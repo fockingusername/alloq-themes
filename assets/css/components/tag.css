@@ -1,0 +1,141 @@
+/* @property allows animating --tag-pulse-angle inside conic-gradient */
+@property --tag-pulse-angle {
+	syntax: '<angle>';
+	inherits: false;
+	initial-value: 0deg;
+}
+
+.tag {
+	--tag-accent: var(--color-status-neutral-accent);
+
+	position: relative;
+
+	display: inline-flex;
+	align-items: center;
+
+	padding: 0 var(--length-m);
+	gap: var(--length-xs);
+
+	border-radius: var(--radius-full);
+	border: var(--border-s) solid var(--color-border-default);
+
+	background-color: light-dark(var(--palette-light-1), var(--palette-dark-4));
+	color: var(--color-text-primary);
+
+	font-weight: normal;
+	font-size: var(--font-size-xs);
+	font-family: var(--font-family-body);
+
+	white-space: nowrap;
+}
+
+.tag__icon {
+	color: var(--tag-accent);
+}
+
+.tag--info {
+	--tag-accent: var(--color-status-info-accent);
+}
+
+.tag--negative {
+	--tag-accent: var(--color-status-negative-accent);
+
+	@media (prefers-reduced-motion: no-preference) {
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			border-radius: inherit;
+			padding: var(--border-s);
+
+			/* Animation lives on ::before so --tag-pulse-angle is both
+			   animated and consumed on the same element (inherits: false). */
+			animation: tag-negative-travel 15s linear infinite;
+
+			/* Comet: long invisible arc, soft tail, bright peak, quick fade */
+			background: conic-gradient(
+				from var(--tag-pulse-angle),
+				transparent 0%,
+				transparent 60%,
+				oklch(from var(--color-status-negative-accent) l c h / 0.15) 72%,
+				oklch(from var(--color-status-negative-accent) l c h / 0.55) 83%,
+				var(--color-status-negative-accent) 88%,
+				oklch(from var(--color-status-negative-accent) l c h / 0.55) 93%,
+				transparent 100%
+			);
+
+			/* Show only the border ring; content area stays transparent */
+			-webkit-mask:
+				linear-gradient(#fff 0 0) content-box,
+				linear-gradient(#fff 0 0);
+			-webkit-mask-composite: xor;
+			mask:
+				linear-gradient(#fff 0 0) content-box,
+				linear-gradient(#fff 0 0);
+			mask-composite: exclude;
+
+			pointer-events: none;
+		}
+	}
+}
+
+.tag--notice {
+	--tag-accent: var(--color-status-warning-accent);
+}
+
+.tag--positive {
+	--tag-accent: var(--color-status-positive-accent);
+}
+
+.tag--removable {
+	cursor: pointer;
+
+	&:active,
+	&:focus,
+	&:hover {
+		background-color: var(--color-surface-elevated);
+		box-shadow: none;
+	}
+
+	.button__label {
+		display: flex;
+		align-items: center;
+		gap: var(--length-xs);
+
+		&:not(:focus, :hover) {
+			color: var(--color-accent-primary);
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@keyframes tag-negative-travel {
+		/* 0–20% (0–3s): one full lap; 20–100% (3–15s): stationary at 360deg.
+		   opacity stays at 1 until 13% then fades independently of the angle. */
+		0%   { --tag-pulse-angle: 0deg; opacity: 1; }
+		16%  { opacity: 1; }
+		17%  { --tag-pulse-angle: 360deg; opacity: 0; }
+		100% { --tag-pulse-angle: 360deg; opacity: 0; }
+	}
+}
+
+/* When tag--removable is rendered as a <button>, Button.vue's scoped styles
+   (.button[data-v-17ebb602], specificity 0,2,0) load after tag.css and win at
+   equal specificity. Three-class selector (0,3,0) restores tag appearance. */
+.button.tag.tag--removable {
+	background-color: light-dark(var(--palette-light-1), var(--palette-dark-4));
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-full);
+	box-shadow: none;
+	color: var(--color-text-primary);
+	font-size: var(--font-size-xs);
+	font-weight: normal;
+	padding: 0 var(--length-m);
+
+	&:active,
+	&:focus,
+	&:hover {
+		background-color: var(--color-surface-elevated);
+		box-shadow: none;
+	}
+}

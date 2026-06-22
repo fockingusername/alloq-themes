@@ -1,0 +1,117 @@
+/* ================================================================
+   DATA TABLE
+   ================================================================ */
+
+.data-table {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+
+	min-height: 0;
+	padding: var(--gutter-m);
+
+	border-radius: var(--radius-xl);
+	background-color: var(--color-surface-raised);
+
+	transition: opacity 0.2s;
+	transition-behavior: allow-discrete;
+
+	@starting-style {
+		opacity: 0;
+	}
+
+	&.is-multilayered {
+		max-width: none;
+		height: stretch;
+		margin: calc(-1 * var(--gutter-m));
+		padding: 0;
+		border: none;
+		background-color: transparent;
+	}
+}
+
+.data-table__notifications {
+	flex-shrink: 0;
+	margin-bottom: var(--gutter-m);
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&:not(:has(.notification)) {
+		display: none;
+	}
+}
+
+.data-table__header {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	margin-block-end: var(--gutter-m);
+	overflow: auto hidden;
+	gap: var(--length-l);
+
+	.is-multilayered & {
+		margin: var(--gutter-m);
+	}
+}
+
+.data-table__toolbar {
+	display: flex;
+	z-index: 15;
+	position: sticky;
+	left: 0;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: var(--length-s);
+	gap: var(--length-m);
+
+	border: var(--border-s) solid var(--color-border-default);
+	background-color: var(--color-surface-raised);
+
+	&.is-active {
+		background-color: var(--color-surface-subtle);
+	}
+}
+
+.data-table__main {
+	flex: 1 1 auto;
+	overflow: auto;
+}
+
+.data-table__actions {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+	gap: var(--length-m);
+}
+
+.data-table__buttons {
+	display: flex;
+	gap: var(--length-m);
+
+	li {
+		display: flex;
+
+		&:not(:last-of-type)::after {
+			width: var(--border-m);
+			height: 100%;
+			margin-left: var(--length-m);
+			background: var(--color-fill-low);
+			content: '';
+		}
+	}
+}
+
+.action-bar {
+	.data-table & {
+		position: relative;
+		margin: calc(-1 * var(--gutter-m));
+		margin-block-start: 0;
+	}
+
+	.data-table.is-multilayered & {
+		margin: 0;
+	}
+}

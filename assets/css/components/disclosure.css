@@ -1,0 +1,102 @@
+/* ================================================================
+   DISCLOSURE
+   ================================================================ */
+
+.disclosure {
+	--bg-body-color: transparent;
+	--bg-body-border: transparent;
+	--bg-body-padding: var(--length-xl) 0 0;
+	--bg-body-margin: 0;
+
+	margin-bottom: var(--length-l);
+	border-radius: var(--radius-m);
+
+	&[inverted='true'] {
+		/* light: palette-light-2 (#f2f2f2) — subtle grey, same as light mode sunken.
+		   dark: palette-dark-2 (#03363d) — dark teal, visually proportionate to page. */
+		--bg-body-color: light-dark(var(--palette-light-2), var(--palette-dark-2));
+		--bg-body-border: var(--border-s) solid var(--color-border-default);
+		--bg-body-padding: var(--length-xl);
+		--bg-body-margin: var(--length-m) 0 0;
+
+		& & {
+			--bg-body-color: var(--color-surface-raised);
+		}
+	}
+
+	&::details-content {
+		block-size: 0;
+		overflow: hidden;
+		transition:
+			block-size 0.1s,
+			content-visibility 0.1s;
+		transition-behavior: allow-discrete;
+	}
+
+	&[open]::details-content {
+		block-size: auto;
+		block-size: calc-size(auto, size);
+	}
+}
+
+.disclosure__summary {
+	display: flex;
+	align-items: center;
+
+	min-height: 2.25rem;
+	gap: var(--length-m);
+	list-style: none;
+
+	cursor: pointer;
+
+	&::-webkit-details-marker {
+		display: none;
+	}
+}
+
+.disclosure__header {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: space-between;
+	overflow: hidden;
+	gap: var(--length-m);
+
+	& :where(h1, h2, h3, h4, h5, h6) {
+		flex: 1 0 46%;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		font-weight: var(--font-weight-bold);
+		font-size: var(--font-size-s);
+		line-height: normal;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+.disclosure__icon {
+	padding: var(--length-s);
+	border-radius: var(--radius-m);
+	color: var(--color-accent-primary);
+
+	&:hover,
+	:hover > &,
+	:focus-visible > & {
+		background-color: var(--color-fill-low);
+		color: var(--color-text-primary);
+	}
+}
+
+.disclosure__body {
+	margin: var(--bg-body-margin);
+	padding: var(--bg-body-padding);
+	border: var(--bg-body-border);
+	border-radius: var(--radius-l);
+	background: var(--bg-body-color);
+	overflow-wrap: anywhere;
+
+	& > :last-child {
+		margin-bottom: 0;
+	}
+}

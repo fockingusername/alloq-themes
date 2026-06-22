@@ -1,0 +1,105 @@
+/* ================================================================
+   LAYOUT
+   App shell, main column, sidebar, and action bar.
+   ================================================================ */
+
+.app {
+	--app-main-min-width: 40rem;
+	--app-sidebar-min-width: 15rem;
+
+	display: grid;
+	position: relative;
+	grid-template-columns: min-content minmax(var(--app-main-min-width), 3fr);
+	height: 100%;
+
+	&.app--sidebar {
+		grid-template-columns:
+			min-content minmax(var(--app-main-min-width), 3fr)
+			minmax(var(--app-sidebar-min-width), 1fr);
+	}
+
+	&.app--resized {
+		grid-template-columns: min-content minmax(0, 1fr) auto;
+	}
+}
+
+.app__header {
+	border-right: var(--border-s) solid var(--color-border-subtle);
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.main__header {
+	container: header / inline-size;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	min-height: var(--layout-header-height);
+	padding: var(--gutter-s) var(--gutter-m);
+	gap: 0 var(--length-xxl);
+	border-bottom: var(--border-s) solid var(--color-border-subtle);
+}
+
+.main__title {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+}
+
+.main__header-content {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: end;
+	gap: var(--length-s);
+}
+
+.main__body {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+
+	height: 100%;
+	padding: var(--gutter-m);
+	overflow: auto;
+	gap: var(--gutter-m);
+
+	background-color: var(--color-surface-page);
+
+	&:has(> .action-bar) {
+		padding-bottom: 0;
+	}
+
+	> .tabs {
+		--collapse-size: calc(var(--gutter-m) * -1);
+
+		margin: var(--collapse-size) var(--collapse-size) 0 var(--collapse-size);
+	}
+}
+
+.app__sidebar {
+	overflow: auto;
+	background: var(--color-surface-base);
+}
+
+/* Pin the resize handle to column 3's left edge instead of relying on the
+   JS-calculated left value, which can drift when the app container is offset. */
+.app--sidebar .resize-handle,
+.app--resized .resize-handle {
+	grid-column: 3;
+	grid-row: 1 / -1;
+	left: 0 !important;
+}
+
+.action-bar {
+	position: sticky;
+	bottom: 0;
+	margin-inline: calc(var(--gutter-m) * -1);
+	margin-top: auto;
+}

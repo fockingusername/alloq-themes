@@ -1,0 +1,4700 @@
+<!doctype html>
+<!-- saved from url=(0052)https://localhost:3000/administration/clients/create -->
+<html lang="en-GB">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script type="module" src="https://localhost:3000/@vite/client"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Client profiles - Administration - Alloq</title>
+
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="https://localhost:3000/favicon-16x16.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="https://localhost:3000/favicon-32x32.png"
+		/>
+
+		<link rel="stylesheet" href="assets/css/fonts.css" />
+		<link rel="stylesheet" href="assets/css/tokens.css" />
+		<link rel="stylesheet" href="assets/css/components/tag.css" />
+		<link rel="stylesheet" href="assets/css/components/button.css" />
+		<link rel="stylesheet" href="assets/css/components/bandwidth.css" />
+		<link rel="stylesheet" href="assets/css/components/notification.css" />
+		<link rel="stylesheet" href="assets/css/components/input.css" />
+		<link rel="stylesheet" href="assets/css/components/layout.css" />
+		<link rel="stylesheet" href="assets/css/components/data-table.css" />
+		<link rel="stylesheet" href="assets/css/components/tab.css" />
+		<link rel="stylesheet" href="assets/css/components/disclosure.css" />
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/styles/main.css"
+		>
+			@layer settings, generic, elements, utilities;
+			@layer generic {
+				body {
+					accent-color: var(--color-accent-primary);
+				}
+
+				body[data-theme='light'] {
+					color-scheme: light;
+				}
+
+				body[data-theme='dark'] {
+					color-scheme: dark;
+				}
+			}
+			@layer generic {
+				/**
+ * Universal Box Sizing with Inheritance
+ * https://css-tricks.com/box-sizing/#aa-universal-box-sizing-with-inheritance
+ */
+				*,
+				*::before,
+				*::after {
+					box-sizing: inherit;
+				}
+
+				html {
+					box-sizing: border-box;
+
+					font-size: 100%;
+
+					scroll-behavior: smooth;
+				}
+
+				[hidden] {
+					display: none !important;
+				}
+
+				/* Element resets */
+				:where(html, body) {
+					height: 100%;
+					margin: 0;
+				}
+
+				:where(ol, ul) {
+					margin: 0;
+					padding: 0;
+
+					list-style-type: none;
+				}
+
+				:where(fieldset, legend) {
+					margin: 0;
+					padding: 0;
+
+					border: none;
+				}
+			}
+			@layer elements {
+				abbr {
+					color: var(--color-text-muted);
+					text-decoration: none;
+				}
+			}
+			@layer elements {
+				a {
+					color: var(--color-link);
+					text-decoration: none;
+
+					&:hover {
+						color: inherit;
+					}
+
+					&:active {
+						color: var(--color-text-muted);
+					}
+				}
+			}
+			@layer elements {
+				blockquote {
+					margin: 0;
+
+					line-height: 1.5;
+				}
+			}
+			@layer elements {
+				code {
+					display: block;
+					font-size: var(--font-size-s);
+
+					font-family: var(--font-family-mono);
+
+					a {
+						color: inherit;
+						text-decoration: underline;
+					}
+				}
+			}
+			@layer elements {
+				dl {
+					margin: 0;
+
+					&:not(:last-of-type) {
+						margin-bottom: var(--length-xl);
+					}
+				}
+
+				dt {
+					color: var(--color-text-muted);
+
+					font-weight: var(--font-weight-bold);
+
+					line-height: 1.5;
+				}
+
+				dd {
+					margin: 0 0 var(--length-xl);
+
+					&:last-child {
+						margin-block-end: 0;
+					}
+				}
+			}
+			@layer elements {
+				body {
+					background-color: var(--color-surface-base);
+
+					color: var(--color-text-primary);
+
+					font-size: var(--font-size-s);
+					line-height: 1.5rem;
+					font-family: var(--font-family-body);
+
+					text-decoration-skip-ink: auto;
+				}
+			}
+			@layer elements {
+				h1,
+				h2,
+				h3,
+				h4,
+				h5,
+				h6 {
+					font-weight: var(--font-weight-bold);
+				}
+
+				h1 {
+					margin: 0 0 var(--length-xl);
+
+					font-size: var(--font-size-xl);
+				}
+
+				h2 {
+					margin: 0 0 var(--length-l);
+
+					font-size: var(--font-size-l);
+				}
+
+				h3 {
+					margin: 0 0 var(--length-m);
+
+					font-size: var(--font-size-m);
+				}
+
+				h4 {
+					margin: 0 0 var(--length-s);
+					font-weight: var(--font-weight-bold);
+
+					font-size: var(--font-size-s);
+				}
+
+				h5 {
+					margin: 0 0 var(--length-xs);
+					font-weight: var(--font-weight-bold);
+
+					font-size: var(--font-size-xs);
+				}
+
+				h6 {
+					margin: 0 0 var(--length-xs);
+					font-weight: var(--font-weight-bold);
+
+					font-size: var(--font-size-xs);
+				}
+			}
+			@layer elements {
+				hr {
+					margin: var(--length-l) 0 calc(var(--length-l) - var(--border-s));
+
+					border: none;
+					border-bottom: var(--border-s) solid var(--color-border-default);
+				}
+			}
+			@layer elements {
+				img {
+					max-width: 100%;
+					height: auto;
+
+					vertical-align: middle;
+				}
+			}
+			@layer elements {
+				legend {
+					display: block;
+
+					padding: 0 0 var(--length-xs);
+
+					font-size: var(--font-size-s);
+				}
+			}
+			@layer elements {
+				p {
+					margin: 0 0 var(--length-xl);
+				}
+			}
+			@layer elements {
+				::-webkit-scrollbar {
+					width: var(--length-l);
+					height: var(--length-l);
+				}
+
+				::-webkit-scrollbar-corner {
+					background: transparent;
+				}
+
+				::-webkit-scrollbar-track {
+					background: var(--color-fill-low);
+				}
+
+				::-webkit-scrollbar-thumb {
+					background: var(--color-fill-medium);
+				}
+			}
+			@layer elements {
+				small {
+					font-size: var(--font-size-xs);
+				}
+			}
+			@layer elements {
+				table {
+					--sticky-cell-border: var(--border-l) solid var(--color-border-default);
+
+					width: 100%;
+
+					border-collapse: separate;
+					border-spacing: 0;
+				}
+
+				thead {
+					z-index: 3;
+					position: sticky;
+					top: 0;
+
+					color: var(--color-text-muted);
+					font-weight: var(--font-weight-bold);
+
+					th {
+						border-bottom: var(--sticky-cell-border);
+
+						font-size: var(--font-size-s);
+						vertical-align: top;
+					}
+
+					tr {
+						background-color: var(--color-surface-raised);
+					}
+				}
+
+				tbody {
+					white-space: nowrap;
+
+					tr {
+						background: var(--color-surface-base);
+					}
+
+					td {
+						border-top: 0;
+						vertical-align: middle;
+					}
+				}
+
+				td,
+				th {
+					padding: var(--length-m) var(--length-xl);
+
+					border: var(--border-s) solid var(--color-border-default);
+					font-weight: inherit;
+
+					font-size: var(--font-size-s);
+					text-align: left;
+
+					& + td,
+					& + th {
+						border-left: 0;
+					}
+				}
+
+				tfoot {
+					color: var(--color-text-muted);
+
+					tr {
+						background: var(--color-surface-raised);
+					}
+
+					th,
+					td {
+						border-top-width: var(--border-m);
+					}
+				}
+			}
+			@layer elements {
+				textarea {
+					display: block;
+
+					width: 100%;
+					height: 6rem;
+					padding: var(--length-m);
+					border: var(--border-s) solid var(--color-border-default);
+					border-radius: var(--radius-m);
+
+					background: var(--color-surface-sunken);
+
+					color: var(--color-text-primary);
+					font-size: var(--font-size-s);
+					line-height: 1.5;
+					font-family: var(--font-family-body);
+					text-decoration: none;
+
+					&::placeholder {
+						color: var(--color-text-muted);
+
+						opacity: 1;
+					}
+
+					&:hover {
+						border-color: var(--color-fill-medium);
+					}
+
+					&:focus {
+						border-color: var(--color-accent-primary);
+						outline: none;
+
+						background-color: var(--palette-white);
+						color: var(--palette-black);
+
+						&::placeholder {
+							color: var(--palette-black);
+							opacity: 0.5;
+						}
+					}
+
+					&:active {
+						border-color: transparent;
+
+						background-color: var(--color-fill-medium);
+						color: var(--color-text-muted);
+
+						&::placeholder {
+							color: var(--color-text-muted);
+							opacity: 1;
+						}
+					}
+
+					&:disabled,
+					&:disabled:hover {
+						border-color: transparent;
+
+						background-color: var(--color-fill-low);
+						color: var(--color-text-secondary);
+					}
+				}
+			}
+			@layer utilities {
+				.font-body {
+					font-family: var(--font-family-body);
+				}
+
+				.font-mono {
+					font-family: var(--font-family-mono);
+				}
+
+				.font-normal {
+					font-weight: normal;
+				}
+
+				.font-bold {
+					font-weight: var(--font-weight-bold);
+				}
+			}
+			@layer utilities {
+				.content-max-width {
+					max-width: var(--max-width-s);
+				}
+
+				.content-center {
+					display: grid;
+					place-content: center;
+
+					min-height: 100dvh;
+				}
+			}
+			@layer utilities {
+				.stack {
+					display: grid;
+					gap: var(--gutter-m);
+				}
+			}
+			@layer utilities {
+				.cell-fixed {
+					width: 1rem;
+					min-width: 1rem;
+				}
+			}
+			@layer utilities {
+				.text-start {
+					text-align: left;
+				}
+
+				.text-end {
+					text-align: right;
+				}
+
+				.text-center {
+					text-align: center;
+				}
+
+				.text-no-wrap {
+					white-space: nowrap;
+				}
+
+				.text-truncate {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				.text-subjacent {
+					color: var(--color-text-muted);
+				}
+
+				.text-neutral {
+					color: var(--color-status-info-accent);
+				}
+
+				.text-positive {
+					color: var(--color-status-positive-accent);
+				}
+
+				.text-negative {
+					color: var(--color-status-negative-accent);
+				}
+
+				.text-caution {
+					color: var(--color-status-warning-accent);
+				}
+			}
+			@layer utilities {
+				/*
+ * Hide only visually, but have it available for screen readers:
+ * @link https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+				.visually-hidden {
+					position: absolute;
+					width: 1px;
+					height: 1px;
+					margin: -1px;
+					padding: 0;
+					overflow: hidden;
+					border: 0;
+					white-space: nowrap;
+					clip-path: inset(50%);
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/action-bar/ActionBar.vue?vue&amp;type=style&amp;index=0&amp;scoped=f3cead76&amp;lang.css"
+		>
+			.action-bar {
+				&[data-v-f3cead76] {
+					display: flex;
+					align-items: center;
+
+					padding: var(--gutter-m);
+					gap: var(--gutter-m);
+
+					border-top: var(--border-s) solid var(--color-border-default);
+
+					background-color: var(--color-surface-base);
+
+					/* Hide the action-bar when it doesn't contain a link, button or progress indicator */
+				}
+				&[data-v-f3cead76]:not(:has(a, button, .progress)) {
+					display: none;
+				}
+			}
+			.action-bar__primary[data-v-f3cead76] {
+				grid-column-start: 2;
+
+				margin-left: auto;
+			}
+			.action-bar__primary[data-v-f3cead76],
+			.action-bar__secondary[data-v-f3cead76] {
+				display: flex;
+				align-items: center;
+				gap: var(--gutter-m);
+			}
+			@media (min-width: 64rem) {
+				.action-bar[data-v-f3cead76] {
+					border-radius: 0 0 var(--radius-m) var(--radius-m);
+				}
+			}
+			@media print {
+				.action-bar[data-v-f3cead76] {
+					display: none;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/icon/Icon.vue?vue&amp;type=style&amp;index=0&amp;lang.css"
+		>
+			.icon {
+				display: inline-block;
+
+				width: var(--icon-size-m);
+				height: var(--icon-size-m);
+
+				vertical-align: bottom;
+
+				/* Only allow events on the parent element/component */
+				pointer-events: none;
+				> svg {
+					aspect-ratio: 1;
+
+					width: inherit;
+					height: inherit;
+				}
+				path {
+					fill: currentColor;
+				}
+			}
+			.icon--small {
+				width: var(--icon-size-s);
+				height: var(--icon-size-s);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/loader/Loader.vue?vue&amp;type=style&amp;index=0&amp;scoped=0f709abd&amp;lang.css"
+		>
+			@keyframes fadeIn-0f709abd {
+				to {
+					opacity: 1;
+				}
+			}
+			@keyframes rotate-0f709abd {
+				0% {
+					transform: rotateZ(0deg);
+				}
+				100% {
+					transform: rotateZ(360deg);
+				}
+			}
+			.loader {
+				&[data-v-0f709abd] {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					animation: 0.2s linear 0.2s fadeIn-0f709abd forwards;
+
+					opacity: 0;
+				}
+				svg[data-v-0f709abd] {
+					aspect-ratio: 1;
+					height: 3.5em;
+					transform-origin: center;
+					animation: 0.8s linear 0.2s infinite rotate-0f709abd;
+				}
+				path[data-v-0f709abd] {
+					fill: var(--color-text-muted);
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/attachments/Attachments.vue?vue&amp;type=style&amp;index=0&amp;scoped=e2f11e87&amp;lang.css"
+		>
+			.attachments[data-v-e2f11e87] {
+				position: relative;
+			}
+			.attachments__button[data-v-e2f11e87] {
+				margin-inline-end: var(--length-xs);
+				vertical-align: middle;
+			}
+			.attachments__item[data-v-e2f11e87] {
+				display: flex;
+				align-items: center;
+				gap: var(--length-xxs);
+
+				white-space: nowrap;
+			}
+			.attachments__icon[data-v-e2f11e87] {
+				vertical-align: middle;
+			}
+			.attachments__filename[data-v-e2f11e87] {
+				overflow: hidden;
+
+				text-overflow: ellipsis;
+				vertical-align: middle;
+			}
+			.attachments__filesize[data-v-e2f11e87] {
+				color: var(--color-text-muted);
+			}
+			.attachments__dropzone {
+				&[data-v-e2f11e87] {
+					margin-top: var(--length-xxl);
+					padding: var(--gutter-l);
+					border: var(--border-m) dashed var(--color-fill-medium);
+					border-radius: var(--radius-l);
+
+					color: var(--color-text-muted);
+					font-weight: var(--font-weight-bold);
+
+					text-align: center;
+
+					cursor: pointer;
+				}
+				&[data-v-e2f11e87]:hover,
+				&.is-active[data-v-e2f11e87] {
+					border-color: var(--color-fill-base);
+					color: var(--color-text-primary);
+				}
+			}
+			.attachtment__dropzone-icon[data-v-e2f11e87] {
+				width: 3rem;
+				height: 3rem;
+				margin: 0 auto;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/avatar/Avatar.vue?vue&amp;type=style&amp;index=0&amp;scoped=a9d0b3c5&amp;lang.css"
+		>
+			rect[data-v-a9d0b3c5] {
+				fill: var(--color-surface-elevated);
+			}
+			text[data-v-a9d0b3c5] {
+				fill: var(--palette-brand-secondary);
+				font-size: 3rem;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/node_modules/tippy.js/animations/scale.css"
+		>
+			.tippy-box[data-animation='scale'][data-placement^='top'] {
+				transform-origin: bottom;
+			}
+			.tippy-box[data-animation='scale'][data-placement^='bottom'] {
+				transform-origin: top;
+			}
+			.tippy-box[data-animation='scale'][data-placement^='left'] {
+				transform-origin: right;
+			}
+			.tippy-box[data-animation='scale'][data-placement^='right'] {
+				transform-origin: left;
+			}
+			.tippy-box[data-animation='scale'][data-state='hidden'] {
+				transform: scale(0.5);
+				opacity: 0;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/tooltip/Tooltip.vue?vue&amp;type=style&amp;index=0&amp;scoped=2788e09f&amp;lang.css"
+		>
+			.trigger[data-v-2788e09f] {
+				display: contents;
+			}
+			[no-js][data-v-2788e09f] {
+				display: none;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/tooltip/Tooltip.vue?vue&amp;type=style&amp;index=1&amp;lang.css"
+		>
+			.tippy-box {
+				border: var(--border-s) solid var(--color-border-default);
+				border-radius: var(--radius-l);
+				background-color: var(--color-surface-overlay);
+				box-shadow: var(--shadow-m);
+
+				color: var(--color-text-primary);
+				font-size: var(--font-size-s);
+				font-family: var(--font-family-body);
+
+				/* &[data-theme='menu'] {
+			border-color: var(--color-border-default);
+			background-color: var(--color-surface-raised);
+		} */
+			}
+			.tippy-content {
+				padding: var(--length-m);
+			}
+			.tippy-arrow {
+				--arrow-size: 8px;
+				--arrow-outline-width: var(--border-s);
+				--arrow-total: calc(var(--arrow-size) + var(--arrow-outline-width));
+				width: calc(var(--arrow-size) * 2);
+				height: calc(var(--arrow-size) * 2);
+				&::before,
+				&::after {
+					position: absolute;
+					border-style: solid;
+					border-color: transparent;
+					content: '';
+				}
+				&::before {
+					inset: var(--outline-inset);
+					border-width: var(--outline-border);
+					border-color: var(--outline-color);
+				}
+				&::after {
+					inset: var(--fill-inset);
+					border-width: var(--fill-border);
+					border-color: var(--fill-color);
+				}
+			}
+			.tippy-box[data-placement^='top'] > .tippy-arrow {
+				bottom: 0;
+				--outline-inset: auto auto calc(-1 * var(--arrow-size))
+					calc(-1 * var(--arrow-outline-width));
+				--outline-border: var(--arrow-total) var(--arrow-total) 0;
+				--outline-color: var(--color-border-default) transparent transparent
+					transparent;
+				--fill-inset: auto auto
+					calc(var(--arrow-outline-width) - var(--arrow-size)) 0;
+				--fill-border: var(--arrow-size) var(--arrow-size) 0;
+				--fill-color: var(--color-surface-overlay) transparent transparent transparent;
+			}
+			.tippy-box[data-placement^='bottom'] > .tippy-arrow {
+				top: 0;
+				--outline-inset: calc(-1 * var(--arrow-size)) auto auto
+					calc(-1 * var(--arrow-outline-width));
+				--outline-border: 0 var(--arrow-total) var(--arrow-total);
+				--outline-color: transparent transparent var(--color-border-default)
+					transparent;
+				--fill-inset: calc(var(--arrow-outline-width) - var(--arrow-size)) auto
+					auto 0;
+				--fill-border: 0 var(--arrow-size) var(--arrow-size);
+				--fill-color: transparent transparent var(--color-surface-overlay) transparent;
+			}
+			.tippy-box[data-placement^='left'] > .tippy-arrow {
+				right: 0;
+				--outline-inset: calc(-1 * var(--arrow-outline-width))
+					calc(-1 * var(--arrow-size)) auto auto;
+				--outline-border: var(--arrow-total) 0 var(--arrow-total)
+					var(--arrow-total);
+				--outline-color: transparent transparent transparent
+					var(--color-border-default);
+				--fill-inset: 0 calc(var(--arrow-outline-width) - var(--arrow-size))
+					auto auto;
+				--fill-border: var(--arrow-size) 0 var(--arrow-size) var(--arrow-size);
+				--fill-color: transparent transparent transparent var(--color-surface-overlay);
+			}
+			.tippy-box[data-placement^='right'] > .tippy-arrow {
+				left: 0;
+				--outline-inset: calc(-1 * var(--arrow-outline-width)) auto auto
+					calc(-1 * var(--arrow-size));
+				--outline-border: var(--arrow-total) var(--arrow-total)
+					var(--arrow-total) 0;
+				--outline-color: transparent var(--color-border-default) transparent
+					transparent;
+				--fill-inset: 0 auto auto
+					calc(var(--arrow-outline-width) - var(--arrow-size));
+				--fill-border: var(--arrow-size) var(--arrow-size) var(--arrow-size) 0;
+				--fill-color: transparent var(--color-surface-overlay) transparent transparent;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/visual/Visual.vue?vue&amp;type=style&amp;index=0&amp;scoped=f6fb8f20&amp;lang.css"
+		>
+			.visual[data-v-f6fb8f20] {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--length-s);
+			}
+			.visual--info[data-v-f6fb8f20] {
+				color: var(--color-status-info-accent);
+			}
+			.visual--negative[data-v-f6fb8f20] {
+				color: var(--color-status-negative-accent);
+			}
+			.visual--notice[data-v-f6fb8f20] {
+				color: var(--color-status-warning-accent);
+			}
+			.visual--positive[data-v-f6fb8f20] {
+				color: var(--color-status-positive-accent);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/_shared/TooltipContent.vue?vue&amp;type=style&amp;index=0&amp;scoped=a232af54&amp;lang.css"
+		>
+			.tooltip-content {
+				&[data-v-a232af54] {
+					display: grid;
+					grid-template-columns: repeat(2, auto);
+
+					padding-inline: var(--length-m);
+					gap: var(--length-s) var(--length-xxl);
+				}
+				dt[data-v-a232af54],
+				dd[data-v-a232af54] {
+					display: inline-flex;
+					align-items: center;
+
+					gap: var(--length-m);
+				}
+				dt[data-v-a232af54] {
+					color: var(--color-text-muted);
+
+					font-weight: var(--font-weight-bold);
+					font-size: var(--font-size-xs);
+				}
+				dd {
+					&[data-v-a232af54] {
+						justify-content: flex-end;
+						margin: 0;
+
+						color: var(--color-text-primary);
+						font-size: var(--font-size-xs);
+					}
+					.is-primary &[data-v-a232af54] {
+						font-weight: var(--font-weight-bold);
+					}
+				}
+				.tooltip-content__item {
+					&[data-v-a232af54] {
+						display: grid;
+						grid-template-columns: subgrid;
+						grid-column: 1 / -1;
+					}
+					&.is-primary[data-v-a232af54] {
+						padding-bottom: var(--length-xs);
+
+						border-bottom: var(--border-s) solid var(--color-border-default);
+					}
+				}
+			}
+			.visual[data-v-a232af54] {
+				display: inline-flex;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/box/Box.vue?vue&amp;type=style&amp;index=0&amp;scoped=77e19f11&amp;lang.css"
+		>
+			.box {
+				&[data-v-77e19f11] {
+					padding: var(--gutter-xl);
+					border: var(--border-s) solid var(--color-border-default);
+					border-radius: var(--radius-l);
+
+					background: var(--color-surface-raised);
+
+					color: inherit;
+				}
+				&[data-v-77e19f11]:is(a):hover {
+					background-color: var(--color-surface-sunken);
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/button-group/ButtonGroup.vue?vue&amp;type=style&amp;index=0&amp;scoped=0e7b7a27&amp;lang.css"
+		>
+			.button-group[data-v-0e7b7a27] {
+				display: inline-flex;
+				flex-wrap: wrap;
+				gap: var(--length-m) var(--length-s);
+
+				vertical-align: middle;
+			}
+			.nowrap[data-v-0e7b7a27] {
+				flex-wrap: nowrap;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/heading/Heading.vue?vue&amp;type=style&amp;index=0&amp;scoped=548d03fb&amp;lang.css"
+		>
+			.heading[data-v-548d03fb] {
+				margin: 0 0 var(--length-xl);
+			}
+			.heading--subheading[data-v-548d03fb] {
+				margin: 0 0 var(--length-m);
+
+				color: var(--color-text-muted);
+				font-weight: var(--font-weight-bold);
+				font-size: var(--font-size-m);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/card/Card.vue?vue&amp;type=style&amp;index=0&amp;scoped=4592faa7&amp;lang.css"
+		>
+			.card[data-v-4592faa7] {
+				display: block;
+				height: 100%; /* fill the parent (grid) height */
+
+				border: var(--border-s) solid var(--color-border-default);
+				border-radius: var(--radius-l);
+
+				background: var(--color-surface-raised);
+
+				color: inherit;
+			}
+			.card__header[data-v-4592faa7] {
+				display: flex;
+				align-items: center;
+
+				padding: var(--length-xl) var(--length-xxl);
+				gap: var(--length-xl);
+
+				white-space: nowrap;
+			}
+			.card__title[data-v-4592faa7] {
+				display: block;
+				flex-grow: 1;
+				margin: 0;
+				font-weight: var(--font-weight-bold);
+
+				font-size: var(--font-size-m);
+				text-overflow: ellipsis;
+			}
+			.card__body {
+				&[data-v-4592faa7] {
+					position: relative;
+					padding: 0 var(--length-xxl) var(--length-xxl);
+					overflow: hidden;
+				}
+				&[data-v-4592faa7] > :last-child {
+					margin-bottom: 0;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/chart/Chart.vue?vue&amp;type=style&amp;index=0&amp;scoped=a684fe23&amp;lang.css"
+		>
+			.chart[data-v-a684fe23] {
+				display: grid;
+				position: relative;
+				align-items: center;
+				justify-items: center;
+
+				min-height: 40vh;
+			}
+			.chart__loader[data-v-a684fe23] {
+				position: absolute;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/data-list/DataListItem.vue?vue&amp;type=style&amp;index=0&amp;scoped=231b96c0&amp;lang.css"
+		>
+			.datalistitem[data-v-231b96c0],
+			.link[data-v-231b96c0] {
+				display: flex;
+				align-items: center;
+
+				gap: var(--length-s);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/data-list/DataList.vue?vue&amp;type=style&amp;index=0&amp;scoped=9082b209&amp;lang.css"
+		>
+			.data-list {
+				&[data-v-9082b209] {
+					display: flex;
+
+					color: var(--color-text-muted);
+					white-space: nowrap;
+				}
+				> li {
+					&[data-v-9082b209] {
+						display: flex;
+						gap: var(--length-xs);
+					}
+					&[data-v-9082b209]:not(:first-of-type) {
+						padding-left: var(--length-m);
+					}
+					&[data-v-9082b209]:not(:last-of-type)::after {
+						width: var(--border-m);
+						height: 100%;
+						margin-inline: var(--length-xs);
+
+						background: var(--color-fill-low);
+
+						content: '';
+					}
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/deviation/DeviationVisualization.vue?vue&amp;type=style&amp;index=0&amp;scoped=7bfc8822&amp;lang.css"
+		>
+			.deviation-visualization[data-v-7bfc8822] {
+				display: block;
+				width: 100%;
+				height: 1.5rem;
+
+				overflow: visible;
+				fill: var(--color-fill-low);
+			}
+			.deviation-bar {
+				&[data-v-7bfc8822] {
+					height: 30%;
+
+					opacity: 0.3;
+				}
+				&.is-active[data-v-7bfc8822] {
+					opacity: 1;
+				}
+			}
+			.deviation__bar--positive[data-v-7bfc8822] {
+				fill: var(--color-status-positive-accent);
+			}
+			.deviation__bar--warning[data-v-7bfc8822] {
+				fill: var(--color-status-warning-accent);
+			}
+			.deviation__bar--error[data-v-7bfc8822] {
+				fill: var(--color-status-negative-accent);
+			}
+			.deviation__marker[data-v-7bfc8822] {
+				fill: var(--color-fill-base);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/errors/Errors.vue?vue&amp;type=style&amp;index=0&amp;scoped=fa7d11e7&amp;lang.css"
+		>
+			.errors__list {
+				&[data-v-fa7d11e7] {
+					display: grid;
+					max-height: 14.5rem;
+					overflow: auto;
+					gap: var(--gutter-s);
+				}
+				ul[data-v-fa7d11e7] {
+					padding-left: var(--length-xxl);
+
+					list-style-type: initial;
+				}
+			}
+			.errors__content[data-v-fa7d11e7] {
+				display: flex;
+				gap: var(--length-s);
+			}
+			.errors__total[data-v-fa7d11e7] {
+				display: inline-block;
+				margin: 0 0 var(--length-m) auto;
+
+				color: var(--color-text-muted);
+				font-weight: var(--font-weight-bold);
+			}
+			.errors__button[data-v-fa7d11e7] {
+				margin-block: calc(var(--length-s) * -1);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/toasts/Toast.vue?vue&amp;type=style&amp;index=0&amp;scoped=60835d32&amp;lang.css"
+		>
+			@keyframes slideFadeIn-60835d32 {
+				from {
+					transform: translate3d(0, 100%, 0);
+					opacity: 0;
+				}
+				to {
+					transform: translate3d(0, 0, 0);
+					opacity: 1;
+				}
+			}
+			.toast {
+				&[data-v-60835d32] {
+					display: flex;
+					align-items: center;
+
+					padding: var(--length-m);
+					border-left: var(--border-l) solid #64b5f6;
+					border-radius: var(--radius-m);
+
+					background: var(--color-surface-overlay);
+					box-shadow: var(--shadow-m);
+
+					animation: slideFadeIn-60835d32 0.2s;
+
+					pointer-events: auto;
+				}
+				.toast__icon[data-v-60835d32] {
+					color: #64b5f6;
+				}
+			}
+			.toast__icon[data-v-60835d32] {
+				flex-shrink: 0;
+
+				margin: 0 var(--length-l) 0 var(--length-m);
+			}
+			.toast--error {
+				&[data-v-60835d32] {
+					border-left-color: var(--color-status-negative-accent);
+				}
+				.toast__icon[data-v-60835d32] {
+					color: var(--color-status-negative-accent);
+				}
+			}
+			.toast--success {
+				&[data-v-60835d32] {
+					border-left-color: var(--color-status-positive-accent);
+				}
+				.toast__icon[data-v-60835d32] {
+					color: var(--color-status-positive-accent);
+				}
+			}
+			.toast--warning {
+				&[data-v-60835d32] {
+					border-left-color: var(--color-status-warning-accent);
+				}
+				.toast__icon[data-v-60835d32] {
+					color: var(--color-status-warning-accent);
+				}
+			}
+			.toast__close[data-v-60835d32] {
+				margin-left: auto;
+
+				cursor: pointer;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/toasts/Toasts.vue?vue&amp;type=style&amp;index=0&amp;scoped=f337fe68&amp;lang.css"
+		>
+			.toasts[data-v-f337fe68] {
+				display: grid;
+				z-index: 20;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+
+				padding: var(--gutter-m);
+				grid-gap: var(--length-xl);
+				width: 30rem;
+
+				overflow: hidden;
+
+				transform: translate(-50%, 0);
+
+				pointer-events: none;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/node_modules/air-datepicker/air-datepicker.css"
+		>
+			.air-datepicker-cell.-year-.-other-decade-,
+			.air-datepicker-cell.-day-.-other-month- {
+				color: var(--adp-color-other-month);
+			}
+			.air-datepicker-cell.-year-.-other-decade-:hover,
+			.air-datepicker-cell.-day-.-other-month-:hover {
+				color: var(--adp-color-other-month-hover);
+			}
+			.-disabled-.-focus-.air-datepicker-cell.-year-.-other-decade-,
+			.-disabled-.-focus-.air-datepicker-cell.-day-.-other-month- {
+				color: var(--adp-color-other-month);
+			}
+			.-selected-.air-datepicker-cell.-year-.-other-decade-,
+			.-selected-.air-datepicker-cell.-day-.-other-month- {
+				color: #fff;
+				background: var(--adp-background-color-selected-other-month);
+			}
+			.-selected-.-focus-.air-datepicker-cell.-year-.-other-decade-,
+			.-selected-.-focus-.air-datepicker-cell.-day-.-other-month- {
+				background: var(--adp-background-color-selected-other-month-focused);
+			}
+			.-in-range-.air-datepicker-cell.-year-.-other-decade-,
+			.-in-range-.air-datepicker-cell.-day-.-other-month- {
+				background-color: var(--adp-background-color-in-range);
+				color: var(--adp-color);
+			}
+			.-in-range-.-focus-.air-datepicker-cell.-year-.-other-decade-,
+			.-in-range-.-focus-.air-datepicker-cell.-day-.-other-month- {
+				background-color: var(--adp-background-color-in-range-focused);
+			}
+			.air-datepicker-cell.-year-.-other-decade-:empty,
+			.air-datepicker-cell.-day-.-other-month-:empty {
+				background: none;
+				border: none;
+			}
+			.air-datepicker-cell {
+				border-radius: var(--adp-cell-border-radius);
+				box-sizing: border-box;
+				cursor: pointer;
+				display: flex;
+				position: relative;
+				align-items: center;
+				justify-content: center;
+				z-index: 1;
+			}
+			.air-datepicker-cell.-focus- {
+				background: var(--adp-cell-background-color-hover);
+			}
+			.air-datepicker-cell.-current- {
+				color: var(--adp-color-current-date);
+			}
+			.air-datepicker-cell.-current-.-focus- {
+				color: var(--adp-color);
+			}
+			.air-datepicker-cell.-current-.-in-range- {
+				color: var(--adp-color-current-date);
+			}
+			.air-datepicker-cell.-disabled- {
+				cursor: default;
+				color: var(--adp-color-disabled);
+			}
+			.air-datepicker-cell.-disabled-.-focus- {
+				color: var(--adp-color-disabled);
+			}
+			.air-datepicker-cell.-disabled-.-in-range- {
+				color: var(--adp-color-disabled-in-range);
+			}
+			.air-datepicker-cell.-disabled-.-current-.-focus- {
+				color: var(--adp-color-disabled);
+			}
+			.air-datepicker-cell.-in-range- {
+				background: var(--adp-cell-background-color-in-range);
+				border-radius: 0;
+			}
+			.air-datepicker-cell.-in-range-:hover,
+			.air-datepicker-cell.-in-range-.-focus- {
+				background: var(--adp-cell-background-color-in-range-hover);
+			}
+			.air-datepicker-cell.-range-from- {
+				border: 1px solid var(--adp-cell-border-color-in-range);
+				background-color: var(--adp-cell-background-color-in-range);
+				border-radius: var(--adp-cell-border-radius) 0 0
+					var(--adp-cell-border-radius);
+			}
+			.air-datepicker-cell.-range-to- {
+				border: 1px solid var(--adp-cell-border-color-in-range);
+				background-color: var(--adp-cell-background-color-in-range);
+				border-radius: 0 var(--adp-cell-border-radius)
+					var(--adp-cell-border-radius) 0;
+			}
+			.air-datepicker-cell.-range-to-.-range-from- {
+				border-radius: var(--adp-cell-border-radius);
+			}
+			.air-datepicker-cell.-selected- {
+				color: #fff;
+				border: none;
+				background: var(--adp-cell-background-color-selected);
+			}
+			.air-datepicker-cell.-selected-.-current- {
+				color: #fff;
+				background: var(--adp-cell-background-color-selected);
+			}
+			.air-datepicker-cell.-selected-.-focus- {
+				background: var(--adp-cell-background-color-selected-hover);
+			}
+			.air-datepicker-body {
+				transition: all var(--adp-transition-duration)
+					var(--adp-transition-ease);
+			}
+			.air-datepicker-body.-hidden- {
+				display: none;
+			}
+			.air-datepicker-body--day-names {
+				display: grid;
+				grid-template-columns: repeat(7, var(--adp-day-cell-width));
+				margin: 8px 0 3px;
+			}
+			.air-datepicker-body--day-name {
+				color: var(--adp-day-name-color);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex: 1;
+				text-align: center;
+				text-transform: uppercase;
+				font-size: 0.8em;
+			}
+			.air-datepicker-body--day-name.-clickable- {
+				cursor: pointer;
+			}
+			.air-datepicker-body--day-name.-clickable-:hover {
+				color: var(--adp-day-name-color-hover);
+			}
+			.air-datepicker-body--cells {
+				display: grid;
+			}
+			.air-datepicker-body--cells.-days- {
+				grid-template-columns: repeat(7, var(--adp-day-cell-width));
+				grid-auto-rows: var(--adp-day-cell-height);
+			}
+			.air-datepicker-body--cells.-months- {
+				grid-template-columns: repeat(3, 1fr);
+				grid-auto-rows: var(--adp-month-cell-height);
+			}
+			.air-datepicker-body--cells.-years- {
+				grid-template-columns: repeat(4, 1fr);
+				grid-auto-rows: var(--adp-year-cell-height);
+			}
+			.air-datepicker-nav {
+				display: flex;
+				justify-content: space-between;
+				border-bottom: 1px solid var(--adp-border-color-inner);
+				min-height: var(--adp-nav-height);
+				padding: var(--adp-padding);
+				box-sizing: content-box;
+			}
+			.-only-timepicker- .air-datepicker-nav {
+				display: none;
+			}
+			.air-datepicker-nav--title,
+			.air-datepicker-nav--action {
+				display: flex;
+				cursor: pointer;
+				align-items: center;
+				justify-content: center;
+			}
+			.air-datepicker-nav--action {
+				width: var(--adp-nav-action-size);
+				border-radius: var(--adp-border-radius);
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+			.air-datepicker-nav--action:hover {
+				background: var(--adp-background-color-hover);
+			}
+			.air-datepicker-nav--action:active {
+				background: var(--adp-background-color-active);
+			}
+			.air-datepicker-nav--action.-disabled- {
+				visibility: hidden;
+			}
+			.air-datepicker-nav--action svg {
+				width: 32px;
+				height: 32px;
+			}
+			.air-datepicker-nav--action path {
+				fill: none;
+				stroke: var(--adp-nav-arrow-color);
+				stroke-width: 2px;
+			}
+			.air-datepicker-nav--title {
+				border-radius: var(--adp-border-radius);
+				padding: 0 8px;
+			}
+			.air-datepicker-nav--title i {
+				font-style: normal;
+				color: var(--adp-nav-color-secondary);
+				margin-left: 0.3em;
+			}
+			.air-datepicker-nav--title:hover {
+				background: var(--adp-background-color-hover);
+			}
+			.air-datepicker-nav--title:active {
+				background: var(--adp-background-color-active);
+			}
+			.air-datepicker-nav--title.-disabled- {
+				cursor: default;
+				background: none;
+			}
+			.air-datepicker-buttons {
+				display: grid;
+				grid-auto-columns: 1fr;
+				grid-auto-flow: column;
+			}
+			.air-datepicker-button {
+				display: inline-flex;
+				color: var(--adp-btn-color);
+				border-radius: var(--adp-btn-border-radius);
+				cursor: pointer;
+				height: var(--adp-btn-height);
+				border: none;
+				background: rgba(255, 255, 255, 0);
+			}
+			.air-datepicker-button:hover {
+				color: var(--adp-btn-color-hover);
+				background: var(--adp-btn-background-color-hover);
+			}
+			.air-datepicker-button:focus {
+				color: var(--adp-btn-color-hover);
+				background: var(--adp-btn-background-color-hover);
+				outline: none;
+			}
+			.air-datepicker-button:active {
+				background: var(--adp-btn-background-color-active);
+			}
+			.air-datepicker-button span {
+				outline: none;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 100%;
+			}
+			.air-datepicker-time {
+				display: grid;
+				grid-template-columns: max-content 1fr;
+				grid-column-gap: 12px;
+				align-items: center;
+				position: relative;
+				padding: 0 var(--adp-time-padding-inner);
+			}
+			.-only-timepicker- .air-datepicker-time {
+				border-top: none;
+			}
+			.air-datepicker-time--current {
+				display: flex;
+				align-items: center;
+				flex: 1;
+				font-size: 14px;
+				text-align: center;
+			}
+			.air-datepicker-time--current-colon {
+				margin: 0 2px 3px;
+				line-height: 1;
+			}
+			.air-datepicker-time--current-hours,
+			.air-datepicker-time--current-minutes {
+				line-height: 1;
+				font-size: 19px;
+				font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+				position: relative;
+				z-index: 1;
+			}
+			.air-datepicker-time--current-hours:after,
+			.air-datepicker-time--current-minutes:after {
+				content: '';
+				background: var(--adp-background-color-hover);
+				border-radius: var(--adp-border-radius);
+				position: absolute;
+				left: -2px;
+				top: -3px;
+				right: -2px;
+				bottom: -2px;
+				z-index: -1;
+				opacity: 0;
+			}
+			.air-datepicker-time--current-hours.-focus-:after,
+			.air-datepicker-time--current-minutes.-focus-:after {
+				opacity: 1;
+			}
+			.air-datepicker-time--current-ampm {
+				text-transform: uppercase;
+				align-self: flex-end;
+				color: var(--adp-time-day-period-color);
+				margin-left: 6px;
+				font-size: 11px;
+				margin-bottom: 1px;
+			}
+			.air-datepicker-time--row {
+				display: flex;
+				align-items: center;
+				font-size: 11px;
+				height: 17px;
+				background: linear-gradient(
+						to right,
+						var(--adp-time-track-color),
+						var(--adp-time-track-color)
+					)
+					left 50%/100% var(--adp-time-track-height) no-repeat;
+			}
+			.air-datepicker-time--row:first-child {
+				margin-bottom: 4px;
+			}
+			.air-datepicker-time--row input[type='range'] {
+				background: none;
+				cursor: pointer;
+				flex: 1;
+				height: 100%;
+				width: 100%;
+				padding: 0;
+				margin: 0;
+				-webkit-appearance: none;
+			}
+			.air-datepicker-time--row input[type='range']::-webkit-slider-thumb {
+				-webkit-appearance: none;
+			}
+			.air-datepicker-time--row input[type='range']::-ms-tooltip {
+				display: none;
+			}
+			.air-datepicker-time--row
+				input[type='range']:hover::-webkit-slider-thumb {
+				border-color: var(--adp-time-track-color-hover);
+			}
+			.air-datepicker-time--row input[type='range']:hover::-moz-range-thumb {
+				border-color: var(--adp-time-track-color-hover);
+			}
+			.air-datepicker-time--row input[type='range']:hover::-ms-thumb {
+				border-color: var(--adp-time-track-color-hover);
+			}
+			.air-datepicker-time--row input[type='range']:focus {
+				outline: none;
+			}
+			.air-datepicker-time--row
+				input[type='range']:focus::-webkit-slider-thumb {
+				background: var(--adp-cell-background-color-selected);
+				border-color: var(--adp-cell-background-color-selected);
+			}
+			.air-datepicker-time--row input[type='range']:focus::-moz-range-thumb {
+				background: var(--adp-cell-background-color-selected);
+				border-color: var(--adp-cell-background-color-selected);
+			}
+			.air-datepicker-time--row input[type='range']:focus::-ms-thumb {
+				background: var(--adp-cell-background-color-selected);
+				border-color: var(--adp-cell-background-color-selected);
+			}
+			.air-datepicker-time--row input[type='range']::-webkit-slider-thumb {
+				box-sizing: border-box;
+				height: 12px;
+				width: 12px;
+				border-radius: 3px;
+				border: 1px solid var(--adp-time-track-color);
+				background: #fff;
+				cursor: pointer;
+				-webkit-transition: background var(--adp-transition-duration);
+				transition: background var(--adp-transition-duration);
+			}
+			.air-datepicker-time--row input[type='range']::-moz-range-thumb {
+				box-sizing: border-box;
+				height: 12px;
+				width: 12px;
+				border-radius: 3px;
+				border: 1px solid var(--adp-time-track-color);
+				background: #fff;
+				cursor: pointer;
+				-moz-transition: background var(--adp-transition-duration);
+				transition: background var(--adp-transition-duration);
+			}
+			.air-datepicker-time--row input[type='range']::-ms-thumb {
+				box-sizing: border-box;
+				height: 12px;
+				width: 12px;
+				border-radius: 3px;
+				border: 1px solid var(--adp-time-track-color);
+				background: #fff;
+				cursor: pointer;
+				-ms-transition: background var(--adp-transition-duration);
+				transition: background var(--adp-transition-duration);
+			}
+			.air-datepicker-time--row input[type='range']::-webkit-slider-thumb {
+				margin-top: calc(var(--adp-time-thumb-size) / 2 * -1);
+			}
+			.air-datepicker-time--row
+				input[type='range']::-webkit-slider-runnable-track {
+				border: none;
+				height: var(--adp-time-track-height);
+				cursor: pointer;
+				color: rgba(0, 0, 0, 0);
+				background: rgba(0, 0, 0, 0);
+			}
+			.air-datepicker-time--row input[type='range']::-moz-range-track {
+				border: none;
+				height: var(--adp-time-track-height);
+				cursor: pointer;
+				color: rgba(0, 0, 0, 0);
+				background: rgba(0, 0, 0, 0);
+			}
+			.air-datepicker-time--row input[type='range']::-ms-track {
+				border: none;
+				height: var(--adp-time-track-height);
+				cursor: pointer;
+				color: rgba(0, 0, 0, 0);
+				background: rgba(0, 0, 0, 0);
+			}
+			.air-datepicker-time--row input[type='range']::-ms-fill-lower {
+				background: rgba(0, 0, 0, 0);
+			}
+			.air-datepicker-time--row input[type='range']::-ms-fill-upper {
+				background: rgba(0, 0, 0, 0);
+			}
+			.air-datepicker {
+				--adp-font-family:
+					-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+					Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+					'Segoe UI Symbol';
+				--adp-font-size: 14px;
+				--adp-width: 246px;
+				--adp-z-index: 100;
+				--adp-padding: 4px;
+				--adp-grid-areas: 'nav' 'body' 'timepicker' 'buttons';
+				--adp-transition-duration: 0.3s;
+				--adp-transition-ease: ease-out;
+				--adp-transition-offset: 8px;
+				--adp-background-color: #fff;
+				--adp-background-color-hover: #f0f0f0;
+				--adp-background-color-active: #eaeaea;
+				--adp-background-color-in-range: rgba(92, 196, 239, 0.1);
+				--adp-background-color-in-range-focused: rgba(92, 196, 239, 0.2);
+				--adp-background-color-selected-other-month-focused: #8ad5f4;
+				--adp-background-color-selected-other-month: #a2ddf6;
+				--adp-color: #4a4a4a;
+				--adp-color-secondary: #9c9c9c;
+				--adp-accent-color: #4eb5e6;
+				--adp-color-current-date: var(--adp-accent-color);
+				--adp-color-other-month: #dedede;
+				--adp-color-disabled: #aeaeae;
+				--adp-color-disabled-in-range: #939393;
+				--adp-color-other-month-hover: #c5c5c5;
+				--adp-border-color: #dbdbdb;
+				--adp-border-color-inner: #efefef;
+				--adp-border-radius: 4px;
+				--adp-border-color-inline: #d7d7d7;
+				--adp-nav-height: 32px;
+				--adp-nav-arrow-color: var(--adp-color-secondary);
+				--adp-nav-action-size: 32px;
+				--adp-nav-color-secondary: var(--adp-color-secondary);
+				--adp-day-name-color: #ff9a19;
+				--adp-day-name-color-hover: #8ad5f4;
+				--adp-day-cell-width: 1fr;
+				--adp-day-cell-height: 32px;
+				--adp-month-cell-height: 42px;
+				--adp-year-cell-height: 56px;
+				--adp-pointer-size: 10px;
+				--adp-poiner-border-radius: 2px;
+				--adp-pointer-offset: 14px;
+				--adp-cell-border-radius: 4px;
+				--adp-cell-background-color-hover: var(--adp-background-color-hover);
+				--adp-cell-background-color-selected: #5cc4ef;
+				--adp-cell-background-color-selected-hover: #45bced;
+				--adp-cell-background-color-in-range: rgba(92, 196, 239, 0.1);
+				--adp-cell-background-color-in-range-hover: rgba(92, 196, 239, 0.2);
+				--adp-cell-border-color-in-range: var(
+					--adp-cell-background-color-selected
+				);
+				--adp-btn-height: 32px;
+				--adp-btn-color: var(--adp-accent-color);
+				--adp-btn-color-hover: var(--adp-color);
+				--adp-btn-border-radius: var(--adp-border-radius);
+				--adp-btn-background-color-hover: var(--adp-background-color-hover);
+				--adp-btn-background-color-active: var(--adp-background-color-active);
+				--adp-time-track-height: 1px;
+				--adp-time-track-color: #dedede;
+				--adp-time-track-color-hover: #b1b1b1;
+				--adp-time-thumb-size: 12px;
+				--adp-time-padding-inner: 10px;
+				--adp-time-day-period-color: var(--adp-color-secondary);
+				--adp-mobile-font-size: 16px;
+				--adp-mobile-nav-height: 40px;
+				--adp-mobile-width: 320px;
+				--adp-mobile-day-cell-height: 38px;
+				--adp-mobile-month-cell-height: 48px;
+				--adp-mobile-year-cell-height: 64px;
+			}
+			.air-datepicker-overlay {
+				--adp-overlay-background-color: rgba(0, 0, 0, 0.3);
+				--adp-overlay-transition-duration: 0.3s;
+				--adp-overlay-transition-ease: ease-out;
+				--adp-overlay-z-index: 99;
+			}
+			.air-datepicker {
+				background: var(--adp-background-color);
+				border: 1px solid var(--adp-border-color);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+				border-radius: var(--adp-border-radius);
+				box-sizing: content-box;
+				display: grid;
+				grid-template-columns: 1fr;
+				grid-template-rows: repeat(4, max-content);
+				grid-template-areas: var(--adp-grid-areas);
+				font-family: var(--adp-font-family), sans-serif;
+				font-size: var(--adp-font-size);
+				color: var(--adp-color);
+				width: var(--adp-width);
+				position: absolute;
+				transition:
+					opacity var(--adp-transition-duration) var(--adp-transition-ease),
+					transform var(--adp-transition-duration) var(--adp-transition-ease);
+				z-index: var(--adp-z-index);
+			}
+			.air-datepicker:not(.-custom-position-) {
+				opacity: 0;
+			}
+			.air-datepicker.-from-top- {
+				transform: translateY(calc(var(--adp-transition-offset) * -1));
+			}
+			.air-datepicker.-from-right- {
+				transform: translateX(var(--adp-transition-offset));
+			}
+			.air-datepicker.-from-bottom- {
+				transform: translateY(var(--adp-transition-offset));
+			}
+			.air-datepicker.-from-left- {
+				transform: translateX(calc(var(--adp-transition-offset) * -1));
+			}
+			.air-datepicker.-active-:not(.-custom-position-) {
+				transform: translate(0, 0);
+				opacity: 1;
+			}
+			.air-datepicker.-active-.-custom-position- {
+				transition: none;
+			}
+			.air-datepicker.-inline- {
+				border-color: var(--adp-border-color-inline);
+				box-shadow: none;
+				position: static;
+				left: auto;
+				right: auto;
+				opacity: 1;
+				transform: none;
+			}
+			.air-datepicker.-inline- .air-datepicker--pointer {
+				display: none;
+			}
+			.air-datepicker.-is-mobile- {
+				--adp-font-size: var(--adp-mobile-font-size);
+				--adp-day-cell-height: var(--adp-mobile-day-cell-height);
+				--adp-month-cell-height: var(--adp-mobile-month-cell-height);
+				--adp-year-cell-height: var(--adp-mobile-year-cell-height);
+				--adp-nav-height: var(--adp-mobile-nav-height);
+				--adp-nav-action-size: var(--adp-mobile-nav-height);
+				position: fixed;
+				width: var(--adp-mobile-width);
+				border: none;
+			}
+			.air-datepicker.-is-mobile- * {
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+			.air-datepicker.-is-mobile- .air-datepicker--pointer {
+				display: none;
+			}
+			.air-datepicker.-is-mobile-:not(.-custom-position-) {
+				transform: translate(-50%, calc(-50% + var(--adp-transition-offset)));
+			}
+			.air-datepicker.-is-mobile-.-active-:not(.-custom-position-) {
+				transform: translate(-50%, -50%);
+			}
+			.air-datepicker.-custom-position- {
+				transition: none;
+			}
+			.air-datepicker-global-container {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.air-datepicker--pointer {
+				--pointer-half-size: calc(var(--adp-pointer-size) / 2);
+				position: absolute;
+				width: var(--adp-pointer-size);
+				height: var(--adp-pointer-size);
+				z-index: -1;
+			}
+			.air-datepicker--pointer:after {
+				content: '';
+				position: absolute;
+				background: #fff;
+				border-top: 1px solid var(--adp-border-color-inline);
+				border-right: 1px solid var(--adp-border-color-inline);
+				border-top-right-radius: var(--adp-poiner-border-radius);
+				width: var(--adp-pointer-size);
+				height: var(--adp-pointer-size);
+				box-sizing: border-box;
+			}
+			.-top-left- .air-datepicker--pointer,
+			.-top-center- .air-datepicker--pointer,
+			.-top-right- .air-datepicker--pointer,
+			[data-popper-placement^='top'] .air-datepicker--pointer {
+				top: calc(100% - var(--pointer-half-size) + 1px);
+			}
+			.-top-left- .air-datepicker--pointer:after,
+			.-top-center- .air-datepicker--pointer:after,
+			.-top-right- .air-datepicker--pointer:after,
+			[data-popper-placement^='top'] .air-datepicker--pointer:after {
+				transform: rotate(135deg);
+			}
+			.-right-top- .air-datepicker--pointer,
+			.-right-center- .air-datepicker--pointer,
+			.-right-bottom- .air-datepicker--pointer,
+			[data-popper-placement^='right'] .air-datepicker--pointer {
+				right: calc(100% - var(--pointer-half-size) + 1px);
+			}
+			.-right-top- .air-datepicker--pointer:after,
+			.-right-center- .air-datepicker--pointer:after,
+			.-right-bottom- .air-datepicker--pointer:after,
+			[data-popper-placement^='right'] .air-datepicker--pointer:after {
+				transform: rotate(225deg);
+			}
+			.-bottom-left- .air-datepicker--pointer,
+			.-bottom-center- .air-datepicker--pointer,
+			.-bottom-right- .air-datepicker--pointer,
+			[data-popper-placement^='bottom'] .air-datepicker--pointer {
+				bottom: calc(100% - var(--pointer-half-size) + 1px);
+			}
+			.-bottom-left- .air-datepicker--pointer:after,
+			.-bottom-center- .air-datepicker--pointer:after,
+			.-bottom-right- .air-datepicker--pointer:after,
+			[data-popper-placement^='bottom'] .air-datepicker--pointer:after {
+				transform: rotate(315deg);
+			}
+			.-left-top- .air-datepicker--pointer,
+			.-left-center- .air-datepicker--pointer,
+			.-left-bottom- .air-datepicker--pointer,
+			[data-popper-placement^='left'] .air-datepicker--pointer {
+				left: calc(100% - var(--pointer-half-size) + 1px);
+			}
+			.-left-top- .air-datepicker--pointer:after,
+			.-left-center- .air-datepicker--pointer:after,
+			.-left-bottom- .air-datepicker--pointer:after,
+			[data-popper-placement^='left'] .air-datepicker--pointer:after {
+				transform: rotate(45deg);
+			}
+			.-top-left- .air-datepicker--pointer,
+			.-bottom-left- .air-datepicker--pointer {
+				left: var(--adp-pointer-offset);
+			}
+			.-top-right- .air-datepicker--pointer,
+			.-bottom-right- .air-datepicker--pointer {
+				right: var(--adp-pointer-offset);
+			}
+			.-top-center- .air-datepicker--pointer,
+			.-bottom-center- .air-datepicker--pointer {
+				left: calc(50% - var(--adp-pointer-size) / 2);
+			}
+			.-left-top- .air-datepicker--pointer,
+			.-right-top- .air-datepicker--pointer {
+				top: var(--adp-pointer-offset);
+			}
+			.-left-bottom- .air-datepicker--pointer,
+			.-right-bottom- .air-datepicker--pointer {
+				bottom: var(--adp-pointer-offset);
+			}
+			.-left-center- .air-datepicker--pointer,
+			.-right-center- .air-datepicker--pointer {
+				top: calc(50% - var(--adp-pointer-size) / 2);
+			}
+			.air-datepicker--navigation {
+				grid-area: nav;
+			}
+			.air-datepicker--content {
+				box-sizing: content-box;
+				padding: var(--adp-padding);
+				grid-area: body;
+			}
+			.-only-timepicker- .air-datepicker--content {
+				display: none;
+			}
+			.air-datepicker--time {
+				grid-area: timepicker;
+			}
+			.air-datepicker--buttons {
+				grid-area: buttons;
+			}
+			.air-datepicker--buttons,
+			.air-datepicker--time {
+				padding: var(--adp-padding);
+				border-top: 1px solid var(--adp-border-color-inner);
+			}
+			.air-datepicker-overlay {
+				position: fixed;
+				background: var(--adp-overlay-background-color);
+				left: 0;
+				top: 0;
+				width: 0;
+				height: 0;
+				opacity: 0;
+				transition:
+					opacity var(--adp-overlay-transition-duration)
+						var(--adp-overlay-transition-ease),
+					left 0s,
+					height 0s,
+					width 0s;
+				transition-delay:
+					0s, var(--adp-overlay-transition-duration),
+					var(--adp-overlay-transition-duration),
+					var(--adp-overlay-transition-duration);
+				z-index: var(--adp-overlay-z-index);
+			}
+			.air-datepicker-overlay.-active- {
+				opacity: 1;
+				width: 100%;
+				height: 100%;
+				transition:
+					opacity var(--adp-overlay-transition-duration)
+						var(--adp-overlay-transition-ease),
+					height 0s,
+					width 0s;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/backtrace/Highlight.vue?vue&amp;type=style&amp;index=0&amp;scoped=b47b1cc5&amp;lang.css"
+		>
+			.highlight {
+				&[data-v-b47b1cc5] {
+					display: inline-block;
+
+					color: var(--color-syntax-text);
+					font-style: normal;
+					font-family: var(--font-family-mono);
+					font-variant-numeric: tabular-nums;
+					vertical-align: top;
+				}
+				&[data-v-b47b1cc5] a {
+					display: inline-flex;
+
+					text-decoration: underline dotted var(--color-fill-high);
+					text-underline-offset: 3px;
+					&:hover {
+						text-decoration-color: inherit;
+					}
+				}
+			}
+			.highlight--block[data-v-b47b1cc5] {
+				display: block;
+			}
+			.highlight--constant[data-v-b47b1cc5] {
+				color: var(--color-syntax-constant);
+			}
+			.highlight--operator[data-v-b47b1cc5] {
+				color: var(--color-syntax-operator);
+				font-weight: var(--font-weight-bold);
+			}
+			.highlight--function[data-v-b47b1cc5],
+			.highlight--scope[data-v-b47b1cc5] {
+				color: var(--color-text-muted);
+			}
+			.highlight--variable[data-v-b47b1cc5] {
+				color: var(--color-syntax-variable);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/backtrace/Formula.vue?vue&amp;type=style&amp;index=0&amp;scoped=c3ee7feb&amp;lang.css"
+		>
+			.formula[data-v-c3ee7feb] {
+				white-space: nowrap;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/backtrace/Formulas.vue?vue&amp;type=style&amp;index=0&amp;scoped=44eead21&amp;lang.css"
+		>
+			.formulas[data-v-44eead21] {
+				overflow: auto;
+				border: var(--border-m) solid var(--color-border-default);
+				border-radius: var(--radius-l);
+
+				background: var(--color-surface-sunken);
+			}
+			.formulas__body[data-v-44eead21] {
+				display: inline-grid;
+
+				margin: var(--length-xxl);
+				gap: var(--length-xl);
+
+				font-size: var(--font-size-s);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/instruction/Instruction.vue?vue&amp;type=style&amp;index=0&amp;scoped=2ee394cb&amp;lang.css"
+		>
+			.instruction[data-v-2ee394cb] {
+				padding: var(--length-xxl);
+
+				text-align: center;
+			}
+			.instruction__description[data-v-2ee394cb] {
+				color: var(--color-text-muted);
+			}
+			.instruction__icon[data-v-2ee394cb] {
+				--size: calc(var(--icon-size-m) * 5);
+
+				width: var(--size);
+				height: var(--size);
+
+				margin-bottom: var(--length-m);
+
+				color: var(--color-text-muted);
+			}
+			.instruction__title[data-v-2ee394cb] {
+				margin: 0;
+
+				font-size: var(--font-size-s);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/list-unordered/ListUnordered.vue?vue&amp;type=style&amp;index=0&amp;scoped=40575987&amp;lang.css"
+		>
+			.list-unordered {
+				&[data-v-40575987] {
+					padding-left: var(--length-xxl);
+
+					list-style-type: initial;
+				}
+				&[data-v-40575987]:not(:last-of-type) {
+					margin-bottom: var(--length-xxl);
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/logo/Logo.vue?vue&amp;type=style&amp;index=0&amp;scoped=e326328c&amp;lang.css"
+		>
+			.logo[data-v-e326328c] {
+				display: block;
+
+				width: auto;
+				height: 2rem;
+				color: light-dark(#03363d, #fff);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/menu/Menu.vue?vue&amp;type=style&amp;index=0&amp;scoped=c3a92936&amp;lang.css"
+		>
+			.menu[data-v-c3a92936] {
+				margin: 0 calc(-1 * var(--length-m));
+				padding: 0;
+				list-style: none;
+			}
+			.menu__action {
+				&[data-v-c3a92936] {
+					display: flex;
+
+					width: 100%;
+					padding: var(--length-s) var(--length-xl);
+					border-radius: 0;
+
+					color: inherit;
+					font-weight: normal;
+
+					cursor: pointer;
+				}
+				&[data-v-c3a92936]:hover:not(:active) {
+					box-shadow: none;
+				}
+				&[aria-disabled='true'][data-v-c3a92936] {
+					border: none;
+					background-color: transparent;
+
+					color: var(--color-text-muted);
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/requirements/Requirements.vue?vue&amp;type=style&amp;index=0&amp;lang.css"
+		>
+			.requirements__list {
+				display: grid;
+				gap: var(--length-m);
+			}
+			.requirements__item {
+				display: flex;
+				align-items: center;
+				gap: var(--length-m);
+
+				color: var(--color-text-muted);
+				font-weight: var(--font-weight-bold);
+				&.is-active {
+					color: var(--color-text-primary);
+					.icon {
+						color: var(--color-status-positive-accent);
+					}
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/progress/Progress.vue?vue&amp;type=style&amp;index=0&amp;scoped=ab4881b4&amp;lang.css"
+		>
+			.progress[data-v-ab4881b4] {
+				display: inline-flex;
+				align-items: center;
+
+				gap: var(--length-l);
+			}
+			.progress__visual {
+				&[data-v-ab4881b4] {
+					position: relative;
+
+					height: 2rem;
+				}
+				circle[data-v-ab4881b4] {
+					fill: transparent;
+				}
+				svg[data-v-ab4881b4] {
+					width: 100%;
+					height: inherit;
+
+					padding: 4%;
+					overflow: visible;
+
+					transform: rotate(-90deg);
+				}
+			}
+			.progress__background[data-v-ab4881b4] {
+				stroke: var(--color-text-secondary);
+			}
+			.progress__foreground {
+				&[data-v-ab4881b4] {
+					stroke: var(--color-accent-primary);
+				}
+				.progress--complete &[data-v-ab4881b4] {
+					stroke: var(--color-status-positive-accent);
+				}
+			}
+			.progress__icon {
+				&[data-v-ab4881b4] {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+
+					transform: scale(0.6);
+
+					color: var(--color-text-secondary);
+				}
+				.progress--complete &[data-v-ab4881b4] {
+					color: var(--color-status-positive-accent);
+				}
+			}
+			.progress__text[data-v-ab4881b4] {
+				color: var(--color-text-muted);
+				font-weight: var(--font-weight-bold);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/syntax-highlight/SyntaxHighlight.vue?vue&amp;type=style&amp;index=0&amp;lang.css"
+		>
+			.syntax-highlight {
+				display: inline-grid;
+				width: 100%;
+
+				margin: 0;
+				padding: var(--length-xxl);
+				overflow: auto;
+				border: var(--border-m) solid var(--color-border-default);
+				border-radius: var(--radius-l);
+
+				background: var(--color-surface-sunken);
+			}
+			pre[class*='language-'] {
+				> code {
+					color: var(--color-syntax-text);
+					font-size: var(--font-size-s);
+				}
+				.token {
+					&.boolean {
+						color: var(--color-syntax-boolean);
+					}
+					&.comment {
+						color: var(--color-syntax-comment);
+					}
+					&.function {
+						color: var(--color-syntax-function);
+					}
+					&.keyword {
+						color: var(--color-syntax-keyword);
+					}
+					&.number {
+						color: var(--color-syntax-number);
+					}
+					&.operator {
+						color: var(--color-syntax-operator);
+					}
+					&.punctuation {
+						color: var(--color-syntax-punctuation);
+					}
+					&.string {
+						color: var(--color-syntax-string);
+					}
+					&.variable {
+						color: var(--color-syntax-variable);
+					}
+				}
+				&.line-numbers {
+					position: relative;
+
+					padding-left: 5rem;
+
+					counter-reset: linenumber;
+					> code {
+						position: relative;
+					}
+					.line-numbers-rows {
+						position: absolute;
+						top: 0;
+						left: -5rem;
+
+						width: 4rem;
+
+						border-right: 1px solid var(--color-border-default);
+
+						pointer-events: none;
+						> span {
+							display: block;
+							counter-increment: linenumber;
+
+							pointer-events: none;
+							&:before {
+								display: block;
+								padding-right: 1rem;
+
+								content: counter(linenumber);
+
+								color: var(--color-text-secondary);
+								text-align: right;
+							}
+						}
+					}
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/table-container/TableContainer.vue?vue&amp;type=style&amp;index=0&amp;scoped=a6973367&amp;lang.css"
+		>
+			.table-container[data-v-a6973367] {
+				@media screen {
+					max-height: 100%;
+					overflow: auto;
+				}
+			}
+		</style>
+						<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/timeline/Timeline.vue?vue&amp;type=style&amp;index=0&amp;scoped=01ca5720&amp;lang.css"
+		>
+			.timeline[data-v-01ca5720],
+			.timeline__items[data-v-01ca5720] {
+				display: grid;
+				gap: var(--gutter-m);
+			}
+			.timeline__header[data-v-01ca5720] {
+				display: flex;
+				z-index: 2;
+
+				position: sticky;
+				top: calc(var(--gutter-m) * -1);
+
+				padding-bottom: var(--gutter-m);
+				gap: var(--length-s);
+
+				border-bottom: var(--border-s) solid var(--color-border-default);
+				background-color: var(--color-surface-raised);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/timeline/Timeline.vue?vue&amp;type=style&amp;index=1&amp;lang.css"
+		>
+			.timeline__items {
+				> :last-child:after,
+				:last-child > li:after {
+					display: none;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/timeline/TimeLineHeader.vue?vue&amp;type=style&amp;index=0&amp;scoped=1c2c336e&amp;lang.css"
+		>
+			.timeline__date[data-v-1c2c336e] {
+				color: var(--color-text-muted);
+				font-size: var(--font-size-xs);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/timeline/TimelineItem.vue?vue&amp;type=style&amp;index=0&amp;scoped=d512281e&amp;lang.css"
+		>
+			.timeline__item {
+				&[data-v-d512281e] {
+					--timeline-icon-size: 2rem;
+
+					display: grid;
+					position: relative;
+
+					grid-template-columns: max-content 1fr;
+					gap: var(--gutter-m);
+				}
+				&[data-v-d512281e]:after {
+					position: absolute;
+					top: calc(var(--timeline-icon-size) + var(--length-xs));
+					bottom: calc((var(--gutter-m) - var(--length-xs)) * -1);
+					left: var(--gutter-m);
+
+					width: var(--border-s);
+
+					background-color: var(--color-border-default);
+
+					content: '';
+				}
+			}
+			.timeline__body[data-v-d512281e] {
+				margin-bottom: var(--length-xs);
+			}
+			.timeline__icon[data-v-d512281e] {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				aspect-ratio: 1;
+
+				width: var(--timeline-icon-size);
+
+				border-radius: 50%;
+				background: var(--color-surface-subtle);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/toggle/Toggle.vue?vue&amp;type=style&amp;index=0&amp;scoped=9a9fbdf8&amp;lang.css"
+		>
+			.toggle {
+				&[data-v-9a9fbdf8] {
+					display: inline-flex;
+
+					padding: var(--length-xxs);
+					gap: var(--length-xxs);
+					border: var(--border-s) solid var(--color-border-default);
+
+					border-radius: var(--radius-m);
+					background-color: var(--color-surface-page);
+				}
+				label {
+					&[data-v-9a9fbdf8] {
+						display: flex;
+						padding: var(--length-xs);
+
+						border-radius: var(--radius-s);
+					}
+					&[data-v-9a9fbdf8]:focus,
+					&[data-v-9a9fbdf8]:hover {
+						color: var(--color-text-muted);
+					}
+				}
+				[data-v-9a9fbdf8]:has(:focus-visible) {
+					outline: var(--focus-outline);
+					outline-offset: var(--focus-outline-negative-offset);
+				}
+				label[data-v-9a9fbdf8]:active,
+				label[data-v-9a9fbdf8]:has(input:checked) {
+					background: var(--color-surface-elevated);
+					color: var(--color-text-primary);
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/layout/Layout.vue?vue&amp;type=style&amp;index=0&amp;scoped=0aa3a964&amp;lang.css"
+		>
+			.layout {
+				&[data-v-0aa3a964] {
+					display: grid;
+					place-content: center;
+					height: 100%;
+
+					padding: var(--gutter-m);
+				}
+				header[data-v-0aa3a964] {
+					margin-bottom: var(--gutter-m);
+				}
+				footer[data-v-0aa3a964] {
+					padding: var(--gutter-m);
+
+					color: var(--color-text-muted);
+					text-align: center;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/app/Navigation.vue?vue&amp;type=style&amp;index=0&amp;scoped=4e667491&amp;lang.css"
+		>
+			:where(ul[data-v-4e667491], li[data-v-4e667491]) {
+				all: unset;
+
+				display: block;
+			}
+			.nav {
+				&[data-v-4e667491] {
+					--color-interactive-selected: var(--palette-brand-secondary);
+
+					white-space: nowrap;
+
+					/* Compact view */
+				}
+				button[data-v-4e667491] {
+					width: 100%;
+
+					border: none;
+					background: none;
+					font: inherit;
+				}
+				> ul[data-v-4e667491] {
+					display: flex;
+					flex-direction: column;
+					gap: var(--length-xs);
+				}
+				button,
+				a {
+					&[data-v-4e667491] {
+						box-sizing: border-box;
+						display: block;
+
+						color: var(--color-text-primary);
+						cursor: pointer;
+						transition: background-color 0.2s;
+					}
+					.icon[data-v-4e667491] {
+						color: var(--color-text-secondary);
+					}
+					.icon__toggle[data-v-4e667491] {
+						margin-left: auto;
+					}
+					&[data-v-4e667491]:hover {
+						background: var(--color-surface-subtle);
+					}
+					&.router-link-active[data-v-4e667491] {
+						background: var(--color-surface-subtle);
+					}
+					&.is-active,
+					&.router-link-active {
+						&[data-v-4e667491] {
+							color: var(--color-text-primary);
+						}
+						.icon[data-v-4e667491] {
+							color: var(--color-interactive-selected);
+						}
+						.icon__toggle[data-v-4e667491] {
+							color: var(--color-text-primary);
+						}
+					}
+				}
+				.nav__item {
+					&[data-v-4e667491] {
+						position: relative;
+					}
+					> button,
+					> a {
+						&[data-v-4e667491] {
+							display: flex;
+							align-items: center;
+
+							margin-bottom: var(--length-s);
+							padding: var(--length-xl);
+							gap: var(--length-l);
+
+							font-weight: var(--font-weight-bold);
+							line-height: 1;
+						}
+						&.router-link-exact-active[data-v-4e667491] {
+							background: var(--color-surface-subtle);
+						}
+					}
+				}
+				.sub-nav__item {
+					&[data-v-4e667491] {
+						margin-left: 1.4rem; /* align border and icons */
+
+						border-left: var(--border-m) solid var(--color-border-default);
+					}
+					> a {
+						&[data-v-4e667491] {
+							position: relative;
+
+							margin: 0 var(--length-m);
+							padding: var(--length-s) var(--length-xl);
+
+							border-radius: var(--radius-m);
+
+							/* faux border */
+						}
+						&[data-v-4e667491]:before {
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: -10px;
+
+							border-left: var(--border-m) solid transparent;
+
+							content: '';
+						}
+						&.router-link-active {
+							&[data-v-4e667491] {
+								background: var(--color-surface-subtle);
+							}
+							&[data-v-4e667491]::before {
+								border-color: var(--color-interactive-selected);
+							}
+						}
+					}
+				}
+				&:not(.nav--compact) {
+					&[data-v-4e667491] {
+						/* Let the nav scroll vertically when not compact */
+						overflow-x: hidden;
+						overflow-y: auto;
+					}
+					.sub-nav-wrapper[data-v-4e667491] {
+						max-height: 0;
+						overflow: hidden;
+						transition: max-height 0.2s;
+					}
+					.nav__item:focus-within > .sub-nav-wrapper[data-v-4e667491],
+					.is-active + .sub-nav-wrapper[data-v-4e667491] {
+						max-height: 12rem;
+					}
+				}
+				&.nav--compact {
+					&[data-v-4e667491] {
+						/* Show sub-nav on hover, or when its children have focus */
+					}
+					.sub-nav-wrapper[data-v-4e667491] {
+						position: absolute;
+						top: calc(-1 * var(--length-l));
+						left: -9999rem;
+
+						padding: var(--length-l) var(--length-m); /* extra space for mouse `hover` */
+					}
+					.nav__item:is(:focus-within, :hover) {
+						> .sub-nav-wrapper[data-v-4e667491] {
+							z-index: 20;
+							left: 100%;
+						}
+					}
+					.sub-nav[data-v-4e667491] {
+						margin: 0;
+						padding: var(--length-m);
+						border-radius: var(--radius-m);
+
+						background-color: var(--color-surface-overlay);
+					}
+					.sub-nav__item {
+						&[data-v-4e667491] {
+							margin: 0;
+							padding: 0;
+							border: none;
+						}
+						a {
+							&[data-v-4e667491] {
+								margin: 0;
+
+								color: var(--color-text-primary);
+							}
+							&[data-v-4e667491]::before {
+								display: none;
+							}
+						}
+					}
+					.icon__toggle[data-v-4e667491] {
+						display: none;
+					}
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/app/Header.vue?vue&amp;type=style&amp;index=0&amp;scoped=10fdf22c&amp;lang.css"
+		>
+			.header {
+				&[data-v-10fdf22c] {
+					--header-width: 15rem;
+
+					display: flex;
+					flex-direction: column;
+					width: var(--header-width);
+
+					transition: width cubic-bezier(0.5, 1.5, 1, 1) 0.3s;
+				}
+				&[data-v-10fdf22c]:not(.header--compact) {
+					overflow-x: hidden;
+					overflow-y: auto;
+				}
+				&.header--compact {
+					&[data-v-10fdf22c] {
+						--header-width: 3rem;
+					}
+					.header__scheme[data-v-10fdf22c] {
+						display: none;
+					}
+					.header-toggle__link[data-v-10fdf22c] {
+						margin-inline-end: var(--length-s);
+					}
+				}
+			}
+			.header__links[data-v-10fdf22c] {
+				display: flex;
+				align-items: center;
+				min-height: var(--layout-header-height);
+
+				border-bottom: var(--border-s) solid var(--color-border-default);
+			}
+			.header-toggle__link[data-v-10fdf22c] {
+				margin-left: auto;
+				margin-inline-end: var(--length-l);
+			}
+			.header__logo[data-v-10fdf22c] {
+				padding-inline-start: var(--gutter-m);
+			}
+			.header__nav[data-v-10fdf22c] {
+				flex: auto;
+			}
+			.header__version[data-v-10fdf22c] {
+				padding: var(--length-m) var(--length-s);
+				overflow: hidden;
+
+				color: var(--color-text-muted);
+				font-size: var(--font-size-s);
+
+				text-align: center;
+
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			.header__actions[data-v-10fdf22c] {
+				display: flex;
+				flex-direction: column;
+			}
+			.header__scheme[data-v-10fdf22c] {
+				display: flex;
+				justify-content: center;
+				padding: var(--length-m);
+				border-bottom: var(--border-s) solid var(--color-border-default);
+			}
+			.header__actions-button {
+				&[data-v-10fdf22c] {
+					width: 100%;
+					padding: var(--length-m) var(--length-l);
+					gap: var(--length-xl);
+					box-shadow: none;
+					color: var(--color-fill-base);
+				}
+				&[data-v-10fdf22c]:not(:last-child) {
+					border-bottom: var(--border-s) solid var(--color-border-default);
+				}
+				&.scheme-toggle[data-v-10fdf22c] .button__icon {
+					color: var(--palette-brand-secondary);
+				}
+			}
+			.user[data-v-10fdf22c] {
+				display: flex;
+				flex-direction: column;
+
+				overflow: hidden;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/app/Notifications.vue?vue&amp;type=style&amp;index=0&amp;scoped=3b73e2f3&amp;lang.css"
+		>
+			.notifications[data-v-3b73e2f3] {
+				display: grid;
+				gap: var(--gutter-s);
+				@media print {
+					display: none;
+				}
+			}
+			.notification--support[data-v-3b73e2f3] {
+				@media (min-width: 64rem) {
+					display: none;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/app/PageTitle.vue?vue&amp;type=style&amp;index=0&amp;scoped=5f7b5559&amp;lang.css"
+		>
+			.page-title {
+				&[data-v-5f7b5559] {
+					display: flex;
+					flex: 1;
+					align-items: baseline;
+
+					max-width: 100%;
+
+					gap: var(--length-m);
+					white-space: nowrap;
+				}
+				> *[data-v-5f7b5559] {
+					flex: 0 1 auto;
+				}
+			}
+			.page-title__heading {
+				&[data-v-5f7b5559] {
+					display: flex;
+					align-items: center;
+
+					min-width: 0; /* fixes text-overflow ellipsis for page title */
+					min-height: 2rem;
+
+					gap: var(--length-m);
+				}
+				.heading[data-v-5f7b5559] {
+					margin: 0;
+
+					overflow: hidden;
+
+					font-size: inherit;
+					text-overflow: ellipsis;
+				}
+			}
+			.page-title__subtitle[data-v-5f7b5559] {
+				color: var(--color-text-muted);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/app/Resizer.vue?vue&amp;type=style&amp;index=0&amp;scoped=33fb5a25&amp;lang.css"
+		>
+			.resize-handle {
+				&[data-v-33fb5a25] {
+					--resize-handle-width: 2rem;
+					z-index: 20;
+
+					position: absolute;
+					top: 0;
+					bottom: 0;
+
+					cursor: ew-resize;
+				}
+				&[data-v-33fb5a25]::before {
+					display: block;
+
+					width: var(--border-l);
+					height: 100%;
+
+					background-color: var(--color-border-default);
+
+					content: '';
+				}
+				&[data-v-33fb5a25]:hover::before {
+					background-color: var(--color-fill-medium);
+				}
+				&.resize-handle--active[data-v-33fb5a25]::before {
+					background-color: var(--color-accent-primary);
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/app/Sidebar.vue?vue&amp;type=style&amp;index=0&amp;scoped=386aca01&amp;lang.css"
+		>
+			.sidebar {
+				&[data-v-386aca01] {
+					display: flex;
+					flex-direction: column;
+					height: 100%;
+					border-left: var(--border-l) solid transparent;
+					background: inherit;
+				}
+				.sidebar__header {
+					&[data-v-386aca01] {
+						display: flex;
+						align-items: center;
+						min-height: var(--layout-header-height);
+
+						padding: var(--gutter-s) var(--gutter-m);
+						gap: var(--length-l);
+						border-bottom: var(--border-s) solid var(--color-border-default);
+					}
+					.sidebar__title {
+						&[data-v-386aca01] {
+							flex: 1 1 auto;
+							overflow: hidden;
+
+							text-overflow: ellipsis;
+							white-space: nowrap;
+						}
+						h1[data-v-386aca01] {
+							display: flex;
+							align-items: center;
+							gap: var(--length-s);
+						}
+					}
+					:is(
+						h1[data-v-386aca01],
+						h2[data-v-386aca01],
+						h3[data-v-386aca01],
+						h4[data-v-386aca01],
+						h5[data-v-386aca01],
+						h6[data-v-386aca01]
+					) {
+						margin: 0;
+						overflow: hidden;
+
+						font-weight: var(--font-weight-bold);
+
+						font-size: var(--font-size-s);
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+				}
+				.sidebar__actions[data-v-386aca01] {
+					display: flex;
+				}
+				.sidebar__body {
+					&[data-v-386aca01] {
+						display: flex;
+						flex: 1 1 auto;
+						flex-direction: column;
+
+						min-height: 0;
+						padding: var(--gutter-m);
+
+						overflow: auto;
+						gap: var(--gutter-m);
+						background: inherit;
+					}
+					&[data-v-386aca01]:has(> .button-group:last-child) {
+						padding-bottom: 0;
+					}
+				}
+			}
+			[data-v-386aca01] .button-group:last-child {
+				position: sticky;
+				bottom: 0;
+				margin-top: auto;
+				padding-block: var(--gutter-m);
+				background: inherit;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/filter/Filter.vue?vue&amp;type=style&amp;index=0&amp;scoped=ccafe77b&amp;lang.css"
+		>
+			.filter__items[data-v-ccafe77b] {
+				display: grid;
+
+				margin-bottom: var(--length-s);
+				gap: var(--length-xs);
+			}
+			.filter__toggle {
+				&[data-v-ccafe77b] {
+					padding: 0;
+					border: none;
+					cursor: pointer;
+				}
+				&[data-v-ccafe77b]:hover {
+					background-color: transparent;
+					box-shadow: none;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/filter/ActiveFilters.vue?vue&amp;type=style&amp;index=0&amp;scoped=10703387&amp;lang.css"
+		>
+			.active-filters[data-v-10703387] {
+				display: flex;
+				flex-wrap: wrap;
+				gap: var(--length-s);
+			}
+			.active-filters__group {
+				&[data-v-10703387] {
+					display: contents;
+				}
+				&[data-v-10703387]:not(:last-child)::after {
+					width: var(--border-m);
+					margin-inline: var(--length-s);
+
+					background: var(--color-fill-low);
+
+					content: '';
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/TableHead.vue?vue&amp;type=style&amp;index=0&amp;scoped=ceaac346&amp;lang.css"
+		>
+			.column__sort {
+				&[data-v-ceaac346] {
+					display: inline-flex;
+					align-items: center;
+					gap: var(--length-s);
+
+					color: inherit;
+				}
+				&[data-v-ceaac346]:hover {
+					color: var(--color-text-primary);
+				}
+				.is-compact & {
+					&[data-v-ceaac346] {
+						display: initial;
+					}
+					.column__title[data-v-ceaac346] {
+						display: initial;
+					}
+				}
+			}
+			.column__title {
+				&[data-v-ceaac346] {
+					display: inline-flex;
+					flex-direction: column;
+				}
+				:where(.column__sort) &[data-v-ceaac346] {
+					text-decoration: underline dotted;
+					text-underline-offset: 2px;
+				}
+			}
+			.column__subtitle[data-v-ceaac346] {
+				font-weight: normal;
+			}
+			.sort__icon {
+				&[data-v-ceaac346] {
+					order: 1;
+
+					vertical-align: text-top;
+					transition: transform 0.2s;
+				}
+				&.desc[data-v-ceaac346] {
+					transform: rotate(180deg);
+				}
+			}
+			.cell-fixed[data-v-ceaac346] {
+				width: 1rem;
+				min-width: 1rem;
+			}
+			.text-truncate[data-v-ceaac346] {
+				max-width: 8ch;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/BulkActions.vue?vue&amp;type=style&amp;index=0&amp;scoped=8b2fffa8&amp;lang.css"
+		>
+			.bulk-actions[data-v-8b2fffa8] {
+				display: flex;
+				flex-grow: 1;
+				align-items: center;
+				justify-content: space-between;
+				gap: var(--length-l);
+			}
+			.bulk-actions__loader[data-v-8b2fffa8] {
+				margin: calc(var(--length-l) * -1);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/CaptureContainer.vue?vue&amp;type=style&amp;index=0&amp;lang.css"
+		>
+			.capture-container {
+				display: contents;
+				&.is-capturing {
+					display: block;
+					position: absolute;
+					top: 0;
+					left: 0;
+
+					padding: var(--length-s);
+
+					transform: translateX(-100%);
+					:is(td, th) {
+						padding-inline: var(--length-l);
+					}
+					td :is(a, .router-link-exact-active) {
+						color: var(--color-text-primary);
+						text-decoration: none;
+					}
+					.scenario-value--positive {
+						color: var(--color-status-positive-accent);
+					}
+					.scenario-value--negative {
+						color: var(--color-status-negative-accent);
+					}
+					.row-name {
+						margin-left: calc(-1 * var(--button-size) + var(--length-l));
+						button {
+							display: none;
+						}
+					}
+					.column__title {
+						text-decoration: none;
+					}
+					:is(
+						.sort__icon,
+						.data-table__notifications,
+						.data-table__header:has(.filters),
+						.data-table__toolbar,
+						.data-table__actions,
+						.action-bar,
+						.header__actions,
+						:is(th, td):has(input[type='checkbox'])
+					) {
+						display: none;
+					}
+				}
+			}
+			.capture-container__title {
+				margin: 0 0 var(--length-xl);
+
+				font-weight: var(--font-weight-bold);
+				font-size: var(--font-size-s);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/filter/Filters.vue?vue&amp;type=style&amp;index=0&amp;scoped=7079362b&amp;lang.css"
+		>
+			ul[data-v-7079362b] {
+				margin-bottom: var(--gutter-m);
+			}
+			.filters[data-v-7079362b] {
+				display: flex;
+			}
+			.filters__body[data-v-7079362b] {
+				display: grid;
+				gap: var(--length-xl);
+			}
+			.filters__items[data-v-7079362b] {
+				display: grid;
+				min-width: 14rem;
+
+				max-height: 50vh;
+
+				padding-inline: var(--length-s);
+				overflow: auto;
+
+				gap: var(--length-s);
+			}
+			.filters__footer[data-v-7079362b] {
+				display: flex;
+				justify-content: flex-end;
+
+				padding-top: var(--length-m);
+
+				border-top: var(--border-s) solid var(--color-border-default);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/columnset/FormColumnset.vue?vue&amp;type=style&amp;index=0&amp;scoped=0e6c6807&amp;lang.css"
+		>
+			.form-columnset[data-v-0e6c6807] {
+				padding: var(--length-s);
+			}
+			.form-columnset__body[data-v-0e6c6807] {
+				display: inherit;
+				min-width: 20rem;
+
+				max-height: 30vh;
+
+				margin-bottom: var(--length-m);
+				padding-inline: var(--length-s);
+
+				overflow: auto;
+				gap: var(--length-s);
+			}
+			.form-columnset__footer {
+				&[data-v-0e6c6807] {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+
+					padding-top: var(--length-l);
+					gap: var(--length-s);
+
+					border-top: var(--border-s) solid var(--color-border-default);
+				}
+				label[data-v-0e6c6807] {
+					margin: 0;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/content/UnavailableAction.vue?vue&amp;type=style&amp;index=0&amp;scoped=3d729f5e&amp;lang.css"
+		>
+			.unavailable-action[data-v-3d729f5e] {
+				color: var(--color-text-secondary);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/content/Deviation.vue?vue&amp;type=style&amp;index=0&amp;scoped=93bc7f37&amp;lang.css"
+		>
+			.deviation {
+				&[data-v-93bc7f37] {
+					min-width: 10rem;
+				}
+				.is-compact &[data-v-93bc7f37] {
+					min-width: 0;
+					max-width: 6rem;
+				}
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/content/Input.vue?vue&amp;type=style&amp;index=0&amp;scoped=dc178aee&amp;lang.css"
+		>
+			.cell-field {
+				&[data-v-dc178aee] {
+					display: flex;
+					align-items: center;
+					min-width: 15rem;
+					gap: var(--length-xs);
+				}
+				.warning[data-v-dc178aee] {
+					color: var(--color-status-warning-accent);
+				}
+			}
+			.cell-loader[data-v-dc178aee] {
+				margin: calc(var(--length-xxl) * -1);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/content/Action.vue?vue&amp;type=style&amp;index=0&amp;lang.css"
+		>
+			.action {
+				display: flex;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/content/ActionsList.vue?vue&amp;type=style&amp;index=0&amp;scoped=d81ceeeb&amp;lang.css"
+		>
+			.actions[data-v-d81ceeeb] {
+				display: flex;
+				gap: var(--length-xs);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/content/Name.vue?vue&amp;type=style&amp;index=0&amp;scoped=e0a5a191&amp;lang.css"
+		>
+			.row-name {
+				&[data-v-e0a5a191] {
+					display: flex;
+					align-items: center;
+
+					padding-inline-start: var(--e0a5a191-offset);
+				}
+				&[data-v-e0a5a191]:has(button) {
+					padding-block: var(--length-m);
+				}
+				& > span[data-v-e0a5a191] {
+					max-width: 30vw;
+					overflow: hidden;
+
+					text-overflow: ellipsis;
+				}
+				.router-link-exact-active {
+					&[data-v-e0a5a191] {
+						color: var(--color-accent-primary);
+						text-decoration: underline;
+					}
+					&[data-v-e0a5a191]:is(:focus, :hover) {
+						color: inherit;
+					}
+				}
+			}
+			.row-name__link[data-v-e0a5a191] {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--length-m);
+			}
+			.row-name__button[data-v-e0a5a191] {
+				margin-inline: calc(-1 * (var(--button-size) - var(--length-s))) 0;
+				margin-block: calc(-1 * var(--length-xs));
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/TableCell.vue?vue&amp;type=style&amp;index=0&amp;scoped=fbfce584&amp;lang.css"
+		>
+			.cell-items[data-v-fbfce584] {
+				display: inline-flex;
+				gap: var(--length-s);
+			}
+			.cell-compact[data-v-fbfce584] {
+				padding-block: 0;
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/pages/client/FormClient.vue?vue&amp;type=style&amp;index=0&amp;scoped=8e304b49&amp;lang.css"
+		>
+			.module-options[data-v-8e304b49] {
+				display: grid;
+				gap: var(--length-xxs);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/pages/asset-allocation/monitoring/Form.vue?vue&amp;type=style&amp;index=0&amp;scoped=76a53d6b&amp;lang.css"
+		>
+			.form {
+				&[data-v-76a53d6b] {
+					display: flex;
+					align-items: center;
+
+					gap: var(--length-xs);
+				}
+				[data-v-76a53d6b] input {
+					width: 9.5rem;
+				}
+			}
+			.warning[data-v-76a53d6b] {
+				color: var(--color-status-warning-accent);
+			}
+		</style>
+		<style
+			type="text/css"
+			data-vite-dev-id="C:/repositories/productone/frontend/packages/client/src/shared/data-table/TableActions.vue?vue&amp;type=style&amp;index=0&amp;scoped=9e0da793&amp;lang.css"
+		>
+			.buttons[data-v-9e0da793] {
+				display: none;
+			}
+			.menu[data-v-9e0da793] {
+				display: contents;
+			}
+			@container (min-width: 50rem) {
+				.menu[data-v-9e0da793] {
+					display: none;
+				}
+				.buttons[data-v-9e0da793] {
+					display: inline-flex;
+				}
+			}
+		</style>
+	</head>
+	<body data-theme="dark" data-v-app="">
+		<div class="app app--sidebar">
+			<header data-v-10fdf22c="" class="header app__header">
+				<div data-v-10fdf22c="" class="header__links">
+					<a
+						data-v-10fdf22c=""
+						href="https://localhost:3000/dashboard"
+						class="header__logo"
+						><svg
+							data-v-e326328c=""
+							data-v-10fdf22c=""
+							class="logo"
+							viewBox="0 0 83 36"
+							xmlns="http://www.w3.org/2000/svg"
+							role="img"
+							aria-label="Alloq"
+						>
+							<path
+								data-v-e326328c=""
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M10.17 23.82a5.13 5.13 0 01-5.036 4.113C2.298 27.933 0 25.643 0 22.819c0-2.477 1.77-4.543 4.118-5.012v6.026H6.15l4.02-.012zm-.006-2.027H6.15v-3.986h4.013v3.98l.001.006zm-5.028-4.087h-.005.005z"
+								fill="currentColor"
+							></path>
+							<path
+								data-v-e326328c=""
+								d="M6.999 5.465L11.395.226l10.268 27.587H15.48C12.254 19.169 10.226 14.109 7 5.465zM30.004.274H24v27.548h6.003V.274zM39.042.274h-6.003v27.548h6.003V.274zM51.282 8.538c-5.868 0-10.202 4.209-10.202 9.89 0 5.683 4.334 9.891 10.202 9.891 5.888 0 10.223-4.208 10.223-9.89s-4.335-9.89-10.223-9.89zm0 5.586c2.36 0 4.086 1.78 4.086 4.305 0 2.525-1.727 4.304-4.086 4.304-2.34 0-4.065-1.779-4.065-4.304 0-2.525 1.726-4.305 4.065-4.305zM71.355 8.538c-5.044 0-8.764 4.362-8.764 9.872 0 5.548 3.72 9.91 8.745 9.91 2.416 0 4.085-.938 5.216-2.277v9.431h5.984V9.054h-5.792v2.029c-1.131-1.473-2.858-2.545-5.389-2.545zm1.42 5.586c2.358 0 4.027 1.818 4.027 4.305 0 2.487-1.669 4.304-4.028 4.304-2.397 0-4.008-1.855-4.008-4.304 0-2.449 1.611-4.305 4.008-4.305z"
+								fill="currentColor"
+							></path>
+							<path
+								data-v-e326328c=""
+								fill="#ff9800"
+								d="M6.16 17.815h4.01v3.982H6.16z"
+							></path></svg
+					></a>
+					<button
+						data-v-17ebb602=""
+						data-v-10fdf22c=""
+						class="button button--icon-only header-toggle__link"
+						type="button"
+					>
+						<!--v-if-->
+						<span data-v-17ebb602="" class="icon button__icon"
+							><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path
+									d="M21 17.9996V19.9996H3V17.9996H21ZM6.94975 3.5498V13.4493L2 8.49955L6.94975 3.5498ZM21 10.9996V12.9996H12V10.9996H21ZM21 3.99955V5.99955H12V3.99955H21Z"
+								></path>
+							</svg>
+						</span>
+						<span data-v-17ebb602="" class="button__label visually-hidden">
+							Toggle navigation
+						</span>
+						<!--v-if-->
+					</button>
+				</div>
+				<nav data-v-4e667491="" data-v-10fdf22c="" class="nav header__nav">
+					<ul data-v-4e667491="">
+						<li data-v-4e667491="" class="nav__item">
+							<a
+								data-v-4e667491=""
+								href="https://localhost:3000/dashboard"
+								class=""
+								><span data-v-4e667491="" class="icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M12.6604 20.1699V10.5699H20.3404V20.1699H12.6604ZM3.06036 12.4899V2.88986H10.7404V12.4899H3.06036ZM8.82036 10.5699V4.80986H4.98036V10.5699H8.82036ZM3.06036 20.1699V14.4099H10.7404V20.1699H3.06036ZM4.98036 18.2499H8.82036V16.3299H4.98036V18.2499ZM14.5804 18.2499H18.4204V12.4899H14.5804V18.2499ZM12.6604 2.88986H20.3404V8.64986H12.6604V2.88986ZM14.5804 4.80986V6.72986H18.4204V4.80986H14.5804Z"
+										></path>
+									</svg>
+								</span>
+								<span data-v-4e667491="" class="label">Dashboard</span></a
+							>
+							<!--v-if-->
+						</li>
+						<li data-v-4e667491="" class="nav__item">
+							<button data-v-4e667491="" class="" aria-expaned="false">
+								<span data-v-4e667491="" class="icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M11.7004 21.1299C6.39826 21.1299 2.10034 16.832 2.10034 11.5299C2.10034 7.23096 4.92562 3.59256 8.82034 2.36952V4.40856C7.17002 5.07869 5.80382 6.3014 4.95544 7.86756C4.10705 9.43371 3.82919 11.246 4.16938 12.9944C4.50958 14.7427 5.4467 16.3187 6.82043 17.4524C8.19417 18.5862 9.91919 19.2074 11.7004 19.2099C13.2303 19.2098 14.7255 18.7529 15.9943 17.8978C17.263 17.0426 18.2475 15.8281 18.8217 14.4099H20.8607C19.6377 18.3046 15.9993 21.1299 11.7004 21.1299ZM21.2524 12.4899H10.7404V1.97784C11.0562 1.94616 11.3768 1.92984 11.7004 1.92984C17.0024 1.92984 21.3004 6.22776 21.3004 11.5299C21.3004 11.8534 21.284 12.174 21.2524 12.4899ZM12.6604 3.90936V10.5699H19.3209C19.1072 8.87795 18.3367 7.30521 17.1308 6.09935C15.9249 4.89349 14.3523 4.12305 12.6604 3.90936Z"
+										></path>
+									</svg>
+								</span>
+								<span data-v-4e667491="" id="nav-asset-allocation" class="label"
+									>Asset allocation</span
+								>
+								<span data-v-4e667491="" class="icon icon__toggle"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M12.8255 11.5298L8.07349 6.77783L9.43093 5.42039L15.5404 11.5298L9.43093 17.6392L8.07349 16.2818L12.8255 11.5298Z"
+										></path>
+									</svg>
+								</span>
+							</button>
+							<div data-v-4e667491="" class="sub-nav-wrapper">
+								<ul data-v-4e667491="" class="sub-nav">
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/asset-allocation/monitoring"
+											class=""
+											id="nav-asset-allocation-monitoring"
+											aria-labelledby="nav-asset-allocation nav-asset-allocation-monitoring"
+											>Monitoring</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/asset-allocation/transactions"
+											class=""
+											id="nav-asset-allocation-transactions"
+											aria-labelledby="nav-asset-allocation nav-asset-allocation-transactions"
+											>Transactions</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/asset-allocation/mandates"
+											class=""
+											id="nav-asset-allocation-mandates"
+											aria-labelledby="nav-asset-allocation nav-asset-allocation-mandates"
+											>Mandates</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/asset-allocation/scenarios"
+											class=""
+											id="nav-asset-allocation-scenarios"
+											aria-labelledby="nav-asset-allocation nav-asset-allocation-scenarios"
+											>Scenarios</a
+										>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li data-v-4e667491="" class="nav__item">
+							<button data-v-4e667491="" class="" aria-expaned="false">
+								<span data-v-4e667491="" class="icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M18.7803 14.5088C19.4033 13.0288 19.5467 11.3907 19.1903 9.82494C18.8341 8.25918 17.996 6.84448 16.7941 5.77971C15.5921 4.71493 14.0866 4.05364 12.4893 3.8888C10.892 3.72396 9.28326 4.06388 7.88915 4.86075L6.93683 3.19323C8.39377 2.36053 10.0435 1.92445 11.7216 1.92849C13.3998 1.93254 15.0474 2.37656 16.5003 3.21627C20.8107 5.70459 22.4619 11.0326 20.4526 15.4755L21.741 16.2185L17.7426 18.344L17.5842 13.8185L18.7803 14.5088ZM4.62035 8.55099C3.99746 10.0311 3.85407 11.669 4.21036 13.2348C4.56665 14.8005 5.40469 16.2153 6.60667 17.28C7.80865 18.3448 9.31411 19.0061 10.9114 19.1709C12.5086 19.3358 14.1175 18.9958 15.5115 18.199L16.4638 19.8665C15.0069 20.6992 13.3572 21.1353 11.679 21.1312C10.0009 21.1272 8.35326 20.6831 6.90035 19.8435C2.58995 17.3552 0.938756 12.0272 2.94803 7.58427L1.65875 6.84219L5.65715 4.71674L5.81555 9.24218L4.61939 8.55195L4.62035 8.55099ZM8.34035 13.4499H13.6203C13.7477 13.4499 13.8697 13.3993 13.9598 13.3093C14.0498 13.2192 14.1003 13.0972 14.1003 12.9699C14.1003 12.8425 14.0498 12.7205 13.9598 12.6304C13.8697 12.5404 13.7477 12.4899 13.6203 12.4899H9.78032C9.14384 12.4899 8.53339 12.237 8.0833 11.7869C7.63322 11.3368 7.38035 10.7264 7.38035 10.0899C7.38035 9.45334 7.63322 8.84289 8.0833 8.39281C8.53339 7.94272 9.14384 7.68987 9.78032 7.68987H10.7403V6.72987H12.6603V7.68987H15.0603V9.6099H9.78032C9.65302 9.6099 9.53096 9.6604 9.44094 9.75045C9.35092 9.8405 9.30035 9.96251 9.30035 10.0899C9.30035 10.2172 9.35092 10.3392 9.44094 10.4293C9.53096 10.5193 9.65302 10.5699 9.78032 10.5699H13.6203C14.2569 10.5699 14.8674 10.8227 15.3174 11.2728C15.7675 11.7229 16.0203 12.3333 16.0203 12.9699C16.0203 13.6064 15.7675 14.2168 15.3174 14.6669C14.8674 15.117 14.2569 15.3699 13.6203 15.3699H12.6603V16.3299H10.7403V15.3699H8.34035V13.4499Z"
+										></path>
+									</svg>
+								</span>
+								<span data-v-4e667491="" id="nav-currency-hedging" class="label"
+									>Currency hedging</span
+								>
+								<span data-v-4e667491="" class="icon icon__toggle"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M12.8255 11.5298L8.07349 6.77783L9.43093 5.42039L15.5404 11.5298L9.43093 17.6392L8.07349 16.2818L12.8255 11.5298Z"
+										></path>
+									</svg>
+								</span>
+							</button>
+							<div data-v-4e667491="" class="sub-nav-wrapper">
+								<ul data-v-4e667491="" class="sub-nav">
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/currency-hedging/monitoring"
+											class=""
+											id="nav-currency-hedging-monitoring"
+											aria-labelledby="nav-currency-hedging nav-currency-hedging-monitoring"
+											>Monitoring</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/currency-hedging/transactions"
+											class=""
+											id="nav-currency-hedging-transactions"
+											aria-labelledby="nav-currency-hedging nav-currency-hedging-transactions"
+											>Transactions</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/currency-hedging/mandates"
+											class=""
+											id="nav-currency-hedging-mandates"
+											aria-labelledby="nav-currency-hedging nav-currency-hedging-mandates"
+											>Mandates</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/currency-hedging/scenarios"
+											class=""
+											id="nav-currency-hedging-scenarios"
+											aria-labelledby="nav-currency-hedging nav-currency-hedging-scenarios"
+											>Scenarios</a
+										>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li data-v-4e667491="" class="nav__item">
+							<button data-v-4e667491="" class="" aria-expaned="false">
+								<span data-v-4e667491="" class="icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M5.94036 1.92981C5.94036 2.42229 6.41076 2.88981 6.90036 2.88981H16.5004C16.9929 2.88981 17.4604 2.41941 17.4604 1.92981H19.3804C19.3804 3.52053 18.0911 4.80981 16.5004 4.80981H12.6604L12.6613 6.78933C16.4495 7.26261 19.3804 10.494 19.3804 14.4099V20.1699C19.3804 20.6998 18.9503 21.1299 18.4204 21.1299H4.98036C4.45044 21.1299 4.02036 20.6998 4.02036 20.1699V14.4099C4.02036 10.4931 6.95219 7.26165 10.7404 6.78933V4.80981H6.90036C5.30676 4.80981 4.02036 3.52341 4.02036 1.92981H5.94036ZM11.7004 8.64981C8.59187 8.64981 5.94036 11.2995 5.94036 14.4099V19.2099H17.4604V14.4099C17.4604 11.3014 14.8089 8.64981 11.7004 8.64981ZM11.7004 10.5699C12.4127 10.5699 13.0789 10.7638 13.6511 11.1017L11.0207 13.7311C10.6463 14.1055 10.6463 14.7142 11.0207 15.0886C11.3673 15.4342 11.9125 15.4611 12.2879 15.1683L12.3791 15.0886L15.0095 12.4591C15.3465 13.0313 15.5404 13.6975 15.5404 14.4099C15.5404 16.5315 13.822 18.2499 11.7004 18.2499C9.57875 18.2499 7.86036 16.5315 7.86036 14.4099C7.86036 12.2883 9.57875 10.5699 11.7004 10.5699Z"
+										></path>
+									</svg>
+								</span>
+								<span
+									data-v-4e667491=""
+									id="nav-balance-management"
+									class="label"
+									>Balance management</span
+								>
+								<span data-v-4e667491="" class="icon icon__toggle"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M12.8255 11.5298L8.07349 6.77783L9.43093 5.42039L15.5404 11.5298L9.43093 17.6392L8.07349 16.2818L12.8255 11.5298Z"
+										></path>
+									</svg>
+								</span>
+							</button>
+							<div data-v-4e667491="" class="sub-nav-wrapper">
+								<ul data-v-4e667491="" class="sub-nav">
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/balance-management/vev"
+											class=""
+											id="nav-balance-management-vev"
+											aria-labelledby="nav-balance-management nav-balance-management-vev"
+											>VEV</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/balance-management/scenarios"
+											class=""
+											id="nav-balance-management-scenarios"
+											aria-labelledby="nav-balance-management nav-balance-management-scenarios"
+											>Scenarios</a
+										>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li data-v-4e667491="" class="nav__item">
+							<button data-v-4e667491="" class="is-active" aria-expaned="true">
+								<span data-v-4e667491="" class="icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M2.30484 13.5075C2.02876 12.2035 2.02876 10.8561 2.30484 9.55223C3.37044 9.67707 4.30164 9.32471 4.605 8.59127C4.90932 7.85687 4.50132 6.94967 3.65844 6.28439C4.3852 5.16727 5.3378 4.21467 6.45492 3.48791C7.11924 4.32983 8.0274 4.73879 8.7618 4.43447C9.4962 4.13015 9.84855 3.19991 9.72279 2.13431C11.0267 1.85822 12.374 1.85822 13.678 2.13431C13.5532 3.19991 13.9055 4.13111 14.639 4.43447C15.3734 4.73879 16.2806 4.33079 16.9458 3.48791C18.0629 4.21467 19.0155 5.16727 19.7423 6.28439C18.9004 6.94871 18.4914 7.85687 18.7958 8.59127C19.1001 9.32567 20.0303 9.67803 21.0959 9.55223C21.372 10.8561 21.372 12.2035 21.0959 13.5075C20.0303 13.3827 19.0991 13.735 18.7958 14.4684C18.4914 15.2028 18.8994 16.11 19.7423 16.7753C19.0155 17.8924 18.0629 18.845 16.9458 19.5718C16.2815 18.7299 15.3734 18.3209 14.639 18.6252C13.9046 18.9295 13.5522 19.8598 13.678 20.9254C12.374 21.2015 11.0267 21.2015 9.72279 20.9254C9.84759 19.8598 9.49524 18.9286 8.7618 18.6252C8.0274 18.3209 7.1202 18.7289 6.45492 19.5718C5.3378 18.845 4.3852 17.8924 3.65844 16.7753C4.50036 16.111 4.90932 15.2028 4.605 14.4684C4.30068 13.734 3.37044 13.3817 2.30484 13.5075ZM4.02036 11.7315C5.07636 12.0243 5.94708 12.6934 6.37908 13.734C6.81012 14.7756 6.66708 15.8652 6.12756 16.8175C6.21972 16.9155 6.31476 17.0105 6.41268 17.1027C7.36596 16.5631 8.4546 16.4211 9.4962 16.8512C10.5369 17.2832 11.206 18.1539 11.4988 19.2099C11.6332 19.2137 11.7676 19.2137 11.902 19.2099C12.1948 18.1539 12.8639 17.2832 13.9046 16.8512C14.9462 16.4201 16.0358 16.5631 16.9881 17.1027C17.086 17.0105 17.181 16.9155 17.2732 16.8175C16.7337 15.8643 16.5916 14.7756 17.0217 13.734C17.4537 12.6934 18.3244 12.0243 19.3804 11.7315C19.3842 11.5971 19.3842 11.4627 19.3804 11.3283C18.3244 11.0355 17.4537 10.3663 17.0217 9.32567C16.5906 8.28407 16.7337 7.19447 17.2732 6.24215C17.1806 6.14462 17.0856 6.04954 16.9881 5.95703C16.0348 6.49655 14.9462 6.63863 13.9046 6.20855C12.8639 5.77655 12.1948 4.90583 11.902 3.84983C11.7676 3.84628 11.6331 3.84628 11.4988 3.84983C11.206 4.90583 10.5369 5.77655 9.4962 6.20855C8.4546 6.63959 7.365 6.49655 6.41268 5.95703C6.31476 6.04919 6.21972 6.14423 6.12756 6.24215C6.66708 7.19543 6.80916 8.28407 6.37908 9.32567C5.94708 10.3663 5.07636 11.0355 4.02036 11.3283C4.01652 11.4627 4.01652 11.5971 4.02036 11.7315ZM11.7004 14.4099C10.9365 14.4099 10.204 14.1064 9.66394 13.5663C9.12379 13.0262 8.82036 12.2936 8.82036 11.5299C8.82036 10.766 9.12379 10.0334 9.66394 9.49336C10.204 8.95326 10.9365 8.64983 11.7004 8.64983C12.4642 8.64983 13.1967 8.95326 13.7368 9.49336C14.2769 10.0334 14.5804 10.766 14.5804 11.5299C14.5804 12.2936 14.2769 13.0262 13.7368 13.5663C13.1967 14.1064 12.4642 14.4099 11.7004 14.4099ZM11.7004 12.4899C11.955 12.4899 12.1991 12.3887 12.3792 12.2087C12.5592 12.0286 12.6604 11.7845 12.6604 11.5299C12.6604 11.2752 12.5592 11.0311 12.3792 10.8511C12.1991 10.671 11.955 10.5699 11.7004 10.5699C11.4458 10.5699 11.2016 10.671 11.0216 10.8511C10.8415 11.0311 10.7404 11.2752 10.7404 11.5299C10.7404 11.7845 10.8415 12.0286 11.0216 12.2087C11.2016 12.3887 11.4458 12.4899 11.7004 12.4899Z"
+										></path>
+									</svg>
+								</span>
+								<span data-v-4e667491="" id="nav-administration" class="label"
+									>Administration</span
+								>
+								<span data-v-4e667491="" class="icon icon__toggle"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M11.7004 12.6549L16.4524 7.90295L17.8098 9.26039L11.7004 15.3698L5.59091 9.26039L6.94835 7.90295L11.7004 12.6549Z"
+										></path>
+									</svg>
+								</span>
+							</button>
+							<div data-v-4e667491="" class="sub-nav-wrapper">
+								<ul data-v-4e667491="" class="sub-nav">
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/administration/users"
+											class=""
+											id="nav-administration-user-profiles"
+											aria-labelledby="nav-administration nav-administration-user-profiles"
+											>User profiles</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/administration/clients"
+											class="router-link-active"
+											id="nav-administration-client-profiles"
+											aria-labelledby="nav-administration nav-administration-client-profiles"
+											>Client profiles</a
+										>
+									</li>
+									<li data-v-4e667491="" class="sub-nav__item">
+										<a
+											data-v-4e667491=""
+											href="https://localhost:3000/administration/account/api-tokens"
+											class=""
+											id="nav-administration-api-tokens"
+											aria-labelledby="nav-administration nav-administration-api-tokens"
+											>API tokens</a
+										>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+				<div data-v-10fdf22c="" class="header__actions">
+					<button
+						data-v-17ebb602=""
+						data-v-10fdf22c=""
+						class="button button--text header__actions-button scheme-toggle js-toggle"
+						type="button"
+					>
+						<!--v-if-->
+						<span data-v-17ebb602="" class="icon button__icon"
+							><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path
+									d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"
+								></path>
+							</svg>
+						</span>
+						<span data-v-17ebb602="" class="button__label"
+							><span data-v-10fdf22c="">Dark mode</span></span
+						>
+						<!--v-if-->
+					</button>
+					<form
+						data-v-10fdf22c=""
+						action="https://localhost:3000/logout"
+						method="POST"
+					>
+						<button
+							data-v-17ebb602=""
+							data-v-10fdf22c=""
+							class="button button--text header__actions-button"
+							type="submit"
+						>
+							<!--v-if-->
+							<span data-v-17ebb602="" class="icon button__icon"
+								><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+									<path
+										d="M4 18H6V20H18V4H6V6H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V18ZM6 11H13V13H6V16L1 12L6 8V11Z"
+									></path>
+								</svg>
+							</span>
+							<span data-v-17ebb602="" class="button__label"
+								><span data-v-10fdf22c="" class="user"
+									><span data-v-10fdf22c="" class="text-truncate"
+										>Edwin Kalkman</span
+									>
+									<span data-v-10fdf22c="" class="font-normal"
+										>Logout</span
+									></span
+								></span
+							>
+							<!--v-if-->
+						</button>
+					</form>
+				</div>
+				<div data-v-10fdf22c="" class="header__version">release-x.xx.xx</div>
+			</header>
+			<main class="app__main">
+				<div class="main">
+					<div data-v-3b73e2f3="" class="notifications">
+						<div
+							data-v-3b73e2f3=""
+							class="notification notification--warning notification--support"
+							role="alert"
+						>
+							<span class="icon notification__icon"
+								><svg width="24" height="24" viewBox="0 0 24 24">
+									<path
+										d="M12.5317 2.88981L21.6766 18.7298C21.7609 18.8757 21.8053 19.0413 21.8053 19.2098C21.8053 19.3783 21.7609 19.5439 21.6766 19.6898C21.5924 19.8357 21.4712 19.957 21.3253 20.0412C21.1793 20.1255 21.0138 20.1698 20.8453 20.1698H2.55537C2.38686 20.1698 2.22131 20.1255 2.07538 20.0412C1.92944 19.957 1.80826 19.8357 1.724 19.6898C1.63975 19.5439 1.59539 19.3783 1.5954 19.2098C1.5954 19.0413 1.63975 18.8757 1.72401 18.7298L10.8689 2.88981C10.9532 2.74388 11.0744 2.62271 11.2204 2.53846C11.3663 2.45421 11.5318 2.40985 11.7003 2.40985C11.8689 2.40985 12.0344 2.45421 12.1803 2.53846C12.3262 2.62271 12.4475 2.74388 12.5317 2.88981ZM4.21809 18.2498H19.1825L11.7003 5.28981L4.21809 18.2498ZM10.7403 15.3698H12.6603V17.2898H10.7403V15.3698ZM10.7403 8.64981H12.6603V13.4498H10.7403V8.64981Z"
+									></path>
+								</svg>
+							</span>
+							<div class="notification__body">
+								This application is not optimized for your current device.
+								Please switch to a desktop device for optimal experience.
+							</div>
+							<button
+								data-v-17ebb602=""
+								class="button button--icon-only"
+								type="button"
+							>
+								<!--v-if-->
+								<span data-v-17ebb602="" class="icon button__icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M12.0001 10.4447L17.4448 5L19.0001 6.55532L13.5554 12L19.0001 17.4447L17.4448 19L12.0001 13.5553L6.55532 19L5 17.4447L10.4448 12L5 6.55532L6.55532 5L12.0001 10.4447Z"
+										></path>
+									</svg>
+								</span>
+								<span data-v-17ebb602="" class="button__label visually-hidden">
+									Close
+								</span>
+								<!--v-if-->
+							</button>
+						</div>
+						<!--v-if-->
+					</div>
+					<header class="main__header">
+						<div class="main__title">
+							<div data-v-5f7b5559="" class="page-title">
+								<span data-v-5f7b5559="" class="page-title__subtitle"
+									>Administration /</span
+								>
+								<div data-v-5f7b5559="" class="page-title__heading">
+									<h1
+										data-v-548d03fb=""
+										data-v-5f7b5559=""
+										class="heading"
+										title="Client profiles"
+									>
+										Client profiles
+									</h1>
+									<div data-v-5f7b5559="" id="teleport-title"></div>
+								</div>
+							</div>
+						</div>
+						<div id="teleport-header" class="main__header-content">
+							<button
+								data-v-17ebb602=""
+								class="button button--primary"
+								disabled=""
+								type="button"
+							>
+								<!--v-if-->
+								<span data-v-17ebb602="" class="icon button__icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M10.7404 10.5699V4.80984H12.6604V10.5699H18.4204V12.4899H12.6604V18.2499H10.7404V12.4899H4.98035V10.5699H10.7404Z"
+										></path>
+									</svg>
+								</span>
+								<span data-v-17ebb602="" class="button__label">
+									Create client
+								</span>
+								<!--v-if-->
+							</button>
+						</div>
+					</header>
+					<div class="main__body">
+						<!--v-if-->
+						<!--teleport start--><!--teleport end-->
+						<!--v-if-->
+						<div class="capture-container">
+							<h1 class="capture-container__title" hidden="">
+								Client profiles - Administration - Alloq
+							</h1>
+							<div data-v-55f1f6ea="" class="data-table">
+								<div data-v-55f1f6ea="" class="data-table__header">
+									<div
+										data-v-7079362b=""
+										data-v-55f1f6ea=""
+										class="filters"
+										data-filter="filter"
+									>
+										<span data-v-2788e09f="" class="trigger"
+											><button
+												data-v-17ebb602=""
+												data-v-7079362b=""
+												class="button"
+												type="button"
+												aria-haspopup="dialog"
+												aria-controls="filter-panel"
+												aria-expanded="false"
+											>
+												<!--v-if-->
+												<span data-v-17ebb602="" class="icon button__icon"
+													><svg width="24" height="24" viewBox="0 0 24 24">
+														<path
+															d="M9.78039 17.2899H13.6204V15.3699H9.78039V17.2899ZM3.06036 5.76987V7.68987H20.3404V5.76987H3.06036ZM5.94036 12.4899H17.4604V10.5699H5.94036V12.4899Z"
+														></path>
+													</svg>
+												</span>
+												<span data-v-17ebb602="" class="button__label">
+													Filter
+												</span>
+												<!--v-if-->
+											</button></span
+										>
+									</div>
+									<div
+										data-v-10703387=""
+										data-v-55f1f6ea=""
+										class="active-filters"
+									></div>
+								</div>
+								<div data-v-55f1f6ea="" class="data-table__toolbar">
+									<!--v-if-->
+									<!--v-if-->
+									<ul data-v-9082b209="" data-v-55f1f6ea="" class="data-list">
+										<li data-v-9082b209="" class="data-list__item">
+											<span data-v-2788e09f="" class="trigger"
+												><span data-v-231b96c0="" class="datalistitem"
+													>8 results
+													<!--v-if-->
+													<!--v-if--></span
+												></span
+											>
+										</li>
+									</ul>
+									<div data-v-55f1f6ea="" class="data-table__actions">
+										<!--v-if-->
+										<ul data-v-55f1f6ea="" class="data-table__buttons">
+											<!--v-if-->
+											<li data-v-55f1f6ea="">
+												<span data-v-2788e09f="" class="trigger"
+													><button
+														data-v-17ebb602=""
+														data-v-55f1f6ea=""
+														class="button button--icon-only"
+														type="button"
+														aria-label="Capture table"
+													>
+														<!--v-if-->
+														<span data-v-17ebb602="" class="icon button__icon"
+															><svg
+																xmlns="http://www.w3.org/2000/svg"
+																viewBox="0 0 24 24"
+															>
+																<path
+																	d="M3 3H5V5H3V3ZM7 3H9V5H7V3ZM11 3H13V5H11V3ZM15 3H17V5H15V3ZM19 3H21V5H19V3ZM19 7H21V9H19V7ZM3 19H5V21H3V19ZM3 15H5V17H3V15ZM3 11H5V13H3V11ZM3 7H5V9H3V7ZM10.6667 11L11.7031 9.4453C11.8886 9.1671 12.2008 9 12.5352 9H15.4648C15.7992 9 16.1114 9.1671 16.2969 9.4453L17.3333 11H20C20.5523 11 21 11.4477 21 12V20C21 20.5523 20.5523 21 20 21H8C7.44772 21 7 20.5523 7 20V12C7 11.4477 7.44772 11 8 11H10.6667ZM9 19H19V13H16.263L14.9296 11H13.0704L11.737 13H9V19ZM14 18C12.8954 18 12 17.1046 12 16C12 14.8954 12.8954 14 14 14C15.1046 14 16 14.8954 16 16C16 17.1046 15.1046 18 14 18Z"
+																></path></svg
+														></span>
+														<span
+															data-v-17ebb602=""
+															class="button__label visually-hidden"
+														></span>
+														<!--v-if-->
+													</button></span
+												>
+											</li>
+											<!--v-if-->
+										</ul>
+										<div data-v-9a9fbdf8="" data-v-55f1f6ea="" class="toggle">
+											<span data-v-2788e09f="" class="trigger"
+												><label data-v-9a9fbdf8=""
+													><input
+														data-v-9a9fbdf8=""
+														id="v-24-0"
+														name="v-24"
+														type="radio"
+														class="visually-hidden"
+														value="0"
+													/>
+													<span data-v-9a9fbdf8="" class="icon"
+														><svg width="24" height="24" viewBox="0 0 24 24">
+															<path
+																d="M3.84 2.98975H19.2C19.4546 2.98975 19.6988 3.0951 19.8788 3.28264C20.0588 3.47018 20.16 3.72453 20.16 3.98975V19.9897C20.16 20.255 20.0588 20.5093 19.8788 20.6969C19.6988 20.8844 19.4546 20.9897 19.2 20.9897H3.84C3.58539 20.9897 3.34122 20.8844 3.16118 20.6969C2.98115 20.5093 2.88 20.255 2.88 19.9897V3.98975C2.88 3.72453 2.98115 3.47018 3.16118 3.28264C3.34122 3.0951 3.58539 2.98975 3.84 2.98975ZM4.8 4.98975V18.9897H18.24V4.98975H4.8Z"
+															></path>
+															<path
+																d="M16.1391 6.43744L12.8495 9.86419L10.4997 7.41651V13.2909H16.1391L13.7894 10.8433L17.0791 7.41651L16.1391 6.43744Z"
+															></path>
+														</svg>
+													</span>
+													<span data-v-9a9fbdf8="" class="visually-hidden"
+														>Compact view</span
+													></label
+												></span
+											>
+											<span data-v-2788e09f="" class="trigger"
+												><label data-v-9a9fbdf8=""
+													><input
+														data-v-9a9fbdf8=""
+														id="v-24-1"
+														name="v-24"
+														type="radio"
+														class="visually-hidden"
+														value="1"
+													/>
+													<span data-v-9a9fbdf8="" class="icon"
+														><svg width="24" height="24" viewBox="0 0 24 24">
+															<path
+																d="M3.84 2.98975H19.2C19.4546 2.98975 19.6988 3.0951 19.8788 3.28264C20.0588 3.47018 20.16 3.72453 20.16 3.98975V19.9897C20.16 20.255 20.0588 20.5093 19.8788 20.6969C19.6988 20.8844 19.4546 20.9897 19.2 20.9897H3.84C3.58539 20.9897 3.34122 20.8844 3.16118 20.6969C2.98115 20.5093 2.88 20.255 2.88 19.9897V3.98975C2.88 3.72453 2.98115 3.47018 3.16118 3.28264C3.34122 3.0951 3.58539 2.98975 3.84 2.98975ZM4.8 4.98975V18.9897H18.24V4.98975H4.8Z"
+															></path>
+															<path
+																d="M10.9696 13.7805L14.2594 10.3537L16.6091 12.8014V6.92697H10.9696L13.3194 9.37465L10.0298 12.8014L10.9696 13.7805Z"
+															></path>
+														</svg>
+													</span>
+													<span data-v-9a9fbdf8="" class="visually-hidden"
+														>Default view</span
+													></label
+												></span
+											>
+										</div>
+									</div>
+								</div>
+								<div data-v-55f1f6ea="" class="data-table__main">
+									<table
+										data-v-55f1f6ea=""
+										class="multilayered-table"
+										aria-label="Data table"
+									>
+										<thead data-v-ceaac346="">
+											<tr data-v-ceaac346="">
+												<!--v-if-->
+												<th
+													data-v-ceaac346=""
+													class="text-no-wrap"
+													scope="col"
+													colspan="1"
+													rowspan="1"
+												>
+													<a
+														data-v-ceaac346=""
+														aria-current="page"
+														href="https://localhost:3000/administration/clients/create?column=id&amp;direction=Ascending"
+														class="router-link-active router-link-exact-active column__sort"
+														title="Sort by Id"
+														><!--v-if-->
+														<span data-v-ceaac346="" class="column__title"
+															>Id
+															<!--v-if--></span
+														></a
+													>
+												</th>
+												<th
+													data-v-ceaac346=""
+													class="text-no-wrap"
+													scope="col"
+													colspan="1"
+													rowspan="1"
+												>
+													<a
+														data-v-ceaac346=""
+														aria-current="page"
+														href="https://localhost:3000/administration/clients/create?column=name&amp;direction=Ascending"
+														class="router-link-active router-link-exact-active column__sort"
+														title="Sort by Name"
+														><!--v-if-->
+														<span data-v-ceaac346="" class="column__title"
+															>Name
+															<!--v-if--></span
+														></a
+													>
+												</th>
+												<th
+													data-v-ceaac346=""
+													class="text-no-wrap"
+													scope="col"
+													colspan="1"
+													rowspan="1"
+												>
+													<a
+														data-v-ceaac346=""
+														aria-current="page"
+														href="https://localhost:3000/administration/clients/create?column=displayName&amp;direction=Ascending"
+														class="router-link-active router-link-exact-active column__sort"
+														title="Sort by Display name"
+														><!--v-if-->
+														<span data-v-ceaac346="" class="column__title"
+															>Display name
+															<!--v-if--></span
+														></a
+													>
+												</th>
+												<th
+													data-v-ceaac346=""
+													class="text-no-wrap"
+													scope="col"
+													colspan="1"
+													rowspan="1"
+												>
+													<span
+														data-v-ceaac346=""
+														class=""
+														title="Activated modules"
+														><span data-v-ceaac346="" class="column__title"
+															>Activated modules
+															<!--v-if--></span
+														></span
+													>
+												</th>
+												<th
+													data-v-ceaac346=""
+													class="text-center cell-fixed text-no-wrap"
+													scope="col"
+													colspan="1"
+													rowspan="1"
+												>
+													<span
+														data-v-ceaac346=""
+														class="visually-hidden"
+														title="More"
+														><span data-v-ceaac346="" class="column__title"
+															>More
+															<!--v-if--></span
+														></span
+													>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FAE1
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FAE1
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FAE1
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													Asset allocation
+												</td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-25"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FAU1
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FAU1
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FAU1
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													Asset allocation
+												</td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-26"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FIP08
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FIP08
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FIP08
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													Asset allocation
+												</td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-27"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FIP09
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FIP09
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													FIP09
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													Asset allocation, Balance management, Currency hedging
+												</td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-28"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													MNM
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													MNM
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													MNM
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													Asset allocation
+												</td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-29"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													PME
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													PME
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													PME
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													Asset allocation
+												</td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-30"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													PMT
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													PMT
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													PMT
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													Asset allocation
+												</td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-31"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+											<tr
+												data-v-8c42ad6a=""
+												class=""
+												style="--level: 0; --table-depth: 3"
+											>
+												<!--v-if-->
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													TEST
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													TEST
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class="">
+													TEST
+												</td>
+												<td data-v-fbfce584="" data-v-8c42ad6a="" class=""></td>
+												<td
+													data-v-fbfce584=""
+													data-v-8c42ad6a=""
+													class="text-center cell-fixed"
+												>
+													<div
+														data-v-d81ceeeb=""
+														data-v-fbfce584=""
+														class="actions"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><button
+																data-v-17ebb602=""
+																data-v-c3a92936=""
+																class="button button--icon-only"
+																type="button"
+																aria-controls="menu-v-32"
+																aria-haspopup="menu"
+																aria-label="Show more actions"
+																aria-expanded="false"
+															>
+																<!--v-if-->
+																<!--v-if-->
+																<span
+																	data-v-17ebb602=""
+																	class="button__label visually-hidden"
+																></span>
+																<span
+																	data-v-17ebb602=""
+																	class="icon button__icon"
+																	><svg
+																		width="24"
+																		height="24"
+																		viewBox="0 0 24 24"
+																	>
+																		<path
+																			d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
+																		></path></svg
+																></span></button
+														></span>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+										<!--v-if-->
+									</table>
+								</div>
+							</div>
+							<div data-v-f3cead76="" data-v-55f1f6ea="" class="action-bar">
+								<div data-v-f3cead76="" class="action-bar__secondary"></div>
+								<div data-v-f3cead76="" class="action-bar__primary"></div>
+							</div>
+						</div>
+						<!--v-if-->
+					</div>
+				</div>
+			</main>
+			<aside class="app__sidebar">
+				<div data-v-386aca01="" class="sidebar">
+					<header data-v-386aca01="" class="sidebar__header">
+						<!--v-if-->
+						<div data-v-386aca01="" class="sidebar__title">
+							<h1 data-v-386aca01="">
+								<span data-v-386aca01="" class="icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M10.7404 10.5699V4.80984H12.6604V10.5699H18.4204V12.4899H12.6604V18.2499H10.7404V12.4899H4.98035V10.5699H10.7404Z"
+										></path>
+									</svg>
+								</span>
+								Create client
+							</h1>
+						</div>
+						<div data-v-386aca01="" class="sidebar__actions">
+							<!--v-if-->
+							<a
+								data-v-17ebb602=""
+								data-v-386aca01=""
+								href="https://localhost:3000/administration/clients"
+								class="router-link-active button button--icon-only sidebar__button-close"
+								><span data-v-17ebb602="" class="icon button__icon"
+									><svg width="24" height="24" viewBox="0 0 24 24">
+										<path
+											d="M12.0001 10.4447L17.4448 5L19.0001 6.55532L13.5554 12L19.0001 17.4447L17.4448 19L12.0001 13.5553L6.55532 19L5 17.4447L10.4448 12L5 6.55532L6.55532 5L12.0001 10.4447Z"
+										></path>
+									</svg>
+								</span>
+								<span data-v-17ebb602="" class="button__label visually-hidden">
+									Close sidebar
+								</span>
+								<!--v-if--></a
+							>
+						</div>
+					</header>
+					<div data-v-386aca01="" class="sidebar__body">
+						<!--v-if-->
+						<form
+							data-v-164b3325=""
+							data-v-8e304b49=""
+							class="form"
+							id="form-client"
+						>
+							<label
+								data-v-a14f8d89=""
+								data-v-69531bea=""
+								data-v-8e304b49=""
+								class="form-label form-input"
+								><span data-v-69531bea="" class="form-input__label"> ID </span>
+								<div data-v-69531bea="" class="form-input__group">
+									<!--v-if-->
+									<input
+										data-v-69531bea=""
+										class="form-input__control"
+										required=""
+										type="text"
+									/>
+									<!--v-if-->
+								</div></label
+							>
+							<label
+								data-v-a14f8d89=""
+								data-v-69531bea=""
+								data-v-8e304b49=""
+								class="form-label form-input"
+								><span data-v-69531bea="" class="form-input__label">Name</span>
+								<div data-v-69531bea="" class="form-input__group">
+									<!--v-if-->
+									<input
+										data-v-69531bea=""
+										class="form-input__control"
+										required=""
+										type="text"
+									/>
+									<!--v-if-->
+								</div></label
+							>
+							<label
+								data-v-a14f8d89=""
+								data-v-69531bea=""
+								data-v-8e304b49=""
+								class="form-label form-input"
+								><span data-v-69531bea="" class="form-input__label">
+									Display name
+									<span data-v-8e304b49="" class="text-subjacent"
+										>(optional)</span
+									></span
+								>
+								<div data-v-69531bea="" class="form-input__group">
+									<!--v-if-->
+									<input
+										data-v-69531bea=""
+										class="form-input__control"
+										disabled=""
+										type="text"
+									/>
+									<!--v-if-->
+								</div></label
+							>
+							<small data-v-8e304b49="" class="text-subjacent">
+								Fill this field to override the default display name consisting
+								of the ID and Name fields.
+							</small>
+							<div data-v-8e304b49="">
+								<label data-v-a14f8d89="" data-v-8e304b49="" class="form-label"
+									>Modules</label
+								>
+								<ul data-v-8e304b49="" class="module-options">
+									<li data-v-8e304b49="">
+										<label
+											data-v-a14f8d89=""
+											data-v-2c3ba0c7=""
+											data-v-8e304b49=""
+											class="form-label form-checkbox"
+											><input
+												data-v-2c3ba0c7=""
+												class="form-checkbox__control"
+												name="modules"
+												type="checkbox"
+												value="AssetAllocation"
+											/>
+											<span data-v-2c3ba0c7="" class="form-checkbox__label"
+												>Asset allocation</span
+											></label
+										>
+									</li>
+									<li data-v-8e304b49="">
+										<label
+											data-v-a14f8d89=""
+											data-v-2c3ba0c7=""
+											data-v-8e304b49=""
+											class="form-label form-checkbox"
+											><input
+												data-v-2c3ba0c7=""
+												class="form-checkbox__control"
+												name="modules"
+												type="checkbox"
+												value="BalanceManagement"
+											/>
+											<span data-v-2c3ba0c7="" class="form-checkbox__label"
+												>Balance management</span
+											></label
+										>
+									</li>
+									<li data-v-8e304b49="">
+										<label
+											data-v-a14f8d89=""
+											data-v-2c3ba0c7=""
+											data-v-8e304b49=""
+											class="form-label form-checkbox"
+											><input
+												data-v-2c3ba0c7=""
+												class="form-checkbox__control"
+												name="modules"
+												type="checkbox"
+												value="CurrencyHedging"
+											/>
+											<span data-v-2c3ba0c7="" class="form-checkbox__label"
+												>Currency hedging</span
+											></label
+										>
+									</li>
+								</ul>
+							</div>
+						</form>
+						<div
+							data-v-0e7b7a27=""
+							data-v-8e304b49=""
+							class="button-group"
+							role="group"
+						>
+							<a
+								data-v-17ebb602=""
+								data-v-8e304b49=""
+								href="https://localhost:3000/administration/clients"
+								class="router-link-active button button--secondary button--block"
+								><!--v-if-->
+								<span data-v-17ebb602="" class="button__label"> Cancel </span>
+								<!--v-if--></a
+							>
+							<button
+								data-v-17ebb602=""
+								data-v-8e304b49=""
+								class="button button--primary button--block"
+								type="submit"
+								form="form-client"
+							>
+								<!--v-if-->
+								<!--v-if-->
+								<span data-v-17ebb602="" class="button__label">
+									Create client
+								</span>
+								<!--v-if-->
+							</button>
+						</div>
+					</div>
+				</div>
+			</aside>
+			<div
+				data-v-33fb5a25=""
+				aria-hidden="true"
+				class="resize-handle"
+				style="left: 1348.5px; top: 0px"
+			></div>
+		</div>
+		<div data-v-f337fe68="" class="toasts"></div>
+		<div
+			class="air-datepicker-global-container"
+			id="air-datepicker-global-container"
+		></div>
+	<script>
+		document.querySelector('.js-toggle').addEventListener('click', function () {
+			const body = document.body;
+			const isDark = body.getAttribute('data-theme') === 'dark';
+			body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+			this.querySelector('.button__label span').textContent = isDark ? 'Light mode' : 'Dark mode';
+		});
+	</script>
+	</body>
+</html>

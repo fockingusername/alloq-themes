@@ -1,0 +1,479 @@
+/* ================================================================
+   SHARED INPUT RESETS
+   Repeated across FormInput, FormCheckbox, FormRadio, FormSelect.
+   Deduplicated here.
+   ================================================================ */
+
+input,
+select,
+textarea {
+	font-variant: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+input:is([type='checkbox'], [type='radio']) {
+	transform: scale(1.5);
+}
+
+label:has(input:disabled) {
+	color: var(--color-text-muted);
+}
+
+/* Remove number spinner (WebKit + Firefox) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type='number'] {
+	appearance: textfield;
+}
+
+/* ================================================================
+   FORM — layout container
+   ================================================================ */
+
+.form {
+	display: grid;
+	gap: var(--length-xl);
+}
+
+.form .button {
+	justify-self: start;
+}
+
+/* ================================================================
+   FORM LABEL
+   ================================================================ */
+
+.form-label {
+	display: inline-block;
+
+	color: var(--color-text-muted);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-s);
+}
+
+/* ================================================================
+   FORM INPUT
+   ================================================================ */
+
+.form-input {
+	display: flex;
+	flex-direction: column;
+
+	gap: var(--length-s);
+}
+
+.form-input > span:empty {
+	display: none;
+}
+
+.form-input__group {
+	display: flex;
+	align-items: stretch;
+}
+
+.form-input__control {
+	width: 100%;
+
+	padding: var(--length-m);
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-m);
+
+	background: var(--color-surface-field);
+
+	color: var(--color-text-primary);
+	font-size: var(--font-size-s);
+
+	&:not(:first-child) {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	&:not(:last-child) {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	&::placeholder {
+		color: var(--color-text-muted);
+		opacity: 1;
+	}
+
+	&:hover {
+		border-color: var(--color-fill-medium);
+	}
+
+	&:focus {
+		border-color: var(--color-accent-primary);
+		outline: none;
+	}
+
+	&:active {
+		border-color: transparent;
+
+		background-color: var(--color-interactive-active);
+		color: var(--color-text-muted);
+
+		&::placeholder {
+			color: var(--color-text-muted);
+			opacity: 1;
+		}
+	}
+
+	&:disabled,
+	&:disabled:hover {
+		border: var(--border-s) solid var(--color-border-default);
+
+		background-color: var(--color-interactive-disabled);
+		color: var(--color-text-muted);
+		cursor: not-allowed;
+	}
+
+	&:read-only[type='number'] {
+		appearance: textfield;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+
+	&[type='file'] {
+		padding: var(--length-xs);
+	}
+}
+
+.form-input__text {
+	display: flex;
+	align-items: center;
+
+	padding-inline: var(--length-m);
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-m);
+
+	background: var(--color-surface-sunken);
+	font-weight: normal;
+
+	font-family: var(--font-family-mono);
+
+	&:first-child {
+		border-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	&:last-child {
+		border-left: 0;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+}
+
+.form-input--inline {
+	flex-direction: row;
+	align-items: baseline;
+}
+
+/* ================================================================
+   FORM INPUT — number variant
+   ================================================================ */
+
+.form-input-number .form-input__control {
+	width: 8rem;
+	text-align: right;
+}
+
+.form-input-number--percentage .form-input__control {
+	width: 4rem;
+}
+
+/* ================================================================
+   FORM INPUT — date variant
+   ================================================================ */
+
+.air-datepicker {
+	--adp-accent-color: var(--color-accent-primary);
+	--adp-background-color: var(--color-surface-overlay);
+	--adp-background-color-hover: var(--color-fill-low);
+	--adp-border-color: var(--color-border-default);
+	--adp-border-color-inner: var(--color-border-default);
+	--adp-border-color-inline: var(--color-border-default);
+	--adp-background-color-active: var(--color-fill-low);
+	--adp-cell-background-color-selected: var(--color-fill-medium);
+	--adp-cell-background-color-selected-hover: var(--color-fill-low);
+	--adp-cell-background-color-hover: var(--color-fill-low);
+	--adp-color: var(--color-text-primary);
+	--adp-color-current-date: var(--color-text-primary);
+	--adp-color-other-month: var(--color-text-secondary);
+	--adp-day-name-color: var(--color-text-muted);
+	--adp-font-family: var(--font-family-body);
+	--adp-nav-arrow-color: var(--color-fill-base);
+	--adp-pointer-size: 0;
+	--adp-pointer-offset: 0;
+}
+
+.air-datepicker-cell.-disabled- {
+	text-decoration: line-through;
+}
+
+.air-datepicker-button {
+	font: inherit;
+}
+
+.air-datepicker-warning {
+	color: var(--color-status-warning-accent);
+}
+
+.air-datepicker-hint {
+	border-bottom: var(--border-m) solid var(--color-status-info-accent);
+}
+
+.form-input-date {
+	position: relative;
+
+	input {
+		padding-right: calc(var(--icon-size-m) + var(--length-xxl));
+	}
+}
+
+.form-input-date__icon {
+	position: absolute;
+	right: var(--length-xs);
+	bottom: var(--length-xs);
+	padding: var(--length-xxs);
+
+	color: var(--color-text-muted);
+}
+
+/* ================================================================
+   FORM SELECT
+   ================================================================ */
+
+.form-select {
+	display: flex;
+	flex-direction: column;
+
+	gap: var(--length-s);
+}
+
+.form-select__control {
+	display: block;
+
+	width: 100%;
+	min-width: 5ch;
+
+	padding: calc(var(--length-m) - var(--border-s)) var(--length-m);
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-m);
+
+	background: var(--color-surface-field);
+
+	color: var(--color-text-primary);
+	font-size: var(--font-size-s);
+
+	&:hover {
+		border-color: var(--color-fill-medium);
+	}
+
+	&:focus {
+		border-color: var(--color-accent-primary);
+		outline: none;
+	}
+
+	&:active {
+		border-color: transparent;
+
+		background-color: var(--color-interactive-active);
+		color: var(--color-text-muted);
+	}
+
+	&:disabled,
+	&:disabled:hover {
+		border-color: transparent;
+
+		background-color: var(--color-interactive-disabled);
+		color: var(--color-text-secondary);
+	}
+
+	optgroup {
+		font-style: normal;
+	}
+
+	option {
+		background-color: var(--color-surface-field);
+		color: var(--color-text-primary);
+
+		&:disabled {
+			color: var(--color-text-muted);
+		}
+	}
+}
+
+.form-select__empty {
+	color: var(--color-text-primary);
+	font-weight: normal;
+	font-size: var(--font-size-s);
+}
+
+.form-select--inline {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: baseline;
+
+	margin-bottom: 0;
+	white-space: nowrap;
+}
+
+/* ================================================================
+   FORM CHECKBOX
+   ================================================================ */
+
+.form-checkbox {
+	display: inline-flex;
+	gap: var(--length-m);
+
+	color: var(--color-text-primary);
+	font-weight: normal;
+}
+
+.form-checkbox__label {
+	font-size: var(--font-size-s);
+}
+
+/* ================================================================
+   FORM RADIO
+   ================================================================ */
+
+.form-radio {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--length-m);
+
+	color: var(--color-text-primary);
+	font-weight: normal;
+}
+
+.form-radio__label {
+	font-size: var(--font-size-s);
+}
+
+.options {
+	display: flex;
+	flex-flow: column wrap;
+	gap: var(--length-s);
+}
+
+.radio-group--inline > .options {
+	flex-flow: row;
+	align-items: center;
+	gap: var(--length-xl);
+}
+
+/* ================================================================
+   FORM TOGGLE
+   ================================================================ */
+
+.form-toggle {
+	--input-control-size: 1.5rem;
+
+	display: inline-flex;
+	flex-direction: column;
+	gap: var(--length-s);
+}
+
+.form-toggle__input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.form-toggle__container {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	gap: var(--length-m);
+}
+
+.form-toggle__control {
+	position: relative;
+
+	width: calc(var(--input-control-size) * 2);
+	height: var(--input-control-size);
+	border-radius: var(--input-control-size);
+
+	background-color: var(--color-interactive-hover);
+
+	cursor: pointer;
+
+	&::after {
+		position: absolute;
+
+		width: var(--input-control-size);
+		height: inherit;
+
+		transform: scale(0.9);
+
+		border-radius: inherit;
+		background-color: var(--color-fill-high);
+		box-shadow: 1px 2px 4px var(--palette-black);
+
+		content: '';
+		transition: transform 0.2s;
+	}
+
+	&:has(input:checked) {
+		background-color: var(--color-accent-primary);
+
+		&::after {
+			transform: translate3d(100%, 0, 0) scale(0.9);
+
+			background-color: var(--color-fill-base);
+		}
+	}
+
+	&:has(input:disabled) {
+		background-color: var(--color-interactive-disabled);
+
+		&::after {
+			background-color: var(--color-interactive-active);
+		}
+	}
+
+	&:has(input:focus-visible) {
+		outline: var(--focus-outline);
+		outline-offset: var(--length-xxs);
+	}
+}
+
+.form-toggle__value {
+	color: var(--color-text-primary);
+	font-weight: normal;
+	font-size: var(--font-size-s);
+}
+
+.form-toggle--inline {
+	flex-direction: row;
+	align-items: center;
+}
+
+/* ================================================================
+   COPY TO CLIPBOARD
+   ================================================================ */
+
+.copy-to-clipboard {
+	display: flex;
+	align-items: center;
+
+	margin-bottom: var(--length-m);
+	gap: var(--length-s);
+}
+
+.copy-to-clipboard__field {
+	flex: 1 0 auto;
+
+	margin-bottom: 0;
+}

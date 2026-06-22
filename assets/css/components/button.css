@@ -1,0 +1,162 @@
+/* ================================================================
+   BUTTON
+   ================================================================ */
+
+/*
+   Component-local variables (§7 NAMING_CONVENTION.md):
+   --btn-bg     — background fill (changes per variant + disabled state)
+   --btn-fg     — foreground / text color
+   --btn-border — border color
+   --btn-shadow — box shadow (changes per interaction state)
+   --btn-radius — border radius (overridden by --pill modifier)
+
+   Primitives still in use — flagged for future semantic tokens:
+   --palette-dark-4  text on amber primary (very dark for contrast; no semantic equivalent yet)
+   --palette-black   shadow alpha base (acceptable: shadows are always black-based)
+
+   Default button fg uses light-dark(accent-primary, text-primary):
+   light → --palette-blue-4 (#1255b8), dark → #ffffff (white via --color-text-primary)
+*/
+
+.button {
+	--btn-bg: var(--color-surface-interactive);
+	--btn-fg: light-dark(var(--color-accent-primary), var(--color-text-primary));
+	--btn-border: transparent;
+	--btn-shadow: 0 1px 1px 0 oklch(from var(--palette-black) l c h / 0.12);
+	--btn-radius: var(--radius-m);
+
+	contain: layout;
+
+	display: inline-flex;
+	position: relative;
+	align-items: center;
+
+	inline-size: fit-content;
+
+	padding: var(--length-xs) var(--length-s);
+	gap: var(--length-s);
+
+	border: var(--border-s) solid var(--btn-border);
+	border-radius: var(--btn-radius);
+
+	background-color: var(--btn-bg);
+	box-shadow: var(--btn-shadow);
+
+	color: var(--btn-fg);
+
+	font: inherit;
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-s);
+
+	text-align: left;
+	text-decoration: none;
+	text-shadow: none;
+	white-space: nowrap;
+
+	cursor: pointer;
+	touch-action: manipulation;
+	user-select: none;
+
+	&:where(:not(:disabled)):hover {
+		--btn-shadow: 0 2px 1px 0 oklch(from var(--palette-black) l c h / 0.25);
+
+		background-color: oklch(from var(--btn-bg) calc(l + 0.04) c h);
+	}
+
+	&:where(:active) {
+		--btn-shadow: 0 2px 4px 0 oklch(from var(--palette-black) l c h / 0.25) inset;
+
+		background-color: oklch(from var(--btn-bg) calc(l + 0.06) c h);
+	}
+
+	&:disabled,
+	&[aria-disabled='true'] {
+		--btn-bg: var(--color-surface-subtle);
+		--btn-border: var(--color-border-default);
+		--btn-shadow: none;
+		--btn-fg: var(--color-text-muted);
+
+		color-scheme: unset;
+		cursor: not-allowed;
+
+		&:hover {
+			--btn-bg: var(--color-surface-subtle);
+		}
+
+		&.is-loading {
+			--btn-fg: transparent;
+		}
+	}
+}
+
+.button__label {
+	pointer-events: none;
+}
+
+.button__loader {
+	position: absolute;
+	top: calc(var(--length-xs) * -1);
+	right: 0;
+	bottom: calc(var(--length-xs) * -1);
+	left: 0;
+}
+
+/* ================================================================
+   VARIANTS
+   ================================================================ */
+
+.button--primary {
+	--btn-bg: var(--color-accent-secondary);
+	--btn-fg: var(--palette-dark-4);
+}
+
+.button--secondary {
+	--btn-bg: transparent;
+	--btn-border: light-dark(var(--color-text-primary), var(--color-accent-secondary));
+	--btn-fg: light-dark(var(--color-text-primary), var(--color-accent-secondary));
+
+	&:hover,
+	&:active {
+		--btn-bg: var(--color-accent-secondary);
+		--btn-border: transparent;
+		--btn-fg: var(--palette-dark-4);
+	}
+}
+
+.button--text,
+.button--icon-only {
+	--btn-bg: transparent;
+	--btn-border: transparent;
+	--btn-shadow: none;
+	--btn-fg: var(--color-accent-primary);
+
+	&:hover {
+		--btn-bg: var(--color-fill-low);
+		--btn-fg: var(--color-text-primary);
+	}
+
+	&:disabled,
+	&[aria-disabled='true'] {
+		--btn-bg: transparent;
+		--btn-border: transparent;
+
+		&:hover {
+			--btn-bg: transparent;
+			--btn-border: transparent;
+		}
+	}
+}
+
+.button--icon-only {
+	padding: var(--length-s);
+	gap: 0;
+}
+
+.button--pill {
+	--btn-radius: var(--radius-full);
+}
+
+.button--block {
+	justify-content: center;
+	min-width: 100%;
+}

@@ -1,0 +1,60 @@
+/* ================================================================
+   BANDWIDTH
+   Wrapper for the bandwidth visualization.
+   ================================================================ */
+
+.bandwidth {
+	min-width: 10rem;
+}
+
+.is-compact .bandwidth {
+	min-width: 0;
+	max-width: 6rem;
+}
+
+/* ================================================================
+   BANDWIDTH VISUALIZATION
+   SVG range indicator: track → acceptable range → target → marker.
+   Structure: bar (full-width track) → boundary (range band) →
+   target (circle at target position) → marker (current position).
+   ================================================================ */
+
+.bandwidth-visualization {
+	/* Intentional palette reference: signal colors must be vivid in both themes;
+	   --color-status-*-accent is too muted in light mode for data visualization. */
+	--bw-range: var(--palette-status-positive);
+
+	display: block;
+	width: 100%;
+	height: 1.5rem;
+	overflow: visible;
+}
+
+.bandwidth-visualization--error   { --bw-range: var(--palette-status-negative); }
+.bandwidth-visualization--warning { --bw-range: var(--palette-status-warning); }
+
+.bandwidth-visualization__bar {
+	fill: var(--color-border-default);
+}
+
+.bandwidth-visualization__boundary {
+	fill: var(--bw-range);
+	opacity: 0.75;
+}
+
+.bandwidth-visualization__target {
+	fill: var(--palette-black);
+}
+
+.bandwidth-visualization__marker {
+	--bw-marker-w: var(--length-xs);
+
+	width: var(--bw-marker-w);
+	height: 75%;
+	transform: translateX(calc(-0.5 * var(--bw-marker-w)));
+
+	fill: light-dark(var(--palette-black), var(--palette-white));
+	stroke: var(--color-border-strong);
+	stroke-width: var(--border-m);
+	shape-rendering: crispedges;
+}

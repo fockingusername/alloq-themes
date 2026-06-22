@@ -1,0 +1,42 @@
+.notification {
+	--notification-accent: var(--color-status-info-accent);
+	--notification-bg: var(--color-status-info-bg);
+	--notification-fg: var(--color-status-info-fg);
+
+	display: flex;
+	position: relative;
+	align-items: flex-start;
+
+	padding: var(--length-m) var(--length-xl);
+	gap: var(--length-l);
+	border-left: var(--border-l) solid var(--notification-accent);
+	border-radius: var(--radius-m);
+
+	background-color: var(--notification-bg);
+	color: var(--notification-fg);
+}
+
+.notification__body {
+	flex-grow: 1;
+
+	padding: var(--length-s) 0;
+
+	overflow-wrap: anywhere;
+}
+
+.notification__icon {
+	flex-shrink: 0;
+	margin: var(--length-m) 0 0 var(--length-xs);
+}
+
+.notification--error {
+	--notification-accent: var(--color-status-negative-accent);
+	--notification-bg: var(--color-status-negative-bg);
+	--notification-fg: var(--color-status-negative-fg);
+}
+
+.notification--warning {
+	--notification-accent: var(--color-status-warning-accent);
+	--notification-bg: var(--color-status-warning-bg);
+	--notification-fg: var(--color-status-warning-fg);
+}
