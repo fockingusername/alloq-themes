@@ -1,0 +1,11 @@
+/* ================================================================
+   NAV
+   Main sidebar navigation.
+   ================================================================ */
+
+/* Inactive sub-nav items are muted; active (.router-link-active) keeps
+   text-primary via the component's own rule. Compact mode excluded
+   because its sub-nav appears as a floating panel with different intent. */
+.nav:not(.nav--compact) .sub-nav__item > a:not(.router-link-active) {
+	color: var(--color-text-muted);
+}

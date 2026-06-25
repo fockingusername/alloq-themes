@@ -68,7 +68,7 @@
 	gap: var(--length-m);
 
 	border: var(--border-s) solid var(--color-border-default);
-	background-color: var(--color-surface-raised);
+	background-color: var(--color-surface-table-header);
 
 	&.is-active {
 		background-color: var(--color-surface-subtle);

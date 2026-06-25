@@ -1,0 +1,71 @@
+@layer settings {
+	:root {
+		/* ================================================================
+   DESIGN SYSTEM TOKENS (non-color)
+   Borders, spacing, sizes, type, radius, shadow. Theme-agnostic.
+   ================================================================ */
+
+		--border-s: 1px;
+		--border-m: 2px;
+		--border-l: 4px;
+
+		--length-xxs: 0.125rem;
+		--length-xs: 0.25rem;
+		--length-s: 0.375rem;
+		--length-m: 0.5rem;
+		--length-l: 0.75rem;
+		--length-xl: 0.875rem;
+		--length-xxl: 1rem;
+
+		--gutter-s: 0.5rem;
+		--gutter-m: 1rem;
+		--gutter-l: 1.5rem;
+		--gutter-xl: 2rem;
+		--gutter-xxl: 3rem;
+
+		--icon-size-m: 1.25rem;
+		--icon-size-s: 1rem;
+
+		--button-size: 2.25rem;
+
+		--layout-header-height: 3.5rem;
+
+		--max-width-s: 37.5rem;
+		--max-width-m: 60rem;
+		--max-width-l: 90rem;
+
+		--radius-s: 0.125rem;
+		--radius-m: calc(var(--radius-s) * 2);
+		--radius-l: calc(var(--radius-s) * 4);
+		--radius-xl: calc(var(--radius-s) * 10);
+		--radius-full: calc(infinity * 1px);
+
+		--focus-outline: var(--border-m) solid var(--color-border-focus);
+		--focus-outline-negative-offset: calc(-1 * var(--length-xxs));
+
+		--font-family-body: inter, sans-serif;
+		--font-family-mono: roboto-mono, monospace;
+
+		--font-size-xs: 0.75rem;
+		--font-size-s: 0.875rem;
+		--font-size-m: 1rem;
+		--font-size-l: 1.25rem;
+		--font-size-xl: 1.5rem;
+		--font-size-xxl: 2rem;
+
+		--font-weight-bold: 600;
+
+		--shadow-s:
+			0 2px 1px -1px oklch(from var(--palette-black) l c h / 0.2),
+			0 1px 1px 0 oklch(from var(--palette-black) l c h / 0.14),
+			0 1px 3px 0 oklch(from var(--palette-black) l c h / 0.12);
+		--shadow-m:
+			0 7px 8px -4px oklch(from var(--palette-black) l c h / 0.2),
+			0 12px 17px 2px oklch(from var(--palette-black) l c h / 0.14),
+			0 5px 22px 4px oklch(from var(--palette-black) l c h / 0.12);
+		--shadow-l:
+			0 11px 15px -7px oklch(from var(--palette-black) l c h / 0.2),
+			0 24px 38px 3px oklch(from var(--palette-black) l c h / 0.14),
+			0 9px 46px 8px oklch(from var(--palette-black) l c h / 0.12);
+	}
+}

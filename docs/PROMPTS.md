@@ -624,3 +624,245 @@ the inputs in dark mode need a dark background, pattern 6
 
 **Outcome:**
 Added `--color-surface-field: light-dark(--palette-light-0, --palette-dark-6)`. Light: #ffffff (same as raised). Dark: #0a0a0a (near-black). Used for all input backgrounds (text inputs, selects, option elements). `--color-surface-raised` (dark-3) remains for cards/panels.
+
+### [2026-06-22] — Surface token audit (shared values across roles)
+
+**Prompt:**
+The table and the surface behind it should have the same background color. → use the raised color for that instead surface page → Situation: the surface colors have sometimes the same colors. Does it make sense that for example in light theme palette light-0 is in base and in raised?
+
+**Tokens / files touched:**
+- assets/css/tokens.css (`--color-surface-raised` dark reverted dark-4 → dark-3; Surfaces comment block expanded)
+- docs/DECISIONS.md (DEC-016 added)
+- docs/NAMING_CONVENTION.md (§4 surface row annotated with tier order)
+
+**Outcome:**
+Audited all 10 surface roles' resolved values in both themes. Finding: no token is a true duplicate — every apparent collision happens in only one theme and the roles diverge in the other (e.g. base/raised both white in light but split dark-5/dark-3 in dark), and colliding roles are never adjacent in the UI. So the shared values are intentional same-tier roles, not redundancy. Only genuine fault was a stray uncommitted nudge of `raised` dark (dark-3 → dark-4) shrinking its lift above `page`; reverted to dark-3. Documented the elevation ladder + the "same-tier shared value is intentional, the rule is raised>page" principle inline in tokens.css, in DEC-016, and in NAMING_CONVENTION §4. Net token-value change vs last commit: none.
+
+**Related decision:** DEC-016
+
+### [2026-06-22] — Extract inline main.css block to shared CSS files
+
+**Prompt:**
+check a - also make sure the styling from the html is moved to a component or generic styling file
+
+**Tokens / files touched:**
+- `assets/css/base.css` (new) — `@layer generic`: box-sizing reset, html/body/list/fieldset resets, color-scheme, accent-color
+- `assets/css/elements.css` (new) — `@layer elements`: bare-element styles (a, abbr, blockquote, body, code, dl/dt/dd, h1–h6, hr, img, legend, p, small, textarea, scrollbar)
+- `assets/css/utilities.css` (new) — `@layer utilities`: single-purpose helpers (.font-*, .content-*, .stack, .cell-fixed, .text-*, .visually-hidden)
+- All 6 HTML files — inline `<style data-vite-dev-id="…main.css">` block (≈408 lines) removed; three `<link>` tags for base/elements/utilities added after tokens.css
+
+**Outcome:**
+The 408-line inline `main.css` style block that appeared in every HTML file has been extracted into three purpose-built CSS files (`base.css`, `elements.css`, `utilities.css`), matching the `@layer settings, generic, elements, utilities` order declared in `tokens.css`. `a` uses `--color-link` (semantic) — no change needed there. Net: ~2,448 lines removed from HTML, ~275 lines added across the three new files.
+
+### [2026-06-22] — Move base table styles to table.css
+
+**Prompt:**
+check the html's, move all the table styling to table.css
+
+**Tokens / files touched:**
+- `assets/css/components/table.css` — base `table`, `thead`, `tbody`, `td/th`, `tfoot` styles added above the `.multilayered-table` block
+- All 6 HTML files — identical 72-line `@layer elements { table { … } }` block removed from each
+
+**Outcome:**
+Extracted the shared base table styles (sticky thead, border-spacing, padding, `--sticky-cell-border` token, tfoot) from the inline `@layer elements` block in every HTML file and consolidated them into `table.css`. The `<link>` to table.css was already present in all files, so no head changes needed. Net: 432 lines removed from HTML, 72 lines added to table.css.
+
+### [2026-06-22] — Table links inherit cell color
+
+**Prompt:**
+now make sure the table links are not in blue color anymore
+
+**Tokens / files touched:**
+- `assets/css/components/table.css` — added `a { color: inherit; }` inside `td, th` block
+
+**Outcome:**
+Links inside any table cell now inherit the cell's text color (`--color-text-primary`) instead of resolving to `--color-link` (blue). Applied at the base `td/th` level so it covers all tables, not just `.multilayered-table`.
+
+### [2026-06-22] — Remove MLT depth fill ramp; add indent guides + bold parents
+
+**Prompt:**
+lets do the plain rules and the other recommandations
+
+**Tokens / files touched:**
+- `assets/css/components/table.css` — removed `:root { --color-table-start; --table-min-steps }` block and `background-color: oklch(...)` from `.multilayered-table tr`; added `td:first-child::before` indent guide lines; added `tr:has(.row-name__button) td:first-child { font-weight: bold }` for parent rows
+- `docs/DECISIONS.md` — DEC-017 added
+
+**Outcome:**
+Replaced the per-depth oklch fill ramp with plain vertical indent guide lines in the sticky label column (`--color-border-subtle`, one line per ancestor, aligned to icon positions) and bold font weight on parent/group row labels. Both themes now show flat rows — maximum text contrast at all depths. Depth is encoded by indentation + guide count + bold. Numeric columns are completely untouched.
+
+**Related decision:** DEC-017
+
+### [2026-06-25] — Add experimental button variants for comparison
+
+**Prompt:**
+im still not happy with the look of the default button. I want you to add a few buttons to the screen so i can easily compare them. In dark mode make the background a transparent white color (keep same in light mode). Also make another one in lila, use the data color as a reference, different tints in light/dark. Also one with #D3FFB5 in different tints. Also one with just a blue line, no background, blue text.
+
+**Tokens / files touched:**
+- `assets/css/components/button.css` — added `.button--ghost`, `.button--lila`, `.button--lime`, `.button--line` under a new EXPERIMENTAL VARIANTS section
+- `test - Mandates - Alloq.html` — added a button showcase `<section>` at the top of `.main__body`
+
+**Outcome:**
+Four comparison variants added so the default look can be evaluated against alternatives. Ghost = translucent white in dark / translucent neutral in light. Lila = data-2/data-3 purple, pale-lilac fill + deep purple text in light, translucent purple + periwinkle text in dark. Lime = #D3FFB5 solid pastel + deep green text in light, translucent lime + lime text in dark. Line = blue outline, no fill, blue text. Lime uses a raw hex (`--lime`) as no semantic/primitive token exists yet — flagged as experimental.
+
+### [2026-06-25] — Adopt blue line as the default button; remove experimentals
+
+**Prompt:**
+Lets go for the blue line, make that the default. Delete all other variants. Make sure the naming conventions are set correctly.
+
+**Tokens / files touched:**
+- `assets/css/components/button.css` — base `.button` reworked to blue outline (transparent fill, `--color-accent-primary` border + text, no shadow; hover/active tint via `--btn-bg`); brighten + shadow hover/active and rest shadow moved onto `.button--primary` (also given `--btn-border: transparent`); deleted experimental `.button--ghost/--lila/--lime/--line` and the `--lime` raw-hex local var
+- `test - Mandates - Alloq.html` — removed the temporary button showcase `<section>`
+- `docs/DECISIONS.md` — DEC-018 added
+
+**Outcome:**
+The plain `.button` is now a blue outline app-wide. "Other variants" interpreted as the experimental comparison ones only — design-system variants (`--primary`, `--secondary`, `--text`, `--icon-only`, `--pill`, `--block`) were preserved since they are used across every page. Naming: removed the only convention violation (the `--lime` raw hex); remaining `--btn-*` locals reference Layer 2 tokens (plus the already-flagged `--palette-dark-4`/`--palette-black` on primary/shadows).
+
+**Related decision:** DEC-018
+
+### [2026-06-25] — Restore subtle card border in light mode
+
+**Prompt:**
+There are some inconsistency with the widget styling based on light and dark. Bring back the border in light modus to align. Make sure its a subtle border tho.
+
+**Tokens / files touched:**
+- `assets/css/components/card.css` — replaced the per-theme overrides (light `border-color: transparent`, dark `--color-border-subtle`) with a single `body[data-theme] .card { border-color: var(--color-border-subtle) }`
+
+**Outcome:**
+Cards (dashboard widgets) now show the same subtle border (`--color-border-subtle`) in both themes; light mode previously had `transparent` (elevation only) which read inconsistently against dark. Kept the `body[data-theme]` selector for specificity (0,2,1) so it beats Card.vue's scoped `.card[data-v-…]` (0,2,0) that loads later.
+
+### [2026-06-25] — Accordion body uses a surface token instead of fill overlay
+
+**Prompt:**
+i dont like the color of the accordion within the dashboard widget. Can we use a palette color from the dark mode / light mode for that?
+
+**Tokens / files touched:**
+- `assets/css/components/disclosure.css` — `.disclosure[inverted='true']` `--bg-body-color`: `--color-fill-low` → `--color-surface-sunken`
+
+**Outcome:**
+The inverted disclosure (accordion) body inside cards previously used `--color-fill-low` (a 10%-alpha overlay) which looked muddy over the raised card surface. Swapped to the palette-backed `--color-surface-sunken` (light `#f2f2f2`, dark `#0a0a0a`) so it reads as a clean recessed panel per theme. Nested disclosures keep `--color-surface-raised` (pops back up against the sunken parent).
+
+### [2026-06-25] — Primary button hover: brand-color tint
+
+**Prompt:**
+the hover state of the primary button should have a tint of the brand color.
+
+**Tokens / files touched:**
+- `assets/css/components/button.css` — `.button--primary:hover` background-color: `oklch(from var(--btn-bg) calc(l + 0.04) c h)` → `oklch(from var(--color-accent-secondary) calc(l + 0.08) calc(c * 0.9) h)`
+
+**Outcome:**
+The previous +0.04 lightness bump barely registered. Hover now produces a clearer lighter tint of the brand amber (`--color-accent-secondary`): L raised 0.08, chroma softened to 90% so it reads as a tint rather than just brighter. Active/pressed state unchanged.
+
+### [2026-06-25] — Fainter subtle border in dark mode
+
+**Prompt:**
+can we make the subtle border in dark mode even more subtle
+
+**Tokens / files touched:**
+- `assets/css/tokens.css` — `--color-border-subtle` dark value: `var(--palette-dark-2)` → `oklch(from var(--palette-dark-2) calc(l - 0.025) calc(c * 0.7) h)`
+- `docs/DECISIONS.md` — DEC-019 added
+
+**Outcome:**
+Dark-mode subtle border darkened (L 0.306 → 0.281) and desaturated (C 0.051 → 0.036) so it sits closer to the surfaces it borders. Stays just above the card surface (dark-3, L 0.265) so it remains visible on cards while reading fainter on page/nav. Light mode unchanged. Ripples through card/tab/nav/header/disclosure borders.
+
+**Related decision:** DEC-019
+
+### [2026-06-25] — Convert dark/light scheme toggle to an actual switch
+
+**Prompt:**
+i dont like the dark / light mode toggle, can we make that an actual toggle
+
+**Tokens / files touched:**
+- All 6 HTML files — replaced the `.scheme-toggle` icon `<button>` (moon icon + "Dark mode" label) with a `.form-toggle` switch (`<label>` wrapping `.form-toggle__control` + checkbox `.js-toggle` + `.form-toggle__value` text). Kept `header__actions-button scheme-toggle` classes for the header-menu row layout. Updated each inline `js-toggle` script from a `click` handler reading `data-theme` to a `change` handler driven by `checkbox.checked` (checked = dark, matching all pages' default), still updating the label text.
+
+**Outcome:**
+The theme switcher now uses the existing `.form-toggle` switch component (reused, not new) instead of a button. Checked = dark, knob slides + turns `--color-accent-primary`; unchecking switches to light. No CSS changes — `.form-toggle` already existed in input.css. The dead `.scheme-toggle … .button__icon` scoped rule in each HTML is now unused but left in place (harmless).
+
+### [2026-06-25] — Animated sun/moon theme toggle
+
+**Prompt:**
+make it more like a cool animation, with a sun and moon.
+
+**Tokens / files touched:**
+- `assets/css/components/theme-toggle.css` (new) — `.theme-toggle` animated sun⇄moon switch
+- All 6 HTML files — `.form-toggle` scheme switch markup replaced with `.theme-toggle` (track/stars/thumb + label); added `<link>` to theme-toggle.css; script selectors updated (`.form-toggle__value`→`.theme-toggle__label`, `closest('.form-toggle')`→`closest('.theme-toggle')`)
+- `docs/DECISIONS.md` — DEC-021 added
+
+**Outcome:**
+Replaced the plain switch with a CSS-only animated day/night toggle: yellow sun + ray burst on a blue sky (unchecked/light) morphs to a pale moon with craters + crescent shading and fading stars on a navy sky (checked/dark); thumb slides with a slight overshoot. Verified rendering in both states via headless-Chrome screenshot. Illustration uses raw `--tt-*` colors (documented exception, DEC-021). Reduced-motion disables transitions.
+
+**Related decision:** DEC-021
+
+### [2026-06-25] — Theme toggle: clean Remix Icon sun/moon
+
+**Prompt:**
+its looks a bit cheap, use icons from remix.com sun and moon, keep it simple and clean
+
+**Tokens / files touched:**
+- `assets/css/components/theme-toggle.css` — rewritten: removed the CSS-drawn day/night scene + raw `--tt-*` colors; now a clean token-driven switch (track `--color-surface-sunken`/`--color-border-subtle`, thumb `--color-surface-raised`/`--shadow-s`) whose thumb carries a Remix Icon glyph that crossfades/rotates
+- All 6 HTML files — toggle markup updated: track now holds the thumb with inline `sun-line` + `moon-line` Remix Icon SVGs (MIT)
+- `docs/DECISIONS.md` — DEC-021 revised (raw-color exception dropped)
+
+**Outcome:**
+Replaced the gimmicky CSS sun/moon scene with real Remix Icon sun/moon glyphs in a minimal switch. Sun on the white thumb in light, moon on the dark thumb in dark; thumb slides and icons crossfade. Now fully theme-token-driven (adapts per theme, no decorative raw colors). Verified both states via headless-Chrome screenshot.
+
+**Related decision:** DEC-021
+
+### [2026-06-25] — Review MD files for FE handoff
+
+**Prompt:**
+alright i think we're almost done with the theming. How can we make sure we can deliver this to FE. Can you check all the MD files and see if it makes sense?
+
+**Tokens / files touched:**
+- `CLAUDE.md` — removed all dead `docs/DESIGN_SYSTEM.md` references (file never existed); rewrote the token-architecture section to the real single-file `tokens.css` + `light-dark()` model with an accurate token table; fixed non-negotiable #6 (amber = `--color-accent-secondary`, not `--color-accent-primary`); `feedback` → `status` wording; updated files table + start-of-task checklist + footer
+- `docs/DECISIONS.md` — DEC-004 status annotated (file structure superseded); added DEC-022 (single-file light-dark() architecture) and backfilled DEC-015 (darker blue accent text, previously "pending")
+
+**Outcome:**
+Reconciled the docs with the shipped code for handoff. Found + fixed: missing DESIGN_SYSTEM.md (referenced 4×), wrong token-architecture description (folder/per-theme files vs single file + light-dark), a factual error (accent-primary called amber), stale token table (feedback namespace, non-existent tokens, 4-of-11 surfaces), and a missing decision (DEC-015). NAMING_CONVENTION.md and PROMPTS.md were accurate. Decision IDs now run 001–022 (020 intentionally absent — reverted).
+
+**Related decision:** DEC-022; DEC-015
+
+### [2026-06-25] — Component token audit; migrate tab indicator to semantic amber
+
+**Prompt:**
+yes check it all. Also if we can do it simpler by moving parts around. For example keeping only the raw values in the token.css then suggest it
+
+**Tokens / files touched:**
+- `assets/css/components/tab.css` — active-tab indicator `border-color`: `--palette-brand-secondary` → `--color-accent-secondary` (Yellow Route semantic token)
+
+**Outcome:**
+Audited all component/base/elements/utilities CSS for primitive + raw-hex usage. Only one undocumented violation found (tab indicator) and migrated; in light mode the indicator shifts from raw #ff9100 to the lightened amber. Remaining `--palette-*` uses are accepted exceptions: black-based shadows, bandwidth signal colors (commented as intentional for data-viz vividness), bandwidth marker contrast fills, and tag `#fff` mask fills. Two items deferred to a decision: tag bg (`light-dark(light-1, dark-4)` has no matching semantic surface token) and button on-amber text (`--palette-dark-4`, candidate for a `--color-text-on-accent` token). File-restructure proposal delivered separately.
+
+### [2026-06-25] — Split tokens.css into tokens/ (palette · semantic · scale) + cleanup tokens
+
+**Prompt:**
+(continuation) yes do the 3-file split, and add both cleanup tokens
+
+**Tokens / files touched:**
+- `assets/css/tokens/palette.css` (new) — Layer 1 raw `--palette-*` + the `@layer` order declaration
+- `assets/css/tokens/semantic.css` (new) — Layer 2 `--color-*` (light-dark) + syntax/data/rbm; added `--color-text-on-accent` and `--color-surface-chip`
+- `assets/css/tokens/scale.css` (new) — non-color design tokens
+- `assets/css/tokens.css` — deleted
+- All 6 HTML files — single `tokens.css` `<link>` replaced with the three `tokens/*` links (palette → semantic → scale)
+- `assets/css/components/button.css` — `--palette-dark-4` → `--color-text-on-accent`; flagged-primitive comment trimmed
+- `assets/css/components/tag.css` — `light-dark(--palette-light-1, --palette-dark-4)` → `--color-surface-chip`
+- `CLAUDE.md` — token-architecture section + file refs updated to the 3-file layout
+- `docs/DECISIONS.md` — DEC-022 revised to the 3-file split
+
+**Outcome:**
+Raw values now live alone in `tokens/palette.css`; semantic mapping and scales are isolated. Two new semantic tokens removed the last avoidable component primitive refs (button on-accent text, tag chip bg). No visual change from the split (new tokens replicate prior values); verified the `@layer` cascade still resolves by rendering the test page in dark mode. Components are now free of `--palette-*` except documented exceptions (black shadows, bandwidth data-viz signal colors + marker fills, tag mask fills).
+
+**Related decision:** DEC-022
+
+### [2026-06-25] — Move raw hex out of semantic.css into the palette
+
+**Prompt:**
+i dont expect in the semantic to be raw hex values. Shouldnt that be a token?
+
+**Tokens / files touched:**
+- `assets/css/tokens/palette.css` — added neutral grey ramp (`--palette-grey-0…4`), muted teals (`--palette-teal-0…2`), dark-theme status bg/fg, light-theme status accents, and domain palettes (`--palette-data-*`, `--palette-syntax-*`, `--palette-rbm-*`)
+- `assets/css/tokens/semantic.css` — every value rewritten to `var(--palette-*)`; zero raw hex remaining
+- `docs/DECISIONS.md` — DEC-023 added
+
+**Outcome:**
+`semantic.css` is now a pure mapping layer (all `var(--palette-*)`); raw colors live only in `palette.css`. Value-preserving migration of ~40 inline hex — verified the test page renders pixel-identically in dark mode. Confirmed every referenced palette token is defined and no hex remains.
+
+**Related decision:** DEC-023

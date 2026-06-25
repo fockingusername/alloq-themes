@@ -68,7 +68,7 @@ Superseded by DEC-004, which defines the token architecture for supporting both 
 ## DEC-004 — Semantic token layer for dual-theme support
 
 - **Date:** 2026-06-16
-- **Status:** Accepted
+- **Status:** Accepted — *file structure superseded by DEC-022* (two-layer model kept; the separate `tokens/` folder + per-theme files were replaced by a single `tokens.css` using `light-dark()`)
 - **Related prompt:** PROMPTS.md entry 2026-06-16 "Dual-theme token architecture"
 
 ### Context
@@ -526,3 +526,187 @@ Contrast of default button: `#1c71e3` on `#dce8f8` = 3.75:1. Buttons are UI comp
 - Default button in light mode: subtle blue surface + blue text — cohesive and visually distinct from grey UI surfaces.
 - Any future component needing a faint blue wash (info highlight, row tint, etc.) should use `--palette-blue-0` or `--palette-blue-1` via a new semantic token — not reference the palette directly.
 - Dark mode default button is unchanged.
+
+## DEC-016 — Surface token ladder: shared values across roles are intentional
+
+- **Date:** 2026-06-22
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-22 — Surface token audit
+
+### Context
+While making a data-table blend into the page, `--color-surface-raised` was temporarily collapsed onto `--color-surface-page`, which made "raised" describe an elevation that no longer existed. A follow-up audit asked whether it makes sense that several surface roles (e.g. `base` and `raised`) resolve to the same palette step in a given theme.
+
+Resolved values were tabulated for all ten surface roles in both themes. Finding: **no surface token is a true duplicate** — every apparent collision occurs in only one theme and the two roles diverge in the other (e.g. `base`/`page` share `dark-5` in dark but split `light-0`/`light-1` in light; `base`/`raised`/`overlay`/`field` all resolve to white in light but split across `dark-3/4/5/6` in dark). Roles that collide in one theme are never adjacent in the UI, so the shared value is invisible. The only genuine fault was a stray uncommitted change nudging `raised` dark from `dark-3` → `dark-4`, shrinking its lift above `page`.
+
+### Options considered
+1. **Force every role to a unique value in both themes** — would invent contrast where the design doesn't want it and break the established palette; high blast radius across 6 HTML files. Rejected.
+2. **Collapse roles that ever share a value into a single token** — loses the per-theme divergence each token genuinely carries; a future theme could not re-split them. Rejected.
+3. **Keep all roles; document that same-tier shared values are intentional; revert the stray `raised` change.** Minimal, honest, preserves flexibility. Chosen.
+
+### Decision
+**Option 3.** The surface tokens form an elevation ladder — canvas (`base`, `page`) → `raised` → `overlay` — plus off-ramp roles (`field`/`sunken` inset, `subtle`/`interactive` state tints, `muted` disabled, `elevated` chip fill). Two roles may resolve to the same palette step within one theme when they sit on the same tier and never touch in the UI. The invariant: **`raised` must sit above `page`** (lighter in dark, whiter in light). `--color-surface-raised` dark reverted to `--palette-dark-3` (`#022b31`), restoring a clear one-step lift above `page` (`dark-5`, `#021318`); this matches the value committed on 2026-06-18. Documented inline above the Surfaces block in `tokens.css` and in `NAMING_CONVENTION.md` §4.
+
+### Consequences
+- No token values change versus the last committed state — the audit confirmed the system is coherent and reverted only the stray edit.
+- Future work should not read a single-theme value collision as a bug. The test for a real fault is whether a token's value contradicts its name (e.g. `raised` not above `page`), not whether two roles ever share a step.
+- A flush, page-level surface (e.g. a data-table meant to blend into the page) should reference `--color-surface-page` or `transparent` — not be achieved by flattening `raised` onto `page`.
+
+## DEC-017 — Multilayered table: replace depth fill ramp with indent guides + bold parents
+
+- **Date:** 2026-06-22
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-22
+
+### Context
+The oklch lightness ramp (one background-color shade per depth level) worked acceptably in dark mode but was distracting in light mode: progressively darker gray bands spanning the full row width on a white canvas, competing visually with the numeric data and degrading text contrast at deeper levels. The fill ramp was also redundant — indentation and disclosure toggles already encode depth unambiguously.
+
+### Options considered
+1. **Split the ramp by theme** — keep ramp in dark, suppress or flatten it in light. Adds complexity; doesn't fix the root problem.
+2. **Tint group-header rows only** — one uniform tint for expandable rows, leaves flat. Clean but loses the vertical hierarchy signal.
+3. **Indent guide lines + bold parents (chosen)** — remove ramp entirely, draw plain vertical rules in the sticky first column at each ancestor's icon position; bold the label of parent rows only.
+
+### Decision
+Remove the `--color-table-start` / `--table-min-steps` / oklch-per-level ramp from table.css.
+
+Add to `td:first-child::before` in `.multilayered-table`: a `repeating-linear-gradient` (1px line every 1rem, `--color-border-subtle`) clipped to `calc(--level * 1rem + 1.2rem)` width, offset `0.2rem` so lines align with the expand-icon column positions (1.2rem, 2.2rem, 3.2rem…). Guide count equals `--level` — root rows get no guide, each deeper level gains one.
+
+Add `font-weight: var(--font-weight-bold)` to `td:first-child` for `tr:has(.row-name__button)` rows (parent/group rows).
+
+### Consequences
+- Rows are now flat in both themes — full text contrast at every depth level, no fill competing with numeric data.
+- Depth readable from: indentation (Vue-managed offset) + guide lines in label column + bold label text + disclosure button.
+- Guide lines live entirely in the sticky first column; numeric columns are untouched.
+- The `--color-table-start` and `--table-min-steps` tokens are now unused and have been removed.
+- Hover state (background-image overlay on cells) is unaffected.
+- `.is-checked td` selected state is unaffected.
+
+## DEC-018 — Default button is a blue outline (line) style
+
+- **Date:** 2026-06-25
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-25
+
+### Context
+The previous default `.button` (accent-primary tint fill + accent text) was not landing. Several experimental variants were trialled side by side (ghost/translucent-white, lila, lime `#D3FFB5`, blue line). The blue line was chosen.
+
+### Options considered
+1. Keep tinted-fill default — reads as a soft filled button; competes visually with `--primary` (amber CTA).
+2. Blue outline default — transparent fill, `--color-accent-primary` border + text, no shadow; clearly subordinate to the amber primary, reads as a standard secondary action. Hover/active lay a translucent accent tint.
+
+### Decision
+`.button` base = blue outline:
+- `--btn-bg: transparent`, `--btn-fg: var(--color-accent-primary)`, `--btn-border: var(--color-accent-primary)`, `--btn-shadow: none`.
+- Hover → `--btn-bg: color-mix(in oklch, var(--color-accent-primary) 12%, transparent)`; active → `20%`.
+
+The base hover/active no longer brighten via `oklch(l + …)` (that mechanism cannot create a fill from a transparent base). The brighten + shadow behaviour that `.button--primary` relied on was moved onto `.button--primary` itself, which now also declares its own rest `--btn-shadow` and `--btn-border: transparent`. `--secondary`, `--text`, `--icon-only` were unaffected (they already set their own `--btn-bg` per state).
+
+All experimental comparison variants (`--ghost`, `--lila`, `--lime`, `--line`) were deleted, along with the `--lime` raw-hex local var (the one naming-convention violation). Design-system variants (`--primary`, `--secondary`, `--text`, `--icon-only`, `--pill`, `--block`) were kept.
+
+### Consequences
+- Every plain `.button` across all pages now renders as a blue outline. Visual weight shifts: amber `--primary` is now the only filled emphasis button.
+- Verify contrast in both themes: `--color-accent-primary` is `blue-4 (#1255b8)` on light and `blue-2 (#84c8ff)` on dark; border + text on page/raised surfaces clear 3:1 (UI/large) — body-size labels at `--font-size-s` bold are borderline on dark and should be re-checked if the accent value changes.
+- The blue outline can visually resemble `.button--secondary` in dark mode (secondary border = accent-secondary/amber, so they stay distinct). Watch for places that used the old filled default as a pseudo-primary.
+
+## DEC-019 — Make --color-border-subtle fainter in dark mode
+
+- **Date:** 2026-06-25
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-25
+
+### Context
+The dark-mode `--color-border-subtle` (`--palette-dark-2`, #03363d) read too strongly against the dark surfaces it borders — noticeably lighter/teal than the card surface (`--palette-dark-3`, #022b31). Request: make it even more subtle.
+
+### Options considered
+1. Step to the next palette value (`--palette-dark-3`) — but that equals the card surface, so the border would vanish on cards.
+2. Relative-color nudge from `--palette-dark-2` — darken + desaturate part-way toward the surface, keeping it present but fainter. Discrete palette has no step between dark-2 and dark-3.
+
+### Decision
+Dark value → `oklch(from var(--palette-dark-2) calc(l - 0.025) calc(c * 0.7) h)`.
+Measured (oklch L / C): dark-2 0.306/0.051 → new 0.281/0.036; card surface dark-3 = 0.265, page dark-6 = 0.145. The border sits just above the card surface (still visible) and clearly above page/nav. Light value (`--palette-light-4`) unchanged.
+
+### Consequences
+- Affects everything on `--color-border-subtle` in dark mode: card edges, tab underline, sidebar right border, header bottom border, inverted disclosure border. All become fainter; none disappear (border L stays > card surface L).
+- `--color-border-default` (heavier borders: inputs, etc.) is untouched.
+
+
+## DEC-021 — Sun/moon theme toggle
+
+- **Date:** 2026-06-25
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-25
+
+### Context
+The theme switcher was restyled from a button → generic `.form-toggle` → an animated sun/moon toggle. A first pass drew the whole day/night scene in CSS (sky gradients, ray-burst sun, crater moon, stars) using raw `--tt-*` illustration colors; it read as cheap. Follow-up: use real Remix Icon sun/moon glyphs, keep it simple and clean.
+
+### Decision
+`assets/css/components/theme-toggle.css` — a `.theme-toggle` switch where the sliding thumb carries a Remix Icon glyph (`sun-line` / `moon-line`, MIT) that crossfades + rotates between states. Unchecked = light (sun, left); checked = dark (moon, right). Fully token-driven: track `--color-surface-sunken` + `--color-border-subtle`, thumb `--color-surface-raised` + `--shadow-s`, icon `--color-text-primary`, focus `--focus-outline`. The earlier raw-color scene was dropped — no exception to non-negotiable #1 is needed.
+
+### Consequences
+- One bespoke control, but it now inherits the theme palette like everything else (track/thumb adapt per theme automatically).
+- `prefers-reduced-motion: reduce` disables the thumb/icon transitions.
+- Remix Icon path data is inlined in each HTML's toggle markup (no icon-font dependency added).
+
+## DEC-015 — Darker blue accent text in light mode (contrast)
+
+- **Date:** 2026-06-18
+- **Status:** Accepted *(backfilled 2026-06-25 — referenced as "pending" in PROMPTS.md but never written)*
+- **Related prompt:** PROMPTS.md 2026-06-18 "Extend blue palette to 6 steps; darker text on default button"
+
+### Context
+The light-mode accent/text blue (`--palette-blue-3`, #1c71e3) cleared 3:1 (UI) but was marginal as body-size text on light surfaces. The blue palette was extended (DEC-014 → 6 steps) to provide a deeper step.
+
+### Decision
+Light-mode `--color-accent-primary` (and its co-references `--color-link`, `--color-status-info-accent`): `--palette-blue-3` (#1c71e3) → `--palette-blue-4` (#1255b8). Dark mode unchanged (`--palette-blue-2`, #84c8ff).
+
+### Consequences
+- Contrast of accent text on light surfaces: ~4.4:1 → ~6.6:1 (page) / ~6.96:1 (raised).
+- Carries into the blue-outline default button (DEC-018), links, and the info status accent.
+- Verified again in DEC-018's contrast pass (both themes pass AA for body text).
+
+## DEC-022 — Token architecture: 3-file split using light-dark()
+
+- **Date:** 2026-06-25
+- **Status:** Accepted — supersedes the file-structure portion of DEC-004
+- **Related prompt:** PROMPTS.md 2026-06-25 "Review MD files for FE handoff" · "Component token audit + token split"
+
+### Context
+DEC-004 specified a `tokens/` folder with `primitives.css`, `semantic.css`, and per-theme `themes/dark.css` / `themes/light.css` remapping via `[data-theme]`. Reality had drifted to a single `tokens.css` with both layers + scales in one `:root`, using `light-dark()`. During the FE-handoff review we kept the `light-dark()` model but split the one file by concern so raw values live alone.
+
+### Decision
+`assets/css/tokens/` — three files, all in `@layer settings :root`:
+- **`palette.css`** — Layer 1 raw `--palette-*` only (the single source of raw color). Holds the `@layer settings, generic, elements, utilities;` order declaration (loads first).
+- **`semantic.css`** — Layer 2 role-based `--color-*` via `light-dark()`, plus syntax/data/rbm domain tokens.
+- **`scale.css`** — non-color design tokens (`--length/gutter/radius/font/shadow/border/sizes`).
+
+Load order: `fonts → tokens/palette → tokens/semantic → tokens/scale → base → …`. **Theming** is `<body data-theme="light|dark">` → `color-scheme` (in `base.css`) → every `--color-*` resolves via `light-dark()`. No per-theme files; one attribute flips all tokens. Two-layer rule from DEC-004 stands: components use Layer 2 only.
+
+Added two semantic tokens to remove the last avoidable component primitive refs: `--color-text-on-accent` (= dark-4; used by `button.css`) and `--color-surface-chip` (= light-dark(light-1, dark-4); used by `tag.css`).
+
+### Consequences
+- "What raw colors exist?" → `palette.css`, one file. CLAUDE.md updated to match.
+- FE integrates by importing the three token files (in order) + base/elements/utilities/components, and setting `data-theme` on `<body>`.
+- Adding a theme would still require a mechanism beyond `light-dark()` (out of scope).
+
+## DEC-023 — semantic.css is a pure mapping layer (raw hex → palette)
+
+- **Date:** 2026-06-25
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-25 "No raw hex in semantic.css"
+
+### Context
+After the 3-file split (DEC-022), `semantic.css` still held ~40 raw hex values inherited from the original `tokens.css` — violating the two-layer rule (NAMING_CONVENTION §1: a `--color-*` holding raw hex belongs in the palette). The mapping layer should contain only `var(--palette-*)`.
+
+### Decision
+Moved every raw color value into `palette.css` as a primitive; `semantic.css` now references only `var(--palette-*)` (wrapped in `light-dark()` / `oklch()` where adaptive). Value-preserving — no resolved color changed (verified by re-render).
+
+New palette primitives added:
+- **Neutral grey ramp** `--palette-grey-0…4` (true greys for theme-neutral text/UI; #dde3ea → #1a1a1a, 0 = lightest).
+- **Muted teal** `--palette-teal-0…2` (dark-mode text + selected state).
+- **Dark-theme status** `--palette-status-{info|positive|negative|warning}-{bg|fg}-dark` (the light counterparts already existed as `-muted`/`-emphasis`).
+- **Light-theme status accents** `--palette-status-{positive|negative|warning}-accent-light` (dark accent reuses the vivid base swatch).
+- **Domain palettes** `--palette-data-1…7`, `--palette-syntax-*` (by hue), `--palette-rbm-2…6` — independent leaf series; `--color-data/syntax/rbm` now alias them.
+
+### Consequences
+- `palette.css` is the single source of every raw color; `semantic.css` has zero hex.
+- Domain series are kept independent even where values coincide (e.g. rbm-5 == data-1 by value) to avoid surprising cross-domain coupling.
+- A few palette primitives are defined-but-unused (ramp completeness) — acceptable.

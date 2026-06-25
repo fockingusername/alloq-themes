@@ -1,0 +1,101 @@
+/* ================================================================
+   UTILITIES — @layer utilities
+   Single-purpose helper classes. Highest named-layer priority.
+   ================================================================ */
+
+@layer utilities {
+	.font-body {
+		font-family: var(--font-family-body);
+	}
+
+	.font-mono {
+		font-family: var(--font-family-mono);
+	}
+
+	.font-normal {
+		font-weight: normal;
+	}
+
+	.font-bold {
+		font-weight: var(--font-weight-bold);
+	}
+
+	.content-max-width {
+		max-width: var(--max-width-s);
+	}
+
+	.content-center {
+		display: grid;
+		place-content: center;
+
+		min-height: 100dvh;
+	}
+
+	.stack {
+		display: grid;
+		gap: var(--gutter-m);
+	}
+
+	.cell-fixed {
+		width: 1rem;
+		min-width: 1rem;
+	}
+
+	.text-start {
+		text-align: left;
+	}
+
+	.text-end {
+		text-align: right;
+	}
+
+	.text-center {
+		text-align: center;
+	}
+
+	.text-no-wrap {
+		white-space: nowrap;
+	}
+
+	.text-truncate {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.text-subjacent {
+		color: var(--color-text-muted);
+	}
+
+	.text-neutral {
+		color: var(--color-status-info-accent);
+	}
+
+	.text-positive {
+		color: var(--color-status-positive-accent);
+	}
+
+	.text-negative {
+		color: var(--color-status-negative-accent);
+	}
+
+	.text-caution {
+		color: var(--color-status-warning-accent);
+	}
+
+	/*
+	 * Hide only visually, but have it available for screen readers:
+	 * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+	 */
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		border: 0;
+		white-space: nowrap;
+		clip-path: inset(50%);
+	}
+}

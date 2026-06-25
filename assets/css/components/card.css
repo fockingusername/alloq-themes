@@ -1,0 +1,12 @@
+/* ================================================================
+   CARD
+   Overrides for the Card Vue component.
+   Both themes use a subtle border (--color-border-subtle) to define the
+   card edge — kept consistent across light and dark.
+   ================================================================ */
+
+/* body[data-theme] (always present) raises specificity to 0,2,1 so this beats
+   Card.vue's scoped `.card[data-v-…]` border (0,2,0), which loads later. */
+body[data-theme] .card {
+	border-color: var(--color-border-subtle);
+}

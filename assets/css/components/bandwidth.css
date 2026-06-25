@@ -43,7 +43,7 @@
 }
 
 .bandwidth-visualization__target {
-	fill: var(--palette-black);
+	fill: light-dark(var(--palette-white), var(--palette-black));
 }
 
 .bandwidth-visualization__marker {

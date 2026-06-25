@@ -1,35 +1,93 @@
 /* ================================================================
    TABLE
-   Multilayered table: striped rows by depth, hover, sticky cells.
+   Base table styles + multilayered variant.
    ================================================================ */
 
-/* Token defined here because it drives the per-level oklch interpolation */
-:root {
-	--color-table-start: light-dark(
-		lch(100% 0 0),
-		lch(19.83% 16.93 212.99)
-	);
+table {
+	--sticky-cell-border: var(--border-l) solid var(--color-border-default);
 
-	--table-min-steps: 4;
+	width: 100%;
 
-	&:has([data-theme='light']) {
-		--table-min-steps: 25;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+thead {
+	z-index: 3;
+	position: sticky;
+	top: 0;
+
+	color: var(--color-text-muted);
+	font-weight: var(--font-weight-bold);
+
+	th {
+		border-bottom: var(--sticky-cell-border);
+
+		font-size: var(--font-size-s);
+		vertical-align: top;
+	}
+
+	tr {
+		background-color: var(--color-surface-table-header);
+	}
+}
+
+tbody {
+	white-space: nowrap;
+
+	tr {
+		background: var(--color-surface-base);
+	}
+
+	td {
+		border-top: 0;
+		vertical-align: middle;
+	}
+}
+
+td,
+th {
+	padding: var(--length-m) var(--length-xl);
+
+	border: var(--border-s) solid var(--color-border-default);
+	font-weight: inherit;
+
+	font-size: var(--font-size-s);
+	text-align: left;
+
+	& + td,
+	& + th {
+		border-left: 0;
+	}
+
+	a {
+		color: inherit;
+	}
+}
+
+tfoot {
+	color: var(--color-text-muted);
+
+	tr {
+		background: var(--color-surface-raised);
+	}
+
+	th,
+	td {
+		border-top-width: var(--border-m);
 	}
 }
 
 .multilayered-table {
 	tr {
-		--min-steps: var(--table-min-steps);
-		--steps: max(var(--min-steps), calc(var(--table-depth) + 1));
-
-		background-color: oklch(
-			from var(--color-table-start)
-			calc(l - (l / var(--steps)) * var(--level)) c h
-		);
-
 		&.is-checked td {
 			background-color: var(--color-interactive-selected);
 		}
+	}
+
+	/* Bold parent/group rows — label column only */
+	tr:has(.row-name__button) td:first-child {
+		font-weight: var(--font-weight-bold);
 	}
 
 	thead th {
@@ -79,8 +137,15 @@
 		}
 	}
 
-	tbody tr:hover {
-		background-color: var(--color-interactive-hover);
+	tbody tr:hover,
+	tbody tr.is-child-hovered {
+		td,
+		th {
+			background-image: linear-gradient(
+				var(--color-interactive-hover),
+				var(--color-interactive-hover)
+			);
+		}
 	}
 
 	:is(tr:first-of-type th:first-child),

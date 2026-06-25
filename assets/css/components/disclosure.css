@@ -3,24 +3,22 @@
    ================================================================ */
 
 .disclosure {
-	--bg-body-color: transparent;
-	--bg-body-border: transparent;
-	--bg-body-padding: var(--length-xl) 0 0;
-	--bg-body-margin: 0;
+	--disclosure-bg: transparent;
+	--disclosure-border: transparent;
+	--disclosure-padding: var(--length-xl) 0 0;
+	--disclosure-margin: 0;
 
 	margin-bottom: var(--length-l);
 	border-radius: var(--radius-m);
 
 	&[inverted='true'] {
-		/* light: palette-light-2 (#f2f2f2) — subtle grey, same as light mode sunken.
-		   dark: palette-dark-2 (#03363d) — dark teal, visually proportionate to page. */
-		--bg-body-color: light-dark(var(--palette-light-2), var(--palette-dark-2));
-		--bg-body-border: var(--border-s) solid var(--color-border-default);
-		--bg-body-padding: var(--length-xl);
-		--bg-body-margin: var(--length-m) 0 0;
+		--disclosure-bg: var(--color-surface-sunken);
+		--disclosure-border: light-dark(none, var(--border-s) solid var(--color-border-subtle));
+		--disclosure-padding: var(--length-xl);
+		--disclosure-margin: var(--length-m) 0 0;
 
 		& & {
-			--bg-body-color: var(--color-surface-raised);
+			--disclosure-bg: var(--color-surface-raised);
 		}
 	}
 
@@ -89,11 +87,11 @@
 }
 
 .disclosure__body {
-	margin: var(--bg-body-margin);
-	padding: var(--bg-body-padding);
-	border: var(--bg-body-border);
+	margin: var(--disclosure-margin);
+	padding: var(--disclosure-padding);
+	border: var(--disclosure-border);
 	border-radius: var(--radius-l);
-	background: var(--bg-body-color);
+	background: var(--disclosure-bg);
 	overflow-wrap: anywhere;
 
 	& > :last-child {

@@ -6,23 +6,23 @@
    Component-local variables (§7 NAMING_CONVENTION.md):
    --btn-bg     — background fill (changes per variant + disabled state)
    --btn-fg     — foreground / text color
-   --btn-border — border color
+   --btn-border-color — border color
    --btn-shadow — box shadow (changes per interaction state)
    --btn-radius — border radius (overridden by --pill modifier)
 
-   Primitives still in use — flagged for future semantic tokens:
-   --palette-dark-4  text on amber primary (very dark for contrast; no semantic equivalent yet)
+   Primitives still in use — flagged exception:
    --palette-black   shadow alpha base (acceptable: shadows are always black-based)
 
-   Default button fg uses light-dark(accent-primary, text-primary):
-   light → --palette-blue-4 (#1255b8), dark → #ffffff (white via --color-text-primary)
+   Default button (DEC-018): blue outline — transparent fill, accent-primary
+   border + text, no shadow. Hover/active lay a translucent accent tint into
+   --btn-bg; the base `background-color: var(--btn-bg)` declaration paints it.
 */
 
 .button {
-	--btn-bg: var(--color-surface-interactive);
-	--btn-fg: light-dark(var(--color-accent-primary), var(--color-text-primary));
-	--btn-border: transparent;
-	--btn-shadow: 0 1px 1px 0 oklch(from var(--palette-black) l c h / 0.12);
+	--btn-bg: transparent;
+	--btn-fg: var(--color-accent-primary);
+	--btn-border-color: var(--color-accent-primary);
+	--btn-shadow: none;
 	--btn-radius: var(--radius-m);
 
 	contain: layout;
@@ -36,7 +36,7 @@
 	padding: var(--length-xs) var(--length-s);
 	gap: var(--length-s);
 
-	border: var(--border-s) solid var(--btn-border);
+	border: var(--border-s) solid var(--btn-border-color);
 	border-radius: var(--btn-radius);
 
 	background-color: var(--btn-bg);
@@ -58,21 +58,17 @@
 	user-select: none;
 
 	&:where(:not(:disabled)):hover {
-		--btn-shadow: 0 2px 1px 0 oklch(from var(--palette-black) l c h / 0.25);
-
-		background-color: oklch(from var(--btn-bg) calc(l + 0.04) c h);
+		--btn-bg: color-mix(in oklch, var(--color-accent-primary) 12%, transparent);
 	}
 
 	&:where(:active) {
-		--btn-shadow: 0 2px 4px 0 oklch(from var(--palette-black) l c h / 0.25) inset;
-
-		background-color: oklch(from var(--btn-bg) calc(l + 0.06) c h);
+		--btn-bg: color-mix(in oklch, var(--color-accent-primary) 20%, transparent);
 	}
 
 	&:disabled,
 	&[aria-disabled='true'] {
 		--btn-bg: var(--color-surface-subtle);
-		--btn-border: var(--color-border-default);
+		--btn-border-color: var(--color-border-default);
 		--btn-shadow: none;
 		--btn-fg: var(--color-text-muted);
 
@@ -107,26 +103,43 @@
 
 .button--primary {
 	--btn-bg: var(--color-accent-secondary);
-	--btn-fg: var(--palette-dark-4);
+	--btn-fg: var(--color-text-on-accent);
+	--btn-border-color: transparent;
+	--btn-shadow: 0 1px 1px 0 oklch(from var(--palette-black) l c h / 0.12);
+
+	/* Hover lays a lighter tint of the brand amber (raised L, softened C). */
+	&:where(:not(:disabled)):hover {
+		--btn-shadow: 0 2px 1px 0 oklch(from var(--palette-black) l c h / 0.25);
+
+		background-color: oklch(
+			from var(--color-accent-secondary) calc(l + 0.08) calc(c * 0.9) h
+		);
+	}
+
+	&:where(:active) {
+		--btn-shadow: 0 2px 4px 0 oklch(from var(--palette-black) l c h / 0.25) inset;
+
+		background-color: oklch(from var(--btn-bg) calc(l + 0.06) c h);
+	}
 }
 
 .button--secondary {
 	--btn-bg: transparent;
-	--btn-border: light-dark(var(--color-text-primary), var(--color-accent-secondary));
+	--btn-border-color: light-dark(var(--color-text-primary), var(--color-accent-secondary));
 	--btn-fg: light-dark(var(--color-text-primary), var(--color-accent-secondary));
 
 	&:hover,
 	&:active {
 		--btn-bg: var(--color-accent-secondary);
-		--btn-border: transparent;
-		--btn-fg: var(--palette-dark-4);
+		--btn-border-color: transparent;
+		--btn-fg: var(--color-text-on-accent);
 	}
 }
 
 .button--text,
 .button--icon-only {
 	--btn-bg: transparent;
-	--btn-border: transparent;
+	--btn-border-color: transparent;
 	--btn-shadow: none;
 	--btn-fg: var(--color-accent-primary);
 
@@ -138,11 +151,11 @@
 	&:disabled,
 	&[aria-disabled='true'] {
 		--btn-bg: transparent;
-		--btn-border: transparent;
+		--btn-border-color: transparent;
 
 		&:hover {
 			--btn-bg: transparent;
-			--btn-border: transparent;
+			--btn-border-color: transparent;
 		}
 	}
 }

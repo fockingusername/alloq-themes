@@ -13,7 +13,7 @@
 - **Fonts:** Inter (UI) · Roboto Mono (tables & financial data)
 - **Themes:** Dark + Light (equal first-class citizens)
 
-Full design guidelines live in `docs/DESIGN_SYSTEM.md`. Treat it as the source of truth for tokens, components, and rules.
+Token naming rules live in `docs/NAMING_CONVENTION.md` (the authority for any token name). Theme choices and rationale live in `docs/DECISIONS.md`. The tokens themselves are the source of truth: `assets/css/tokens/` (palette · semantic · scale).
 
 ---
 
@@ -26,7 +26,7 @@ Claude Code's job here is to **optimize the theme system** — build and refine 
 - Mapping semantic tokens to primitives per theme (dark + light)
 - Replacing hardcoded values and primitive token references in components with semantic tokens
 - Aligning existing components to the design system (colors, spacing, typography, radii)
-- Fixing focus states, hover states, feedback color usage
+- Fixing focus states, hover states, status color usage
 - Improving contrast and accessibility — verified in both themes
 - Consolidating duplicate or near-duplicate tokens
 
@@ -40,30 +40,35 @@ If a request drifts out of scope, stop and flag it.
 
 ---
 
-## Token architecture (DEC-004)
+## Token architecture (DEC-004, DEC-022)
 
-Two layers. Components reference only the semantic layer — never primitives.
+Two layers, split by concern across three files in `assets/css/tokens/` (all in `@layer settings :root`). Components reference only the semantic layer, never primitives.
 
 ```
-tokens/
-  primitives.css     ← raw palette values; never used directly in components
-  semantic.css       ← role-based aliases; the only tokens components may use
-  themes/
-    dark.css         ← [data-theme="dark"]  maps semantic → primitive
-    light.css        ← [data-theme="light"] maps semantic → primitive
+assets/css/tokens/
+  palette.css    Layer 1 — raw --palette-* values (the only file with raw colors); never used in components
+  semantic.css   Layer 2 — role-based --color-* via light-dark() (+ syntax/data/rbm domain tokens); used everywhere
+  scale.css      non-color design tokens — --length-*, --gutter-*, --radius-*, --font-*, --shadow-*, --border-*, sizes
 ```
 
-**Semantic token naming — describe role, not value:**
+Load order (the `@layer` declaration lives at the top of `palette.css`): `fonts → tokens/palette → tokens/semantic → tokens/scale → base → …`.
 
-| Category | Tokens |
+**Theme selection:** `<body data-theme="light|dark">` sets `color-scheme` (in `base.css`); every `--color-*` token resolves per scheme via `light-dark(<light>, <dark>)`. There are no per-theme files — switching `data-theme` flips every token at once.
+
+**Semantic token naming — describe role, not value** (full list in `tokens/semantic.css`; naming rules in `NAMING_CONVENTION.md`):
+
+| Category | Roles |
 |---|---|
-| Surface | `--color-surface-page` · `--color-surface-base` · `--color-surface-raised` · `--color-surface-overlay` |
-| Text | `--color-text-primary` · `--color-text-secondary` · `--color-text-muted` · `--color-text-on-accent` |
-| Border | `--color-border-default` · `--color-border-strong` · `--color-border-focus` |
-| Interactive | `--color-interactive-default` · `--color-interactive-hover` · `--color-interactive-active` |
-| Accent | `--color-accent-primary` · `--color-accent-primary-hover` |
-| Feedback | `--color-feedback-positive` · `--color-feedback-negative` · `--color-feedback-warning` · `--color-feedback-info` |
+| Surface | `base` · `page` · `raised` · `overlay` · `elevated` · `sunken` · `subtle` · `muted` · `interactive` · `field` · `table-header` |
+| Text | `primary` · `secondary` · `muted` |
+| Border | `subtle` · `default` · `strong` · `focus` |
+| Accent | `primary` (blue) · `secondary` (amber — the Yellow Route) |
+| Interactive | `hover` · `active` · `disabled` · `selected` |
+| Fill | `base` · `low` · `medium` · `high` (alpha overlays) |
+| Status | `{info\|positive\|negative\|warning\|neutral}` × `{bg\|fg\|accent}` |
+| Link | _(single token)_ |
 | Data viz | `--color-data-1` … `--color-data-7` |
+| Domain | `--color-syntax-*` · `--color-rbm-level-*` |
 
 ---
 
@@ -74,9 +79,9 @@ tokens/
 3. **Primitives are stable.** Don't change primitive values without a decision entry — they're the palette foundation.
 4. **Roboto Mono** for all numeric/tabular cells, right-aligned, `tabular-nums`.
 5. **Inter** for everything else.
-6. **Yellow Route preserved.** `--color-accent-primary` (amber) keeps its visual weight in both themes.
-7. **Feedback color ≠ only signal.** Always paired with icon or text label.
-8. **Focus states** use `--color-accent-primary`. Don't remove or weaken them.
+6. **Yellow Route preserved.** `--color-accent-secondary` (amber) keeps its visual weight in both themes. (`--color-accent-primary` is the blue accent.)
+7. **Status color ≠ only signal.** Always paired with icon or text label.
+8. **Focus states** use `--color-border-focus` (= `--color-accent-primary`, blue). Don't remove or weaken them.
 9. **Contrast:** 4.5:1 body text, 3:1 large text and UI — verify every change in both themes.
 
 ---
@@ -86,7 +91,7 @@ tokens/
 | File | Purpose |
 |---|---|
 | `CLAUDE.md` | This file. Scope + rules + index. |
-| `docs/DESIGN_SYSTEM.md` | Full Pieq guidelines. Reference. |
+| `assets/css/tokens/` | The tokens themselves — `palette.css` · `semantic.css` · `scale.css`. Source of truth for values. |
 | `docs/NAMING_CONVENTION.md` | Token naming rules (Primer-based). The authority for naming any token. |
 | `docs/PROMPTS.md` | Log of every prompt given to Claude Code. |
 | `docs/DECISIONS.md` | Decision log for theme choices, with rationale. |
@@ -161,7 +166,7 @@ Decisions are append-only. Don't edit accepted decisions — supersede them with
 
 1. Read this file.
 2. Skim `docs/DECISIONS.md` for prior theme choices in the area being touched.
-3. Check `docs/DESIGN_SYSTEM.md` for the relevant tokens/components.
+3. Check `assets/css/tokens/` (palette / semantic / scale) for the relevant tokens.
 4. Adding or renaming a token? Check `docs/NAMING_CONVENTION.md` first.
 5. Make the change.
 6. Append to `docs/PROMPTS.md`. Append to `docs/DECISIONS.md` if applicable.
@@ -174,4 +179,4 @@ Decisions are append-only. Don't edit accepted decisions — supersede them with
 
 ---
 
-*Keep this file short. Long-form guidance lives in `docs/DESIGN_SYSTEM.md`.*
+*Keep this file short. Token values live in `assets/css/tokens/`; naming rules in `docs/NAMING_CONVENTION.md`; rationale in `docs/DECISIONS.md`.*

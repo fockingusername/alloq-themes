@@ -1,0 +1,234 @@
+/* ================================================================
+   ELEMENTS — @layer elements
+   Base styles for bare HTML elements.
+   ================================================================ */
+
+@layer elements {
+	body {
+		background-color: var(--color-surface-base);
+
+		color: var(--color-text-primary);
+
+		font-size: var(--font-size-s);
+		line-height: 1.5rem;
+		font-family: var(--font-family-body);
+
+		text-decoration-skip-ink: auto;
+	}
+
+	abbr {
+		color: var(--color-text-muted);
+		text-decoration: none;
+	}
+
+	a {
+		color: var(--color-link);
+		text-decoration: none;
+
+		&:hover {
+			color: inherit;
+		}
+
+		&:active {
+			color: var(--color-text-muted);
+		}
+	}
+
+	blockquote {
+		margin: 0;
+
+		line-height: 1.5;
+	}
+
+	code {
+		display: block;
+		font-size: var(--font-size-s);
+
+		font-family: var(--font-family-mono);
+
+		a {
+			color: inherit;
+			text-decoration: underline;
+		}
+	}
+
+	dl {
+		margin: 0;
+
+		&:not(:last-of-type) {
+			margin-bottom: var(--length-xl);
+		}
+	}
+
+	dt {
+		color: var(--color-text-muted);
+
+		font-weight: var(--font-weight-bold);
+
+		line-height: 1.5;
+	}
+
+	dd {
+		margin: 0 0 var(--length-xl);
+
+		&:last-child {
+			margin-block-end: 0;
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: var(--font-weight-bold);
+	}
+
+	h1 {
+		margin: 0 0 var(--length-xl);
+
+		font-size: var(--font-size-xl);
+	}
+
+	h2 {
+		margin: 0 0 var(--length-l);
+
+		font-size: var(--font-size-l);
+	}
+
+	h3 {
+		margin: 0 0 var(--length-m);
+
+		font-size: var(--font-size-m);
+	}
+
+	h4 {
+		margin: 0 0 var(--length-s);
+		font-weight: var(--font-weight-bold);
+
+		font-size: var(--font-size-s);
+	}
+
+	h5 {
+		margin: 0 0 var(--length-xs);
+		font-weight: var(--font-weight-bold);
+
+		font-size: var(--font-size-xs);
+	}
+
+	h6 {
+		margin: 0 0 var(--length-xs);
+		font-weight: var(--font-weight-bold);
+
+		font-size: var(--font-size-xs);
+	}
+
+	hr {
+		margin: var(--length-l) 0 calc(var(--length-l) - var(--border-s));
+
+		border: none;
+		border-bottom: var(--border-s) solid var(--color-border-default);
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+
+		vertical-align: middle;
+	}
+
+	legend {
+		display: block;
+
+		padding: 0 0 var(--length-xs);
+
+		font-size: var(--font-size-s);
+	}
+
+	p {
+		margin: 0 0 var(--length-xl);
+	}
+
+	small {
+		font-size: var(--font-size-xs);
+	}
+
+	textarea {
+		display: block;
+
+		width: 100%;
+		height: 6rem;
+		padding: var(--length-m);
+		border: var(--border-s) solid var(--color-border-default);
+		border-radius: var(--radius-m);
+
+		background: var(--color-surface-sunken);
+
+		color: var(--color-text-primary);
+		font-size: var(--font-size-s);
+		line-height: 1.5;
+		font-family: var(--font-family-body);
+		text-decoration: none;
+
+		&::placeholder {
+			color: var(--color-text-muted);
+
+			opacity: 1;
+		}
+
+		&:hover {
+			border-color: var(--color-fill-medium);
+		}
+
+		&:focus {
+			border-color: var(--color-accent-primary);
+			outline: none;
+
+			background-color: var(--palette-white);
+			color: var(--palette-black);
+
+			&::placeholder {
+				color: var(--palette-black);
+				opacity: 0.5;
+			}
+		}
+
+		&:active {
+			border-color: transparent;
+
+			background-color: var(--color-fill-medium);
+			color: var(--color-text-muted);
+
+			&::placeholder {
+				color: var(--color-text-muted);
+				opacity: 1;
+			}
+		}
+
+		&:disabled,
+		&:disabled:hover {
+			border-color: transparent;
+
+			background-color: var(--color-fill-low);
+			color: var(--color-text-secondary);
+		}
+	}
+
+	::-webkit-scrollbar {
+		width: var(--length-l);
+		height: var(--length-l);
+	}
+
+	::-webkit-scrollbar-corner {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--color-fill-low);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--color-fill-medium);
+	}
+}

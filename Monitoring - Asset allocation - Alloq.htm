@@ -23,497 +23,26 @@
 		/>
 
 		<link rel="stylesheet" href="assets/css/fonts.css" />
-		<link rel="stylesheet" href="assets/css/tokens.css" />
+		<link rel="stylesheet" href="assets/css/tokens/palette.css" />
+		<link rel="stylesheet" href="assets/css/tokens/semantic.css" />
+		<link rel="stylesheet" href="assets/css/tokens/scale.css" />
+		<link rel="stylesheet" href="assets/css/base.css" />
+		<link rel="stylesheet" href="assets/css/elements.css" />
+		<link rel="stylesheet" href="assets/css/utilities.css" />
 		<link rel="stylesheet" href="assets/css/components/tag.css" />
 		<link rel="stylesheet" href="assets/css/components/button.css" />
 		<link rel="stylesheet" href="assets/css/components/bandwidth.css" />
 		<link rel="stylesheet" href="assets/css/components/notification.css" />
 		<link rel="stylesheet" href="assets/css/components/input.css" />
 		<link rel="stylesheet" href="assets/css/components/layout.css" />
+		<link rel="stylesheet" href="assets/css/components/nav.css" />
 		<link rel="stylesheet" href="assets/css/components/data-table.css" />
+		<link rel="stylesheet" href="assets/css/components/card.css" />
+		<link rel="stylesheet" href="assets/css/components/table.css" />
 		<link rel="stylesheet" href="assets/css/components/tab.css" />
 		<link rel="stylesheet" href="assets/css/components/disclosure.css" />
-		<style
-			type="text/css"
-			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/styles/main.css"
-		>
-			@layer settings, generic, elements, utilities;
-			@layer generic {
-				body {
-					accent-color: var(--color-accent-primary);
-				}
+		<link rel="stylesheet" href="assets/css/components/theme-toggle.css" />
 
-				body[data-theme='light'] {
-					color-scheme: light;
-				}
-
-				body[data-theme='dark'] {
-					color-scheme: dark;
-				}
-			}
-			@layer generic {
-				/**
- * Universal Box Sizing with Inheritance
- * https://css-tricks.com/box-sizing/#aa-universal-box-sizing-with-inheritance
- */
-				*,
-				*::before,
-				*::after {
-					box-sizing: inherit;
-				}
-
-				html {
-					box-sizing: border-box;
-
-					font-size: 100%;
-
-					scroll-behavior: smooth;
-				}
-
-				[hidden] {
-					display: none !important;
-				}
-
-				/* Element resets */
-				:where(html, body) {
-					height: 100%;
-					margin: 0;
-				}
-
-				:where(ol, ul) {
-					margin: 0;
-					padding: 0;
-
-					list-style-type: none;
-				}
-
-				:where(fieldset, legend) {
-					margin: 0;
-					padding: 0;
-
-					border: none;
-				}
-			}
-			@layer elements {
-				abbr {
-					color: var(--color-text-muted);
-					text-decoration: none;
-				}
-			}
-			@layer elements {
-				a {
-					color: var(--color-link);
-					text-decoration: none;
-
-					&:hover {
-						color: inherit;
-					}
-
-					&:active {
-						color: var(--color-text-muted);
-					}
-				}
-			}
-			@layer elements {
-				blockquote {
-					margin: 0;
-
-					line-height: 1.5;
-				}
-			}
-			@layer elements {
-				code {
-					display: block;
-					font-size: var(--font-size-s);
-
-					font-family: var(--font-family-mono);
-
-					a {
-						color: inherit;
-						text-decoration: underline;
-					}
-				}
-			}
-			@layer elements {
-				dl {
-					margin: 0;
-
-					&:not(:last-of-type) {
-						margin-bottom: var(--length-xl);
-					}
-				}
-
-				dt {
-					color: var(--color-text-muted);
-
-					font-weight: var(--font-weight-bold);
-
-					line-height: 1.5;
-				}
-
-				dd {
-					margin: 0 0 var(--length-xl);
-
-					&:last-child {
-						margin-block-end: 0;
-					}
-				}
-			}
-			@layer elements {
-				body {
-					background-color: var(--color-surface-base);
-
-					color: var(--color-text-primary);
-
-					font-size: var(--font-size-s);
-					line-height: 1.5rem;
-					font-family: var(--font-family-body);
-
-					text-decoration-skip-ink: auto;
-				}
-			}
-			@layer elements {
-				h1,
-				h2,
-				h3,
-				h4,
-				h5,
-				h6 {
-					font-weight: var(--font-weight-bold);
-				}
-
-				h1 {
-					margin: 0 0 var(--length-xl);
-
-					font-size: var(--font-size-xl);
-				}
-
-				h2 {
-					margin: 0 0 var(--length-l);
-
-					font-size: var(--font-size-l);
-				}
-
-				h3 {
-					margin: 0 0 var(--length-m);
-
-					font-size: var(--font-size-m);
-				}
-
-				h4 {
-					margin: 0 0 var(--length-s);
-					font-weight: var(--font-weight-bold);
-
-					font-size: var(--font-size-s);
-				}
-
-				h5 {
-					margin: 0 0 var(--length-xs);
-					font-weight: var(--font-weight-bold);
-
-					font-size: var(--font-size-xs);
-				}
-
-				h6 {
-					margin: 0 0 var(--length-xs);
-					font-weight: var(--font-weight-bold);
-
-					font-size: var(--font-size-xs);
-				}
-			}
-			@layer elements {
-				hr {
-					margin: var(--length-l) 0 calc(var(--length-l) - var(--border-s));
-
-					border: none;
-					border-bottom: var(--border-s) solid var(--color-border-default);
-				}
-			}
-			@layer elements {
-				img {
-					max-width: 100%;
-					height: auto;
-
-					vertical-align: middle;
-				}
-			}
-			@layer elements {
-				legend {
-					display: block;
-
-					padding: 0 0 var(--length-xs);
-
-					font-size: var(--font-size-s);
-				}
-			}
-			@layer elements {
-				p {
-					margin: 0 0 var(--length-xl);
-				}
-			}
-			@layer elements {
-				::-webkit-scrollbar {
-					width: var(--length-l);
-					height: var(--length-l);
-				}
-
-				::-webkit-scrollbar-corner {
-					background: transparent;
-				}
-
-				::-webkit-scrollbar-track {
-					background: var(--color-fill-low);
-				}
-
-				::-webkit-scrollbar-thumb {
-					background: var(--color-fill-medium);
-				}
-			}
-			@layer elements {
-				small {
-					font-size: var(--font-size-xs);
-				}
-			}
-			@layer elements {
-				table {
-					--sticky-cell-border: var(--border-l) solid var(--color-border-default);
-
-					width: 100%;
-
-					border-collapse: separate;
-					border-spacing: 0;
-				}
-
-				thead {
-					z-index: 3;
-					position: sticky;
-					top: 0;
-
-					color: var(--color-text-muted);
-					font-weight: var(--font-weight-bold);
-
-					th {
-						border-bottom: var(--sticky-cell-border);
-
-						font-size: var(--font-size-s);
-						vertical-align: top;
-					}
-
-					tr {
-						background-color: var(--color-surface-raised);
-					}
-				}
-
-				tbody {
-					white-space: nowrap;
-
-					tr {
-						background: var(--color-surface-base);
-					}
-
-					td {
-						border-top: 0;
-						vertical-align: middle;
-					}
-				}
-
-				td,
-				th {
-					padding: var(--length-m) var(--length-xl);
-
-					border: var(--border-s) solid var(--color-border-default);
-					font-weight: inherit;
-
-					font-size: var(--font-size-s);
-					text-align: left;
-
-					& + td,
-					& + th {
-						border-left: 0;
-					}
-				}
-
-				tfoot {
-					color: var(--color-text-muted);
-
-					tr {
-						background: var(--color-surface-raised);
-					}
-
-					th,
-					td {
-						border-top-width: var(--border-m);
-					}
-				}
-			}
-			@layer elements {
-				textarea {
-					display: block;
-
-					width: 100%;
-					height: 6rem;
-					padding: var(--length-m);
-					border: var(--border-s) solid var(--color-border-default);
-					border-radius: var(--radius-m);
-
-					background: var(--color-surface-sunken);
-
-					color: var(--color-text-primary);
-					font-size: var(--font-size-s);
-					line-height: 1.5;
-					font-family: var(--font-family-body);
-					text-decoration: none;
-
-					&::placeholder {
-						color: var(--color-text-muted);
-
-						opacity: 1;
-					}
-
-					&:hover {
-						border-color: var(--color-fill-medium);
-					}
-
-					&:focus {
-						border-color: var(--color-accent-primary);
-						outline: none;
-
-						background-color: var(--palette-white);
-						color: var(--palette-black);
-
-						&::placeholder {
-							color: var(--palette-black);
-							opacity: 0.5;
-						}
-					}
-
-					&:active {
-						border-color: transparent;
-
-						background-color: var(--color-fill-medium);
-						color: var(--color-text-muted);
-
-						&::placeholder {
-							color: var(--color-text-muted);
-							opacity: 1;
-						}
-					}
-
-					&:disabled,
-					&:disabled:hover {
-						border-color: transparent;
-
-						background-color: var(--color-fill-low);
-						color: var(--color-text-secondary);
-					}
-				}
-			}
-			@layer utilities {
-				.font-body {
-					font-family: var(--font-family-body);
-				}
-
-				.font-mono {
-					font-family: var(--font-family-mono);
-				}
-
-				.font-normal {
-					font-weight: normal;
-				}
-
-				.font-bold {
-					font-weight: var(--font-weight-bold);
-				}
-			}
-			@layer utilities {
-				.content-max-width {
-					max-width: var(--max-width-s);
-				}
-
-				.content-center {
-					display: grid;
-					place-content: center;
-
-					min-height: 100dvh;
-				}
-			}
-			@layer utilities {
-				.stack {
-					display: grid;
-					gap: var(--gutter-m);
-				}
-			}
-			@layer utilities {
-				.cell-fixed {
-					width: 1rem;
-					min-width: 1rem;
-				}
-			}
-			@layer utilities {
-				.text-start {
-					text-align: left;
-				}
-
-				.text-end {
-					text-align: right;
-				}
-
-				.text-center {
-					text-align: center;
-				}
-
-				.text-no-wrap {
-					white-space: nowrap;
-				}
-
-				.text-truncate {
-					overflow: hidden;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-				}
-
-				.text-subjacent {
-					color: var(--color-text-muted);
-				}
-
-				.text-neutral {
-					color: var(--color-status-info-accent);
-				}
-
-				.text-positive {
-					color: var(--color-status-positive-accent);
-				}
-
-				.text-negative {
-					color: var(--color-status-negative-accent);
-				}
-
-				.text-caution {
-					color: var(--color-status-warning-accent);
-				}
-			}
-			@layer utilities {
-				/*
- * Hide only visually, but have it available for screen readers:
- * @link https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
-				.visually-hidden {
-					position: absolute;
-					width: 1px;
-					height: 1px;
-					margin: -1px;
-					padding: 0;
-					overflow: hidden;
-					border: 0;
-					white-space: nowrap;
-					clip-path: inset(50%);
-				}
-			}
-		</style>
 		<style
 			type="text/css"
 			data-vite-dev-id="C:/repositories/productone/frontend/packages/components/src/components/action-bar/ActionBar.vue?vue&amp;type=style&amp;index=0&amp;scoped=f3cead76&amp;lang.css"
@@ -3249,6 +2778,7 @@
 				color: var(--color-status-warning-accent);
 			}
 		</style>
+			<script src="assets/js/multilayered-table.js" defer></script>
 	</head>
 	<body data-theme="dark" data-v-app="">
 		<div class="app">
@@ -3559,25 +3089,23 @@
 					</ul>
 				</nav>
 				<div data-v-10fdf22c="" class="header__actions">
-					<button
-						data-v-17ebb602=""
+					<label
 						data-v-10fdf22c=""
-						class="button button--text header__actions-button scheme-toggle js-toggle"
-						type="button"
+						class="theme-toggle header__actions-button scheme-toggle"
 					>
-						<!--v-if-->
-						<span data-v-17ebb602="" class="icon button__icon"
-							><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path
-									d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"
-								></path>
-							</svg>
+						<input
+							class="theme-toggle__input js-toggle"
+							type="checkbox"
+							checked
+						/>
+						<span class="theme-toggle__track">
+							<span class="theme-toggle__thumb">
+								<svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/></svg>
+								<svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/></svg>
+							</span>
 						</span>
-						<span data-v-17ebb602="" class="button__label"
-							><span data-v-10fdf22c="">Dark mode</span></span
-						>
-						<!--v-if-->
-					</button>
+						<span class="theme-toggle__label">Dark mode</span>
+					</label>
 					<form
 						data-v-10fdf22c=""
 						action="https://localhost:3000/logout"
@@ -4433,13 +3961,12 @@
 		<script>
 			document
 				.querySelector('.js-toggle')
-				.addEventListener('click', function () {
-					const body = document.body;
-					const isDark = body.getAttribute('data-theme') === 'dark';
-					body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-					this.querySelector('.button__label span').textContent = isDark
-						? 'Light mode'
-						: 'Dark mode';
+				.addEventListener('change', function () {
+					const theme = this.checked ? 'dark' : 'light';
+					document.body.setAttribute('data-theme', theme);
+					this.closest('.theme-toggle').querySelector(
+						'.theme-toggle__label'
+					).textContent = this.checked ? 'Dark mode' : 'Light mode';
 				});
 		</script>
 	</body>

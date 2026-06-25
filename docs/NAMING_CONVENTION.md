@@ -67,7 +67,7 @@ Primer leads with the **CSS property** (`bgColor-default`, `fgColor-muted`, `bor
 
 | Category | Purpose | Roles in use |
 |---|---|---|
-| `surface` | Background fills by elevation/role | `base`, `page`, `raised`, `elevated`, `overlay`, `sunken`, `subtle`, `muted`, `interactive`, `field` |
+| `surface` | Background fills by elevation tier (DEC-016): canvas (`base`, `page`) → `raised` → `overlay`; plus off-ramp roles | `base`, `page`, `raised`, `elevated`, `overlay`, `sunken`, `subtle`, `muted`, `interactive`, `field` |
 | `text` | Foreground text | `primary`, `secondary`, `muted` |
 | `border` | Border & divider colors | `subtle`, `default`, `strong`, `focus` |
 | `accent` | Brand emphasis color | `primary`, `secondary` |
