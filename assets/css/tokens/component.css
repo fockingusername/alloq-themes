@@ -1,0 +1,141 @@
+@layer settings {
+	:root {
+		/* ================================================================
+   LAYER 3: COMPONENT DEFAULTS
+   Default values for all --<component>-* theming knobs (DEC-026, DEC-027).
+   Components consume these knobs in their body rules. Override per variant,
+   per state, or per consumer in the component CSS file — never here.
+   Load order: after tokens/scale.css, before base.css.
+   ================================================================ */
+
+		/* ── Button ──────────────────────────────────────────────────── */
+		--btn-bg:           transparent;
+		--btn-fg:           var(--color-accent-primary);
+		--btn-border-color: var(--color-accent-primary);
+		--btn-shadow:       none;
+		--btn-radius:       var(--radius-m);
+		--btn-padding:      var(--length-xs) var(--length-s);
+		--btn-gap:          var(--length-s);
+		--btn-font-size:    var(--font-size-s);
+		--btn-font-weight:  var(--font-weight-bold);
+
+		/* ── Tag ─────────────────────────────────────────────────────── */
+		--tag-bg:          var(--color-surface-chip);
+		--tag-bg-hover:    var(--color-surface-elevated);
+		--tag-fg:          var(--color-text-primary);
+		--tag-border:      var(--border-s) solid var(--color-border-default);
+		--tag-radius:      var(--radius-full);
+		--tag-padding:     0 var(--length-m);
+		--tag-gap:         var(--length-xs);
+		--tag-font-size:   var(--font-size-xs);
+		--tag-font-family: var(--font-family-body);
+		--tag-accent:      var(--color-status-neutral-accent);
+
+		/* ── Notification ────────────────────────────────────────────── */
+		--notification-accent:       var(--color-status-info-accent);
+		--notification-bg:           var(--color-status-info-bg);
+		--notification-fg:           var(--color-status-info-fg);
+		--notification-radius:       var(--radius-m);
+		--notification-padding:      var(--length-m) var(--length-xl);
+		--notification-gap:          var(--length-l);
+		--notification-border-width: var(--border-l);
+
+		/* ── Disclosure ──────────────────────────────────────────────── */
+		--disclosure-bg:          transparent;
+		--disclosure-border:      transparent;
+		--disclosure-padding:     var(--length-xl) 0 0;
+		--disclosure-margin:      0;
+		--disclosure-body-radius: var(--radius-l);
+		--disclosure-icon-color:  var(--color-accent-primary);
+
+		/* ── Tabs ────────────────────────────────────────────────────── */
+		--tabs-bg:           var(--color-surface-base);
+		--tabs-border-color: var(--color-border-subtle);
+
+		/* ── Tab ─────────────────────────────────────────────────────── */
+		--tab-indicator:      var(--border-s);
+		--tab-fg:             var(--color-text-muted);
+		--tab-fg-active:      var(--color-text-primary);
+		--tab-active-bg:      var(--color-surface-subtle);
+		--tab-active-border:  var(--color-accent-secondary);
+		--tab-padding-inline: var(--length-xxl);
+
+		/* ── Table ───────────────────────────────────────────────────── */
+		--table-cell-border:  var(--border-s) solid var(--color-border-default);
+		--sticky-cell-border: var(--border-l) solid var(--color-border-default);
+		--table-header-bg:    var(--color-surface-table-header);
+		--table-header-color: var(--color-text-muted);
+		--table-row-bg:       var(--color-surface-base);
+		--table-tfoot-bg:     var(--color-surface-raised);
+		--table-tfoot-color:  var(--color-text-muted);
+
+		/* ── Data table ──────────────────────────────────────────────── */
+		--dt-bg:             var(--color-surface-raised);
+		--dt-radius:         var(--radius-xl);
+		--dt-padding:        var(--gutter-m);
+		--dt-toolbar-bg:     var(--color-surface-table-header);
+		--dt-toolbar-border: var(--border-s) solid var(--color-border-default);
+
+		/* ── Theme toggle ────────────────────────────────────────────── */
+		--tt-track-w:         3.25rem;
+		--tt-track-h:         1.625rem;
+		--tt-thumb:           1.25rem;
+		--tt-inset:           0.1875rem;
+		--tt-travel:          calc(var(--tt-track-w) - var(--tt-thumb) - (var(--tt-inset) * 2));
+		--tt-track-bg:        var(--color-surface-sunken);
+		--tt-track-shadow:    inset 0 0 0 var(--border-s) var(--color-border-subtle);
+		--tt-thumb-bg:        var(--color-surface-raised);
+		--tt-thumb-shadow:    var(--shadow-s);
+		--tt-icon-color:      var(--color-text-primary);
+		--tt-label-color:     var(--color-text-primary);
+		--tt-label-font-size: var(--font-size-s);
+
+		/* ── Form label ──────────────────────────────────────────────── */
+		--label-color:       var(--color-text-muted);
+		--label-font-weight: var(--font-weight-bold);
+		--label-font-size:   var(--font-size-s);
+
+		/* ── Form input (text control + addon) ───────────────────────── */
+		--input-bg:                var(--color-surface-field);
+		--input-fg:                var(--color-text-primary);
+		--input-border-color:      var(--color-border-default);
+		--input-radius:            var(--radius-m);
+		--input-padding:           var(--length-m);
+		--input-font-size:         var(--font-size-s);
+		--input-placeholder:       var(--color-text-muted);
+		--input-text-bg:           var(--color-surface-sunken);
+		--input-text-border-color: var(--color-border-default);
+		--input-text-font-family:  var(--font-family-mono);
+
+		/* ── Form select ─────────────────────────────────────────────── */
+		--select-bg:           var(--color-surface-field);
+		--select-fg:           var(--color-text-primary);
+		--select-border-color: var(--color-border-default);
+		--select-radius:       var(--radius-m);
+		--select-font-size:    var(--font-size-s);
+
+		/* ── Form checkbox / radio ───────────────────────────────────── */
+		--checkbox-color: var(--color-text-primary);
+		--radio-color:    var(--color-text-primary);
+
+		/* ── Form toggle ─────────────────────────────────────────────── */
+		--toggle-track-bg:          var(--color-interactive-hover);
+		--toggle-track-bg-checked:  var(--color-accent-primary);
+		--toggle-track-bg-disabled: var(--color-interactive-disabled);
+		--toggle-thumb-bg:          var(--color-fill-high);
+		--toggle-thumb-bg-checked:  var(--color-fill-base);
+		--toggle-thumb-bg-disabled: var(--color-interactive-active);
+		--toggle-value-color:       var(--color-text-primary);
+		--toggle-value-font-size:   var(--font-size-s);
+
+		/* ── Bandwidth visualization ──────────────────────────────────── */
+		/* Intentional palette refs: vivid signal colors needed for data viz (DEC-024). */
+		--bw-range:            var(--palette-green-4);
+		--bw-bar-fill:         var(--color-border-default);
+		--bw-boundary-opacity: 0.75;
+		--bw-target-fill:      light-dark(var(--palette-white), var(--palette-black));
+		--bw-marker-fill:      light-dark(var(--palette-black), var(--palette-white));
+		--bw-marker-stroke:    var(--color-border-strong);
+		--bw-marker-w:         var(--length-xs);
+	}
+}

@@ -7,23 +7,7 @@
    ================================================================ */
 
 .theme-toggle {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────
-	   Geometry knobs are structural (track size, travel) and stay here.
-	   Color knobs are consumed by child selectors below. */
-	--tt-track-w:      3.25rem;
-	--tt-track-h:      1.625rem;
-	--tt-thumb:        1.25rem;
-	--tt-inset:        0.1875rem;
-	/* slide = track − thumb − 2·inset */
-	--tt-travel:       calc(var(--tt-track-w) - var(--tt-thumb) - (var(--tt-inset) * 2));
-
-	--tt-track-bg:     var(--color-surface-sunken);
-	--tt-track-shadow: inset 0 0 0 var(--border-s) var(--color-border-subtle);
-	--tt-thumb-bg:     var(--color-surface-raised);
-	--tt-thumb-shadow: var(--shadow-s);
-	--tt-icon-color:   var(--color-text-primary);
-	--tt-label-color:  var(--color-text-primary);
-	--tt-label-font-size: var(--font-size-s);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: inline-flex;
 	align-items: center;

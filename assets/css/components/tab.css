@@ -3,9 +3,7 @@
    ================================================================ */
 
 .tabs {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--tabs-bg:           var(--color-surface-base);
-	--tabs-border-color: var(--color-border-subtle);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: flex;
 	flex-wrap: wrap;
@@ -32,13 +30,7 @@
 }
 
 .tab {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--tab-indicator:      var(--border-s);
-	--tab-fg:             var(--color-text-muted);
-	--tab-fg-active:      var(--color-text-primary);
-	--tab-active-bg:      var(--color-surface-subtle);
-	--tab-active-border:  var(--color-accent-secondary);
-	--tab-padding-inline: var(--length-xxl);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	margin-bottom: calc(-1 * var(--border-s));
 	padding-inline: var(--tab-padding-inline);

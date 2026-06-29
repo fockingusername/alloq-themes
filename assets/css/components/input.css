@@ -48,10 +48,7 @@ input[type='number'] {
    ================================================================ */
 
 .form-label {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--label-color:       var(--color-text-muted);
-	--label-font-weight: var(--font-weight-bold);
-	--label-font-size:   var(--font-size-s);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: inline-block;
 
@@ -81,16 +78,7 @@ input[type='number'] {
 }
 
 .form-input__control {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────
-	   State pseudo-classes (:hover, :focus, :active, :disabled) override
-	   knobs; the body declarations stay stable. */
-	--input-bg:           var(--color-surface-field);
-	--input-fg:           var(--color-text-primary);
-	--input-border-color: var(--color-border-default);
-	--input-radius:       var(--radius-m);
-	--input-padding:      var(--length-m);
-	--input-font-size:    var(--font-size-s);
-	--input-placeholder:  var(--color-text-muted);
+	/* Knob defaults → tokens/component.css. State pseudo-classes override knobs inline (DEC-026, DEC-027). */
 
 	width: 100%;
 
@@ -165,10 +153,7 @@ input[type='number'] {
 }
 
 .form-input__text {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--input-text-bg:          var(--color-surface-sunken);
-	--input-text-border-color: var(--color-border-default);
-	--input-text-font-family: var(--font-family-mono);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: flex;
 	align-items: center;
@@ -283,12 +268,7 @@ input[type='number'] {
 }
 
 .form-select__control {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--select-bg:           var(--color-surface-field);
-	--select-fg:           var(--color-text-primary);
-	--select-border-color: var(--color-border-default);
-	--select-radius:       var(--radius-m);
-	--select-font-size:    var(--font-size-s);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: block;
 
@@ -361,8 +341,7 @@ input[type='number'] {
    ================================================================ */
 
 .form-checkbox {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--checkbox-color: var(--color-text-primary);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: inline-flex;
 	gap: var(--length-m);
@@ -380,8 +359,7 @@ input[type='number'] {
    ================================================================ */
 
 .form-radio {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--radio-color: var(--color-text-primary);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: inline-flex;
 	align-items: center;
@@ -433,13 +411,7 @@ input[type='number'] {
 }
 
 .form-toggle__control {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--toggle-track-bg:          var(--color-interactive-hover);
-	--toggle-track-bg-checked:  var(--color-accent-primary);
-	--toggle-track-bg-disabled: var(--color-interactive-disabled);
-	--toggle-thumb-bg:          var(--color-fill-high);
-	--toggle-thumb-bg-checked:  var(--color-fill-base);
-	--toggle-thumb-bg-disabled: var(--color-interactive-active);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	position: relative;
 
@@ -492,9 +464,7 @@ input[type='number'] {
 }
 
 .form-toggle__value {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--toggle-value-color:     var(--color-text-primary);
-	--toggle-value-font-size: var(--font-size-s);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	color: var(--toggle-value-color);
 	font-weight: normal;

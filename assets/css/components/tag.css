@@ -6,21 +6,7 @@
 }
 
 .tag {
-	/* ── Theming contract (DEC-026) ──────────────────────────────────
-	   Every token-driven visual property is exposed as a --tag-* knob,
-	   defaulting to a global token. Override these (per variant, per
-	   state, or per consumer) to retheme the tag; never edit the body.
-	   Structural CSS (display, position, white-space) stays inline. */
-	--tag-bg:          var(--color-surface-chip);
-	--tag-bg-hover:    var(--color-surface-elevated);
-	--tag-fg:          var(--color-text-primary);
-	--tag-border:      var(--border-s) solid var(--color-border-default);
-	--tag-radius:      var(--radius-full);
-	--tag-padding:     0 var(--length-m);
-	--tag-gap:         var(--length-xs);
-	--tag-font-size:   var(--font-size-xs);
-	--tag-font-family: var(--font-family-body);
-	--tag-accent:      var(--color-status-neutral-accent);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	position: relative;
 

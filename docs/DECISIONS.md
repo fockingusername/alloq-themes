@@ -797,3 +797,27 @@ Each component opens its base rule with a block of `--<component>-*` knobs cover
 - Performance impact is negligible: component-scoped custom properties don't measurably affect style recalc (the expensive pattern is many frequently-mutated `:root` vars, not static scoped knobs).
 - Global scale/semantic tokens remain the single source of truth — knobs default to them, so a token change still propagates and the mapping is visible in one place.
 - Other components should be migrated to this shape over time (NAMING_CONVENTION §7). Value-preserving for `tag.css` — every knob defaults to the exact token it previously used inline.
+
+## DEC-027 — Centralize component knob defaults in tokens/component.css
+
+- **Date:** 2026-06-29
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-29
+
+### Context
+After DEC-026 established the uniform `--<component>-*` knob convention, each component CSS file had a knob-defaults block at the top. The defaults were scattered across 10 files. Wanted a single readable place for all component defaults, moving toward a token pipeline (Style Dictionary / Tokens Studio) without introducing a build step yet.
+
+### Options considered
+1. **`tokens/component.css` on `:root`** — extract all knob defaults to one CSS file in the tokens layer; component files keep only body rules and variant/state overrides. No new tooling.
+2. **JSON + generator** — JSON source of truth, small Node script writes `component.css`. Makes defaults lintable and Figma-syncable, but adds a build step.
+3. **Keep per-component blocks** — status quo, no change.
+
+### Decision
+Option 1. Created `assets/css/tokens/component.css` with all `--<component>-*` defaults declared on `:root` in `@layer settings`. Load order: after `tokens/scale.css`, before `base.css`. Each component CSS file now carries only a one-line pointer comment (`Knob defaults → tokens/component.css`) and its body/variant/state rules.
+
+### Consequences
+- One file to open to see every component's theming surface and its default value.
+- Component CSS files are now purely structural — body rules, variant overrides, state overrides. No token values.
+- The pointer comment in each component file (`DEC-026, DEC-027`) is the breadcrumb to the central file.
+- Easy to migrate to Option 2 later: `component.css` becomes a generated artifact; nothing else changes.
+- `tokens/component.css` must be added to any new HTML entry point after `tokens/scale.css`.

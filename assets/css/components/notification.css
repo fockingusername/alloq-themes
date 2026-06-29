@@ -1,13 +1,5 @@
 .notification {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────
-	   Override these knobs per variant to retheme; never edit the body. */
-	--notification-accent:       var(--color-status-info-accent);
-	--notification-bg:           var(--color-status-info-bg);
-	--notification-fg:           var(--color-status-info-fg);
-	--notification-radius:       var(--radius-m);
-	--notification-padding:      var(--length-m) var(--length-xl);
-	--notification-gap:          var(--length-l);
-	--notification-border-width: var(--border-l);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: flex;
 	position: relative;

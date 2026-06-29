@@ -3,16 +3,8 @@
    ================================================================ */
 
 .disclosure {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────
-	   Override knobs per variant/state; never edit the body.
-	   --disclosure-bg/border/padding/margin flip on [inverted].
-	   Structural CSS (display, overflow, animation) stays inline. */
-	--disclosure-bg:          transparent;
-	--disclosure-border:      transparent;
-	--disclosure-padding:     var(--length-xl) 0 0;
-	--disclosure-margin:      0;
-	--disclosure-body-radius: var(--radius-l);
-	--disclosure-icon-color:  var(--color-accent-primary);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027).
+	   --disclosure-bg/border/padding/margin flip on [inverted]. */
 
 	margin-bottom: var(--length-l);
 	border-radius: var(--radius-m);

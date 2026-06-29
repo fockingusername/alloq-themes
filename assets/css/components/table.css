@@ -4,15 +4,7 @@
    ================================================================ */
 
 table {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────
-	   Override these knobs per context to retheme; never edit the body. */
-	--table-cell-border:   var(--border-s) solid var(--color-border-default);
-	--sticky-cell-border:  var(--border-l) solid var(--color-border-default);
-	--table-header-bg:     var(--color-surface-table-header);
-	--table-header-color:  var(--color-text-muted);
-	--table-row-bg:        var(--color-surface-base);
-	--table-tfoot-bg:      var(--color-surface-raised);
-	--table-tfoot-color:   var(--color-text-muted);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	width: 100%;
 

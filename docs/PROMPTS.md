@@ -934,3 +934,18 @@ yes do the other components now
 DEC-026 knob convention now applied uniformly across all 10 rethemable component files. Every component's theming surface is readable from one predictable block at the top of its base rule. All changes are value-preserving — knobs default to the same tokens previously used inline.
 
 **Related decision:** DEC-026
+
+### [2026-06-29] — Centralize component knob defaults in tokens/component.css
+
+**Prompt:**
+Now these variables are scattered per class, would it be possible to have these in a centered place? perhaps use json for that? … yes lets start with A
+
+**Tokens / files touched:**
+- `assets/css/tokens/component.css` — new file; all `--<component>-*` knob defaults on `:root` in `@layer settings`, organized by component section.
+- All 10 component CSS files — knob-defaults blocks removed; replaced with one-line pointer comment.
+- All 5 HTML prototype files — `<link>` to `tokens/component.css` added after `tokens/scale.css`.
+
+**Outcome:**
+All component knob defaults now live in one file. Component CSS files hold only structural rules, variant/state overrides. Load order preserved; values unchanged.
+
+**Related decision:** DEC-027

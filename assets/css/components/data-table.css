@@ -3,11 +3,7 @@
    ================================================================ */
 
 .data-table {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────
-	   Override knobs to retheme; never edit the body. */
-	--dt-bg:      var(--color-surface-raised);
-	--dt-radius:  var(--radius-xl);
-	--dt-padding: var(--gutter-m);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: flex;
 	position: relative;
@@ -63,9 +59,7 @@
 }
 
 .data-table__toolbar {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
-	--dt-toolbar-bg:     var(--color-surface-table-header);
-	--dt-toolbar-border: var(--border-s) solid var(--color-border-default);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027). */
 
 	display: flex;
 	z-index: 15;

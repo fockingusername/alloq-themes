@@ -20,17 +20,8 @@
    ================================================================ */
 
 .bandwidth-visualization {
-	/* ── Theming contract (DEC-026) ─────────────────────────────────
-	   Intentional palette reference: signal colors must be vivid in both themes;
-	   --color-status-*-accent is too muted in light mode for data visualization.
-	   These are the vivid base swatches of each status hue (DEC-024). */
-	--bw-range:              var(--palette-green-4);
-	--bw-bar-fill:           var(--color-border-default);
-	--bw-boundary-opacity:   0.75;
-	--bw-target-fill:        light-dark(var(--palette-white), var(--palette-black));
-	--bw-marker-fill:        light-dark(var(--palette-black), var(--palette-white));
-	--bw-marker-stroke:      var(--color-border-strong);
-	--bw-marker-w:           var(--length-xs);
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027).
+	   Intentional palette refs for vivid signal colors — see component.css comment. */
 
 	display: block;
 	width: 100%;

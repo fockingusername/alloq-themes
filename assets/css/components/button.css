@@ -3,21 +3,8 @@
    ================================================================ */
 
 .button {
-	/* ── Theming contract (DEC-026) ──────────────────────────────────
-	   Every token-driven visual property is exposed as a --btn-* knob,
-	   defaulting to a global token. Override these (per variant, per
-	   state, or per consumer) to retheme; never edit the body.
-	   Structural CSS (display, position, text-align, white-space) stays inline.
+	/* Knob defaults → tokens/component.css (DEC-026, DEC-027).
 	   --palette-black in shadow values: shadows are always black-based (acceptable). */
-	--btn-bg:           transparent;
-	--btn-fg:           var(--color-accent-primary);
-	--btn-border-color: var(--color-accent-primary);
-	--btn-shadow:       none;
-	--btn-radius:       var(--radius-m);
-	--btn-padding:      var(--length-xs) var(--length-s);
-	--btn-gap:          var(--length-s);
-	--btn-font-size:    var(--font-size-s);
-	--btn-font-weight:  var(--font-weight-bold);
 
 	contain: layout;
 
