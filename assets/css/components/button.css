@@ -2,28 +2,22 @@
    BUTTON
    ================================================================ */
 
-/*
-   Component-local variables (§7 NAMING_CONVENTION.md):
-   --btn-bg     — background fill (changes per variant + disabled state)
-   --btn-fg     — foreground / text color
-   --btn-border-color — border color
-   --btn-shadow — box shadow (changes per interaction state)
-   --btn-radius — border radius (overridden by --pill modifier)
-
-   Primitives still in use — flagged exception:
-   --palette-black   shadow alpha base (acceptable: shadows are always black-based)
-
-   Default button (DEC-018): blue outline — transparent fill, accent-primary
-   border + text, no shadow. Hover/active lay a translucent accent tint into
-   --btn-bg; the base `background-color: var(--btn-bg)` declaration paints it.
-*/
-
 .button {
-	--btn-bg: transparent;
-	--btn-fg: var(--color-accent-primary);
+	/* ── Theming contract (DEC-026) ──────────────────────────────────
+	   Every token-driven visual property is exposed as a --btn-* knob,
+	   defaulting to a global token. Override these (per variant, per
+	   state, or per consumer) to retheme; never edit the body.
+	   Structural CSS (display, position, text-align, white-space) stays inline.
+	   --palette-black in shadow values: shadows are always black-based (acceptable). */
+	--btn-bg:           transparent;
+	--btn-fg:           var(--color-accent-primary);
 	--btn-border-color: var(--color-accent-primary);
-	--btn-shadow: none;
-	--btn-radius: var(--radius-m);
+	--btn-shadow:       none;
+	--btn-radius:       var(--radius-m);
+	--btn-padding:      var(--length-xs) var(--length-s);
+	--btn-gap:          var(--length-s);
+	--btn-font-size:    var(--font-size-s);
+	--btn-font-weight:  var(--font-weight-bold);
 
 	contain: layout;
 
@@ -33,8 +27,8 @@
 
 	inline-size: fit-content;
 
-	padding: var(--length-xs) var(--length-s);
-	gap: var(--length-s);
+	padding: var(--btn-padding);
+	gap: var(--btn-gap);
 
 	border: var(--border-s) solid var(--btn-border-color);
 	border-radius: var(--btn-radius);
@@ -45,8 +39,8 @@
 	color: var(--btn-fg);
 
 	font: inherit;
-	font-weight: var(--font-weight-bold);
-	font-size: var(--font-size-s);
+	font-weight: var(--btn-font-weight);
+	font-size: var(--btn-font-size);
 
 	text-align: left;
 	text-decoration: none;
@@ -161,8 +155,8 @@
 }
 
 .button--icon-only {
-	padding: var(--length-s);
-	gap: 0;
+	--btn-padding: var(--length-s);
+	--btn-gap:     0;
 }
 
 .button--pill {

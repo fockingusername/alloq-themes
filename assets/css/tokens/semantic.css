@@ -5,33 +5,37 @@
    Adaptive — respond to the active color-scheme via light-dark().
    Pure mapping layer: every value is a var(--palette-*). Components style
    with these only. Raw values live in tokens/palette.css.
+
+   Palette is organized by hue (DEC-024, DEC-025); the role-to-hue mapping
+   lives here. Light-theme surfaces map to the neutral grey ramp; dark-theme
+   surfaces map to the deep teal ramp; cool greys come from slate.
    ================================================================ */
 
 		/* Accent */
 		--color-accent-primary: light-dark(
-			var(--palette-blue-4),
-			var(--palette-blue-2)
+			var(--palette-blue-7),
+			var(--palette-blue-3)
 		);
 		--color-accent-secondary: light-dark(
-			oklch(from var(--palette-brand-secondary) calc(l + 0.07) calc(c * 0.6) h),
-			var(--palette-brand-secondary)
+			oklch(from var(--palette-amber-3) calc(l + 0.07) calc(c * 0.6) h),
+			var(--palette-amber-3)
 		);
 
 		/* Interactive states */
 		--color-interactive-hover:    var(--color-fill-low);
 		--color-interactive-active:   var(--color-fill-medium);
 		--color-interactive-disabled: var(--color-surface-muted);
-		--color-interactive-selected: light-dark(var(--palette-light-6), var(--palette-teal-2));
+		--color-interactive-selected: light-dark(var(--palette-grey-5), var(--palette-teal-5));
 
 		/* Text */
-		--color-text-primary:   light-dark(var(--palette-grey-3), var(--palette-white));
-		--color-text-muted:     light-dark(var(--palette-grey-2), var(--palette-teal-0));
-		--color-text-secondary: light-dark(var(--palette-grey-1), var(--palette-teal-1));
-		--color-text-on-accent: var(--palette-dark-4); /* dark text on amber accent (both themes) */
-		--color-link:           light-dark(var(--palette-blue-4), var(--palette-blue-2)); /* dup: same as --color-accent-primary and --color-status-info-accent; consider aliasing → var(--color-accent-primary) */
+		--color-text-primary:   light-dark(var(--palette-grey-6), var(--palette-white));
+		--color-text-muted:     light-dark(var(--palette-slate-6), var(--palette-teal-2));
+		--color-text-secondary: light-dark(var(--palette-slate-4), var(--palette-teal-4));
+		--color-text-on-accent: var(--palette-teal-10); /* dark text on amber accent (both themes) */
+		--color-link:           light-dark(var(--palette-blue-7), var(--palette-blue-3)); /* dup: same as --color-accent-primary and --color-status-info-accent; consider aliasing → var(--color-accent-primary) */
 
 		/* Fills — alpha-based overlays for background-color and fill properties */
-		--color-fill-base: light-dark(var(--palette-grey-3), var(--palette-white)); /* dup: same as --color-text-primary and --color-border-strong; intentional (fill-base IS the foreground color for alpha overlays) */
+		--color-fill-base: light-dark(var(--palette-grey-6), var(--palette-white)); /* dup: same as --color-text-primary and --color-border-strong; intentional (fill-base IS the foreground color for alpha overlays) */
 		--color-fill-low: oklch(from var(--color-fill-base) l c h / 0.1);
 		--color-fill-medium: oklch(from var(--color-fill-base) l c h / 0.3);
 		--color-fill-high: oklch(from var(--color-fill-base) l c h / 0.6);
@@ -48,121 +52,124 @@
 		   pair diverges in the other theme. The one rule: raised must sit
 		   ABOVE page (lighter in dark, whiter in light) so cards pop. */
 		--color-surface-base: light-dark(
-			var(--palette-light-0),
-			var(--palette-dark-5)
+			var(--palette-white),
+			var(--palette-teal-11)
 		);
 		--color-surface-page: light-dark(
-			var(--palette-light-1),
-			var(--palette-dark-6)
+			var(--palette-grey-0),
+			var(--palette-grey-8)
 		);
 		--color-surface-raised: light-dark(
-			var(--palette-light-0),
-			var(--palette-dark-4)
+			var(--palette-white),
+			var(--palette-teal-10)
 		);
 		--color-surface-field: light-dark(
-			var(--palette-light-0),
-			var(--palette-dark-6)
+			var(--palette-white),
+			var(--palette-grey-8)
 		);
 		--color-surface-elevated: light-dark(
-			var(--palette-light-5),
-			var(--palette-dark-0)
+			var(--palette-grey-4),
+			var(--palette-teal-6)
 		);
 		--color-surface-overlay: light-dark(
-			var(--palette-light-0),
-			var(--palette-dark-1)
+			var(--palette-white),
+			var(--palette-teal-7)
 		);
 		--color-surface-sunken: light-dark(
-			var(--palette-light-2),
-			var(--palette-dark-6)
+			var(--palette-grey-1),
+			var(--palette-grey-8)
 		);
 		--color-surface-subtle: light-dark(
-			var(--palette-light-3),
-			var(--palette-dark-2)
+			var(--palette-grey-2),
+			var(--palette-teal-8)
 		);
 		--color-surface-muted: light-dark(
-			var(--palette-light-6),
-			var(--palette-dark-1)
+			var(--palette-grey-5),
+			var(--palette-teal-7)
 		);
 		--color-surface-interactive: light-dark(
-			var(--palette-blue-1),
-			var(--palette-dark-2)
+			var(--palette-blue-2),
+			var(--palette-teal-8)
 		);
 		--color-surface-chip: light-dark(
-			var(--palette-light-1),
-			var(--palette-dark-4)
+			var(--palette-grey-0),
+			var(--palette-teal-10)
 		); /* dup: same as --color-surface-table-header; kept separate in case they diverge */
 		--color-surface-table-header: light-dark(
-			var(--palette-light-1),
-			var(--palette-dark-4)
+			var(--palette-grey-0),
+			var(--palette-teal-10)
 		); /* dup: same as --color-surface-chip; kept separate in case they diverge */
 
 		/* Borders */
 		--color-border-subtle: light-dark(
-			var(--palette-light-4),
-			oklch(from var(--palette-dark-2) calc(l - 0.025) calc(c * 0.7) h)
+			var(--palette-grey-3),
+			oklch(from var(--palette-teal-8) calc(l - 0.025) calc(c * 0.7) h)
 		);
 		--color-border-default: light-dark(
-			var(--palette-light-6),
-			var(--palette-dark-0)
+			var(--palette-grey-5),
+			var(--palette-teal-6)
 		);
-		--color-border-strong: light-dark(var(--palette-grey-3), var(--palette-white)); /* dup: same as --color-text-primary; could alias → var(--color-text-primary) if they should always track */
+		--color-border-strong: light-dark(var(--palette-grey-6), var(--palette-white)); /* dup: same as --color-text-primary; could alias → var(--color-text-primary) if they should always track */
 		--color-border-focus: var(--color-accent-primary);
 
-		/* Status — adaptive badge bg / fg (light → dark) */
-		--color-status-info-bg:     light-dark(var(--palette-status-info-muted),        var(--palette-status-info-bg-dark));
-		--color-status-info-fg:     light-dark(var(--palette-status-info-emphasis),     var(--palette-status-info-fg-dark));
+		/* Status — adaptive badge bg / fg (light → dark). Each status hue is one
+		   palette ramp: info=blue, positive=green, negative=red, warning=yellow,
+		   neutral=grey/slate. Light tints are the low ramp steps; dark-theme
+		   bg/fg are the deep shades and light tints of the same hue. */
+		--color-status-info-bg:     light-dark(var(--palette-slate-0), var(--palette-blue-10));
+		--color-status-info-fg:     light-dark(var(--palette-blue-9),  var(--palette-blue-1));
 
-		--color-status-positive-bg: light-dark(var(--palette-status-positive-muted),    var(--palette-status-positive-bg-dark));
-		--color-status-positive-fg: light-dark(var(--palette-status-positive-emphasis), var(--palette-status-positive-fg-dark));
+		--color-status-positive-bg: light-dark(var(--palette-green-0), var(--palette-green-9));
+		--color-status-positive-fg: light-dark(var(--palette-green-8), var(--palette-green-1));
 
-		--color-status-negative-bg: light-dark(var(--palette-status-negative-muted),    var(--palette-status-negative-bg-dark));
-		--color-status-negative-fg: light-dark(var(--palette-status-negative-emphasis), var(--palette-status-negative-fg-dark));
+		--color-status-negative-bg: light-dark(var(--palette-red-0),   var(--palette-red-5));
+		--color-status-negative-fg: light-dark(var(--palette-red-4),   var(--palette-red-1));
 
-		--color-status-warning-bg:  light-dark(var(--palette-status-warning-muted),     var(--palette-status-warning-bg-dark));
-		--color-status-warning-fg:  light-dark(var(--palette-status-warning-emphasis),  var(--palette-status-warning-fg-dark));
+		--color-status-warning-bg:  light-dark(var(--palette-yellow-0), var(--palette-yellow-5));
+		--color-status-warning-fg:  light-dark(var(--palette-yellow-4), var(--palette-yellow-1));
 
-		--color-status-neutral-bg:  light-dark(var(--palette-grey-0), var(--palette-black));
-		--color-status-neutral-fg:  light-dark(var(--palette-grey-4), var(--palette-white));
+		--color-status-neutral-bg:  light-dark(var(--palette-slate-3), var(--palette-black));
+		--color-status-neutral-fg:  light-dark(var(--palette-grey-7), var(--palette-white));
 
 		/* Status — accent (vivid; light value darker for contrast on light surfaces) */
-		--color-status-info-accent:     light-dark(var(--palette-blue-4), var(--palette-blue-2)); /* dup: same as --color-accent-primary; consider aliasing → var(--color-accent-primary) */
-		--color-status-positive-accent: light-dark(var(--palette-status-positive-accent-light), var(--palette-status-positive));
-		--color-status-negative-accent: light-dark(var(--palette-status-negative-accent-light), var(--palette-status-negative));
-		--color-status-warning-accent:  light-dark(var(--palette-status-warning-accent-light),  var(--palette-status-warning));
+		--color-status-info-accent:     light-dark(var(--palette-blue-7), var(--palette-blue-3)); /* dup: same as --color-accent-primary; consider aliasing → var(--color-accent-primary) */
+		--color-status-positive-accent: light-dark(var(--palette-green-5), var(--palette-green-4));
+		--color-status-negative-accent: light-dark(var(--palette-red-3),   var(--palette-red-2));
+		--color-status-warning-accent:  light-dark(var(--palette-yellow-3), var(--palette-yellow-2));
 		--color-status-neutral-accent:  var(--color-text-muted);
 
 		/* ================================================================
-   DOMAIN-SPECIFIC TOKENS — alias the domain palettes (tokens/palette.css)
+   DOMAIN-SPECIFIC TOKENS — role series mapped onto hue swatches.
    ================================================================ */
 
 		/* Syntax highlighting */
-		--color-syntax-boolean:     var(--palette-syntax-blue);   /* dup: boolean/constant/number/string all resolve to syntax-blue; intentional (same category) — could consolidate if syntax theme never diverges */
-		--color-syntax-comment:     var(--palette-syntax-green);
-		--color-syntax-constant:    var(--palette-syntax-blue);   /* dup: see --color-syntax-boolean */
-		--color-syntax-function:    var(--palette-syntax-slate);
-		--color-syntax-keyword:     var(--palette-syntax-cyan);   /* dup: keyword/punctuation both resolve to syntax-cyan */
-		--color-syntax-number:      var(--palette-syntax-blue);   /* dup: see --color-syntax-boolean */
-		--color-syntax-operator:    var(--palette-syntax-magenta);
-		--color-syntax-punctuation: var(--palette-syntax-cyan);   /* dup: see --color-syntax-keyword */
-		--color-syntax-string:      var(--palette-syntax-blue);   /* dup: see --color-syntax-boolean */
-		--color-syntax-text:        light-dark(var(--palette-dark-2), var(--palette-syntax-fog));
-		--color-syntax-variable:    light-dark(var(--palette-syntax-emerald), var(--palette-status-positive));
+		--color-syntax-boolean:     var(--palette-blue-4);   /* dup: boolean/constant/number/string all resolve to blue-4; intentional (same category) */
+		--color-syntax-comment:     var(--palette-green-6);
+		--color-syntax-constant:    var(--palette-blue-4);   /* dup: see --color-syntax-boolean */
+		--color-syntax-function:    var(--palette-slate-5);
+		--color-syntax-keyword:     var(--palette-teal-1);   /* dup: keyword/punctuation both resolve to teal-1 */
+		--color-syntax-number:      var(--palette-blue-4);   /* dup: see --color-syntax-boolean */
+		--color-syntax-operator:    var(--palette-purple-1);
+		--color-syntax-punctuation: var(--palette-teal-1);   /* dup: see --color-syntax-keyword */
+		--color-syntax-string:      var(--palette-blue-4);   /* dup: see --color-syntax-boolean */
+		--color-syntax-text:        light-dark(var(--palette-teal-8), var(--palette-slate-1));
+		--color-syntax-variable:    light-dark(var(--palette-green-7), var(--palette-green-4));
 
 		/* Data visualization */
-		--color-data-1: var(--palette-data-1);
-		--color-data-2: var(--palette-data-2);
-		--color-data-3: var(--palette-data-3);
-		--color-data-4: var(--palette-data-4);
-		--color-data-5: var(--palette-data-5);
-		--color-data-6: var(--palette-data-6);
-		--color-data-7: var(--palette-data-7);
+		--color-data-1: var(--palette-green-2);
+		--color-data-2: var(--palette-indigo-0);
+		--color-data-3: var(--palette-indigo-1);
+		--color-data-4: var(--palette-brown-0);
+		--color-data-5: var(--palette-brown-1);
+		--color-data-6: var(--palette-teal-0);
+		--color-data-7: var(--palette-teal-3);
 
 		/* RBM levels */
-		--color-rbm-level-1: var(--palette-rbm-1);
-		--color-rbm-level-2: var(--palette-rbm-2);
-		--color-rbm-level-3: var(--palette-rbm-3);
-		--color-rbm-level-4: var(--palette-rbm-4);
-		--color-rbm-level-5: var(--palette-rbm-5);
-		--color-rbm-level-6: var(--palette-rbm-6);
+		--color-rbm-level-1: var(--palette-slate-4);
+		--color-rbm-level-2: var(--palette-blue-4);
+		--color-rbm-level-3: var(--palette-green-3);
+		--color-rbm-level-4: var(--palette-purple-0);
+		--color-rbm-level-5: var(--palette-green-2);
+		--color-rbm-level-6: var(--palette-teal-0);
 	}
 }

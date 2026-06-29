@@ -6,25 +6,39 @@
 }
 
 .tag {
-	--tag-accent: var(--color-status-neutral-accent);
+	/* ── Theming contract (DEC-026) ──────────────────────────────────
+	   Every token-driven visual property is exposed as a --tag-* knob,
+	   defaulting to a global token. Override these (per variant, per
+	   state, or per consumer) to retheme the tag; never edit the body.
+	   Structural CSS (display, position, white-space) stays inline. */
+	--tag-bg:          var(--color-surface-chip);
+	--tag-bg-hover:    var(--color-surface-elevated);
+	--tag-fg:          var(--color-text-primary);
+	--tag-border:      var(--border-s) solid var(--color-border-default);
+	--tag-radius:      var(--radius-full);
+	--tag-padding:     0 var(--length-m);
+	--tag-gap:         var(--length-xs);
+	--tag-font-size:   var(--font-size-xs);
+	--tag-font-family: var(--font-family-body);
+	--tag-accent:      var(--color-status-neutral-accent);
 
 	position: relative;
 
 	display: inline-flex;
 	align-items: center;
 
-	padding: 0 var(--length-m);
-	gap: var(--length-xs);
+	padding: var(--tag-padding);
+	gap: var(--tag-gap);
 
-	border-radius: var(--radius-full);
-	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--tag-radius);
+	border: var(--tag-border);
 
-	background-color: var(--color-surface-chip);
-	color: var(--color-text-primary);
+	background-color: var(--tag-bg);
+	color: var(--tag-fg);
 
 	font-weight: normal;
-	font-size: var(--font-size-xs);
-	font-family: var(--font-family-body);
+	font-size: var(--tag-font-size);
+	font-family: var(--tag-font-family);
 
 	white-space: nowrap;
 }
@@ -52,15 +66,16 @@
 			   animated and consumed on the same element (inherits: false). */
 			animation: tag-negative-travel 15s linear infinite;
 
-			/* Comet: long invisible arc, soft tail, bright peak, quick fade */
+			/* Comet: long invisible arc, soft tail, bright peak, quick fade.
+			   Tracks the --tag-accent knob set on .tag--negative above. */
 			background: conic-gradient(
 				from var(--tag-pulse-angle),
 				transparent 0%,
 				transparent 60%,
-				oklch(from var(--color-status-negative-accent) l c h / 0.15) 72%,
-				oklch(from var(--color-status-negative-accent) l c h / 0.55) 83%,
-				var(--color-status-negative-accent) 88%,
-				oklch(from var(--color-status-negative-accent) l c h / 0.55) 93%,
+				oklch(from var(--tag-accent) l c h / 0.15) 72%,
+				oklch(from var(--tag-accent) l c h / 0.55) 83%,
+				var(--tag-accent) 88%,
+				oklch(from var(--tag-accent) l c h / 0.55) 93%,
 				transparent 100%
 			);
 
@@ -93,7 +108,7 @@
 	&:active,
 	&:focus,
 	&:hover {
-		background-color: var(--color-surface-elevated);
+		background-color: var(--tag-bg-hover);
 		box-shadow: none;
 	}
 
@@ -121,21 +136,22 @@
 
 /* When tag--removable is rendered as a <button>, Button.vue's scoped styles
    (.button[data-v-17ebb602], specificity 0,2,0) load after tag.css and win at
-   equal specificity. Three-class selector (0,3,0) restores tag appearance. */
+   equal specificity. Three-class selector (0,3,0) restores tag appearance.
+   Re-reads the same --tag-* knobs as .tag, so the two never drift (DEC-026). */
 .button.tag.tag--removable {
-	background-color: var(--color-surface-chip);
-	border: var(--border-s) solid var(--color-border-default);
-	border-radius: var(--radius-full);
+	background-color: var(--tag-bg);
+	border: var(--tag-border);
+	border-radius: var(--tag-radius);
 	box-shadow: none;
-	color: var(--color-text-primary);
-	font-size: var(--font-size-xs);
+	color: var(--tag-fg);
+	font-size: var(--tag-font-size);
 	font-weight: normal;
-	padding: 0 var(--length-m);
+	padding: var(--tag-padding);
 
 	&:active,
 	&:focus,
 	&:hover {
-		background-color: var(--color-surface-elevated);
+		background-color: var(--tag-bg-hover);
 		box-shadow: none;
 	}
 }

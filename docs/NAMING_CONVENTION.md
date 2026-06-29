@@ -102,9 +102,10 @@ Used by `--length-*`, `--font-size-*`, `--radius-*`, `--gutter-*`, `--icon-size-
 **Always carry the suffix, even for the middle of the scale.** `--icon-size-m` ✅, not `--icon-size` (DEC-009). A token with a sibling at another size must declare its own step.
 
 ### Ordinal scale
-Palette ramps and series use `0`-based ordinals where **`0` = lightest**:
-`--palette-light-0` … `--palette-light-6`, `--palette-dark-0` … `--palette-dark-6`, `--palette-blue-0`/`-1`.
-Series tokens (`--color-data-1` … `-7`) are `1`-based and carry no lightness meaning.
+Palette ramps are hue-named and use `0`-based ordinals where **`0` = lightest** (DEC-024, DEC-025):
+`--palette-blue-0` … `--palette-blue-10`, `--palette-teal-0` … `--palette-teal-11`, `--palette-grey-0` … `--palette-grey-8`.
+The palette holds only hue families (`blue`, `green`, `red`, `yellow`, `amber`, `teal`, `indigo`, `purple`, `brown`, `slate`, `grey`) plus `black`/`white` anchors — no role-, domain-, or theme-named ramps.
+Semantic series tokens (`--color-data-1` … `-7`) are `1`-based and carry no lightness meaning; they map onto hue swatches.
 
 > Do not mix scale systems within one ramp. The Material-style `100`–`900` scale is **not** used (DEC-010).
 
@@ -132,20 +133,46 @@ The raw status swatches and their `-emphasis`/`-muted` tints are **Layer 1** (`-
 
 ---
 
-## 7. Component-local variables
+## 7. Component-local variables — the theming contract (DEC-026)
 
-A component may define its own `--<component>-*` custom properties to create a single themable knob. Variants then set only that knob; everything else inherits from the base rule.
+Every component exposes its themable surface as a block of `--<component>-*` custom properties at the top of its base rule. These knobs **are** the component's theming contract: to retheme — per variant, per state, or per consumer — you override a knob; you never edit the body. This is applied **uniformly** across all components so the mental model is the same everywhere (read the top block, know everything that's tweakable).
 
 ```css
-.tag            { --tag-accent: var(--color-status-neutral-accent); }
-.tag--positive  { --tag-accent: var(--color-status-positive-accent); }
-.tag__icon      { color: var(--tag-accent); }
+.tag {
+  /* theming contract — every token-driven visual property, defaulting to a global token */
+  --tag-bg:        var(--color-surface-chip);
+  --tag-bg-hover:  var(--color-surface-elevated);
+  --tag-fg:        var(--color-text-primary);
+  --tag-border:    var(--border-s) solid var(--color-border-default);
+  --tag-radius:    var(--radius-full);
+  --tag-padding:   0 var(--length-m);
+  --tag-accent:    var(--color-status-neutral-accent);
+
+  /* body consumes only the knobs… */
+  background-color: var(--tag-bg);
+  border: var(--tag-border);
+  border-radius: var(--tag-radius);
+
+  /* …structural CSS stays inline */
+  display: inline-flex;
+  position: relative;
+}
+
+.tag--positive { --tag-accent: var(--color-status-positive-accent); }
+.tag__icon     { color: var(--tag-accent); }
 ```
+
+**What gets a knob:** every property whose value comes from a design token — color, background, border, radius, padding, gap, typography. The knob defaults to the global token (`--tag-radius: var(--radius-full)`), so the scale stays the single source of truth and the mapping is visible in one predictable place.
+
+**What does NOT get a knob:** structural and effect CSS that isn't theming surface — `display`, `position`, `align-items`, `white-space`, mask/animation machinery, literal keywords (`font-weight: normal`). Wrapping these adds indirection nobody overrides.
+
+**Why uniform** (not just a single knob): the cost is a few lines of static CSS per component — negligible at render time (scoped custom properties don't measurably affect style recalc; the expensive pattern is many frequently-mutated `:root` vars, not static component knobs). The payoff is a consistent theming contract: predictable to read, safe to override, and duplication (e.g. specificity-override blocks) collapses to re-reading the same knobs so copies never drift.
 
 Rules:
 - Prefix with a **short component abbreviation** (`--tag-*`, `--bw-*`, `--notification-*`), not the full BEM block.
-- These reference Layer 2 tokens — never palette or raw values.
+- Knob defaults reference Layer 2 semantic tokens (or scale tokens) — never palette or raw values.
 - Keep them inside the component CSS file; they are not global tokens.
+- The body of the component references **only** its own knobs for themable properties.
 
 ---
 

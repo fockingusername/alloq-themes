@@ -1,16 +1,22 @@
 .notification {
-	--notification-accent: var(--color-status-info-accent);
-	--notification-bg: var(--color-status-info-bg);
-	--notification-fg: var(--color-status-info-fg);
+	/* ── Theming contract (DEC-026) ─────────────────────────────────
+	   Override these knobs per variant to retheme; never edit the body. */
+	--notification-accent:       var(--color-status-info-accent);
+	--notification-bg:           var(--color-status-info-bg);
+	--notification-fg:           var(--color-status-info-fg);
+	--notification-radius:       var(--radius-m);
+	--notification-padding:      var(--length-m) var(--length-xl);
+	--notification-gap:          var(--length-l);
+	--notification-border-width: var(--border-l);
 
 	display: flex;
 	position: relative;
 	align-items: flex-start;
 
-	padding: var(--length-m) var(--length-xl);
-	gap: var(--length-l);
-	border-left: var(--border-l) solid var(--notification-accent);
-	border-radius: var(--radius-m);
+	padding: var(--notification-padding);
+	gap: var(--notification-gap);
+	border-left: var(--notification-border-width) solid var(--notification-accent);
+	border-radius: var(--notification-radius);
 
 	background-color: var(--notification-bg);
 	color: var(--notification-fg);
@@ -31,12 +37,12 @@
 
 .notification--error {
 	--notification-accent: var(--color-status-negative-accent);
-	--notification-bg: var(--color-status-negative-bg);
-	--notification-fg: var(--color-status-negative-fg);
+	--notification-bg:     var(--color-status-negative-bg);
+	--notification-fg:     var(--color-status-negative-fg);
 }
 
 .notification--warning {
 	--notification-accent: var(--color-status-warning-accent);
-	--notification-bg: var(--color-status-warning-bg);
-	--notification-fg: var(--color-status-warning-fg);
+	--notification-bg:     var(--color-status-warning-bg);
+	--notification-fg:     var(--color-status-warning-fg);
 }

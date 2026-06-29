@@ -48,11 +48,16 @@ input[type='number'] {
    ================================================================ */
 
 .form-label {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--label-color:       var(--color-text-muted);
+	--label-font-weight: var(--font-weight-bold);
+	--label-font-size:   var(--font-size-s);
+
 	display: inline-block;
 
-	color: var(--color-text-muted);
-	font-weight: var(--font-weight-bold);
-	font-size: var(--font-size-s);
+	color: var(--label-color);
+	font-weight: var(--label-font-weight);
+	font-size: var(--label-font-size);
 }
 
 /* ================================================================
@@ -76,16 +81,27 @@ input[type='number'] {
 }
 
 .form-input__control {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────
+	   State pseudo-classes (:hover, :focus, :active, :disabled) override
+	   knobs; the body declarations stay stable. */
+	--input-bg:           var(--color-surface-field);
+	--input-fg:           var(--color-text-primary);
+	--input-border-color: var(--color-border-default);
+	--input-radius:       var(--radius-m);
+	--input-padding:      var(--length-m);
+	--input-font-size:    var(--font-size-s);
+	--input-placeholder:  var(--color-text-muted);
+
 	width: 100%;
 
-	padding: var(--length-m);
-	border: var(--border-s) solid var(--color-border-default);
-	border-radius: var(--radius-m);
+	padding: var(--input-padding);
+	border: var(--border-s) solid var(--input-border-color);
+	border-radius: var(--input-radius);
 
-	background: var(--color-surface-field);
+	background: var(--input-bg);
 
-	color: var(--color-text-primary);
-	font-size: var(--font-size-s);
+	color: var(--input-fg);
+	font-size: var(--input-font-size);
 
 	&:not(:first-child) {
 		border-top-left-radius: 0;
@@ -98,37 +114,38 @@ input[type='number'] {
 	}
 
 	&::placeholder {
-		color: var(--color-text-muted);
+		color: var(--input-placeholder);
 		opacity: 1;
 	}
 
 	&:hover {
-		border-color: var(--color-fill-medium);
+		--input-border-color: var(--color-fill-medium);
 	}
 
 	&:focus {
-		border-color: var(--color-accent-primary);
+		--input-border-color: var(--color-accent-primary);
+
 		outline: none;
 	}
 
 	&:active {
-		border-color: transparent;
-
-		background-color: var(--color-interactive-active);
-		color: var(--color-text-muted);
+		--input-border-color: transparent;
+		--input-bg:           var(--color-interactive-active);
+		--input-fg:           var(--color-text-muted);
 
 		&::placeholder {
-			color: var(--color-text-muted);
+			color: var(--input-placeholder);
 			opacity: 1;
 		}
 	}
 
 	&:disabled,
 	&:disabled:hover {
-		border: var(--border-s) solid var(--color-border-default);
+		--input-bg:           var(--color-interactive-disabled);
+		--input-fg:           var(--color-text-muted);
+		--input-border-color: var(--color-border-default);
 
-		background-color: var(--color-interactive-disabled);
-		color: var(--color-text-muted);
+		border: var(--border-s) solid var(--input-border-color);
 		cursor: not-allowed;
 	}
 
@@ -148,17 +165,22 @@ input[type='number'] {
 }
 
 .form-input__text {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--input-text-bg:          var(--color-surface-sunken);
+	--input-text-border-color: var(--color-border-default);
+	--input-text-font-family: var(--font-family-mono);
+
 	display: flex;
 	align-items: center;
 
 	padding-inline: var(--length-m);
-	border: var(--border-s) solid var(--color-border-default);
+	border: var(--border-s) solid var(--input-text-border-color);
 	border-radius: var(--radius-m);
 
-	background: var(--color-surface-sunken);
+	background: var(--input-text-bg);
 	font-weight: normal;
 
-	font-family: var(--font-family-mono);
+	font-family: var(--input-text-font-family);
 
 	&:first-child {
 		border-right: 0;
@@ -261,42 +283,48 @@ input[type='number'] {
 }
 
 .form-select__control {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--select-bg:           var(--color-surface-field);
+	--select-fg:           var(--color-text-primary);
+	--select-border-color: var(--color-border-default);
+	--select-radius:       var(--radius-m);
+	--select-font-size:    var(--font-size-s);
+
 	display: block;
 
 	width: 100%;
 	min-width: 5ch;
 
 	padding: calc(var(--length-m) - var(--border-s)) var(--length-m);
-	border: var(--border-s) solid var(--color-border-default);
-	border-radius: var(--radius-m);
+	border: var(--border-s) solid var(--select-border-color);
+	border-radius: var(--select-radius);
 
-	background: var(--color-surface-field);
+	background: var(--select-bg);
 
-	color: var(--color-text-primary);
-	font-size: var(--font-size-s);
+	color: var(--select-fg);
+	font-size: var(--select-font-size);
 
 	&:hover {
-		border-color: var(--color-fill-medium);
+		--select-border-color: var(--color-fill-medium);
 	}
 
 	&:focus {
-		border-color: var(--color-accent-primary);
+		--select-border-color: var(--color-accent-primary);
+
 		outline: none;
 	}
 
 	&:active {
-		border-color: transparent;
-
-		background-color: var(--color-interactive-active);
-		color: var(--color-text-muted);
+		--select-border-color: transparent;
+		--select-bg:           var(--color-interactive-active);
+		--select-fg:           var(--color-text-muted);
 	}
 
 	&:disabled,
 	&:disabled:hover {
-		border-color: transparent;
-
-		background-color: var(--color-interactive-disabled);
-		color: var(--color-text-secondary);
+		--select-border-color: transparent;
+		--select-bg:           var(--color-interactive-disabled);
+		--select-fg:           var(--color-text-secondary);
 	}
 
 	optgroup {
@@ -304,8 +332,8 @@ input[type='number'] {
 	}
 
 	option {
-		background-color: var(--color-surface-field);
-		color: var(--color-text-primary);
+		background-color: var(--select-bg);
+		color: var(--select-fg);
 
 		&:disabled {
 			color: var(--color-text-muted);
@@ -333,10 +361,13 @@ input[type='number'] {
    ================================================================ */
 
 .form-checkbox {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--checkbox-color: var(--color-text-primary);
+
 	display: inline-flex;
 	gap: var(--length-m);
 
-	color: var(--color-text-primary);
+	color: var(--checkbox-color);
 	font-weight: normal;
 }
 
@@ -349,11 +380,14 @@ input[type='number'] {
    ================================================================ */
 
 .form-radio {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--radio-color: var(--color-text-primary);
+
 	display: inline-flex;
 	align-items: center;
 	gap: var(--length-m);
 
-	color: var(--color-text-primary);
+	color: var(--radio-color);
 	font-weight: normal;
 }
 
@@ -399,13 +433,21 @@ input[type='number'] {
 }
 
 .form-toggle__control {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--toggle-track-bg:          var(--color-interactive-hover);
+	--toggle-track-bg-checked:  var(--color-accent-primary);
+	--toggle-track-bg-disabled: var(--color-interactive-disabled);
+	--toggle-thumb-bg:          var(--color-fill-high);
+	--toggle-thumb-bg-checked:  var(--color-fill-base);
+	--toggle-thumb-bg-disabled: var(--color-interactive-active);
+
 	position: relative;
 
 	width: calc(var(--input-control-size) * 2);
 	height: var(--input-control-size);
 	border-radius: var(--input-control-size);
 
-	background-color: var(--color-interactive-hover);
+	background-color: var(--toggle-track-bg);
 
 	cursor: pointer;
 
@@ -418,7 +460,7 @@ input[type='number'] {
 		transform: scale(0.9);
 
 		border-radius: inherit;
-		background-color: var(--color-fill-high);
+		background-color: var(--toggle-thumb-bg);
 		box-shadow: 1px 2px 4px var(--palette-black);
 
 		content: '';
@@ -426,20 +468,20 @@ input[type='number'] {
 	}
 
 	&:has(input:checked) {
-		background-color: var(--color-accent-primary);
+		background-color: var(--toggle-track-bg-checked);
 
 		&::after {
 			transform: translate3d(100%, 0, 0) scale(0.9);
 
-			background-color: var(--color-fill-base);
+			background-color: var(--toggle-thumb-bg-checked);
 		}
 	}
 
 	&:has(input:disabled) {
-		background-color: var(--color-interactive-disabled);
+		background-color: var(--toggle-track-bg-disabled);
 
 		&::after {
-			background-color: var(--color-interactive-active);
+			background-color: var(--toggle-thumb-bg-disabled);
 		}
 	}
 
@@ -450,9 +492,13 @@ input[type='number'] {
 }
 
 .form-toggle__value {
-	color: var(--color-text-primary);
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--toggle-value-color:     var(--color-text-primary);
+	--toggle-value-font-size: var(--font-size-s);
+
+	color: var(--toggle-value-color);
 	font-weight: normal;
-	font-size: var(--font-size-s);
+	font-size: var(--toggle-value-font-size);
 }
 
 .form-toggle--inline {

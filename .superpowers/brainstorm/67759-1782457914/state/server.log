@@ -1,0 +1,5 @@
+{"type":"server-started","port":58945,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:58945","screen_dir":"/Users/jordi/Documents/GitHub/alloq-themes/.superpowers/brainstorm/67759-1782457914/content","state_dir":"/Users/jordi/Documents/GitHub/alloq-themes/.superpowers/brainstorm/67759-1782457914/state"}
+{"type":"screen-added","file":"/Users/jordi/Documents/GitHub/alloq-themes/.superpowers/brainstorm/67759-1782457914/content/newsletter-layout.html"}
+{"type":"screen-added","file":"/Users/jordi/Documents/GitHub/alloq-themes/.superpowers/brainstorm/67759-1782457914/content/waiting-1.html"}
+{"type":"screen-added","file":"/Users/jordi/Documents/GitHub/alloq-themes/.superpowers/brainstorm/67759-1782457914/content/newsletter-final.html"}
+{"type":"server-stopped","reason":"idle timeout"}

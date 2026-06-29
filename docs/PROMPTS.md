@@ -866,3 +866,71 @@ i dont expect in the semantic to be raw hex values. Shouldnt that be a token?
 `semantic.css` is now a pure mapping layer (all `var(--palette-*)`); raw colors live only in `palette.css`. Value-preserving migration of ~40 inline hex — verified the test page renders pixel-identically in dark mode. Confirmed every referenced palette token is defined and no hex remains.
 
 **Related decision:** DEC-023
+
+### [2026-06-26] — Palette only an actual palette (hue ramps); extend brand
+
+**Prompt:**
+Ok we decided we want palette only to have an actual palette. So Blue 0 - Blue 6 for example. That means palette RBM and syntax and data are not compliant. In the semantics then we map the color to color-rbm-1 for example. Can you generate the pallets that we need. Also extend brand color for example in a yellow palette. (Follow-ups: name brand ramp `amber`; convert status too; use unified ramps with renumbering.)
+
+**Tokens / files touched:**
+- `assets/css/tokens/palette.css` — fully reorganized by hue family (`blue-0…10`, `green-0…9`, `red-0…5`, `yellow-0…5`, `amber-0…5`, `teal-0…5`, `grey-0…9`, `indigo`, `purple`, `brown`); removed all role/domain-named primitives (`--palette-status-*`, `--palette-syntax-*`, `--palette-data-*`, `--palette-rbm-*`, `--palette-brand-secondary`). `light-*`/`dark-*`/`black`/`white` unchanged.
+- `assets/css/tokens/semantic.css` — every `--color-*` (accent, text, fill, surface, border, status, syntax, data, rbm) repointed to the new hue swatches; no token names changed.
+- `assets/css/components/bandwidth.css` — `--bw-range` palette refs updated (`status-positive/negative/warning` → `green-4`/`red-2`/`yellow-2`).
+- `docs/DECISIONS.md` — DEC-024 added.
+
+**Outcome:**
+Palette now contains only raw hue ramps (`0` = lightest); all role/series mapping lives in semantic. Brand amber extended from a single `#ff9100` swatch into a full `amber-0…5` ramp (anchor at `amber-3`). Value-preserving migration — verified every semantic token resolves to its original hex and that every referenced palette token is defined.
+
+**Related decision:** DEC-024
+
+### [2026-06-26] — Retire light/dark palette ramps (theme-function names)
+
+**Prompt:**
+what about the pallete light and dark, thats also more of a function mapped for the theme rather than palette colors. Should we split that up in dark teal or extend teal and just use the grey pallette when styling components? (Chose: hue-honest split — extend teal, pure-neutral grey, new slate for cool greys.)
+
+**Tokens / files touched:**
+- `assets/css/tokens/palette.css` — removed `--palette-light-*` and `--palette-dark-*`; extended `teal` to `0…11` (absorbs dark teals); `grey-0…8` is now pure-neutral (former light greys + pure darks + `#0a0a0a`); added `slate-0…7` for cool blue-greys.
+- `assets/css/tokens/semantic.css` — repointed light surfaces → grey/white, dark surfaces → teal, cool greys → slate. No semantic names changed.
+- `docs/DECISIONS.md` — DEC-025 added.
+
+**Outcome:**
+Palette is now 100% hue-named (no light/dark/status/syntax/data/rbm). Value-preserving — verified no `light-*`/`dark-*` refs remain and every referenced palette token is defined.
+
+**Related decision:** DEC-025
+
+### [2026-06-29] — Uniform component theming contract (--component-* knobs)
+
+**Prompt:**
+ok so if we look at the tag.css … shouldnt the variables be more generic. For example border-radius: var(--tag-border-radius) … (after discussion of performance + workflow) … i think by keeping it simple, and approaching everything the same, you win in the communication and workflow … yes lets do it
+
+**Tokens / files touched:**
+- `assets/css/components/tag.css` — refactored to the knob convention: theming-contract block at top (`--tag-bg`, `--tag-bg-hover`, `--tag-fg`, `--tag-border`, `--tag-radius`, `--tag-padding`, `--tag-gap`, `--tag-font-size`, `--tag-font-family`, `--tag-accent`); body and the `.button.tag.tag--removable` override block now consume the knobs; comet gradient tracks `--tag-accent`.
+- `docs/NAMING_CONVENTION.md` — §7 rewritten from "single themable knob" to "uniform theming contract" with what-gets-a-knob / what-doesn't rules and the performance rationale.
+- `docs/DECISIONS.md` — DEC-026 added.
+
+**Outcome:**
+Established the uniform `--component-*` theming-contract pattern; `tag.css` converted as the reference (value-preserving — knobs default to the same tokens used before). Duplication in tag.css collapsed to shared knobs so the override block can't drift.
+
+**Related decision:** DEC-026
+
+### [2026-06-29] — Apply DEC-026 theming contract to all remaining components
+
+**Prompt:**
+yes do the other components now
+
+**Tokens / files touched:**
+- `assets/css/components/button.css` — extended partial knobs: added `--btn-padding`, `--btn-gap`, `--btn-font-size`, `--btn-font-weight`; `.button--icon-only` now overrides `--btn-padding`/`--btn-gap` instead of `padding`/`gap` inline; updated comment to DEC-026 style.
+- `assets/css/components/notification.css` — extended partial knobs: added `--notification-radius`, `--notification-padding`, `--notification-gap`, `--notification-border-width`.
+- `assets/css/components/disclosure.css` — extended partial knobs: added `--disclosure-body-radius`, `--disclosure-icon-color`; `.disclosure__icon` now consumes `--disclosure-icon-color`.
+- `assets/css/components/tab.css` — new knob blocks on `.tabs` (`--tabs-bg`, `--tabs-border-color`) and `.tab` (`--tab-indicator`, `--tab-fg`, `--tab-fg-active`, `--tab-active-bg`, `--tab-active-border`, `--tab-padding-inline`).
+- `assets/css/components/table.css` — extended `--sticky-cell-border`; added `--table-cell-border`, `--table-header-bg`, `--table-header-color`, `--table-row-bg`, `--table-tfoot-bg`, `--table-tfoot-color`.
+- `assets/css/components/data-table.css` — new knob blocks on `.data-table` (`--dt-bg`, `--dt-radius`, `--dt-padding`) and `.data-table__toolbar` (`--dt-toolbar-bg`, `--dt-toolbar-border`).
+- `assets/css/components/theme-toggle.css` — new knobs on `.theme-toggle` (`--tt-track-bg`, `--tt-track-shadow`, `--tt-thumb-bg`, `--tt-thumb-shadow`, `--tt-icon-color`, `--tt-label-color`, `--tt-label-font-size`); child selectors consume them.
+- `assets/css/components/input.css` — new knob blocks on `.form-label` (`--label-*`), `.form-input__control` (`--input-*`, state pseudo-classes now override knobs), `.form-input__text` (`--input-text-*`), `.form-select__control` (`--select-*`), `.form-checkbox` (`--checkbox-color`), `.form-radio` (`--radio-color`), `.form-toggle__control` (`--toggle-track-bg`, `--toggle-track-bg-checked`, `--toggle-track-bg-disabled`, `--toggle-thumb-bg`, `--toggle-thumb-bg-checked`, `--toggle-thumb-bg-disabled`), `.form-toggle__value` (`--toggle-value-*`).
+- `assets/css/components/bandwidth.css` — formalized knob block: added `--bw-bar-fill`, `--bw-boundary-opacity`, `--bw-target-fill`, `--bw-marker-fill`, `--bw-marker-stroke`, `--bw-marker-w`; moved `--bw-marker-w` from `.bandwidth-visualization__marker` to the contract block.
+- Skipped: `card.css` (specificity override, no base component rule), `nav.css` (sub-element rule only), `layout.css` (structural shell).
+
+**Outcome:**
+DEC-026 knob convention now applied uniformly across all 10 rethemable component files. Every component's theming surface is readable from one predictable block at the top of its base rule. All changes are value-preserving — knobs default to the same tokens previously used inline.
+
+**Related decision:** DEC-026

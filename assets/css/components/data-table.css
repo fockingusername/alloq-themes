@@ -3,15 +3,21 @@
    ================================================================ */
 
 .data-table {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────
+	   Override knobs to retheme; never edit the body. */
+	--dt-bg:      var(--color-surface-raised);
+	--dt-radius:  var(--radius-xl);
+	--dt-padding: var(--gutter-m);
+
 	display: flex;
 	position: relative;
 	flex-direction: column;
 
 	min-height: 0;
-	padding: var(--gutter-m);
+	padding: var(--dt-padding);
 
-	border-radius: var(--radius-xl);
-	background-color: var(--color-surface-raised);
+	border-radius: var(--dt-radius);
+	background-color: var(--dt-bg);
 
 	transition: opacity 0.2s;
 	transition-behavior: allow-discrete;
@@ -57,6 +63,10 @@
 }
 
 .data-table__toolbar {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--dt-toolbar-bg:     var(--color-surface-table-header);
+	--dt-toolbar-border: var(--border-s) solid var(--color-border-default);
+
 	display: flex;
 	z-index: 15;
 	position: sticky;
@@ -67,11 +77,11 @@
 	padding: var(--length-s);
 	gap: var(--length-m);
 
-	border: var(--border-s) solid var(--color-border-default);
-	background-color: var(--color-surface-table-header);
+	border: var(--dt-toolbar-border);
+	background-color: var(--dt-toolbar-bg);
 
 	&.is-active {
-		background-color: var(--color-surface-subtle);
+		--dt-toolbar-bg: var(--color-surface-subtle);
 	}
 }
 

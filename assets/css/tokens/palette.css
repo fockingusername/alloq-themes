@@ -8,118 +8,109 @@
    Fixed values — no theme adaptation. The only file that holds raw color
    values. Never reference --palette-* directly in components; use the
    semantic --color-* tokens (tokens/semantic.css) instead.
-   Ramps are ordinal, 0 = lightest (DEC-010; no Material 100–900 scale).
+
+   Organized strictly by HUE FAMILY (DEC-024, DEC-025). Every ramp is
+   ordinal, 0 = lightest (DEC-010; no Material 100–900 scale). No role-,
+   domain-, or theme-named palettes here (no status/syntax/data/rbm, and
+   no light/dark) — those map onto these hues in the semantic layer.
+   Only swatches actively consumed by semantic.css are defined here.
    ================================================================ */
 
-		/* Blue — 0 = lightest surface tint, 5 = deepest navy */
-		--palette-blue-0: #f0f5fe;
-		--palette-blue-1: #dce8f8;
-		--palette-blue-2: #84c8ff;
-		--palette-blue-3: #1c71e3;
-		--palette-blue-4: #1255b8;
-		--palette-blue-5: #0d3d8c;
+		/* Blue — surface tint → bright azure → accent → deep navy */
+		--palette-blue-1: #daeeff;
+		--palette-blue-2: #dce8f8;
+		--palette-blue-3: #84c8ff;
+		--palette-blue-4: #2196f3;
+		--palette-blue-7: #1255b8;
+		--palette-blue-9: #111a35;
+		--palette-blue-10: #0a1428;
 
-		/* Neutral — light side (cool greys; backgrounds in light mode) */
-		--palette-light-0: #ffffff; /* dup: same as --palette-white; consider aliasing white → light-0 or dropping one */
-		--palette-light-1: #f7fafb;
-		--palette-light-2: #f2f2f2;
-		--palette-light-3: #ebebeb;
-		--palette-light-4: #e5e5e5;
-		--palette-light-5: #dedede;
-		--palette-light-6: #d6d6d6;
+		/* Green — pale tint → vivid → olive → deep shade */
+		--palette-green-0: #f0fff3;
+		--palette-green-1: #bbf7d0;
+		--palette-green-2: #c7d1a9;
+		--palette-green-3: #7ce4b1;
+		--palette-green-4: #00e676;
+		--palette-green-5: #00cc5b;
+		--palette-green-6: #6a9955;
+		--palette-green-7: #00af5b;
+		--palette-green-8: #02230e;
+		--palette-green-9: #03200e;
 
-		/* Neutral — dark side (teal-blacks; backgrounds in dark mode, 0 = least dark) */
-		--palette-dark-0: #0b474f;
-		--palette-dark-1: #073e46;
-		--palette-dark-2: #03363d;
-		--palette-dark-3: #022b31;
-		--palette-dark-4: #011b1e;
-		--palette-dark-5: #021318;
-		--palette-dark-6: #0a0a0a;
+		/* Red — pale tint → vivid → deep shade */
+		--palette-red-0: #fceded;
+		--palette-red-1: #ffd6de;
+		--palette-red-2: #ff4e64;
+		--palette-red-3: #ff2040;
+		--palette-red-4: #3b0911;
+		--palette-red-5: #290710;
 
-		/* Neutral — true greys (theme-neutral text / UI; 0 = lightest) */
-		--palette-grey-0: #dde3ea;
-		--palette-grey-1: #8a9fa8;
-		--palette-grey-2: #5a6a72;
-		--palette-grey-3: #272727;
-		--palette-grey-4: #1a1a1a;
+		/* Yellow — warning family; pale tint → vivid → deep shade */
+		--palette-yellow-0: #fef5cf;
+		--palette-yellow-1: #fef3b4;
+		--palette-yellow-2: #f8c100;
+		--palette-yellow-3: #e8a800;
+		--palette-yellow-4: #331801;
+		--palette-yellow-5: #261500;
 
-		/* Teal — muted (dark-mode text & selected state; 0 = lightest) */
-		--palette-teal-0: #8aacb4;
-		--palette-teal-1: #4a7a84;
-		--palette-teal-2: #28626a;
+		/* Amber — brand secondary (the Yellow Route). anchor = #ff9100 (DEC-024).
+		   Only the anchor is consumed; tints/shades available if future UI needs them. */
+		--palette-amber-3: #ff9100;
 
-		/* Brand */
-		--palette-brand-secondary: #ff9100;
+		/* Teal — aqua mid-tones → dark teal backgrounds (dark-theme surface ramp; DEC-025).
+		   teal-0..5: muted aquas used for dark-mode text, selected states, and domain colors.
+		   teal-6..11: the dark-theme background ramp (deepest card → darkest page). */
+		--palette-teal-0: #8cc4c1;
+		--palette-teal-1: #8dbdc7;
+		--palette-teal-2: #8aacb4;
+		--palette-teal-3: #5d7f84;
+		--palette-teal-4: #4a7a84;
+		--palette-teal-5: #28626a;
+		--palette-teal-6: #0b474f;
+		--palette-teal-7: #073e46;
+		--palette-teal-8: #03363d;
+		--palette-teal-10: #011b1e;
+		--palette-teal-11: #021318;
+
+		/* Indigo — periwinkle → slate-blue (data viz series) */
+		--palette-indigo-0: #afb9de;
+		--palette-indigo-1: #7079aa;
+
+		/* Purple — orchid → magenta (data viz + syntax operator) */
+		--palette-purple-0: #c096c7;
+		--palette-purple-1: #d500f9;
+
+		/* Brown — tan/clay → taupe (data viz series) */
+		--palette-brown-0: #c7a98d;
+		--palette-brown-1: #665850;
+
+		/* Slate — cool/blue-tinted greys. Used for UI accents that need a hint of
+		   blue temperature: muted text, secondary text, info-status tints, syntax
+		   function color, and the rbm-level-1 series marker. NOT used for surface
+		   backgrounds or primary text — those are temperature-neutral and use grey. */
+		--palette-slate-0: #f4f5f7;
+		--palette-slate-1: #f0f4f7;
+		--palette-slate-3: #dde3ea;
+		--palette-slate-4: #8a9fa8;
+		--palette-slate-5: #7a8892;
+		--palette-slate-6: #5a6a72;
+
+		/* Grey — pure neutral ramp. Used for light-theme surface backgrounds (page,
+		   card, chip, border) and primary text/ink in both themes. Temperature-neutral
+		   by design: surfaces and body text should not carry a color cast. Slate handles
+		   anything that benefits from a cool blue-grey tone instead. */
+		--palette-grey-0: #f7fafb;
+		--palette-grey-1: #f2f2f2;
+		--palette-grey-2: #ebebeb;
+		--palette-grey-3: #e5e5e5;
+		--palette-grey-4: #dedede;
+		--palette-grey-5: #d6d6d6;
+		--palette-grey-6: #272727;
+		--palette-grey-7: #1a1a1a;
+		--palette-grey-8: #0a0a0a;
+
+		/* Anchors */
 		--palette-black: #000;
-		--palette-white: #fff; /* dup: same as --palette-light-0; see above */
-
-		/* Status — raw palette values (vivid, fixed per brand; no theme adaptation) */
-		--palette-status-info: #294bff;
-		--palette-status-positive: #00e676;
-		--palette-status-negative: #ff4e64;
-		--palette-status-neutral: #edeff3; /* dup: same value as --palette-status-neutral-muted below */
-		--palette-status-warning: #f8c100;
-
-		/* Status — emphasis (solid badge fg in light) */
-		--palette-status-info-emphasis: #111a35;
-		--palette-status-positive-emphasis: #02230e;
-		--palette-status-negative-emphasis: #3b0911;
-		--palette-status-neutral-emphasis: #1a212a;
-		--palette-status-warning-emphasis: #331801;
-
-		/* Status — muted (subtle tint badge bg in light) */
-		--palette-status-info-muted: #f4f5f7;
-		--palette-status-positive-muted: #f0fff3;
-		--palette-status-negative-muted: #fceded;
-		--palette-status-neutral-muted: #edeff3; /* dup: same as --palette-status-neutral; likely collapse neutral-muted → neutral */
-		--palette-status-warning-muted: #fef5cf;
-
-		/* Status — dark-theme badge bg / fg counterparts */
-		--palette-status-info-bg-dark: #0a1428;
-		--palette-status-info-fg-dark: #daeeff;
-		--palette-status-positive-bg-dark: #03200e;
-		--palette-status-positive-fg-dark: #bbf7d0;
-		--palette-status-negative-bg-dark: #290710;
-		--palette-status-negative-fg-dark: #ffd6de;
-		--palette-status-warning-bg-dark: #261500;
-		--palette-status-warning-fg-dark: #fef3b4;
-
-		/* Status — light-theme accent (darker for contrast on light surfaces;
-		   the dark-theme accent reuses the vivid base swatch above) */
-		--palette-status-positive-accent-light: #00cc5b;
-		--palette-status-negative-accent-light: #ff2040;
-		--palette-status-warning-accent-light: #e8a800;
-
-		/* ================================================================
-   DOMAIN PALETTES — leaf colors for charts, code, and RBM levels.
-   Independent series; values may coincide across series by design.
-   ================================================================ */
-
-		/* Data visualization (1-based series) */
-		--palette-data-1: #c7d1a9;
-		--palette-data-2: #afb9de;
-		--palette-data-3: #7079aa;
-		--palette-data-4: #c7a98d;
-		--palette-data-5: #665850;
-		--palette-data-6: #8cc4c1;
-		--palette-data-7: #5d7f84;
-
-		/* Syntax highlighting (by hue) */
-		--palette-syntax-blue: #2196f3;
-		--palette-syntax-green: #6a9955;
-		--palette-syntax-slate: #7a8892;
-		--palette-syntax-cyan: #8dbdc7;
-		--palette-syntax-magenta: #d500f9;
-		--palette-syntax-fog: #f0f4f7;
-		--palette-syntax-emerald: #00af5b;
-
-		/* RBM levels (independent series; 1 = neutral grey) */
-		--palette-rbm-1: #8a9fa8; /* dup: same value as --palette-grey-1 */
-		--palette-rbm-2: #2196f3; /* dup: same as --palette-syntax-blue; RBM series intentionally borrows this hue */
-		--palette-rbm-3: #7ce4b1;
-		--palette-rbm-4: #c096c7;
-		--palette-rbm-5: #c7d1a9; /* dup: same as --palette-data-1; RBM series intentionally borrows this hue */
-		--palette-rbm-6: #8cc4c1; /* dup: same as --palette-data-6; RBM series intentionally borrows this hue */
+		--palette-white: #fff;
 	}
 }

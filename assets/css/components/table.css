@@ -4,7 +4,15 @@
    ================================================================ */
 
 table {
-	--sticky-cell-border: var(--border-l) solid var(--color-border-default);
+	/* ── Theming contract (DEC-026) ─────────────────────────────────
+	   Override these knobs per context to retheme; never edit the body. */
+	--table-cell-border:   var(--border-s) solid var(--color-border-default);
+	--sticky-cell-border:  var(--border-l) solid var(--color-border-default);
+	--table-header-bg:     var(--color-surface-table-header);
+	--table-header-color:  var(--color-text-muted);
+	--table-row-bg:        var(--color-surface-base);
+	--table-tfoot-bg:      var(--color-surface-raised);
+	--table-tfoot-color:   var(--color-text-muted);
 
 	width: 100%;
 
@@ -17,7 +25,7 @@ thead {
 	position: sticky;
 	top: 0;
 
-	color: var(--color-text-muted);
+	color: var(--table-header-color);
 	font-weight: var(--font-weight-bold);
 
 	th {
@@ -28,7 +36,7 @@ thead {
 	}
 
 	tr {
-		background-color: var(--color-surface-table-header);
+		background-color: var(--table-header-bg);
 	}
 }
 
@@ -36,7 +44,7 @@ tbody {
 	white-space: nowrap;
 
 	tr {
-		background: var(--color-surface-base);
+		background: var(--table-row-bg);
 	}
 
 	td {
@@ -49,7 +57,7 @@ td,
 th {
 	padding: var(--length-m) var(--length-xl);
 
-	border: var(--border-s) solid var(--color-border-default);
+	border: var(--table-cell-border);
 	font-weight: inherit;
 
 	font-size: var(--font-size-s);
@@ -66,10 +74,10 @@ th {
 }
 
 tfoot {
-	color: var(--color-text-muted);
+	color: var(--table-tfoot-color);
 
 	tr {
-		background: var(--color-surface-raised);
+		background: var(--table-tfoot-bg);
 	}
 
 	th,

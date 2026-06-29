@@ -20,9 +20,17 @@
    ================================================================ */
 
 .bandwidth-visualization {
-	/* Intentional palette reference: signal colors must be vivid in both themes;
-	   --color-status-*-accent is too muted in light mode for data visualization. */
-	--bw-range: var(--palette-status-positive);
+	/* ── Theming contract (DEC-026) ─────────────────────────────────
+	   Intentional palette reference: signal colors must be vivid in both themes;
+	   --color-status-*-accent is too muted in light mode for data visualization.
+	   These are the vivid base swatches of each status hue (DEC-024). */
+	--bw-range:              var(--palette-green-4);
+	--bw-bar-fill:           var(--color-border-default);
+	--bw-boundary-opacity:   0.75;
+	--bw-target-fill:        light-dark(var(--palette-white), var(--palette-black));
+	--bw-marker-fill:        light-dark(var(--palette-black), var(--palette-white));
+	--bw-marker-stroke:      var(--color-border-strong);
+	--bw-marker-w:           var(--length-xs);
 
 	display: block;
 	width: 100%;
@@ -30,31 +38,29 @@
 	overflow: visible;
 }
 
-.bandwidth-visualization--error   { --bw-range: var(--palette-status-negative); }
-.bandwidth-visualization--warning { --bw-range: var(--palette-status-warning); }
+.bandwidth-visualization--error   { --bw-range: var(--palette-red-2); }
+.bandwidth-visualization--warning { --bw-range: var(--palette-yellow-2); }
 
 .bandwidth-visualization__bar {
-	fill: var(--color-border-default);
+	fill: var(--bw-bar-fill);
 }
 
 .bandwidth-visualization__boundary {
 	fill: var(--bw-range);
-	opacity: 0.75;
+	opacity: var(--bw-boundary-opacity);
 }
 
 .bandwidth-visualization__target {
-	fill: light-dark(var(--palette-white), var(--palette-black));
+	fill: var(--bw-target-fill);
 }
 
 .bandwidth-visualization__marker {
-	--bw-marker-w: var(--length-xs);
-
 	width: var(--bw-marker-w);
 	height: 75%;
 	transform: translateX(calc(-0.5 * var(--bw-marker-w)));
 
-	fill: light-dark(var(--palette-black), var(--palette-white));
-	stroke: var(--color-border-strong);
+	fill: var(--bw-marker-fill);
+	stroke: var(--bw-marker-stroke);
 	stroke-width: var(--border-m);
 	shape-rendering: crispedges;
 }

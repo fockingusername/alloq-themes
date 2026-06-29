@@ -3,12 +3,16 @@
    ================================================================ */
 
 .tabs {
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--tabs-bg:           var(--color-surface-base);
+	--tabs-border-color: var(--color-border-subtle);
+
 	display: flex;
 	flex-wrap: wrap;
 
-	border-bottom: var(--border-s) solid var(--color-border-subtle);
+	border-bottom: var(--border-s) solid var(--tabs-border-color);
 
-	background-color: var(--color-surface-base);
+	background-color: var(--tabs-bg);
 
 	&.tabs--pill {
 		width: max-content;
@@ -28,15 +32,22 @@
 }
 
 .tab {
-	--tab-indicator: var(--border-s);
+	/* ── Theming contract (DEC-026) ─────────────────────────────────*/
+	--tab-indicator:      var(--border-s);
+	--tab-fg:             var(--color-text-muted);
+	--tab-fg-active:      var(--color-text-primary);
+	--tab-active-bg:      var(--color-surface-subtle);
+	--tab-active-border:  var(--color-accent-secondary);
+	--tab-padding-inline: var(--length-xxl);
 
 	margin-bottom: calc(-1 * var(--border-s));
-	padding-inline: var(--length-xxl);
+	padding-inline: var(--tab-padding-inline);
 
 	border: none;
 	border-bottom: var(--tab-indicator) solid transparent;
 	box-shadow: none;
 
+	color: var(--tab-fg);
 	font-weight: 500;
 
 	cursor: pointer;
@@ -44,7 +55,7 @@
 	user-select: none;
 
 	&.button--text {
-		color: var(--color-text-muted);
+		color: var(--tab-fg);
 	}
 
 	.tabs--pill & {
@@ -54,9 +65,9 @@
 
 	&.is-active {
 		border-bottom-width: var(--border-m);
-		border-color: var(--color-accent-secondary);
-		background-color: var(--color-surface-subtle);
-		color: var(--color-text-primary);
+		border-color: var(--tab-active-border);
+		background-color: var(--tab-active-bg);
+		color: var(--tab-fg-active);
 
 		&:disabled {
 			border-color: var(--color-border-default);

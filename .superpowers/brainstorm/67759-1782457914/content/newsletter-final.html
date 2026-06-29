@@ -1,0 +1,126 @@
+<h2>Definitief ontwerp — nieuwsbrief-stap</h2>
+<p class="subtitle">Zo ziet de nieuwe stap 4 eruit in de registratie-flow. Geeft dit het juiste gevoel?</p>
+
+<div class="mockup">
+  <div class="mockup-header">http://localhost / registreren · Stap 4 van 5</div>
+  <div class="mockup-body" style="font-family:Arial,Helvetica,sans-serif;background:#dde0df;padding:24px;">
+
+    <!-- Path bar -->
+    <div style="max-width:640px;margin:0 auto 14px;display:flex;align-items:center;gap:6px;font-size:11px;color:#8a8a8a;flex-wrap:wrap;">
+      <span style="display:flex;align-items:center;gap:5px;color:#2e9e4f;">
+        <span style="width:18px;height:18px;border-radius:50%;background:#2e9e4f;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">✓</span>Registreren
+      </span>
+      <span style="color:#d9d9d9;">›</span>
+      <span style="display:flex;align-items:center;gap:5px;color:#2e9e4f;">
+        <span style="width:18px;height:18px;border-radius:50%;background:#2e9e4f;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">✓</span>E-mail bevestigen
+      </span>
+      <span style="color:#d9d9d9;">›</span>
+      <span style="display:flex;align-items:center;gap:5px;color:#2e9e4f;">
+        <span style="width:18px;height:18px;border-radius:50%;background:#2e9e4f;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">✓</span>Account voltooien
+      </span>
+      <span style="color:#d9d9d9;">›</span>
+      <span style="display:flex;align-items:center;gap:5px;color:#1a1a1a;font-weight:600;">
+        <span style="width:18px;height:18px;border-radius:50%;background:#1a1a1a;color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">4</span>Nieuwsbrief
+      </span>
+      <span style="color:#d9d9d9;">›</span>
+      <span style="display:flex;align-items:center;gap:5px;">
+        <span style="width:18px;height:18px;border-radius:50%;background:#d9d9d9;color:#888;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">5</span>Klaar
+      </span>
+    </div>
+
+    <!-- Card -->
+    <div style="max-width:560px;margin:0 auto;background:#fff;border:1px solid #ececec;padding:28px 34px;">
+
+      <div style="font-size:19px;font-weight:800;color:#1a1a1a;margin-bottom:4px;">Nieuwsbrieven</div>
+      <div style="font-size:13px;color:#555;margin-bottom:20px;">Kies welke nieuwsbrieven u wilt ontvangen. U kunt dit later altijd aanpassen.</div>
+
+      <!-- Select all row (green header) -->
+      <div style="border:1px solid #d9d9d9;border-radius:4px;overflow:hidden;margin-bottom:16px;">
+
+        <label style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#eaf4ee;border-bottom:2px solid #cfe5d8;cursor:pointer;gap:12px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <input type="checkbox" id="nl-all" style="width:16px;height:16px;flex-shrink:0;accent-color:#00965e;cursor:pointer;" onchange="toggleAll(this)">
+            <span style="font-size:13px;font-weight:700;color:#2e6b45;">Alle nieuwsbrieven selecteren</span>
+          </div>
+        </label>
+
+        <!-- nl1 -->
+        <label style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;gap:12px;" id="row-nl1">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#1a1a1a;">Turbo &amp; Trading</div>
+            <div style="font-size:11.5px;color:#6b6b6b;margin-top:1px;">Dagelijks · productnieuws en handelskansen</div>
+          </div>
+          <input type="checkbox" id="nl1" style="width:15px;height:15px;flex-shrink:0;accent-color:#00965e;cursor:pointer;" onchange="syncAll()">
+        </label>
+
+        <!-- nl2 -->
+        <label style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;gap:12px;" id="row-nl2">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#1a1a1a;">Beleggingsnieuws</div>
+            <div style="font-size:11.5px;color:#6b6b6b;margin-top:1px;">Wekelijks · marktanalyse en beleggingstips</div>
+          </div>
+          <input type="checkbox" id="nl2" style="width:15px;height:15px;flex-shrink:0;accent-color:#00965e;cursor:pointer;" onchange="syncAll()">
+        </label>
+
+        <!-- nl3 -->
+        <label style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;gap:12px;" id="row-nl3">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#1a1a1a;">Marktupdate</div>
+            <div style="font-size:11.5px;color:#6b6b6b;margin-top:1px;">Meerdere per week · koersen en marktbewegingen</div>
+          </div>
+          <input type="checkbox" id="nl3" style="width:15px;height:15px;flex-shrink:0;accent-color:#00965e;cursor:pointer;" onchange="syncAll()">
+        </label>
+
+        <!-- nl4 -->
+        <label style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;gap:12px;" id="row-nl4">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#1a1a1a;">Webinars &amp; events</div>
+            <div style="font-size:11.5px;color:#6b6b6b;margin-top:1px;">Aankondigingen en herinneringen voor live sessies</div>
+          </div>
+          <input type="checkbox" id="nl4" style="width:15px;height:15px;flex-shrink:0;accent-color:#00965e;cursor:pointer;" onchange="syncAll()">
+        </label>
+
+      </div>
+
+      <!-- Legal note -->
+      <div style="font-size:11.5px;color:#8a8a8a;margin-bottom:20px;line-height:1.5;">
+        Door een nieuwsbrief aan te vinken geeft u toestemming om de geselecteerde nieuwsbrief(en) te ontvangen. U kunt uw instellingen later aanpassen via <span style="color:#00965e;text-decoration:underline;cursor:pointer;">Mijn profiel</span>.
+      </div>
+
+      <!-- Actions -->
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <button style="background:none;border:none;font-size:12px;color:#6b6b6b;cursor:pointer;text-decoration:underline;padding:0;font-family:inherit;">Sla over</button>
+        <button style="background:#00965e;color:#fff;border:none;border-radius:2px;padding:10px 22px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Opslaan &amp; afronden</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function toggleAll(master) {
+  ['nl1','nl2','nl3','nl4'].forEach(id => {
+    const cb = document.getElementById(id);
+    if (cb) cb.checked = master.checked;
+  });
+}
+function syncAll() {
+  const boxes = ['nl1','nl2','nl3','nl4'].map(id => document.getElementById(id));
+  const all = document.getElementById('nl-all');
+  if (!all) return;
+  const checkedCount = boxes.filter(b => b && b.checked).length;
+  all.checked = checkedCount === boxes.length;
+  all.indeterminate = checkedCount > 0 && checkedCount < boxes.length;
+}
+</script>
+
+<div class="section" style="margin-top:24px;">
+  <h3>Samenvatting wijzigingen</h3>
+  <ul style="margin-top:8px;line-height:1.8;font-size:14px;">
+    <li><strong>Stap 1 (Registreren)</strong> — marketing-vinkje verwijderd</li>
+    <li><strong>Stap 4 (nieuw)</strong> — nieuwsbrief-selectie toegevoegd, na "Account voltooien"</li>
+    <li><strong>Stappen-balk</strong> — uitgebreid van 4 naar 5 stappen</li>
+    <li><strong>Setup-done</strong> — "Nieuwsbrief instellen"-link verdwijnt (is nu onderdeel van de flow)</li>
+    <li><strong>GDPR</strong> — aanvinken = toestemming, geen apart vinkje nodig (zelfde patroon als bestaande nieuwsbrief-pagina)</li>
+  </ul>
+</div>

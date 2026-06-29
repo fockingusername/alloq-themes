@@ -710,3 +710,90 @@ New palette primitives added:
 - `palette.css` is the single source of every raw color; `semantic.css` has zero hex.
 - Domain series are kept independent even where values coincide (e.g. rbm-5 == data-1 by value) to avoid surprising cross-domain coupling.
 - A few palette primitives are defined-but-unused (ramp completeness) — acceptable.
+
+## DEC-024 — Palette is hue-only; status/syntax/data/rbm move to semantic
+
+- **Date:** 2026-06-26
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-26 "Palette only an actual palette"
+
+### Context
+`palette.css` still held role- and domain-named primitives — `--palette-status-*` (organized by status role), `--palette-syntax-*` (by code-token type), `--palette-data-*` and `--palette-rbm-*` (by series index), and a single `--palette-brand-secondary`. A palette should contain only raw hue swatches; "what role is this" belongs in the semantic layer. These names answered "what is this for," not "what color is this," violating NAMING_CONVENTION §1.
+
+### Options considered
+1. **Additive hue ramps** — leave existing ramps numbered, add new hue ramps for the non-compliant values. Lower risk, but produces duplicate hue families (a `blue` and an `azure`).
+2. **Unified hue ramps (chosen)** — one ramp per hue, ordered by lightness, renumbering existing ramps so every blue lives in `blue-*`, every green in `green-*`, etc. Cleanest "true palette"; more references to rewire.
+
+### Decision
+Reorganized `palette.css` strictly by hue family, `0 = lightest`. Every previous raw value is preserved — only names changed:
+- **blue-0…10** absorbs surface blues + azure (`#2196f3`) + info status blues (`#294bff`, `#111a35`, `#0a1428`, `#daeeff`).
+- **green-0…9** absorbs positive-status greens, syntax green/emerald, rbm mint, data sage.
+- **red-0…5** = negative-status family. **yellow-0…5** = warning family.
+- **amber-0…5** = brand secondary (the Yellow Route); `amber-3 = #ff9100` is the brand anchor, `0–2`/`4–5` are generated tints/shades to complete the ramp.
+- **teal-0…5** absorbs existing teals + syntax-cyan + data aquas.
+- **grey-0…9** absorbs cool near-white tints (`#f4f5f7`, `#f0f4f7`, `#edeff3`), syntax-slate, neutral-status, and the existing true greys.
+- **indigo-0…1**, **purple-0…1**, **brown-0…1** for the remaining chart hues.
+- `light-*`, `dark-*`, `black`, `white` unchanged (already compliant neutral ramps/anchors).
+
+`semantic.css` now maps every role — including `--color-status-*`, `--color-syntax-*`, `--color-data-*`, `--color-rbm-level-*`, and `--color-accent-secondary` — onto these hue swatches. No semantic token name changed and no resolved color changed (value-preserving; verified token-by-token).
+
+### Consequences
+- The palette finally answers only "what color," never "what for." Cross-domain value coincidences (e.g. `rbm-5` and `data-1` both `#c7d1a9`) now collapse to one swatch (`green-2`) by design.
+- `bandwidth.css` referenced `--palette-status-{positive,negative,warning}` directly (a documented intentional palette reference for vivid signals); repointed to `--palette-green-4` / `red-2` / `yellow-2` (same values).
+- Faintly-tinted status backgrounds (e.g. info-muted `#f4f5f7`) now resolve via the `grey` ramp — accurate, since those swatches are near-neutral.
+- A few palette swatches are defined-but-unused (the generated amber tints, some hue steps) — acceptable for ramp completeness.
+- Supersedes the domain/status palette structure introduced in DEC-023 (DEC-023's value-migration intent stands; only the naming/organization changes).
+
+## DEC-025 — Retire light/dark palette ramps; split neutrals into grey + slate + teal
+
+- **Date:** 2026-06-26
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-26 "light/dark are theme-function, not hue"
+
+### Context
+After DEC-024 made the palette hue-only, `--palette-light-*` and `--palette-dark-*` remained — but those names describe a *theme* (which background ramp), not a hue, the same smell DEC-024 removed from status/syntax/data. Inspection showed: `dark-0…5` are dark teals (one hue family with the existing `teal` ramp), `dark-6` is neutral near-black, and `light-1…6` are neutral light greys (`light-0` is white). The existing `grey` ramp (from DEC-024) was cool/blue-tinted, so naïvely merging the neutral `light-*` greys into it would mix two temperatures and create near-duplicate near-whites.
+
+### Options considered
+1. **Leave as-is** — keep `light-*`/`dark-*` as documented theme-function exceptions. Least churn, but inconsistent with DEC-024.
+2. **Simple merge** — `dark-*` → `teal`; `light-*` → `grey`. One long neutral ramp mixing cool + neutral greys with redundant swatches.
+3. **Hue-honest split (chosen)** — separate the neutrals by temperature so each ramp is one true hue.
+
+### Decision
+Value-preserving rename/reorg (no resolved color changed):
+- **`teal-6…11`** absorbs the former `dark-0…5` (dark teals).
+- **`grey-0…8`** is now the **pure neutral** ramp: former `light-1…6` (`#f7fafb`→`#d6d6d6`) plus the pure darks `#272727`, `#1a1a1a`, and former `dark-6` `#0a0a0a`. `light-0` `#ffffff` folds into the `white` anchor.
+- **`slate-0…7`** (new) holds the **cool/blue-tinted** greys: the cool near-whites `#f4f5f7`/`#f0f4f7`/`#edeff3`/`#dde3ea`, blue-greys `#8a9fa8`/`#7a8892`/`#5a6a72`, and cool near-black `#1a212a` (all previously misfiled in `grey` by DEC-024).
+- `--palette-light-*` and `--palette-dark-*` are deleted.
+
+`semantic.css` repointed accordingly: light-theme surfaces → `grey`/`white`, dark-theme surfaces → `teal`, cool text/greys → `slate`. No semantic token name changed.
+
+### Consequences
+- The palette now contains **only** hue families (blue, green, red, yellow, amber, teal, indigo, purple, brown, slate, grey) + black/white anchors. No role/domain/theme names remain at Layer 1.
+- `grey` vs `slate` now carry a real, honest distinction (neutral vs cool) instead of "light vs dark theme."
+- Surface elevation in both themes is unchanged visually — only the underlying token names moved.
+- NAMING_CONVENTION §4 surface roles are unaffected (they live in the semantic layer).
+
+## DEC-026 — Uniform component theming contract via --component-* knobs
+
+- **Date:** 2026-06-29
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md 2026-06-29 "make component variables generic / consistent"
+
+### Context
+Components mixed global token references inline (`border-radius: var(--radius-full)`) with the existing single-knob pattern (`--tag-accent`). Retheming or even reading "what is tweakable here" meant scanning the whole rule. `tag.css` also duplicated its surface/border/radius/font values three times (base rule, hover, and the `.button.tag.tag--removable` specificity-override block), so copies could drift.
+
+### Options considered
+1. **Knob only what varies** — local var for values that change across variants (status quo); reference global tokens directly for everything else. Most traceable per-line, but the "theming surface" is implicit and scattered; duplication stays.
+2. **Wrap every declaration** — including structural CSS (`--tag-display`). Maximally uniform but adds indirection nobody overrides and obscures layout.
+3. **Uniform theming contract (chosen)** — every *token-driven visual* property becomes a `--<component>-*` knob at the top of the base rule, defaulting to a global token; structural/effect CSS stays inline.
+
+### Decision
+Each component opens its base rule with a block of `--<component>-*` knobs covering every token-driven visual property (color, bg, border, radius, padding, gap, typography), each defaulting to the global semantic/scale token. The body consumes only those knobs; variants/states/consumers retheme by overriding a knob. Structural CSS (`display`, `position`, `white-space`), effect machinery (mask, animation), and literal keywords (`font-weight: normal`) stay inline — no knob.
+
+`tag.css` is the reference implementation: knobs `--tag-bg/-bg-hover/-fg/-border/-radius/-padding/-gap/-font-size/-font-family/-accent`; the duplicated `.button.tag.tag--removable` block now re-reads the same knobs (no drift); the `.tag--negative` comet gradient tracks `--tag-accent` instead of repeating `--color-status-negative-accent` five times.
+
+### Consequences
+- Each component's knob block is its documented theming contract — read once at the top, override to retheme, never edit the body.
+- Performance impact is negligible: component-scoped custom properties don't measurably affect style recalc (the expensive pattern is many frequently-mutated `:root` vars, not static scoped knobs).
+- Global scale/semantic tokens remain the single source of truth — knobs default to them, so a token change still propagates and the mapping is visible in one place.
+- Other components should be migrated to this shape over time (NAMING_CONVENTION §7). Value-preserving for `tag.css` — every knob defaults to the exact token it previously used inline.
