@@ -949,3 +949,114 @@ Now these variables are scattered per class, would it be possible to have these 
 All component knob defaults now live in one file. Component CSS files hold only structural rules, variant/state overrides. Load order preserved; values unchanged.
 
 **Related decision:** DEC-027
+
+### [2026-06-29] — Notification system prototype, step 1: navbar bell + inbox drawer
+
+**Prompt:**
+Create a clickable prototype for the Alloq notification system. Do it per page, ask questions, then proceed. Step 1 = shared navbar bell + inbox. (Decisions: start with navbar+inbox; bell at top near the logo; right-side drawer.)
+
+**Tokens / files touched:**
+- `assets/css/components/notification-inbox.css` — new component; bell trigger + right-side drawer, per-client groups, filter pills, items with read/unread state. Token-driven; CTA buttons tightened via `--btn-*` knob overrides on `.inbox-item__ctas` (DEC-026).
+- `assets/css/tokens/component.css` — added `--inbox-*` knob defaults.
+- All 5 HTML prototypes — added CSS link, bell markup (top of sidebar, before `.nav`), drawer markup + vanilla-JS controller (open/close, ESC, filter pills, click-to-read, mark-all-read, live unread badge + group counts) before `</body>`.
+
+**Outcome:**
+Shared notification inbox works on every page. Footer links forward to the (not-yet-built) admin settings page. Prototype work — outside the usual theme-only scope, done at user's explicit direction; styled entirely with existing tokens + component-knob system.
+
+**Related decision:** none (prototype feature, not a theme decision)
+
+### [2026-06-29] — Notification system prototype, step 2: admin settings panel
+
+**Prompt:**
+Notification prototype, per page. Step 2 = admin settings panel (new HTML). Decision: per-client config (client selector at top; matrix + recipients scoped to the selected client).
+
+**Tokens / files touched:**
+- `Notification settings - Administration - Alloq.html` — new page, cloned from the Administration shell (inherits navbar + inbox). Right "Create client" sidebar removed; `app--sidebar` modifier dropped. Title/heading updated; top-right "Save changes" button.
+- `assets/css/components/notification-settings.css` — new component: per-client trigger×channel matrix, toggle switches (reusing `.form-toggle__control`), accordion config rows (message textarea + recipient chips + add control), save toast.
+- `assets/css/tokens/component.css` — added `--nset-*` knob defaults.
+
+**Outcome:**
+Admin page renders a client selector + 4 triggers × 3 channels matrix; rows expand to edit message and add/remove scoped recipients (auto-detects email vs user); per-client state held in JS and swapped on client change; Save shows a confirmation toast. Reached from the inbox footer "Notification settings" link.
+
+**Related decision:** none (prototype feature)
+
+### [2026-06-29] — Notification system prototype, step 3: PME activity/revision log
+
+**Prompt:**
+Notification prototype, per page. Step 3 = client detail page (PME). Decision: right-sidebar activity panel.
+
+**Tokens / files touched:**
+- `PME - Monitoring - Asset allocation - Alloq.html` — switched `.app` → `.app app--sidebar`; added right `app__sidebar` aside with an Activity panel (notification & revision log) built on the page's shipped Timeline styles (`.timeline*`, reusing their `data-v-*` scopes). 4 events: event-type badge, message, "Notified:" recipients, "Via:" channels, timestamp.
+- `assets/css/components/activity-log.css` — new component: panel chrome + per-event detail + per-status timeline-icon accent.
+- `assets/css/tokens/component.css` — added `--activity-*` knob defaults.
+
+**Outcome:**
+PME now shows a persistent right-hand activity log of notification events. Also fixed a render bug in the step-2 admin script (config panel was nested inside the matrix row, leaving a div unclosed and breaking the grid) — config is now a sibling of the row; admin page re-verified (balanced DOM, scripts syntax-checked).
+
+**Related decision:** none (prototype feature)
+
+### [2026-06-29] — Wire inbox CTAs to their target pages
+
+**Prompt:**
+yes (wire the inbox item CTAs so the prototype click-throughs end to end)
+
+**Tokens / files touched:**
+- All 6 HTMLs with the inbox (5 originals + admin) — converted the 6 inbox item CTA `<button>`s per page into navigating `<a class="button …">`: "Open transaction" → Transactions, "Start allocations" → PME, "View client" → Client profiles.
+
+**Outcome:**
+Inbox now click-throughs end to end. Value-preserving swap (matched button pairs → matched anchor pairs); verified DOM balance unchanged vs. pristine HEAD.
+
+**Related decision:** none (prototype feature)
+
+### [2026-06-29] — Move notification bell to top bar
+
+**Prompt:**
+I would expect the notifications bell button be part of the top bar and placed on the right.
+
+**Tokens / files touched:**
+- assets/css/components/notification-inbox.css
+- Dashboard - Alloq.html
+- Transactions - Asset allocation - Alloq.html
+- PME - Monitoring - Asset allocation - Alloq.html
+- Client profiles - Administration - Alloq.html
+- Notification settings - Administration - Alloq.html
+- test - Mandates - Alloq.html
+
+**Outcome:**
+Bell moved from left sidebar (.app__header / nav) into #teleport-header (.main__header-content) on all 6 pages. `.inbox-bell-wrap` CSS changed from sidebar-centering (flex column + padding) to inline-flex for the top bar context. On pages with existing header actions (Save changes, Create client) the bell sits alongside the button inside the same right-aligned flex row.
+
+**Related decision:** none (layout correction)
+
+### [2026-06-29] — Inbox polish: bell blue, card items, mark-as-unread, settings icon
+
+**Prompt:**
+make the bell icon link blue. in the sidepanel when opening i want the messages to have the same styling as the widgets. Could you also include a mark as unread for each message. I want the settings button to be next to the close button. Use the settings icon. I want unread to have the same red dot as notification so its clear its unread.
+
+**Tokens / files touched:**
+- assets/css/tokens/component.css (--inbox-bell-color, --inbox-dot-unread)
+- assets/css/components/notification-inbox.css
+- Dashboard - Alloq.html (and 5 other HTML files — identical drawer)
+
+**Outcome:**
+Five changes applied across all 6 pages:
+1. Bell color → --color-accent-primary (blue) via --inbox-bell-color token
+2. Unread dot → --color-status-negative-accent (red, same as bell badge) via --inbox-dot-unread token
+3. Inbox items restyled as cards: border + radius-l + surface-raised, card-header (table-header bg) separated from card-body by a border
+4. Per-item toggle-read button (question-mark/help icon) added to each card header; JS toggles is-unread class bidirectionally; aria-label updates dynamically
+5. Settings icon link + close button grouped in .inbox__header-actions; "Notification settings" text link removed from footer
+
+**Related decision:** none (prototype polish)
+
+### [2026-06-29] — Inbox layout rework: flat items, pin/delete, balanced spacing
+
+**Prompt:**
+im not to happy with the sizing and spacing of the sidepanel. Make it more balanced. Also the first sentence of the message repeats the title, thats not needed. you've devided the title with the rest, thats not nessesary. Use a similar layout and actions. Use pin and delete.
+
+**Tokens / files touched:**
+- assets/css/components/notification-inbox.css
+- All 6 HTML files (inbox drawer rebuilt)
+
+**Outcome:**
+Inbox items flattened to email-list style: dot | main (flex col) structure, no internal header/body divider. Top row has title (blue/bold when unread, matching --color-accent-primary) + time (also blue when unread) + pin/delete icon buttons (opacity 0, revealed on item hover). Group padding tightened. Redundant description text cleaned (e.g. "TR-2041 has been submitted for approval. Action required." → "Action required."). Pin toggles .is-pinned (pin icon turns blue); delete removes the item from DOM.
+
+**Related decision:** none (prototype polish)

@@ -128,6 +128,40 @@
 		--toggle-value-color:       var(--color-text-primary);
 		--toggle-value-font-size:   var(--font-size-s);
 
+		/* ── Notification inbox (prototype) ───────────────────────────── */
+		--inbox-width:          24rem;
+		--inbox-bg:             var(--color-surface-raised);
+		--inbox-border-color:   var(--color-border-subtle);
+		--inbox-shadow:         var(--shadow-l);
+		--inbox-backdrop:       oklch(from var(--palette-black) l c h / 0.4);
+		--inbox-item-bg:        transparent;
+		--inbox-item-bg-hover:  var(--color-interactive-hover);
+		--inbox-dot-unread:     var(--color-status-negative-accent);
+		--inbox-dot-read:       var(--color-border-default);
+		--inbox-pill-bg:        transparent;
+		--inbox-pill-fg:        var(--color-text-muted);
+		--inbox-pill-active-bg: var(--color-fill-medium);
+		--inbox-pill-active-fg: var(--color-text-primary);
+		--inbox-bell-bg:        transparent;
+		--inbox-bell-color:     var(--color-accent-primary);
+		--inbox-bell-badge-bg:  var(--color-status-negative-accent);
+		--inbox-bell-badge-fg:  var(--palette-white);
+
+		/* ── Notification settings (prototype) ────────────────────────── */
+		--nset-divider:           var(--color-border-subtle);
+		--nset-row-hover-bg:      var(--color-interactive-hover);
+		--nset-config-bg:         var(--color-surface-sunken);
+		--nset-hint-color:        var(--color-text-muted);
+		--nset-chip-remove-color: var(--color-text-muted);
+		--nset-toast-bg:          var(--color-surface-overlay);
+		--nset-toast-fg:          var(--color-text-primary);
+
+		/* ── Activity log (prototype) ─────────────────────────────────── */
+		--activity-title-color:    var(--color-text-primary);
+		--activity-subtitle-color: var(--color-text-muted);
+		--activity-text-color:     var(--color-text-primary);
+		--activity-meta-color:     var(--color-text-muted);
+
 		/* ── Bandwidth visualization ──────────────────────────────────── */
 		/* Intentional palette refs: vivid signal colors needed for data viz (DEC-024). */
 		--bw-range:            var(--palette-green-4);

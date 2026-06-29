@@ -1,0 +1,271 @@
+/* ================================================================
+   NOTIFICATION SETTINGS  (prototype — not in original Pieq spec)
+   Admin panel: per-client trigger × channel matrix with toggle
+   switches; each row expands to configure message + recipients.
+   Token-driven; knob defaults live in tokens/component.css (DEC-027).
+   ================================================================ */
+
+.nsettings {
+	display: flex;
+	flex-direction: column;
+}
+
+.nsettings__intro {
+	margin: 0 0 var(--gutter-m);
+
+	color: var(--color-text-muted);
+	font-size: var(--font-size-s);
+}
+
+.nsettings__client {
+	display: flex;
+	align-items: center;
+
+	margin-bottom: var(--gutter-m);
+	gap: var(--length-m);
+}
+
+.nsettings__client-label {
+	color: var(--color-text-muted);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-s);
+}
+
+.nsettings__client .form-select__control {
+	width: auto;
+	min-width: 12rem;
+}
+
+/* ── Column header + rows share one grid template ─────────────── */
+.nsettings-head,
+.nsettings-row {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 5rem 5rem 5rem 2.5rem;
+	align-items: center;
+
+	gap: var(--length-m);
+	padding: var(--length-l) var(--length-m);
+}
+
+.nsettings-head {
+	border-bottom: var(--border-s) solid var(--nset-divider);
+
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-bold);
+}
+
+.nsettings-head__ch {
+	text-align: center;
+}
+
+.nsettings-row {
+	border-bottom: var(--border-s) solid var(--nset-divider);
+
+	&:hover {
+		background: var(--nset-row-hover-bg);
+	}
+}
+
+.nsettings-row__name {
+	display: flex;
+	flex-direction: column;
+	gap: var(--length-xxs);
+}
+
+.nsettings-row__title {
+	color: var(--color-text-primary);
+	font-size: var(--font-size-s);
+	font-weight: var(--font-weight-bold);
+}
+
+.nsettings-row__hint {
+	color: var(--nset-hint-color);
+	font-size: var(--font-size-xs);
+}
+
+.nsettings-row__ch {
+	display: flex;
+	justify-content: center;
+}
+
+/* Toggle switch reused from input.css (.form-toggle__control) at a smaller size */
+.nsettings-row__ch .form-toggle__control {
+	--input-control-size: 1.25rem;
+
+	display: inline-block;
+}
+
+.nsettings-row__expand {
+	display: flex;
+	justify-content: center;
+
+	color: var(--color-text-muted);
+
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	&:hover {
+		color: var(--color-text-primary);
+	}
+
+	& .icon {
+		transition: transform 0.2s;
+	}
+
+	&[aria-expanded='true'] .icon {
+		transform: rotate(90deg);
+	}
+}
+
+/* ── Expanded configuration panel ─────────────────────────────── */
+.nsettings-config {
+	padding: var(--gutter-m) var(--length-m) var(--gutter-l);
+	border-bottom: var(--border-s) solid var(--nset-divider);
+
+	background: var(--nset-config-bg);
+
+	&[hidden] {
+		display: none;
+	}
+}
+
+.nsettings-config__field {
+	margin-bottom: var(--gutter-m);
+}
+
+.nsettings-config__label {
+	display: block;
+
+	margin-bottom: var(--length-s);
+
+	color: var(--color-text-muted);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-s);
+}
+
+.nsettings-config__message {
+	width: 100%;
+	min-height: 4rem;
+	padding: var(--length-m);
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-m);
+
+	background: var(--color-surface-field);
+
+	color: var(--color-text-primary);
+	font: inherit;
+	font-size: var(--font-size-s);
+	resize: vertical;
+
+	&:focus {
+		border-color: var(--color-accent-primary);
+		outline: none;
+	}
+}
+
+/* ── Recipients ───────────────────────────────────────────────── */
+.nsettings-recipients {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+
+	gap: var(--length-s);
+}
+
+.nsettings-recipient {
+	display: inline-flex;
+	align-items: center;
+
+	gap: var(--length-xs);
+}
+
+.nsettings-recipient__type {
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+	text-transform: uppercase;
+}
+
+.nsettings-recipient__remove {
+	display: inline-flex;
+
+	padding: 0;
+	border: none;
+
+	background: none;
+	color: var(--nset-chip-remove-color);
+
+	cursor: pointer;
+	line-height: 1;
+
+	&:hover {
+		color: var(--color-status-negative-accent);
+	}
+}
+
+.nsettings-add {
+	display: flex;
+	align-items: center;
+
+	margin-top: var(--length-m);
+	gap: var(--length-s);
+}
+
+.nsettings-add__input {
+	flex: 0 1 18rem;
+
+	padding: var(--length-s) var(--length-m);
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-m);
+
+	background: var(--color-surface-field);
+
+	color: var(--color-text-primary);
+	font: inherit;
+	font-size: var(--font-size-s);
+
+	&:focus {
+		border-color: var(--color-accent-primary);
+		outline: none;
+	}
+}
+
+/* ── Save toast ───────────────────────────────────────────────── */
+.nsettings-toast {
+	position: fixed;
+	z-index: 600;
+	right: var(--gutter-l);
+	bottom: var(--gutter-l);
+
+	display: flex;
+	align-items: center;
+
+	padding: var(--length-l) var(--gutter-m);
+	gap: var(--length-s);
+	border-left: var(--border-l) solid var(--color-status-positive-accent);
+	border-radius: var(--radius-m);
+
+	background: var(--nset-toast-bg);
+	color: var(--nset-toast-fg);
+	box-shadow: var(--shadow-l);
+
+	font-size: var(--font-size-s);
+
+	opacity: 0;
+	transform: translateY(var(--length-xl));
+	transition:
+		opacity 0.2s,
+		transform 0.2s;
+
+	&.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.nsettings-toast {
+		transition: none;
+	}
+}

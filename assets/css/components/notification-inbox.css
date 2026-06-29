@@ -1,0 +1,380 @@
+/* ================================================================
+   NOTIFICATION INBOX  (prototype — not in original Pieq spec)
+   Bell trigger in the top bar (main__header-content) + right-side drawer with
+   card-styled notification items. Header has settings icon + close; each item
+   has a toggle-read button. Token-driven; knob defaults in tokens/component.css.
+   ================================================================ */
+
+/* ── Bell trigger ─────────────────────────────────────────────── */
+.inbox-bell-wrap {
+	display: inline-flex;
+	align-items: center;
+}
+
+.inbox-bell {
+	position: relative;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: var(--length-m);
+	border: none;
+	border-radius: var(--radius-m);
+
+	background: var(--inbox-bell-bg);
+	color: var(--inbox-bell-color);
+
+	cursor: pointer;
+
+	&:hover {
+		background: var(--color-fill-low);
+		color: var(--color-text-primary);
+	}
+
+	&:focus-visible {
+		outline: var(--focus-outline);
+		outline-offset: var(--length-xxs);
+	}
+}
+
+.inbox-bell__badge {
+	position: absolute;
+	top: calc(-1 * var(--length-xxs));
+	right: calc(-1 * var(--length-xxs));
+
+	display: grid;
+	place-items: center;
+
+	min-width: 1.1rem;
+	height: 1.1rem;
+	padding: 0 var(--length-xs);
+	border-radius: var(--radius-full);
+
+	background: var(--inbox-bell-badge-bg);
+	color: var(--inbox-bell-badge-fg);
+
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-bold);
+	line-height: 1;
+
+	&:empty {
+		display: none;
+	}
+}
+
+/* ── Backdrop + drawer ────────────────────────────────────────── */
+.inbox-backdrop {
+	position: fixed;
+	z-index: 500;
+	inset: 0;
+
+	background: var(--inbox-backdrop);
+
+	opacity: 0;
+	visibility: hidden;
+	transition:
+		opacity 0.2s,
+		visibility 0.2s;
+}
+
+.inbox {
+	position: fixed;
+	z-index: 501;
+	top: 0;
+	right: 0;
+
+	display: flex;
+	flex-direction: column;
+
+	width: var(--inbox-width);
+	max-width: 100vw;
+	height: 100%;
+
+	border-left: var(--border-s) solid var(--inbox-border-color);
+	background: var(--inbox-bg);
+	box-shadow: var(--inbox-shadow);
+
+	transform: translateX(100%);
+	transition: transform 0.25s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+
+.inbox-root.is-open .inbox-backdrop {
+	opacity: 1;
+	visibility: visible;
+}
+
+.inbox-root.is-open .inbox {
+	transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.inbox,
+	.inbox-backdrop {
+		transition: none;
+	}
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.inbox__header {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: var(--gutter-s) var(--gutter-m);
+	border-bottom: var(--border-s) solid var(--color-border-subtle);
+}
+
+.inbox__title {
+	margin: 0;
+
+	color: var(--color-text-primary);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-l);
+}
+
+.inbox__header-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--length-xs);
+}
+
+/* ── Filter pills ─────────────────────────────────────────────── */
+.inbox__filters {
+	display: flex;
+	flex-shrink: 0;
+	flex-wrap: wrap;
+
+	padding: var(--length-l) var(--gutter-m);
+	gap: var(--length-xs);
+	border-bottom: var(--border-s) solid var(--color-border-subtle);
+}
+
+.inbox-pill {
+	padding: var(--length-xs) var(--length-l);
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-full);
+
+	background: var(--inbox-pill-bg);
+	color: var(--inbox-pill-fg);
+
+	font-size: var(--font-size-xs);
+
+	cursor: pointer;
+
+	&:hover {
+		background: var(--color-fill-low);
+		color: var(--color-text-primary);
+	}
+
+	&.is-active {
+		border-color: transparent;
+		background: var(--inbox-pill-active-bg);
+		color: var(--inbox-pill-active-fg);
+	}
+
+	&:focus-visible {
+		outline: var(--focus-outline);
+		outline-offset: var(--length-xxs);
+	}
+}
+
+/* ── Scrolling body ───────────────────────────────────────────── */
+.inbox__body {
+	flex: 1 1 auto;
+	overflow-y: auto;
+}
+
+.inbox__empty {
+	display: none;
+
+	padding: var(--gutter-xl) var(--gutter-m);
+
+	color: var(--color-text-muted);
+	font-size: var(--font-size-s);
+	text-align: center;
+}
+
+/* ── Per-client group ─────────────────────────────────────────── */
+.inbox-group {
+	padding: var(--length-l) var(--length-xl);
+	border-bottom: var(--border-s) solid var(--color-border-subtle);
+}
+
+.inbox-group__header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+
+	margin-bottom: var(--length-m);
+}
+
+.inbox-group__name {
+	color: var(--color-text-primary);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-s);
+}
+
+.inbox-group__count {
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+}
+
+/* ── Notification item ────────────────────────────────────────── */
+.inbox-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--length-s);
+}
+
+.inbox-item {
+	display: flex;
+	align-items: flex-start;
+
+	padding: var(--length-l) var(--length-xl);
+	gap: var(--length-m);
+	border: var(--border-s) solid var(--inbox-border-color);
+	border-radius: var(--radius-l);
+
+	background: var(--inbox-item-bg);
+
+	&:hover {
+		background: var(--inbox-item-bg-hover);
+
+		.inbox-item__actions {
+			opacity: 1;
+		}
+	}
+}
+
+.inbox-item__dot {
+	flex-shrink: 0;
+
+	width: 0.5rem;
+	height: 0.5rem;
+	margin-top: 0.35rem;
+	border-radius: var(--radius-full);
+
+	background: var(--inbox-dot-read);
+}
+
+.inbox-item.is-unread .inbox-item__dot {
+	background: var(--inbox-dot-unread);
+}
+
+/* ── Main content column ──────────────────────────────────────── */
+.inbox-item__main {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	min-width: 0;
+	gap: var(--length-xs);
+}
+
+/* Top row: title + time + actions */
+.inbox-item__row {
+	display: flex;
+	align-items: baseline;
+	gap: var(--length-s);
+}
+
+.inbox-item__title {
+	flex: 1 1 auto;
+	min-width: 0;
+
+	overflow: hidden;
+
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-s);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.inbox-item.is-unread .inbox-item__title {
+	color: var(--color-accent-primary);
+	font-weight: var(--font-weight-bold);
+}
+
+.inbox-item__time {
+	flex-shrink: 0;
+
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+}
+
+.inbox-item.is-unread .inbox-item__time {
+	color: var(--color-accent-primary);
+}
+
+/* Pin + delete — visible on row hover */
+.inbox-item__actions {
+	flex-shrink: 0;
+
+	display: flex;
+	align-items: center;
+	gap: var(--length-xxs);
+
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+
+.inbox-item__action {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: var(--length-xxs);
+	border: none;
+	border-radius: var(--radius-s);
+
+	background: none;
+	color: var(--color-text-muted);
+
+	cursor: pointer;
+
+	&:hover {
+		color: var(--color-text-primary);
+	}
+}
+
+.inbox-item.is-pinned [data-inbox-pin] {
+	color: var(--color-accent-primary);
+}
+
+/* Tags + desc + CTAs */
+.inbox-item__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--length-xs);
+}
+
+.inbox-item__desc {
+	margin: 0;
+
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+	line-height: 1.4;
+}
+
+.inbox-item__ctas {
+	/* Tighten the design-system button inside the narrow drawer via knobs (DEC-026). */
+	--btn-padding:   var(--length-xs) var(--length-m);
+	--btn-font-size: var(--font-size-xs);
+
+	display: flex;
+	flex-wrap: wrap;
+
+	gap: var(--length-s);
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.inbox__footer {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+
+	padding: var(--length-m) var(--gutter-m);
+	gap: var(--length-m);
+	border-top: var(--border-s) solid var(--color-border-subtle);
+}

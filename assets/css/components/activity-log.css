@@ -1,0 +1,85 @@
+/* ================================================================
+   ACTIVITY LOG  (prototype — not in original Pieq spec)
+   Right-sidebar notification/revision log for a detail page.
+   Renders on top of the shipped Timeline component styles
+   (.timeline / .timeline__item / .timeline__date); this file only
+   adds the panel chrome + per-event detail. Knob defaults live in
+   tokens/component.css (DEC-027).
+   ================================================================ */
+
+.activity {
+	display: flex;
+	flex-direction: column;
+
+	padding: var(--gutter-m);
+	gap: var(--gutter-m);
+}
+
+.activity__header {
+	display: flex;
+	flex-direction: column;
+	gap: var(--length-xxs);
+}
+
+.activity__title {
+	margin: 0;
+
+	color: var(--activity-title-color);
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-l);
+}
+
+.activity__subtitle {
+	color: var(--activity-subtitle-color);
+	font-size: var(--font-size-xs);
+}
+
+/* ── Per-event content (sits inside .timeline__body) ──────────── */
+.activity__event {
+	display: flex;
+	flex-direction: column;
+	gap: var(--length-s);
+}
+
+.activity__event-top {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--length-s);
+}
+
+.activity__text {
+	margin: 0;
+
+	color: var(--activity-text-color);
+	font-size: var(--font-size-s);
+}
+
+.activity__meta {
+	margin: 0;
+
+	color: var(--activity-meta-color);
+	font-size: var(--font-size-xs);
+	line-height: 1.4;
+}
+
+.activity__meta-label {
+	font-weight: var(--font-weight-bold);
+}
+
+/* ── Timeline icon accent per status ──────────────────────────── */
+.activity .timeline__icon {
+	color: var(--color-text-muted);
+}
+
+.activity .timeline__item--info .timeline__icon {
+	color: var(--color-status-info-accent);
+}
+
+.activity .timeline__item--positive .timeline__icon {
+	color: var(--color-status-positive-accent);
+}
+
+.activity .timeline__item--notice .timeline__icon {
+	color: var(--color-status-warning-accent);
+}

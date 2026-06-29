@@ -43,6 +43,7 @@
 		<link rel="stylesheet" href="assets/css/components/tab.css" />
 		<link rel="stylesheet" href="assets/css/components/disclosure.css" />
 		<link rel="stylesheet" href="assets/css/components/theme-toggle.css" />
+		<link rel="stylesheet" href="assets/css/components/notification-inbox.css" />
 
 		<style
 			type="text/css"
@@ -2864,6 +2865,7 @@
 						<!--v-if-->
 					</button>
 				</div>
+				
 				<nav data-v-4e667491="" data-v-10fdf22c="" class="nav header__nav">
 					<ul data-v-4e667491="">
 						<li data-v-4e667491="" class="nav__item">
@@ -3230,6 +3232,25 @@
 							</div>
 						</div>
 						<div id="teleport-header" class="main__header-content">
+							<div class="inbox-bell-wrap">
+						<button
+							class="inbox-bell"
+							type="button"
+							data-inbox-open
+							aria-label="Notifications"
+							aria-haspopup="dialog"
+							aria-expanded="false"
+						>
+							<span class="icon"
+								><svg width="24" height="24" viewBox="0 0 24 24">
+									<path
+										d="M20 17H22V19H2V17H4V10C4 5.58172 7.58172 2 12 2C16.4183 2 20 5.58172 20 10V17ZM18 17V10C18 6.68629 15.3137 4 12 4C8.68629 4 6 6.68629 6 10V17H18ZM9 21H15V23H9V21Z"
+									></path>
+								</svg>
+							</span>
+							<span class="inbox-bell__badge">3</span>
+						</button>
+					</div>
 							<button
 								data-v-17ebb602=""
 								class="button button--primary"
@@ -4226,5 +4247,198 @@
 					).textContent = this.checked ? 'Dark mode' : 'Light mode';
 				});
 	</script>
+	
+						<!-- Notification inbox: drawer (prototype) -->
+		<div class="inbox-root" data-inbox-root>
+			<div class="inbox-backdrop" data-inbox-close></div>
+			<aside class="inbox" role="dialog" aria-modal="true" aria-label="Notifications">
+				<header class="inbox__header">
+					<h2 class="inbox__title">Notifications</h2>
+					<div class="inbox__header-actions">
+						<a class="button button--icon-only" href="Notification settings - Administration - Alloq.html" aria-label="Notification settings" title="Notification settings">
+							<span class="icon button__icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3.34 17a10.018 10.018 0 01-.978-2.326 3 3 0 000-5.348A9.9 9.9 0 015.88 6.836a3 3 0 003.664-3.664 9.958 9.958 0 012.326-.178 9.958 9.958 0 012.326.178 3 3 0 003.664 3.664 9.9 9.9 0 011.518 2.49 3 3 0 000 5.348 9.9 9.9 0 01-1.518 2.49 3 3 0 00-3.664 3.664 9.958 9.958 0 01-2.326.178 9.958 9.958 0 01-2.326-.178 3 3 0 00-3.664-3.664A9.9 9.9 0 013.34 17zm7.66.98a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
+						</a>
+						<button class="button button--icon-only" type="button" data-inbox-close aria-label="Close">
+							<span class="icon button__icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12.0001 10.4447L17.4448 5L19.0001 6.55532L13.5554 12L19.0001 17.4447L17.4448 19L12.0001 13.5553L6.55532 19L5 17.4447L10.4448 12L5 6.55532L6.55532 5L12.0001 10.4447Z"></path></svg></span>
+						</button>
+					</div>
+				</header>
+				<div class="inbox__filters" role="tablist">
+					<button class="inbox-pill is-active" type="button" data-inbox-filter="all">All</button>
+					<button class="inbox-pill" type="button" data-inbox-filter="unread">Unread</button>
+					<button class="inbox-pill" type="button" data-inbox-filter="Client A">Client A</button>
+					<button class="inbox-pill" type="button" data-inbox-filter="Client B">Client B</button>
+				</div>
+				<div class="inbox__body">
+					<section class="inbox-group" data-inbox-client="Client A">
+						<header class="inbox-group__header">
+							<span class="inbox-group__name">Client A</span>
+							<span class="inbox-group__count" data-inbox-count>2 new</span>
+						</header>
+						<ul class="inbox-list">
+						<li class="inbox-item is-unread">
+							<span class="inbox-item__dot"></span>
+							<div class="inbox-item__main">
+								<div class="inbox-item__row">
+									<span class="inbox-item__title">Cluster allocation complete</span>
+									<time class="inbox-item__time">10 min ago</time>
+									<div class="inbox-item__actions"><button class="inbox-item__action" type="button" data-inbox-pin aria-label="Pin" title="Pin"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M18 2H6v2h2v7.382L5.764 16H10v6l2 2 2-2v-6h4.236L16 11.382V4h2V2zM8 4h8v7h-8V4z"/></svg></span></button><button class="inbox-item__action" type="button" data-inbox-delete aria-label="Delete" title="Delete"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 01-1 1H5a1 1 0 01-1-1V6H2V4h5zm2 0v1h6V4H9zM6 8v11h12V8H6zm3 2h2v7H9v-7zm4 0h2v7h-2v-7z"/></svg></span></button></div>
+								</div>
+								<div class="inbox-item__tags"><span class="tag tag--positive"><span class="icon icon--small tag__icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z"/></svg></span>Allocation ready</span><span class="tag">Client A</span></div>
+								<p class="inbox-item__desc">Your product allocation step is ready.</p>
+								<div class="inbox-item__ctas">
+								<a class="button button--primary" href="PME - Monitoring - Asset allocation - Alloq.html"><span class="button__label">Start allocations</span></a>
+									<a class="button button--text" href="Client profiles - Administration - Alloq.html"><span class="button__label">View client</span></a>
+								</div>
+							</div>
+						</li>
+						<li class="inbox-item is-unread">
+							<span class="inbox-item__dot"></span>
+							<div class="inbox-item__main">
+								<div class="inbox-item__row">
+									<span class="inbox-item__title">TR-2041 submitted for approval</span>
+									<time class="inbox-item__time">1 h ago</time>
+									<div class="inbox-item__actions"><button class="inbox-item__action" type="button" data-inbox-pin aria-label="Pin" title="Pin"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M18 2H6v2h2v7.382L5.764 16H10v6l2 2 2-2v-6h4.236L16 11.382V4h2V2zM8 4h8v7h-8V4z"/></svg></span></button><button class="inbox-item__action" type="button" data-inbox-delete aria-label="Delete" title="Delete"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 01-1 1H5a1 1 0 01-1-1V6H2V4h5zm2 0v1h6V4H9zM6 8v11h12V8H6zm3 2h2v7H9v-7zm4 0h2v7h-2v-7z"/></svg></span></button></div>
+								</div>
+								<div class="inbox-item__tags"><span class="tag tag--info"><span class="icon icon--small tag__icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm1-10V7h-2v7h6v-2h-4z"/></svg></span>In review</span><span class="tag">Client A</span></div>
+								<p class="inbox-item__desc">Action required.</p>
+								<div class="inbox-item__ctas">
+								<a class="button button--primary" href="Transactions - Asset allocation - Alloq.html"><span class="button__label">Open transaction</span></a>
+								</div>
+							</div>
+						</li>
+						</ul>
+					</section>
+					<section class="inbox-group" data-inbox-client="Client B">
+						<header class="inbox-group__header">
+							<span class="inbox-group__name">Client B</span>
+							<span class="inbox-group__count" data-inbox-count>1 new</span>
+						</header>
+						<ul class="inbox-list">
+						<li class="inbox-item is-unread">
+							<span class="inbox-item__dot"></span>
+							<div class="inbox-item__main">
+								<div class="inbox-item__row">
+									<span class="inbox-item__title">TR-2038 approved</span>
+									<time class="inbox-item__time">3 h ago</time>
+									<div class="inbox-item__actions"><button class="inbox-item__action" type="button" data-inbox-pin aria-label="Pin" title="Pin"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M18 2H6v2h2v7.382L5.764 16H10v6l2 2 2-2v-6h4.236L16 11.382V4h2V2zM8 4h8v7h-8V4z"/></svg></span></button><button class="inbox-item__action" type="button" data-inbox-delete aria-label="Delete" title="Delete"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 01-1 1H5a1 1 0 01-1-1V6H2V4h5zm2 0v1h6V4H9zM6 8v11h12V8H6zm3 2h2v7H9v-7zm4 0h2v7h-2v-7z"/></svg></span></button></div>
+								</div>
+								<div class="inbox-item__tags"><span class="tag tag--positive"><span class="icon icon--small tag__icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z"/></svg></span>Approved</span><span class="tag">Client B</span></div>
+								<p class="inbox-item__desc">Allocation streams are ready.</p>
+								<div class="inbox-item__ctas">
+								<a class="button button--primary" href="PME - Monitoring - Asset allocation - Alloq.html"><span class="button__label">Start allocations</span></a>
+									<a class="button button--text" href="Transactions - Asset allocation - Alloq.html"><span class="button__label">Open transaction</span></a>
+								</div>
+							</div>
+						</li>
+						<li class="inbox-item">
+							<span class="inbox-item__dot"></span>
+							<div class="inbox-item__main">
+								<div class="inbox-item__row">
+									<span class="inbox-item__title">Review requested on TR-2044</span>
+									<time class="inbox-item__time">Yesterday</time>
+									<div class="inbox-item__actions"><button class="inbox-item__action" type="button" data-inbox-pin aria-label="Pin" title="Pin"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M18 2H6v2h2v7.382L5.764 16H10v6l2 2 2-2v-6h4.236L16 11.382V4h2V2zM8 4h8v7h-8V4z"/></svg></span></button><button class="inbox-item__action" type="button" data-inbox-delete aria-label="Delete" title="Delete"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 01-1 1H5a1 1 0 01-1-1V6H2V4h5zm2 0v1h6V4H9zM6 8v11h12V8H6zm3 2h2v7H9v-7zm4 0h2v7h-2v-7z"/></svg></span></button></div>
+								</div>
+								<div class="inbox-item__tags"><span class="tag tag--notice"><span class="icon icon--small tag__icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-7v2h2v-2h-2zm0-8v6h2V7h-2z"/></svg></span>Review requested</span><span class="tag">Client B</span></div>
+								<p class="inbox-item__desc">TR-2044 requires your review.</p>
+								<div class="inbox-item__ctas">
+								<a class="button button--primary" href="Transactions - Asset allocation - Alloq.html"><span class="button__label">Open transaction</span></a>
+								</div>
+							</div>
+						</li>
+						</ul>
+					</section>
+					<p class="inbox__empty" data-inbox-empty>You're all caught up.</p>
+				</div>
+				<footer class="inbox__footer">
+					<button class="button button--text" type="button" data-inbox-readall>
+						<span class="button__label">Mark all as read</span>
+					</button>
+				</footer>
+			</aside>
+		</div>
+		<script>
+			(function () {
+				var root = document.querySelector('[data-inbox-root]');
+				if (!root) return;
+				var openBtn = document.querySelector('[data-inbox-open]');
+				var badge = document.querySelector('.inbox-bell__badge');
+
+				function open() { root.classList.add('is-open'); if (openBtn) openBtn.setAttribute('aria-expanded', 'true'); }
+				function close() { root.classList.remove('is-open'); if (openBtn) openBtn.setAttribute('aria-expanded', 'false'); }
+
+				if (openBtn) openBtn.addEventListener('click', open);
+				root.querySelectorAll('[data-inbox-close]').forEach(function (el) { el.addEventListener('click', close); });
+				document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+				function refresh() {
+					var unread = root.querySelectorAll('.inbox-item.is-unread').length;
+					if (badge) badge.textContent = unread ? String(unread) : '';
+					root.querySelectorAll('[data-inbox-client]').forEach(function (group) {
+						var n = group.querySelectorAll('.inbox-item.is-unread').length;
+						var c = group.querySelector('[data-inbox-count]');
+						if (c) c.textContent = n ? n + ' new' : '';
+					});
+				}
+
+				// Pin toggles pinned state
+				root.addEventListener('click', function (e) {
+					var pin = e.target.closest('[data-inbox-pin]');
+					if (pin) { pin.closest('.inbox-item').classList.toggle('is-pinned'); return; }
+
+					// Delete removes the item
+					var del = e.target.closest('[data-inbox-delete]');
+					if (del) {
+						var it = del.closest('.inbox-item');
+						it.remove();
+						refresh();
+						return;
+					}
+
+					// Clicking item body marks it read
+					var body = e.target.closest('.inbox-item__main');
+					if (body && !e.target.closest('.button, a, .inbox-item__actions')) {
+						var it = body.closest('.inbox-item');
+						if (it.classList.contains('is-unread')) {
+							it.classList.remove('is-unread');
+							refresh();
+						}
+					}
+				});
+
+				// Mark all as read
+				var readAll = root.querySelector('[data-inbox-readall]');
+				if (readAll) readAll.addEventListener('click', function () {
+					root.querySelectorAll('.inbox-item.is-unread').forEach(function (it) { it.classList.remove('is-unread'); });
+					refresh();
+				});
+
+				// Filter pills
+				root.querySelectorAll('[data-inbox-filter]').forEach(function (pill) {
+					pill.addEventListener('click', function () {
+						root.querySelectorAll('[data-inbox-filter]').forEach(function (p) { p.classList.remove('is-active'); });
+						pill.classList.add('is-active');
+						var f = pill.getAttribute('data-inbox-filter');
+						var anyVisible = false;
+						root.querySelectorAll('[data-inbox-client]').forEach(function (group) {
+							var clientMatch = (f === 'all' || f === group.getAttribute('data-inbox-client'));
+							var items = group.querySelectorAll('.inbox-item');
+							var groupVisible = false;
+							items.forEach(function (it) {
+								var show = clientMatch && (f !== 'unread' || it.classList.contains('is-unread'));
+								it.style.display = show ? '' : 'none';
+								if (show) { groupVisible = true; anyVisible = true; }
+							});
+							group.style.display = groupVisible ? '' : 'none';
+						});
+						var empty = root.querySelector('[data-inbox-empty]');
+						if (empty) empty.style.display = anyVisible ? 'none' : '';
+					});
+				});
+
+				refresh();
+			})();
+		</script>
+	
 	</body>
 </html>
