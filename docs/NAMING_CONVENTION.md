@@ -75,7 +75,7 @@ Primer leads with the **CSS property** (`bgColor-default`, `fgColor-muted`, `bor
 | `status` | State of financial entities (see DEC-006) | `{info\|positive\|negative\|warning\|neutral}` × `{bg\|fg\|accent}` |
 | `fill` | Alpha overlays for decorative fills | `base`, `low`, `medium`, `high` |
 | `link` | Hyperlink color | _(single token)_ |
-| `data` | Chart/visualization series | `1`–`7` |
+| `series` | Categorical color series for data viz and domain tokens (DEC-029) | `1`–`7` |
 | `syntax` | Code highlighting | by token type |
 
 ---

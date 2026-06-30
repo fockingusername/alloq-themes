@@ -2012,7 +2012,7 @@
 							color: var(--color-text-primary);
 						}
 						.icon[data-v-4e667491] {
-							color: var(--color-interactive-selected);
+							color: var(--color-accent-secondary);
 						}
 						.icon__toggle[data-v-4e667491] {
 							color: var(--color-text-primary);
@@ -3233,6 +3233,35 @@
 			}
 		</style>
 			<script src="assets/js/multilayered-table.js" defer></script>
+	<style>
+		.series-chart {
+			display: flex;
+			align-items: flex-end;
+			gap: var(--length-s);
+			height: 10rem;
+		}
+		.series-chart__col {
+			flex: 1;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+			justify-content: flex-end;
+			gap: var(--length-xs);
+		}
+		.series-chart__bar {
+			width: 100%;
+			border-radius: var(--radius-s) var(--radius-s) 0 0;
+			transition: opacity 0.15s;
+		}
+		.series-chart__bar:hover { opacity: 0.8; }
+		.series-chart__label {
+			text-align: center;
+			font-size: var(--font-size-xs);
+			color: var(--color-text-muted);
+			font-family: var(--font-family-mono);
+		}
+	</style>
 	</head>
 	<body data-theme="dark" data-v-app="">
 		<div class="app">
@@ -5331,6 +5360,30 @@
 									</div>
 								</div>
 							</div>
+						<div data-v-2722a79a="" class="row">
+							<div data-v-4592faa7="" data-v-2722a79a="" class="card">
+								<div data-v-4592faa7="" class="card__header">
+									<h2 data-v-548d03fb="" data-v-4592faa7="" class="heading card__title">Colour series</h2>
+								</div>
+								<div data-v-4592faa7="" class="card__body">
+									<div class="series-chart" aria-hidden="true">
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:65%;background:var(--color-series-1)"></div><span class="series-chart__label">1</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:45%;background:var(--color-series-2)"></div><span class="series-chart__label">2</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:80%;background:var(--color-series-3)"></div><span class="series-chart__label">3</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:35%;background:var(--color-series-4)"></div><span class="series-chart__label">4</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:70%;background:var(--color-series-5)"></div><span class="series-chart__label">5</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:55%;background:var(--color-series-6)"></div><span class="series-chart__label">6</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:90%;background:var(--color-series-7)"></div><span class="series-chart__label">7</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:60%;background:var(--color-series-8)"></div><span class="series-chart__label">8</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:40%;background:var(--color-series-9)"></div><span class="series-chart__label">9</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:75%;background:var(--color-series-10)"></div><span class="series-chart__label">10</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:50%;background:var(--color-series-11)"></div><span class="series-chart__label">11</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:85%;background:var(--color-series-12)"></div><span class="series-chart__label">12</span></div>
+										<div class="series-chart__col"><div class="series-chart__bar" style="height:30%;background:var(--color-series-13)"></div><span class="series-chart__label">13</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
 							<!--v-if-->
 						</div>
 					</div>

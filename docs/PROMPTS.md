@@ -949,3 +949,117 @@ Now these variables are scattered per class, would it be possible to have these 
 All component knob defaults now live in one file. Component CSS files hold only structural rules, variant/state overrides. Load order preserved; values unchanged.
 
 **Related decision:** DEC-027
+
+### [2026-06-30] — Replace component-named surface tokens with surface-dimmed
+
+**Prompt:**
+surface-dimmed klinkt goed. (Voorafgegaan door discussie over --color-surface-chip en --color-surface-table-header als te component-specifiek.)
+
+**Tokens / files touched:**
+- assets/css/tokens/semantic.css — --color-surface-chip + --color-surface-table-header → --color-surface-dimmed
+- assets/css/tokens/component.css — --tag-bg, --table-header-bg, --dt-toolbar-bg bijgewerkt
+
+**Outcome:**
+Twee component-specifieke tokens samengevoegd tot één rol-beschrijvend token. Waarde ongewijzigd: light-dark(grey-0, teal-10).
+
+**Related decision:** DEC-028
+
+### [2026-06-30] — Merge data viz + RBM levels into shared series; add light-dark to syntax
+
+**Prompt:**
+optie A) voeg ook light dark modus daar toe. test de kleuren. voor dark theme wil ik fellere kleuren dan in de light theme. Check ook de syntax, daar mis ik ook light, dark theme
+
+**Tokens / files touched:**
+- assets/css/tokens/semantic.css — --color-data-1..7 + --color-rbm-level-1..6 → --color-series-1..7 + RBM aliases; all syntax tokens now light-dark()
+- docs/NAMING_CONVENTION.md — `data` category renamed to `series`
+
+**Outcome:**
+Single `--color-series-1..7` palette with light-dark(). Light theme: muted/desaturated. Dark theme: vivid (blue-3, green-4, purple-1, amber-3, teal-1, indigo-0). RBM levels alias series-1..6. All syntax tokens now adapt per theme. Series-1 (~2.7:1) and series-5 brown-0 (~2.5:1) are shape-only in light — flag for contrast review.
+
+**Related decision:** DEC-029
+
+### [2026-06-30] — Remove --color-rbm-level-N aliases
+
+**Prompt:**
+remove rbm variables, we can replace them with color-series
+
+**Tokens / files touched:**
+- assets/css/tokens/semantic.css — --color-rbm-level-1..6 verwijderd
+
+**Outcome:**
+RBM-level aliases volledig verwijderd. Geen component-gebruik gevonden. Componenten die RBM-levels nodig hebben, verwijzen direct naar --color-series-N.
+
+**Related decision:** DEC-029 (update)
+
+### [2026-06-30] — Add colour series bar chart to dashboard
+
+**Prompt:**
+make a chart on the dashboard where these colors are visible. make it a bar chart (theme testing)
+
+**Tokens / files touched:**
+- Dashboard - Alloq.html — new "Colour series" card with .series-chart bar chart; CSS injected in <head>
+
+**Outcome:**
+Pure CSS bar chart added at the bottom of the dashboard. Seven bars with varying heights (35–90%), each filled with --color-series-1 through --color-series-7. Switches correctly with the theme toggle.
+
+### [2026-06-30] — Fix series dark vividness, expand to 13 colors, remove amber
+
+**Prompt:**
+the vivid palette doesnt look that vivid for color 1,2,6 and 7. Also i need at least 13 colors in total. Avoid the bright amber, this for call to action only.
+
+**Tokens / files touched:**
+- assets/css/tokens/palette.css — added: cyan-0/1, orange-0/1, lime-0/1, pink-0/1, indigo-2
+- assets/css/tokens/semantic.css — series 1-7 dark values fixed; series 8-13 added; amber removed
+- Dashboard - Alloq.html — bar chart expanded from 7 to 13 bars
+
+**Outcome:**
+Series 1 D: teal-0 → cyan-0 (#00e5ff). Series 2 swapped (blue-3 L, blue-4 D). Series 5 D: amber-3 → orange-0 (#ff6d00). Series 6 D: teal-1 → cyan-1 (#00acc1). Series 7 D: indigo-0 → indigo-2 (#6c63ff). Series 8–13 added: red, yellow, lime, pink, brown, olive-green.
+
+**Related decision:** DEC-030
+
+### [2026-06-30] — Redesign series palette from Pieq Data Colors reference; avoid green + red
+
+**Prompt:**
+take a look at these colors [Pieq Data Colors screenshot]. use them as inspiration. If we can avoid green and red it would be better.
+
+**Tokens / files touched:**
+- assets/css/tokens/palette.css — removed lime-0/1; added purple-2, lavender-0, steel-0/1, ochre-0/1
+- assets/css/tokens/semantic.css — all 13 series redesigned
+
+**Outcome:**
+7 reference colors were exact palette matches (indigo-0/1, brown-0/1, teal-0/3). 4 new hue families added (steel, lavender, ochre extended; purple-2). No green, no red, no amber in any series. Light palette closely follows the reference; dark values are vivid counterparts of the same hues.
+
+**Related decision:** DEC-031
+
+### [2026-06-30] — Reorder series to interleave cool and warm hues
+
+**Prompt:**
+ok lets make sure that the blue colors are not right after eachother in the series. make it more diverse
+
+**Tokens / files touched:**
+- assets/css/tokens/semantic.css — series 1–13 reordered only; no value changes
+
+**Outcome:**
+Cool/warm now alternates: periwinkle → sand → aqua → ochre → blue → pink → teal-blue → taupe → teal → lavender → cream → violet → grey. No two blue/teal slots adjacent.
+
+**Related decision:** DEC-032
+
+### [2026-06-30] — Brighten light-mode amber on primary button
+
+**Prompt:**
+ok lets make the muted amber for the primary button in light mode a bit brighter so it stands out more then the series colors
+
+**Tokens / files touched:**
+- assets/css/tokens/semantic.css — --color-accent-secondary light value
+
+**Outcome:**
+Light mode: chroma kept full (c → c, was c * 0.6), lightness boost reduced (+0.03, was +0.07). Result: vivid orange amber in light, clearly distinct from series earthy tones.
+
+### [2026-06-30] — Active nav item icon in brand color
+
+**Prompt:**
+the icon of an active menu item should also be in the brand color
+
+**Tokens / files touched:**
+- assets/css/components/nav.css — added .nav .router-link-active .icon rule
+- Dashboard - Alloq.html — inline icon color changed from --color-interactive-selected → --color-accent-secondary

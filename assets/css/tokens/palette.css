@@ -72,17 +72,42 @@
 		--palette-teal-10: #011b1e;
 		--palette-teal-11: #021318;
 
-		/* Indigo — periwinkle → slate-blue (data viz series) */
+		/* Indigo — periwinkle → slate-blue → vivid violet */
 		--palette-indigo-0: #afb9de;
 		--palette-indigo-1: #7079aa;
+		--palette-indigo-2: #6c63ff; /* vivid violet-indigo for series dark mode */
 
-		/* Purple — orchid → magenta (data viz + syntax operator) */
-		--palette-purple-0: #c096c7;
-		--palette-purple-1: #d500f9;
+		/* Purple — lavender → orchid → medium violet → vivid magenta */
+		--palette-purple-0: #c096c7; /* orchid (series dark) */
+		--palette-purple-1: #d500f9; /* vivid magenta (series dark) */
+		--palette-purple-2: #9d56a9; /* medium violet (series light; ref Data-9) */
 
-		/* Brown — tan/clay → taupe (data viz series) */
-		--palette-brown-0: #c7a98d;
-		--palette-brown-1: #665850;
+		/* Lavender — lighter than purple-0; perceptually distinct from indigo */
+		--palette-lavender-0: #d4aeda; /* soft lavender (series light; ref Data-10) */
+
+		/* Brown — tan/clay → taupe */
+		--palette-brown-0: #c7a98d; /* warm sand/tan (ref Data-4) */
+		--palette-brown-1: #665850; /* dark taupe (ref Data-5) */
+
+		/* Ochre — warm earth tones; golden → pale sand */
+		--palette-ochre-0: #e1d2a7; /* pale sand/cream (series light; ref Data-12) */
+		--palette-ochre-1: #a58f52; /* golden ochre (series light; ref Data-11) */
+
+		/* Steel — blue-teal midpoint; higher chroma than teal ramp */
+		--palette-steel-0: #29b6f6; /* vivid sky-blue (series dark) */
+		--palette-steel-1: #4b8da3; /* muted teal-blue (series light; ref Data-8) */
+
+		/* Cyan — vivid aqua, higher chroma than the muted teal ramp */
+		--palette-cyan-0: #00e5ff; /* vivid bright cyan (series dark) */
+		--palette-cyan-1: #00acc1; /* medium vivid cyan (series dark) */
+
+		/* Orange — warm vivid; distinct from amber brand secondary (#ff9100) */
+		--palette-orange-0: #ff6d00; /* vivid deep orange (series dark) */
+		--palette-orange-1: #8c4a2a; /* muted rust (series light) */
+
+		/* Pink — rose/hot-pink */
+		--palette-pink-0: #ff4081; /* vivid hot pink (series dark) */
+		--palette-pink-1: #a05478; /* muted dusty rose (series light) */
 
 		/* Slate — cool/blue-tinted greys. Used for UI accents that need a hint of
 		   blue temperature: muted text, secondary text, info-status tints, syntax

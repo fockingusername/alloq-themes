@@ -9,3 +9,9 @@
 .nav:not(.nav--compact) .sub-nav__item > a:not(.router-link-active) {
 	color: var(--color-text-muted);
 }
+
+/* Active nav item icon uses the brand accent (Yellow Route). */
+.nav .router-link-active .icon,
+.nav .is-active .icon {
+	color: var(--color-accent-secondary);
+}

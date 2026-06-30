@@ -20,7 +20,7 @@
 		--btn-font-weight:  var(--font-weight-bold);
 
 		/* ── Tag ─────────────────────────────────────────────────────── */
-		--tag-bg:          var(--color-surface-chip);
+		--tag-bg:          var(--color-surface-dimmed);
 		--tag-bg-hover:    var(--color-surface-elevated);
 		--tag-fg:          var(--color-text-primary);
 		--tag-border:      var(--border-s) solid var(--color-border-default);
@@ -63,7 +63,7 @@
 		/* ── Table ───────────────────────────────────────────────────── */
 		--table-cell-border:  var(--border-s) solid var(--color-border-default);
 		--sticky-cell-border: var(--border-l) solid var(--color-border-default);
-		--table-header-bg:    var(--color-surface-table-header);
+		--table-header-bg:    var(--color-surface-dimmed);
 		--table-header-color: var(--color-text-muted);
 		--table-row-bg:       var(--color-surface-base);
 		--table-tfoot-bg:     var(--color-surface-raised);
@@ -73,7 +73,7 @@
 		--dt-bg:             var(--color-surface-raised);
 		--dt-radius:         var(--radius-xl);
 		--dt-padding:        var(--gutter-m);
-		--dt-toolbar-bg:     var(--color-surface-table-header);
+		--dt-toolbar-bg:     var(--color-surface-dimmed);
 		--dt-toolbar-border: var(--border-s) solid var(--color-border-default);
 
 		/* ── Theme toggle ────────────────────────────────────────────── */

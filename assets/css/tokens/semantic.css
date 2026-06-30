@@ -17,7 +17,7 @@
 			var(--palette-blue-3)
 		);
 		--color-accent-secondary: light-dark(
-			oklch(from var(--palette-amber-3) calc(l + 0.07) calc(c * 0.6) h),
+			oklch(from var(--palette-amber-3) calc(l + 0.03) c h),
 			var(--palette-amber-3)
 		);
 
@@ -91,14 +91,10 @@
 			var(--palette-blue-2),
 			var(--palette-teal-8)
 		);
-		--color-surface-chip: light-dark(
+		--color-surface-dimmed: light-dark(
 			var(--palette-grey-0),
 			var(--palette-teal-10)
-		); /* dup: same as --color-surface-table-header; kept separate in case they diverge */
-		--color-surface-table-header: light-dark(
-			var(--palette-grey-0),
-			var(--palette-teal-10)
-		); /* dup: same as --color-surface-chip; kept separate in case they diverge */
+		);
 
 		/* Borders */
 		--color-border-subtle: light-dark(
@@ -142,34 +138,36 @@
    DOMAIN-SPECIFIC TOKENS — role series mapped onto hue swatches.
    ================================================================ */
 
-		/* Syntax highlighting */
-		--color-syntax-boolean:     var(--palette-blue-4);   /* dup: boolean/constant/number/string all resolve to blue-4; intentional (same category) */
-		--color-syntax-comment:     var(--palette-green-6);
-		--color-syntax-constant:    var(--palette-blue-4);   /* dup: see --color-syntax-boolean */
-		--color-syntax-function:    var(--palette-slate-5);
-		--color-syntax-keyword:     var(--palette-teal-1);   /* dup: keyword/punctuation both resolve to teal-1 */
-		--color-syntax-number:      var(--palette-blue-4);   /* dup: see --color-syntax-boolean */
-		--color-syntax-operator:    var(--palette-purple-1);
-		--color-syntax-punctuation: var(--palette-teal-1);   /* dup: see --color-syntax-keyword */
-		--color-syntax-string:      var(--palette-blue-4);   /* dup: see --color-syntax-boolean */
-		--color-syntax-text:        light-dark(var(--palette-teal-8), var(--palette-slate-1));
-		--color-syntax-variable:    light-dark(var(--palette-green-7), var(--palette-green-4));
+		/* Syntax highlighting — light: darker hue step, legible on white.
+		   Dark: brighter/lighter step, legible on deep teal backgrounds. */
+		--color-syntax-boolean:     light-dark(var(--palette-blue-4),   var(--palette-blue-3));
+		--color-syntax-comment:     light-dark(var(--palette-green-6),  var(--palette-slate-4));  /* muted in both; slate-4 reads as a cool grey on dark */
+		--color-syntax-constant:    light-dark(var(--palette-blue-4),   var(--palette-blue-3));
+		--color-syntax-function:    light-dark(var(--palette-slate-5),  var(--palette-teal-2));   /* slate-5 borderline 3:1 on white — acceptable for non-text highlighting */
+		--color-syntax-keyword:     light-dark(var(--palette-teal-5),   var(--palette-teal-1));   /* teal-5 ≈6.3:1 on white; teal-1 bright on dark */
+		--color-syntax-number:      light-dark(var(--palette-blue-4),   var(--palette-blue-3));
+		--color-syntax-operator:    light-dark(var(--palette-purple-0), var(--palette-purple-1)); /* softer in light, vivid magenta in dark */
+		--color-syntax-punctuation: light-dark(var(--palette-teal-5),   var(--palette-teal-1));
+		--color-syntax-string:      light-dark(var(--palette-blue-4),   var(--palette-blue-3));
+		--color-syntax-text:        light-dark(var(--palette-teal-8),   var(--palette-slate-1));
+		--color-syntax-variable:    light-dark(var(--palette-green-7),  var(--palette-green-4));
 
-		/* Data visualization */
-		--color-data-1: var(--palette-green-2);
-		--color-data-2: var(--palette-indigo-0);
-		--color-data-3: var(--palette-indigo-1);
-		--color-data-4: var(--palette-brown-0);
-		--color-data-5: var(--palette-brown-1);
-		--color-data-6: var(--palette-teal-0);
-		--color-data-7: var(--palette-teal-3);
-
-		/* RBM levels */
-		--color-rbm-level-1: var(--palette-slate-4);
-		--color-rbm-level-2: var(--palette-blue-4);
-		--color-rbm-level-3: var(--palette-green-3);
-		--color-rbm-level-4: var(--palette-purple-0);
-		--color-rbm-level-5: var(--palette-green-2);
-		--color-rbm-level-6: var(--palette-teal-0);
+		/* Categorical series — 13 steps; light palette inspired by Pieq Data Colors reference.
+		   No green, no red (reserved for status tokens). No amber (reserved for CTA accent).
+		   Light: muted/earthy; dark: vivid, high-chroma (DEC-029, DEC-031, DEC-032).
+		   Order interleaves cool and warm so no two blue/teal slots are adjacent. */
+		--color-series-1:  light-dark(var(--palette-indigo-0),   var(--palette-indigo-2));  /* periwinkle    / vivid violet    — cool */
+		--color-series-2:  light-dark(var(--palette-brown-0),    var(--palette-orange-0));  /* warm sand     / vivid orange    — warm */
+		--color-series-3:  light-dark(var(--palette-teal-0),     var(--palette-cyan-0));    /* soft aqua     / vivid cyan      — cool */
+		--color-series-4:  light-dark(var(--palette-ochre-1),    var(--palette-yellow-2));  /* golden ochre  / vivid yellow    — warm */
+		--color-series-5:  light-dark(var(--palette-indigo-1),   var(--palette-blue-4));    /* slate-blue    / vivid blue      — cool */
+		--color-series-6:  light-dark(var(--palette-pink-1),     var(--palette-pink-0));    /* dusty rose    / vivid pink      — warm */
+		--color-series-7:  light-dark(var(--palette-steel-1),    var(--palette-steel-0));   /* teal-blue     / vivid sky-blue  — cool */
+		--color-series-8:  light-dark(var(--palette-brown-1),    var(--palette-brown-0));   /* dark taupe    / warm tan        — warm */
+		--color-series-9:  light-dark(var(--palette-teal-3),     var(--palette-cyan-1));    /* dark teal     / vivid teal-cyan — cool */
+		--color-series-10: light-dark(var(--palette-lavender-0), var(--palette-purple-0));  /* light lavender / orchid         — cool-warm */
+		--color-series-11: light-dark(var(--palette-ochre-0),    var(--palette-yellow-1));  /* pale sand     / warm cream      — warm */
+		--color-series-12: light-dark(var(--palette-purple-2),   var(--palette-purple-1));  /* medium violet / vivid magenta   — cool */
+		--color-series-13: light-dark(var(--palette-slate-4),    var(--palette-teal-0));    /* cool grey     / bright aqua     — cool */
 	}
 }

@@ -821,3 +821,157 @@ Option 1. Created `assets/css/tokens/component.css` with all `--<component>-*` d
 - The pointer comment in each component file (`DEC-026, DEC-027`) is the breadcrumb to the central file.
 - Easy to migrate to Option 2 later: `component.css` becomes a generated artifact; nothing else changes.
 - `tokens/component.css` must be added to any new HTML entry point after `tokens/scale.css`.
+
+## DEC-028 — Replace --color-surface-chip and --color-surface-table-header with --color-surface-dimmed
+
+- **Date:** 2026-06-30
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-06-30
+
+### Context
+`--color-surface-chip` and `--color-surface-table-header` name components, not roles — a violation of the token naming principle (DEC-004). Both resolved to the same value (`grey-0` / `teal-10`) and carried a comment acknowledging they might diverge but hadn't.
+
+### Options considered
+1. **Keep both, rename to roles** — e.g. `surface-badge` + `surface-header`. Still component-specific.
+2. **Alias to existing `surface-page`** — same value in light, but page could diverge independently.
+3. **Single role token `surface-dimmed`** — describes the visual role (slightly dimmed vs. raised), component-agnostic.
+
+### Decision
+Introduce `--color-surface-dimmed: light-dark(var(--palette-grey-0), var(--palette-teal-10))` and remove both component tokens. Component knobs in `component.css` (`--tag-bg`, `--table-header-bg`, `--dt-toolbar-bg`) now reference `--color-surface-dimmed`.
+
+### Consequences
+Any component CSS that referenced `--color-surface-chip` or `--color-surface-table-header` directly must switch to `--color-surface-dimmed`. The component.css knobs already updated. If chips and table headers need to diverge in future, split into two role-named tokens at that point.
+
+## DEC-029 — Merge --color-data-N and --color-rbm-level-N into --color-series-N with light-dark()
+
+- **Date:** 2026-06-30
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-06-30
+
+### Context
+Two separate categorical color series (`data` and `rbm-level`) served the same visual function with partially overlapping values and no light-dark() adaptation. Dark mode was getting the same muted light-theme palette.
+
+### Options considered
+1. Keep separate, add light-dark() to each — double maintenance.
+2. Alias RBM levels onto data tokens — still two series names.
+3. Single `--color-series-N` series; RBM levels alias onto it — one maintained palette.
+
+### Decision
+`--color-series-1..7` with `light-dark()`. Light: muted palette. Dark: vivid steps of the same hue.
+
+| Slot | Light | Dark |
+|---|---|---|
+| 1 | slate-4 `#8a9fa8` | teal-0 `#8cc4c1` |
+| 2 | blue-4 `#2196f3` | blue-3 `#84c8ff` |
+| 3 | green-3 `#7ce4b1` | green-4 `#00e676` |
+| 4 | purple-0 `#c096c7` | purple-1 `#d500f9` |
+| 5 | brown-0 `#c7a98d` | amber-3 `#ff9100` |
+| 6 | teal-3 `#5d7f84` | teal-1 `#8dbdc7` |
+| 7 | indigo-1 `#7079aa` | indigo-0 `#afb9de` |
+
+RBM levels: `--color-rbm-level-N: var(--color-series-N)` for N=1..6.
+
+`--color-data-N` removed; components use `--color-series-N` directly.
+
+### Consequences
+- Series-1 (slate-4) and series-5 (brown-0) in light theme are estimated at ~2.7:1 and ~2.5:1 contrast on white — acceptable as fill/shape colors, NOT for standalone text labels on white.
+- syntax-function (slate-5) in light is ~3.35:1 — acceptable for code highlighting (non-text), marginal for AA text.
+- If RBM levels need to diverge from series in future, break the alias and assign independent values.
+- NAMING_CONVENTION.md updated: category `data` → `series`.
+
+## DEC-030 — Expand series to 13; fix dark vividness for series 1/2/6/7; remove amber
+
+- **Date:** 2026-06-30
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-06-30
+
+### Context
+Series 1, 2, 6, 7 dark values were low-chroma (desaturated aquas and pale blues) that appeared washed out on dark teal backgrounds. Series 5 used amber-3 (`#ff9100`) which is reserved for CTA (accent-secondary). Only 7 series existed; 13 needed.
+
+### Decision
+Five new palette hue families added (cyan, orange, lime, pink; indigo-2 step). Dark values for series 1/2/5/6/7 updated to high-chroma vivid colors. Six new series (8-13) covering red, yellow, lime, pink, brown, olive-green.
+
+| Series | Light | Dark |
+|---|---|---|
+| 1 | slate-4 | **cyan-0** `#00e5ff` |
+| 2 | **blue-3** | **blue-4** `#2196f3` |
+| 3 | green-3 | green-4 (unchanged) |
+| 4 | purple-0 | purple-1 (unchanged) |
+| 5 | **orange-1** `#8c4a2a` | **orange-0** `#ff6d00` |
+| 6 | teal-3 | **cyan-1** `#00acc1` |
+| 7 | indigo-1 | **indigo-2** `#6c63ff` |
+| 8 | red-3 | red-2 |
+| 9 | yellow-3 | yellow-2 |
+| 10 | lime-1 | lime-0 |
+| 11 | pink-1 | pink-0 |
+| 12 | brown-1 | brown-0 |
+| 13 | green-2 | green-3 |
+
+### Consequences
+- Series 2 light changed from blue-4 → blue-3 (`#84c8ff`); contrast on white ~2.4:1 — shapes only, not for text labels.
+- Series 3 and 13 both use green family in dark (green-4 vs green-3); verify they're sufficiently distinct.
+- Amber (`--palette-amber-3`) now strictly reserved for `--color-accent-secondary` (CTA).
+
+## DEC-031 — Redesign series palette from Pieq Data Colors reference
+
+- **Date:** 2026-06-30
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-06-30
+
+### Context
+Series 1–13 used a mix of green, red, lime, and chartreuse. User provided the Pieq Data Colors reference palette and asked to use it as inspiration, avoiding green and red.
+
+### Decision
+Light values follow the reference palette exactly where possible (7 exact matches). New palette families added: steel (teal-blue midpoint), lavender, ochre; purple-2 step added. No green/red/amber in any series slot.
+
+| Series | Light (ref) | Dark (vivid) | Hue |
+|---|---|---|---|
+| 1 | indigo-0 `#afb9de` | indigo-2 `#6c63ff` | Periwinkle |
+| 2 | indigo-1 `#7079aa` | blue-4 `#2196f3` | Slate-blue |
+| 3 | teal-0 `#8cc4c1` | cyan-0 `#00e5ff` | Soft aqua |
+| 4 | teal-3 `#5d7f84` | cyan-1 `#00acc1` | Dark teal |
+| 5 | steel-1 `#4b8da3` | steel-0 `#29b6f6` | Teal-blue |
+| 6 | purple-2 `#9d56a9` | purple-1 `#d500f9` | Violet |
+| 7 | lavender-0 `#d4aeda` | purple-0 `#c096c7` | Lavender |
+| 8 | brown-0 `#c7a98d` | orange-0 `#ff6d00` | Warm sand |
+| 9 | brown-1 `#665850` | brown-0 `#c7a98d` | Taupe |
+| 10 | ochre-1 `#a58f52` | yellow-2 `#f8c100` | Golden ochre |
+| 11 | ochre-0 `#e1d2a7` | yellow-1 `#fef3b4` | Pale sand |
+| 12 | slate-4 `#8a9fa8` | teal-0 `#8cc4c1` | Cool grey |
+| 13 | pink-1 `#a05478` | pink-0 `#ff4081` | Dusty rose |
+
+### Consequences
+- lime-0/1 removed from palette (no longer consumed)
+- Series 11 dark (yellow-1 `#fef3b4`) is very light — works on dark bg due to high contrast but may look pale next to vivid neighbors; adjust if needed
+- Series 9 dark = brown-0, same as series 8 light — different themes so no conflict, but note for future if light/dark are ever shown side by side
+
+## DEC-032 — Reorder series to interleave cool and warm hues
+
+- **Date:** 2026-06-30
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-06-30
+
+### Context
+Series 1–5 were all blue/teal, clustering similar hues at the start. When used sequentially in charts, the first five data points would be nearly indistinguishable.
+
+### Decision
+Reorder only (no value changes). Pattern: cool → warm → cool → warm…
+
+| Pos | Hue | Family |
+|---|---|---|
+| 1 | Periwinkle | cool |
+| 2 | Warm sand | warm |
+| 3 | Soft aqua | cool |
+| 4 | Golden ochre | warm |
+| 5 | Slate-blue | cool |
+| 6 | Dusty rose | warm |
+| 7 | Teal-blue | cool |
+| 8 | Dark taupe | warm |
+| 9 | Dark teal | cool |
+| 10 | Lavender | cool-warm |
+| 11 | Pale sand | warm |
+| 12 | Medium violet | cool |
+| 13 | Cool grey | cool |
+
+### Consequences
+Existing component references to --color-series-N by number will get a different color after this change. Since no components reference series tokens yet, risk is zero now.
