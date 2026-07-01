@@ -90,14 +90,85 @@ tfoot {
 		font-weight: var(--font-weight-bold);
 	}
 
+	/* Depth ramp (trial, pending DEC) — opt-in via --depth-tint modifier.
+	   slate-4 is the "UI accent needing a hint of blue temperature" hue (see
+	   palette.css), not a surface/status/series color, so it doesn't collide
+	   with those meanings. Uses an opaque color-mix (not an alpha overlay) so
+	   the sticky first column's `background-color: inherit` (below) repaints
+	   an identical opaque value instead of compounding a second translucent
+	   layer on top — that compounding was making the first column visibly
+	   darker than the rest of the row.
+	   Mix % scales relative to --table-depth (set per table), not a fixed
+	   step, so it always spans the table's actual full range: level 0 gets
+	   the strongest mix, and the deepest level (level == --table-depth)
+	   lands at exactly 0% — the plain --table-row-bg, i.e. white in light,
+	   the theme's default dark row color in dark. Because slate-4 sits
+	   mid-lightness — darker than the light-theme row bg, lighter than the
+	   dark-theme row bg — this single formula produces opposite visual
+	   directions per theme for free: light theme reads dark→light with
+	   depth, dark theme reads light→dark with depth. No light-dark()
+	   branching needed. */
+	&.multilayered-table--depth-tint {
+		tbody tr {
+			background-color: color-mix(
+				in oklch,
+				var(--palette-slate-4) clamp(
+					0%,
+					calc(32% * (var(--table-depth, 3) - var(--level, 0)) / var(--table-depth, 3)),
+					32%
+				),
+				var(--table-row-bg)
+			);
+		}
+	}
+
+	/* Chevron rotates to point at the label when its row is collapsed
+	   (down = expanded, right = collapsed) — set by multilayered-table.js
+	   toggling .is-collapsed on the row. */
+	tr.is-collapsed .row-name__button .button__icon {
+		transform: rotate(-90deg);
+	}
+	.row-name__button .button__icon {
+		transition: transform 0.15s ease;
+	}
+
+	/* Row type icon (trial) — briefcase (portfolio/total), pie chart
+	   (return/matching), folder (allocation group). Deepest level gets no
+	   icon. Muted, same as the main nav's inactive icon treatment (nav.css)
+	   — the icon marks category via shape, not color/emphasis. The `d`
+	   attribute is swapped between line/fill variants by
+	   multilayered-table.js when a row's expanded state changes (fill =
+	   expanded). */
+	.row-type-icon {
+		margin-right: var(--length-s);
+		flex-shrink: 0;
+		color: var(--color-text-muted);
+	}
+
 	thead th {
 		min-width: 11.25rem;
 		border-bottom: var(--sticky-cell-border);
 	}
 
+	/* Wider than the default column — the BandwidthRange row-size visual
+	   (track + dot + value) needs more room than a plain numeric cell. */
+	thead th.bandwidth-col {
+		min-width: 18rem;
+	}
+
 	td {
 		cursor: pointer;
 		color: var(--color-text-primary);
+
+		/* Restore the blue link color for cell links (overrides the base
+		   `td, th { a { color: inherit } }` rule in this file, which made
+		   these read as plain body text). Medium weight (500) distinguishes
+		   links from the plain-weight numeric text around them. Current-page
+		   links stay text-primary/regular weight, unchanged. */
+		a:not(.router-link-exact-active) {
+			color: var(--color-link);
+			font-weight: var(--font-weight-medium);
+		}
 
 		&:focus-visible,
 		&:active {
@@ -130,7 +201,11 @@ tfoot {
 	td:first-child {
 		z-index: 2;
 		left: 0;
+		/* Sticky first column framed on both sides. Left starts at the same
+		   width/color as the right divider so the hover state below only
+		   needs to swap the color, not the width — no reflow on hover. */
 		border-right: var(--sticky-cell-border);
+		border-left: var(--sticky-cell-border);
 
 		@media screen {
 			position: sticky;
@@ -145,6 +220,11 @@ tfoot {
 				var(--color-interactive-hover),
 				var(--color-interactive-hover)
 			);
+		}
+
+		/* Brand-color hover indicator (Yellow Route). */
+		td:first-child {
+			border-left-color: var(--color-accent-secondary);
 		}
 	}
 
@@ -161,4 +241,65 @@ tfoot {
 			padding-inline: var(--length-m);
 		}
 	}
+}
+
+/* Depth-tint toggle (trial) — reuses the theme-toggle switch's knobs
+   (--tt-*) since it's the same generic track/thumb control, just without
+   the sun/moon icon crossfade. Lives in the table toolbar; toggles
+   .multilayered-table--depth-tint on the associated table (see
+   multilayered-table.js). */
+.mlt-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--length-m);
+	cursor: pointer;
+}
+
+.mlt-toggle__input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.mlt-toggle__track {
+	position: relative;
+	flex: none;
+
+	width: var(--tt-track-w);
+	height: var(--tt-track-h);
+	border-radius: var(--radius-full);
+
+	background: var(--tt-track-bg);
+	box-shadow: var(--tt-track-shadow);
+}
+
+.mlt-toggle__thumb {
+	position: absolute;
+	top: 50%;
+	left: var(--tt-inset);
+
+	width: var(--tt-thumb);
+	height: var(--tt-thumb);
+	margin-top: calc(var(--tt-thumb) / -2);
+	border-radius: 50%;
+
+	background: var(--tt-thumb-bg);
+	box-shadow: var(--tt-thumb-shadow);
+
+	transition: transform 0.3s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+
+.mlt-toggle__input:checked + .mlt-toggle__track .mlt-toggle__thumb {
+	transform: translateX(var(--tt-travel));
+}
+
+.mlt-toggle__input:focus-visible + .mlt-toggle__track {
+	outline: var(--focus-outline);
+	outline-offset: var(--length-xxs);
+}
+
+.mlt-toggle__label {
+	color: var(--tt-label-color);
+	font-weight: normal;
+	font-size: var(--tt-label-font-size);
 }

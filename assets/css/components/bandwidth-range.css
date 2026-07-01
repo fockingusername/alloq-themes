@@ -1,0 +1,244 @@
+/* ================================================================
+   BANDWIDTH RANGE (trial) — replacement for bandwidth.css.
+   Mirrors the <style scoped> block in assets/vue/BandwidthRange.vue.
+   Colors reference --palette-* directly rather than the shared
+   --color-status-* tokens (DEC-040) — those are tuned as vivid accents for
+   small icons/badges. bandwidth.css already sets this precedent in this
+   repo (see its `--bw-range: var(--palette-red-2)` comment).
+   The status colors drive the dot fill (green/yellow/red — DEC-048) and the
+   dynamic warning/breach fills. The static zone tints (--bwr-safe-wash,
+   --bwr-warning-wash) stay on slate (light) / teal (dark) per DEC-041/042,
+   independent of the vivid status colors.
+   ================================================================ */
+
+.bandwidth-range {
+	--bwr-ok: light-dark(var(--palette-green-5), var(--palette-green-4));
+	--bwr-warning: light-dark(var(--palette-yellow-3), var(--palette-yellow-2));
+	--bwr-danger: light-dark(var(--palette-red-3), var(--palette-red-2));
+	--bwr-safe-wash: light-dark(var(--palette-slate-3), var(--palette-teal-6));
+	--bwr-warning-wash: light-dark(var(--palette-slate-4), var(--palette-teal-5));
+	--bwr-tick: var(--color-border-default);
+	--bwr-track-bg: var(--color-surface-base);
+	--bwr-status-color: var(--bwr-ok);
+	--bwr-icon-color: var(--color-text-on-accent);
+
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: var(--length-s);
+}
+
+.bandwidth-range[data-status='warning'] {
+	--bwr-status-color: var(--bwr-warning);
+}
+.bandwidth-range[data-status='exceeded'] {
+	--bwr-status-color: var(--bwr-danger);
+	--bwr-icon-color: var(--palette-white);
+}
+
+/* ---- row (compact) ---- */
+.bandwidth-range--row {
+	position: relative;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--length-m);
+}
+
+.bandwidth-range--row .bandwidth-range__track-wrap {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	gap: var(--length-s);
+}
+
+.bandwidth-range--row .bandwidth-range__track {
+	height: 0.65rem;
+}
+
+.bandwidth-range__label {
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+	white-space: nowrap;
+}
+
+.bandwidth-range__value {
+	color: var(--color-link);
+	font-family: var(--font-family-mono);
+	font-variant-numeric: tabular-nums;
+	font-size: var(--font-size-s);
+	font-weight: var(--font-weight-medium);
+	white-space: nowrap;
+}
+
+/* ---- card (full detail) ---- */
+.bandwidth-range--card .bandwidth-range__track {
+	height: 0.75rem; /* ~12px */
+}
+
+.bandwidth-range__value-row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--length-m);
+}
+
+.bandwidth-range__current-label {
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-medium);
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+}
+
+.bandwidth-range__current {
+	color: var(--color-link);
+	font-family: var(--font-family-mono);
+	font-variant-numeric: tabular-nums;
+	font-size: var(--font-size-s);
+	font-weight: var(--font-weight-medium);
+	line-height: 1.1;
+}
+
+.bandwidth-range__track-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--length-xs);
+}
+
+.bandwidth-range__track {
+	position: relative;
+	flex: 1;
+	padding: 0.1875rem;
+	border: var(--border-s) solid var(--color-border-default);
+	border-radius: var(--radius-full);
+	background-color: var(--bwr-track-bg);
+	overflow: visible;
+}
+
+.bandwidth-range__safe-zone {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background-color: color-mix(in oklch, var(--bwr-safe-wash) 40%, transparent);
+	border-radius: inherit;
+}
+
+.bandwidth-range__shoulder {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background-color: color-mix(in oklch, var(--bwr-warning-wash) 50%, transparent);
+}
+
+.bandwidth-range__warning-fill {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background-color: var(--bwr-warning);
+	opacity: 0.85;
+}
+
+.bandwidth-range__breach-fill {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background-color: var(--bwr-danger);
+	opacity: 0.85;
+}
+
+.bandwidth-range__tick {
+	position: absolute;
+	top: 50%;
+	width: var(--border-m);
+	background-color: var(--bwr-tick);
+	transform: translate(-50%, -50%);
+}
+.bandwidth-range__tick--lower,
+.bandwidth-range__tick--upper {
+	height: 100%;
+}
+.bandwidth-range__tick--target {
+	height: 220%;
+	width: var(--border-s);
+	background-color: light-dark(var(--color-text-primary), var(--palette-white));
+}
+
+.bandwidth-range__dot {
+	position: absolute;
+	top: 50%;
+	z-index: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 0.875rem; /* ~14px */
+	height: 0.875rem;
+	border: var(--border-s) solid var(--color-surface-raised);
+	border-radius: 50%;
+	background-color: var(--bwr-status-color);
+	transform: translate(-50%, -50%);
+	transition: left 0.15s ease;
+}
+.bandwidth-range__dot svg {
+	width: 80%;
+	height: 80%;
+	fill: var(--bwr-icon-color);
+}
+
+.bandwidth-range__overflow {
+	display: flex;
+	flex-shrink: 0;
+	color: var(--bwr-danger);
+}
+.bandwidth-range__overflow svg {
+	width: 1rem;
+	height: 1rem;
+	fill: currentColor;
+}
+
+/* Scale values below the track — the lower / target / upper numbers, aligned
+   under their tick marks. No text captions (DEC-048). */
+.bandwidth-range__scale {
+	position: relative;
+	height: 1rem;
+	font-size: var(--font-size-xs);
+}
+.bandwidth-range__scale-value {
+	position: absolute;
+	transform: translateX(-50%);
+	color: var(--color-text-muted);
+	font-family: var(--font-family-mono);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+/* Row size (table context, DEC-049): the scale is a popover, hidden until
+   the row is hovered/focused — a table cell has no room to show this at
+   rest. Taken out of flow (absolute) so it doesn't widen the row. */
+.bandwidth-range__scale--popover {
+	position: absolute;
+	z-index: 10;
+	top: 100%;
+	left: 0;
+	right: 0;
+
+	margin-top: var(--length-xs);
+	padding: var(--length-s) var(--length-m);
+	border: var(--border-s) solid var(--color-border-subtle);
+	border-radius: var(--radius-m);
+
+	background-color: var(--color-surface-overlay);
+	box-shadow: var(--shadow-m);
+
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.15s ease;
+}
+
+.bandwidth-range--row:hover .bandwidth-range__scale--popover,
+.bandwidth-range--row:focus-within .bandwidth-range__scale--popover {
+	opacity: 1;
+	pointer-events: auto;
+}

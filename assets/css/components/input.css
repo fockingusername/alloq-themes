@@ -129,9 +129,13 @@ input[type='number'] {
 
 	&:disabled,
 	&:disabled:hover {
-		--input-bg:           var(--color-interactive-disabled);
+		/* Background stays the button-matching subtle fill; border uses
+		   --color-border-subtle instead of --color-border-default so the
+		   background reads lighter than the border in both themes (grey-2 >
+		   grey-3 in light; teal-8 > teal-8-minus-lightness in dark). */
+		--input-bg:           var(--color-surface-subtle);
 		--input-fg:           var(--color-text-muted);
-		--input-border-color: var(--color-border-default);
+		--input-border-color: var(--color-border-subtle);
 
 		border: var(--border-s) solid var(--input-border-color);
 		cursor: not-allowed;

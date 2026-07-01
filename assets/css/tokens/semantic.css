@@ -32,7 +32,7 @@
 		--color-text-muted:     light-dark(var(--palette-slate-6), var(--palette-teal-2));
 		--color-text-secondary: light-dark(var(--palette-slate-4), var(--palette-teal-4));
 		--color-text-on-accent: var(--palette-teal-10); /* dark text on amber accent (both themes) */
-		--color-link:           light-dark(var(--palette-blue-7), var(--palette-blue-3)); /* dup: same as --color-accent-primary and --color-status-info-accent; consider aliasing → var(--color-accent-primary) */
+		--color-link:           light-dark(var(--palette-blue-7), var(--palette-blue-3)); /* independent from --color-accent-primary (DEC-035) */
 
 		/* Fills — alpha-based overlays for background-color and fill properties */
 		--color-fill-base: light-dark(var(--palette-grey-6), var(--palette-white)); /* dup: same as --color-text-primary and --color-border-strong; intentional (fill-base IS the foreground color for alpha overlays) */

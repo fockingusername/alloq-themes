@@ -33,7 +33,6 @@
 		<link rel="stylesheet" href="assets/css/components/tag.css" />
 		<link rel="stylesheet" href="assets/css/components/button.css" />
 		<link rel="stylesheet" href="assets/css/components/bandwidth.css" />
-		<link rel="stylesheet" href="assets/css/components/bandwidth-range.css" />
 		<link rel="stylesheet" href="assets/css/components/notification.css" />
 		<link rel="stylesheet" href="assets/css/components/input.css" />
 		<link rel="stylesheet" href="assets/css/components/layout.css" />
@@ -2884,12 +2883,6 @@
 			}
 		</style>
 			<script src="assets/js/multilayered-table.js" defer></script>
-			<script src="assets/js/table-settings-menu.js" defer></script>
-			<!-- BandwidthRange preview only (DEC-037/038) — Vue is not otherwise
-			     used in this static theme repo; loaded here purely so this
-			     trial component can be seen rendered in context. -->
-			<script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
-			<script src="assets/js/bandwidth-range.js" defer></script>
 	</head>
 	<body data-theme="dark" data-v-app="">
 		<div class="app">
@@ -3553,6 +3546,65 @@
 										<ul data-v-55f1f6ea="" class="data-table__buttons">
 											<li data-v-55f1f6ea="">
 												<span data-v-2788e09f="" class="trigger"
+													><span data-v-2788e09f="" class="trigger"
+														><button
+															data-v-17ebb602=""
+															data-v-55f1f6ea=""
+															class="button button--icon-only"
+															type="button"
+															aria-label="Manage column sets"
+															aria-expanded="false"
+														>
+															<!--v-if-->
+															<span data-v-17ebb602="" class="icon button__icon"
+																><svg
+																	width="24"
+																	height="24"
+																	viewBox="0 0 24 24"
+																>
+																	<path
+																		d="M10.7404 4.80986H4.98036V18.2499H10.7404V4.80986ZM12.6604 4.80986V18.2499H18.4204V4.80986H12.6604ZM4.02036 2.88986H19.3804C19.635 2.88986 19.8791 2.99101 20.0592 3.17105C20.2392 3.35107 20.3404 3.59526 20.3404 3.84986V19.2099C20.3404 19.4645 20.2392 19.7086 20.0592 19.8887C19.8791 20.0687 19.635 20.1699 19.3804 20.1699H4.02036C3.76575 20.1699 3.52158 20.0687 3.34154 19.8887C3.1615 19.7086 3.06036 19.4645 3.06036 19.2099V3.84986C3.06036 3.59526 3.1615 3.35107 3.34154 3.17105C3.52158 2.99101 3.76575 2.88986 4.02036 2.88986Z"
+																	></path>
+																</svg>
+															</span>
+															<span
+																data-v-17ebb602=""
+																class="button__label visually-hidden"
+															></span>
+															<!--v-if-->
+														</button></span
+													>
+												</span>
+											</li>
+											<li data-v-55f1f6ea="">
+												<span data-v-2788e09f="" class="trigger"
+													><button
+														data-v-17ebb602=""
+														data-v-55f1f6ea=""
+														class="button button--icon-only"
+														type="button"
+														aria-label="Capture table"
+													>
+														<!--v-if-->
+														<span data-v-17ebb602="" class="icon button__icon"
+															><svg
+																xmlns="http://www.w3.org/2000/svg"
+																viewBox="0 0 24 24"
+															>
+																<path
+																	d="M3 3H5V5H3V3ZM7 3H9V5H7V3ZM11 3H13V5H11V3ZM15 3H17V5H15V3ZM19 3H21V5H19V3ZM19 7H21V9H19V7ZM3 19H5V21H3V19ZM3 15H5V17H3V15ZM3 11H5V13H3V11ZM3 7H5V9H3V7ZM10.6667 11L11.7031 9.4453C11.8886 9.1671 12.2008 9 12.5352 9H15.4648C15.7992 9 16.1114 9.1671 16.2969 9.4453L17.3333 11H20C20.5523 11 21 11.4477 21 12V20C21 20.5523 20.5523 21 20 21H8C7.44772 21 7 20.5523 7 20V12C7 11.4477 7.44772 11 8 11H10.6667ZM9 19H19V13H16.263L14.9296 11H13.0704L11.737 13H9V19ZM14 18C12.8954 18 12 17.1046 12 16C12 14.8954 12.8954 14 14 14C15.1046 14 16 14.8954 16 16C16 17.1046 15.1046 18 14 18Z"
+																></path></svg
+														></span>
+														<span
+															data-v-17ebb602=""
+															class="button__label visually-hidden"
+														></span>
+														<!--v-if-->
+													</button></span
+												>
+											</li>
+											<li data-v-55f1f6ea="">
+												<span data-v-2788e09f="" class="trigger"
 													><button
 														data-v-17ebb602=""
 														data-v-55f1f6ea=""
@@ -3564,7 +3616,10 @@
 														<span data-v-17ebb602="" class="icon button__icon"
 															><svg width="24" height="24" viewBox="0 0 24 24">
 																<path
-																	d="M12 19.1642L18.2071 12.9571L16.7929 11.5429L12 16.3358L7.20712 11.5429L5.79291 12.9571L12 19.1642ZM12 13.5143L18.2071 7.30722L16.7929 5.89301L12 10.6859L7.20712 5.89301L5.79291 7.30722L12 13.5143Z"
+																	d="M16.5004 7V3C16.5004 2.73478 16.3992 2.48043 16.2192 2.29289C16.0391 2.10536 15.795 2 15.5404 2H3.06036C2.80575 2 2.56156 2.10536 2.38153 2.29289C2.20149 2.48043 2.10036 2.73478 2.10036 3V16C2.10036 16.2652 2.20149 16.5196 2.38153 16.7071C2.56156 16.8946 2.80575 17 3.06036 17H6.90036V20.993C6.90036 21.549 7.3314 22 7.86708 22H20.3337C20.4606 22.0001 20.5863 21.9742 20.7037 21.9236C20.8211 21.8731 20.9277 21.7989 21.0175 21.7053C21.1073 21.6118 21.1785 21.5008 21.227 21.3785C21.2755 21.2563 21.3005 21.1253 21.3004 20.993L21.2975 8.007C21.2975 7.451 20.8665 7 20.3308 7H16.5004ZM14.5804 7H7.86708C7.33332 7 6.90036 7.449 6.90036 8.007V15H4.02036V4H14.5804V7ZM8.82036 9H19.3775L19.3804 20H8.82036V9Z"
+																></path>
+																<path
+																	d="M13.2364 10V13.6H9.78038V15.4H13.2364V19H14.9644V15.4H18.4204V13.6H14.9644V10H13.2364Z"
 																></path>
 															</svg>
 														</span>
@@ -3587,7 +3642,10 @@
 														<span data-v-17ebb602="" class="icon button__icon"
 															><svg width="24" height="24" viewBox="0 0 24 24">
 																<path
-																	d="M12 4.83582L5.79291 11.0429L7.20712 12.4571L12 7.66424L16.7929 12.4571L18.2071 11.0429L12 4.83582ZM12 10.4857L5.79291 16.6928L7.20712 18.107L12 13.3141L16.7929 18.107L18.2071 16.6928L12 10.4857Z"
+																	d="M16.5004 7V3C16.5004 2.73478 16.3992 2.48043 16.2192 2.29289C16.0391 2.10536 15.795 2 15.5404 2H3.06036C2.80575 2 2.56156 2.10536 2.38153 2.29289C2.20149 2.48043 2.10036 2.73478 2.10036 3V16C2.10036 16.2652 2.20149 16.5196 2.38153 16.7071C2.56156 16.8946 2.80575 17 3.06036 17H6.90036V20.993C6.90036 21.549 7.3314 22 7.86708 22H20.3337C20.4606 22.0001 20.5863 21.9742 20.7037 21.9236C20.8211 21.8731 20.9277 21.7989 21.0175 21.7053C21.1073 21.6118 21.1785 21.5008 21.227 21.3785C21.2755 21.2563 21.3005 21.1253 21.3004 20.993L21.2975 8.007C21.2975 7.451 20.8665 7 20.3308 7H16.5004ZM14.5804 7H7.86708C7.33332 7 6.90036 7.449 6.90036 8.007V15H4.02036V4H14.5804V7ZM8.82036 9H19.3775L19.3804 20H8.82036V9Z"
+																></path>
+																<path
+																	d="M18.4146 13.5101H9.77463V15.5101H18.4146V13.5101Z"
 																></path>
 															</svg>
 														</span>
@@ -3599,122 +3657,59 @@
 													</button></span
 												>
 											</li>
-											<li data-v-55f1f6ea="">
-												<div class="table-settings">
-													<button
-														class="button button--icon-only table-settings__trigger"
-														type="button"
-														aria-haspopup="menu"
-														aria-controls="table-settings-menu-1"
-														aria-expanded="false"
-														aria-label="Table settings"
-													>
-														<span class="icon button__icon"
-															><svg width="24" height="24" viewBox="0 0 24 24">
-																<path
-																	d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
-																></path></svg
-															></span>
-													</button>
-													<div
-														id="table-settings-menu-1"
-														class="table-settings-menu"
-														role="menu"
-														hidden
-													>
-														<button
-															class="table-settings-menu__item"
-															type="button"
-															role="menuitem"
-														>
-															<span class="icon icon--small"
-																><svg width="24" height="24" viewBox="0 0 24 24">
-																	<path
-																		d="M10.7404 4.80986H4.98036V18.2499H10.7404V4.80986ZM12.6604 4.80986V18.2499H18.4204V4.80986H12.6604ZM4.02036 2.88986H19.3804C19.635 2.88986 19.8791 2.99101 20.0592 3.17105C20.2392 3.35107 20.3404 3.59526 20.3404 3.84986V19.2099C20.3404 19.4645 20.2392 19.7086 20.0592 19.8887C19.8791 20.0687 19.635 20.1699 19.3804 20.1699H4.02036C3.76575 20.1699 3.52158 20.0687 3.34154 19.8887C3.1615 19.7086 3.06036 19.4645 3.06036 19.2099V3.84986C3.06036 3.59526 3.1615 3.35107 3.34154 3.17105C3.52158 2.99101 3.76575 2.88986 4.02036 2.88986Z"
-																	></path>
-																</svg>
-															</span>
-															Manage column sets
-														</button>
-														<button
-															class="table-settings-menu__item"
-															type="button"
-															role="menuitem"
-														>
-															<span class="icon icon--small"
-																><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-																	<path
-																		d="M3 3H5V5H3V3ZM7 3H9V5H7V3ZM11 3H13V5H11V3ZM15 3H17V5H15V3ZM19 3H21V5H19V3ZM19 7H21V9H19V7ZM3 19H5V21H3V19ZM3 15H5V17H3V15ZM3 11H5V13H3V11ZM3 7H5V9H3V7ZM10.6667 11L11.7031 9.4453C11.8886 9.1671 12.2008 9 12.5352 9H15.4648C15.7992 9 16.1114 9.1671 16.2969 9.4453L17.3333 11H20C20.5523 11 21 11.4477 21 12V20C21 20.5523 20.5523 21 20 21H8C7.44772 21 7 20.5523 7 20V12C7 11.4477 7.44772 11 8 11H10.6667ZM9 19H19V13H16.263L14.9296 11H13.0704L11.737 13H9V19ZM14 18C12.8954 18 12 17.1046 12 16C12 14.8954 12.8954 14 14 14C15.1046 14 16 14.8954 16 16C16 17.1046 15.1046 18 14 18Z"
-																	></path>
-																</svg>
-															</span>
-															Capture table
-														</button>
-														<div class="table-settings-menu__divider"></div>
-														<div class="table-settings-menu__group">
-															<span class="table-settings-menu__group-label">Density</span>
-															<div data-v-9a9fbdf8="" class="toggle">
-																<span data-v-2788e09f="" class="trigger"
-																	><label data-v-9a9fbdf8=""
-																		><input
-																			data-v-9a9fbdf8=""
-																			id="v-40-0"
-																			name="v-40"
-																			type="radio"
-																			class="visually-hidden"
-																			value="0"
-																		/>
-																		<span data-v-9a9fbdf8="" class="icon"
-																			><svg width="24" height="24" viewBox="0 0 24 24">
-																				<path
-																					d="M3.84 2.98975H19.2C19.4546 2.98975 19.6988 3.0951 19.8788 3.28264C20.0588 3.47018 20.16 3.72453 20.16 3.98975V19.9897C20.16 20.255 20.0588 20.5093 19.8788 20.6969C19.6988 20.8844 19.4546 20.9897 19.2 20.9897H3.84C3.58539 20.9897 3.34122 20.8844 3.16118 20.6969C2.98115 20.5093 2.88 20.255 2.88 19.9897V3.98975C2.88 3.72453 2.98115 3.47018 3.16118 3.28264C3.34122 3.0951 3.58539 2.98975 3.84 2.98975ZM4.8 4.98975V18.9897H18.24V4.98975H4.8Z"
-																				></path>
-																				<path
-																					d="M16.1391 6.43744L12.8495 9.86419L10.4997 7.41651V13.2909H16.1391L13.7894 10.8433L17.0791 7.41651L16.1391 6.43744Z"
-																				></path>
-																			</svg>
-																		</span>
-																		<span data-v-9a9fbdf8="" class="visually-hidden">Compact view</span
-																		></label
-																	></span
-																>
-																<span data-v-2788e09f="" class="trigger"
-																	><label data-v-9a9fbdf8=""
-																		><input
-																			data-v-9a9fbdf8=""
-																			id="v-40-1"
-																			name="v-40"
-																			type="radio"
-																			class="visually-hidden"
-																			value="1"
-																		/>
-																		<span data-v-9a9fbdf8="" class="icon"
-																			><svg width="24" height="24" viewBox="0 0 24 24">
-																				<path
-																					d="M3.84 2.98975H19.2C19.4546 2.98975 19.6988 3.0951 19.8788 3.28264C20.0588 3.47018 20.16 3.72453 20.16 3.98975V19.9897C20.16 20.255 20.0588 20.5093 19.8788 20.6969C19.6988 20.8844 19.4546 20.9897 19.2 20.9897H3.84C3.58539 20.9897 3.34122 20.8844 3.16118 20.6969C2.98115 20.5093 2.88 20.255 2.88 19.9897V3.98975C2.88 3.72453 2.98115 3.47018 3.16118 3.28264C3.34122 3.0951 3.58539 2.98975 3.84 2.98975ZM4.8 4.98975V18.9897H18.24V4.98975H4.8Z"
-																				></path>
-																				<path
-																					d="M10.9696 13.7805L14.2594 10.3537L16.6091 12.8014V6.92697H10.9696L13.3194 9.37465L10.0298 12.8014L10.9696 13.7805Z"
-																				></path>
-																			</svg>
-																		</span>
-																		<span data-v-9a9fbdf8="" class="visually-hidden">Default view</span
-																		></label
-																	></span
-																>
-															</div>
-														</div>
-														<label class="mlt-toggle table-settings-menu__item">
-															<input type="checkbox" class="mlt-toggle__input" checked />
-															<span class="mlt-toggle__track"
-																><span class="mlt-toggle__thumb"></span
-															></span>
-															<span class="mlt-toggle__label">Highlight levels</span>
-														</label>
-													</div>
-												</div>
-											</li>
 										</ul>
+										<div data-v-9a9fbdf8="" data-v-55f1f6ea="" class="toggle">
+											<span data-v-2788e09f="" class="trigger"
+												><label data-v-9a9fbdf8=""
+													><input
+														data-v-9a9fbdf8=""
+														id="v-40-0"
+														name="v-40"
+														type="radio"
+														class="visually-hidden"
+														value="0"
+													/>
+													<span data-v-9a9fbdf8="" class="icon"
+														><svg width="24" height="24" viewBox="0 0 24 24">
+															<path
+																d="M3.84 2.98975H19.2C19.4546 2.98975 19.6988 3.0951 19.8788 3.28264C20.0588 3.47018 20.16 3.72453 20.16 3.98975V19.9897C20.16 20.255 20.0588 20.5093 19.8788 20.6969C19.6988 20.8844 19.4546 20.9897 19.2 20.9897H3.84C3.58539 20.9897 3.34122 20.8844 3.16118 20.6969C2.98115 20.5093 2.88 20.255 2.88 19.9897V3.98975C2.88 3.72453 2.98115 3.47018 3.16118 3.28264C3.34122 3.0951 3.58539 2.98975 3.84 2.98975ZM4.8 4.98975V18.9897H18.24V4.98975H4.8Z"
+															></path>
+															<path
+																d="M16.1391 6.43744L12.8495 9.86419L10.4997 7.41651V13.2909H16.1391L13.7894 10.8433L17.0791 7.41651L16.1391 6.43744Z"
+															></path>
+														</svg>
+													</span>
+													<span data-v-9a9fbdf8="" class="visually-hidden"
+														>Compact view</span
+													></label
+												></span
+											>
+											<span data-v-2788e09f="" class="trigger"
+												><label data-v-9a9fbdf8=""
+													><input
+														data-v-9a9fbdf8=""
+														id="v-40-1"
+														name="v-40"
+														type="radio"
+														class="visually-hidden"
+														value="1"
+													/>
+													<span data-v-9a9fbdf8="" class="icon"
+														><svg width="24" height="24" viewBox="0 0 24 24">
+															<path
+																d="M3.84 2.98975H19.2C19.4546 2.98975 19.6988 3.0951 19.8788 3.28264C20.0588 3.47018 20.16 3.72453 20.16 3.98975V19.9897C20.16 20.255 20.0588 20.5093 19.8788 20.6969C19.6988 20.8844 19.4546 20.9897 19.2 20.9897H3.84C3.58539 20.9897 3.34122 20.8844 3.16118 20.6969C2.98115 20.5093 2.88 20.255 2.88 19.9897V3.98975C2.88 3.72453 2.98115 3.47018 3.16118 3.28264C3.34122 3.0951 3.58539 2.98975 3.84 2.98975ZM4.8 4.98975V18.9897H18.24V4.98975H4.8Z"
+															></path>
+															<path
+																d="M10.9696 13.7805L14.2594 10.3537L16.6091 12.8014V6.92697H10.9696L13.3194 9.37465L10.0298 12.8014L10.9696 13.7805Z"
+															></path>
+														</svg>
+													</span>
+													<span data-v-9a9fbdf8="" class="visually-hidden"
+														>Default view</span
+													></label
+												></span
+											>
+										</div>
 									</div>
 								</div>
 								<div data-v-55f1f6ea="" class="data-table__main">
@@ -3980,7 +3975,7 @@
 												</th>
 												<th
 													data-v-ceaac346=""
-													class="text-center bandwidth-col"
+													class="text-center"
 													scope="col"
 													colspan="1"
 													rowspan="1"
@@ -4060,7 +4055,7 @@
 												</th>
 												<th
 													data-v-ceaac346=""
-													class="text-center bandwidth-col"
+													class="text-center"
 													scope="col"
 													colspan="1"
 													rowspan="1"
@@ -4284,7 +4279,7 @@
 												</th>
 												<th
 													data-v-ceaac346=""
-													class="text-center bandwidth-col"
+													class="text-center"
 													scope="col"
 													colspan="1"
 													rowspan="1"
@@ -4302,15 +4297,6 @@
 														></a
 													>
 												</th>
-											<th
-												data-v-ceaac346=""
-												class="text-end text-no-wrap"
-												scope="col"
-												colspan="1"
-												rowspan="1"
-											>
-												<span data-v-ceaac346="" class="column__title">Reference (no link)</span>
-											</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -4326,7 +4312,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 1.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--briefcase" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V6C2 5.44772 2.44772 5 3 5H7ZM4 16V19H20V16H4ZM4 14H20V7H4V14ZM9 3V5H15V3H9ZM11 11H13V13H11V11Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -4354,7 +4340,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--portfolio" aria-hidden="true" data-path-line="M7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V6C2 5.44772 2.44772 5 3 5H7ZM4 16V19H20V16H4ZM4 14H20V7H4V14ZM9 3V5H15V3H9ZM11 11H13V13H11V11Z" data-path-fill="M7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V6C2 5.44772 2.44772 5 3 5H7ZM4 15V19H20V15H4ZM11 11V13H13V11H11ZM9 3V5H15V3H9Z"><svg viewBox="0 0 24 24"><path d="M7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V6C2 5.44772 2.44772 5 3 5H7ZM4 15V19H20V15H4ZM11 11V13H13V11H11ZM9 3V5H15V3H9Z"></path></svg></span>
 														Totaal</span
 													>
 												</td>
@@ -4559,13 +4544,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -4579,7 +4557,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 2.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--return" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 2.4578V4.58152C6.06817 5.76829 4 8.64262 4 12C4 16.4183 7.58172 20 12 20C15.3574 20 18.2317 17.9318 19.4185 15H21.5422C20.2679 19.0571 16.4776 22 12 22C6.47715 22 2 17.5228 2 12C2 7.52236 4.94289 3.73207 9 2.4578ZM12 2C17.5228 2 22 6.47715 22 12C22 12.3375 21.9833 12.6711 21.9506 13H11V2.04938C11.3289 2.01672 11.6625 2 12 2ZM13 4.06189V11H19.9381C19.4869 7.38128 16.6187 4.51314 13 4.06189Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -4607,7 +4585,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--return" aria-hidden="true" data-path-line="M9 2.4578V4.58152C6.06817 5.76829 4 8.64262 4 12C4 16.4183 7.58172 20 12 20C15.3574 20 18.2317 17.9318 19.4185 15H21.5422C20.2679 19.0571 16.4776 22 12 22C6.47715 22 2 17.5228 2 12C2 7.52236 4.94289 3.73207 9 2.4578ZM12 2C17.5228 2 22 6.47715 22 12C22 12.3375 21.9833 12.6711 21.9506 13H11V2.04938C11.3289 2.01672 11.6625 2 12 2ZM13 4.06189V11H19.9381C19.4869 7.38128 16.6187 4.51314 13 4.06189Z" data-path-fill="M11 2.04935V13H21.9506C21.4489 18.0533 17.1853 22 12 22C6.47715 22 2 17.5228 2 12C2 6.81462 5.94668 2.55107 11 2.04935ZM13 0.542847C18.5535 1.02121 22.9788 5.4465 23.4571 11H13V0.542847Z"><svg viewBox="0 0 24 24"><path d="M11 2.04935V13H21.9506C21.4489 18.0533 17.1853 22 12 22C6.47715 22 2 17.5228 2 12C2 6.81462 5.94668 2.55107 11 2.04935ZM13 0.542847C18.5535 1.02121 22.9788 5.4465 23.4571 11H13V0.542847Z"></path></svg></span>
 														Matching</span
 													>
 												</td>
@@ -4751,7 +4728,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="39.00" data-target="40.00" data-lower="35.00" data-upper="45.00" data-unit="%" data-size="row"></div>
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="41.99761171922081%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 												<td
 													data-v-fbfce584=""
@@ -4797,7 +4820,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="39.00" data-target="40.00" data-lower="35.00" data-upper="45.00" data-unit="%" data-size="row"></div>
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="41.99761171922081%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 												<td
 													data-v-fbfce584=""
@@ -4920,14 +4989,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="39.00" data-target="40.00" data-lower="35.00" data-upper="45.00" data-unit="%" data-size="row"></div>
-												</td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="41.99761171922081%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 											</tr>
 											<tr
@@ -4942,7 +5050,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 2.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--return" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 2.4578V4.58152C6.06817 5.76829 4 8.64262 4 12C4 16.4183 7.58172 20 12 20C15.3574 20 18.2317 17.9318 19.4185 15H21.5422C20.2679 19.0571 16.4776 22 12 22C6.47715 22 2 17.5228 2 12C2 7.52236 4.94289 3.73207 9 2.4578ZM12 2C17.5228 2 22 6.47715 22 12C22 12.3375 21.9833 12.6711 21.9506 13H11V2.04938C11.3289 2.01672 11.6625 2 12 2ZM13 4.06189V11H19.9381C19.4869 7.38128 16.6187 4.51314 13 4.06189Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -4970,7 +5078,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--return" aria-hidden="true" data-path-line="M9 2.4578V4.58152C6.06817 5.76829 4 8.64262 4 12C4 16.4183 7.58172 20 12 20C15.3574 20 18.2317 17.9318 19.4185 15H21.5422C20.2679 19.0571 16.4776 22 12 22C6.47715 22 2 17.5228 2 12C2 7.52236 4.94289 3.73207 9 2.4578ZM12 2C17.5228 2 22 6.47715 22 12C22 12.3375 21.9833 12.6711 21.9506 13H11V2.04938C11.3289 2.01672 11.6625 2 12 2ZM13 4.06189V11H19.9381C19.4869 7.38128 16.6187 4.51314 13 4.06189Z" data-path-fill="M11 2.04935V13H21.9506C21.4489 18.0533 17.1853 22 12 22C6.47715 22 2 17.5228 2 12C2 6.81462 5.94668 2.55107 11 2.04935ZM13 0.542847C18.5535 1.02121 22.9788 5.4465 23.4571 11H13V0.542847Z"><svg viewBox="0 0 24 24"><path d="M11 2.04935V13H21.9506C21.4489 18.0533 17.1853 22 12 22C6.47715 22 2 17.5228 2 12C2 6.81462 5.94668 2.55107 11 2.04935ZM13 0.542847C18.5535 1.02121 22.9788 5.4465 23.4571 11H13V0.542847Z"></path></svg></span>
 														Matching (extra)</span
 													>
 												</td>
@@ -5114,7 +5221,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="39.00" data-target="40.00" data-lower="35.00" data-upper="45.00" data-unit="%" data-size="row"></div>
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="41.99761171922081%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 												<td
 													data-v-fbfce584=""
@@ -5160,7 +5313,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="39.00" data-target="40.00" data-lower="35.00" data-upper="45.00" data-unit="%" data-size="row"></div>
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="41.99761171922081%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 												<td
 													data-v-fbfce584=""
@@ -5283,14 +5482,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="39.00" data-target="40.00" data-lower="35.00" data-upper="45.00" data-unit="%" data-size="row"></div>
-												</td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="41.99761171922081%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 											</tr>
 											<tr
@@ -5305,7 +5543,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -5333,7 +5571,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span>
 														Cluster Matching</span
 													>
 												</td>
@@ -5644,13 +5881,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -5664,7 +5894,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -5692,7 +5922,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span>
 														Cluster Matching (extra)</span
 													>
 												</td>
@@ -6003,13 +6232,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -6226,13 +6448,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -6449,13 +6664,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -6672,13 +6880,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -6895,13 +7096,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -7118,13 +7312,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -7138,7 +7325,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 2.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--return" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 2.4578V4.58152C6.06817 5.76829 4 8.64262 4 12C4 16.4183 7.58172 20 12 20C15.3574 20 18.2317 17.9318 19.4185 15H21.5422C20.2679 19.0571 16.4776 22 12 22C6.47715 22 2 17.5228 2 12C2 7.52236 4.94289 3.73207 9 2.4578ZM12 2C17.5228 2 22 6.47715 22 12C22 12.3375 21.9833 12.6711 21.9506 13H11V2.04938C11.3289 2.01672 11.6625 2 12 2ZM13 4.06189V11H19.9381C19.4869 7.38128 16.6187 4.51314 13 4.06189Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -7166,7 +7353,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--return" aria-hidden="true" data-path-line="M9 2.4578V4.58152C6.06817 5.76829 4 8.64262 4 12C4 16.4183 7.58172 20 12 20C15.3574 20 18.2317 17.9318 19.4185 15H21.5422C20.2679 19.0571 16.4776 22 12 22C6.47715 22 2 17.5228 2 12C2 7.52236 4.94289 3.73207 9 2.4578ZM12 2C17.5228 2 22 6.47715 22 12C22 12.3375 21.9833 12.6711 21.9506 13H11V2.04938C11.3289 2.01672 11.6625 2 12 2ZM13 4.06189V11H19.9381C19.4869 7.38128 16.6187 4.51314 13 4.06189Z" data-path-fill="M11 2.04935V13H21.9506C21.4489 18.0533 17.1853 22 12 22C6.47715 22 2 17.5228 2 12C2 6.81462 5.94668 2.55107 11 2.04935ZM13 0.542847C18.5535 1.02121 22.9788 5.4465 23.4571 11H13V0.542847Z"><svg viewBox="0 0 24 24"><path d="M11 2.04935V13H21.9506C21.4489 18.0533 17.1853 22 12 22C6.47715 22 2 17.5228 2 12C2 6.81462 5.94668 2.55107 11 2.04935ZM13 0.542847C18.5535 1.02121 22.9788 5.4465 23.4571 11H13V0.542847Z"></path></svg></span>
 														Return</span
 													>
 												</td>
@@ -7310,7 +7496,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="61.00" data-target="60.00" data-lower="55.00" data-upper="65.00" data-unit="%" data-size="row"></div>
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="58.00238828077919%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 												<td
 													data-v-fbfce584=""
@@ -7356,7 +7588,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="61.00" data-target="60.00" data-lower="55.00" data-upper="65.00" data-unit="%" data-size="row"></div>
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="58.00238828077919%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 												<td
 													data-v-fbfce584=""
@@ -7479,14 +7757,53 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												>
-													<div class="bwr-mount" data-current="61.00" data-target="60.00" data-lower="55.00" data-upper="65.00" data-unit="%" data-size="row"></div>
-												</td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
+													<div
+														data-v-c1d1a0a9=""
+														data-v-fbfce584=""
+														class="bandwidth"
+													>
+														<span data-v-2788e09f="" class="trigger"
+															><svg
+																data-v-1297d35a=""
+																aria-hidden="true"
+																class="bandwidth-visualization"
+																height="100%"
+																width="100%"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	data-v-1297d35a=""
+																	x="0"
+																	y="37.5%"
+																	height="25%"
+																	width="100%"
+																	class="bandwidth-visualization__bar"
+																></rect>
+																<rect
+																	data-v-1297d35a=""
+																	x="10%"
+																	y="37.5%"
+																	height="25%"
+																	width="80%"
+																	class="bandwidth-visualization__boundary"
+																></rect>
+																<circle
+																	data-v-1297d35a=""
+																	cx="50%"
+																	cy="50%"
+																	r="0.25em"
+																	class="bandwidth-visualization__target"
+																></circle>
+																<rect
+																	data-v-1297d35a=""
+																	x="58.00238828077919%"
+																	y="12.5%"
+																	height="75%"
+																	width="0.25em"
+																	class="bandwidth-visualization__marker"
+																></rect></svg
+														></span>
+													</div>
 												</td>
 											</tr>
 											<tr
@@ -7501,7 +7818,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -7529,7 +7846,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span>
 														Real Assets</span
 													>
 												</td>
@@ -7764,13 +8080,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -7784,7 +8093,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -7812,7 +8121,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span>
 														Real Assets (extra)</span
 													>
 												</td>
@@ -8047,13 +8355,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -8270,13 +8571,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -8493,13 +8787,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -8716,13 +9003,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -8939,13 +9219,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -9162,13 +9435,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -9182,7 +9448,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span><!--v-if-->
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><!--v-if-->
 														Overige beleggingen</span
 													>
 												</td>
@@ -9385,13 +9651,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -9405,7 +9664,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -9433,7 +9692,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span>
 														Onroerend goed</span
 													>
 												</td>
@@ -9668,13 +9926,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -9891,13 +10142,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -10114,13 +10358,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -10337,13 +10574,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -10560,13 +10790,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -10783,13 +11006,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -10803,7 +11019,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span><!--v-if-->
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><!--v-if-->
 														Valuta-afdekking</span
 													>
 												</td>
@@ -11006,13 +11222,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -11026,7 +11235,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -11054,7 +11263,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span>
 														Hoogrentende waarden</span
 													>
 												</td>
@@ -11257,13 +11465,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -11480,13 +11681,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -11703,13 +11897,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -11926,13 +12113,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -12149,13 +12329,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -12372,13 +12545,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -12392,7 +12558,7 @@
 														data-v-fbfce584=""
 														class="row-name"
 														style="--e0a5a191-offset: 3.2rem"
-														><button
+														><span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z"></path></svg></span><button
 															data-v-17ebb602=""
 															data-v-e0a5a191=""
 															class="button button--icon-only row-name__button"
@@ -12420,7 +12586,6 @@
 															</span>
 															<!--v-if-->
 														</button>
-														<span class="icon icon--small row-type-icon row-type-icon--allocation" aria-hidden="true" data-path-line="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 5V19H20V7H11.5858L9.58579 5H4ZM12 9V13H16C16 15.2091 14.2091 17 12 17C9.79086 17 8 15.2091 8 13C8 10.7909 9.79086 9 12 9Z" data-path-fill="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"><svg viewBox="0 0 24 24"><path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17C14.2091 17 16 15.2091 16 13H12V9Z"></path></svg></span>
 														Aandelen</span
 													>
 												</td>
@@ -12623,13 +12788,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -12846,13 +13004,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -13069,13 +13220,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -13292,13 +13436,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -13515,13 +13652,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 											<tr
 												data-v-8c42ad6a=""
@@ -13738,13 +13868,6 @@
 													data-v-8c42ad6a=""
 													class="text-center"
 												></td>
-												<td
-													data-v-fbfce584=""
-													data-v-8c42ad6a=""
-													class="text-end font-mono"
-												>
-													0.0 EUR
-												</td>
 											</tr>
 										</tbody>
 										<!--v-if-->

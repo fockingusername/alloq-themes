@@ -53,7 +53,8 @@
 		--font-size-xl: 1.5rem;
 		--font-size-xxl: 2rem;
 
-		--font-weight-bold: 600;
+		--font-weight-medium: 500;
+		--font-weight-bold:   600;
 
 		--shadow-s:
 			0 2px 1px -1px oklch(from var(--palette-black) l c h / 0.2),

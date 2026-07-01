@@ -1,0 +1,82 @@
+<!doctype html>
+<!-- Standalone preview for assets/vue/BandwidthRange.vue's `card` size.
+     Not a saved app page — built so the card-only features (Current label,
+     status pill, delta text, tick labels, compare marker) can be viewed in
+     a plain browser, since this repo has no build step to compile the SFC.
+     Mirrors assets/vue/BandwidthRangeDemo.vue's card examples. Uses the
+     plain-JS port (assets/js/bandwidth-range.js) — see DEC-038/046. -->
+<html lang="en-GB">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>BandwidthRange — Card Demo</title>
+
+		<link rel="stylesheet" href="assets/css/fonts.css" />
+		<link rel="stylesheet" href="assets/css/tokens/palette.css" />
+		<link rel="stylesheet" href="assets/css/tokens/semantic.css" />
+		<link rel="stylesheet" href="assets/css/tokens/scale.css" />
+		<link rel="stylesheet" href="assets/css/tokens/component.css" />
+		<link rel="stylesheet" href="assets/css/base.css" />
+		<link rel="stylesheet" href="assets/css/elements.css" />
+		<link rel="stylesheet" href="assets/css/components/bandwidth-range.css" />
+		<link rel="stylesheet" href="assets/css/components/theme-toggle.css" />
+
+		<style>
+			body {
+				padding: var(--length-xxl, 1.5rem);
+			}
+			.demo-toggle {
+				margin-bottom: var(--length-xxl, 1.5rem);
+			}
+			.demo-cards {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+				gap: var(--length-xl, 1rem);
+			}
+			.demo-card {
+				padding: var(--length-xl, 1rem);
+				border: var(--border-s, 1px) solid var(--color-border-subtle);
+				border-radius: var(--radius-l, 0.75rem);
+				background-color: var(--color-surface-raised);
+			}
+		</style>
+	</head>
+	<body data-theme="dark">
+		<label class="theme-toggle demo-toggle">
+			<input type="checkbox" class="theme-toggle__input js-toggle" checked />
+			<span class="theme-toggle__track">
+				<span class="theme-toggle__thumb">
+					<svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/></svg>
+					<svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/></svg>
+				</span>
+			</span>
+			<span class="theme-toggle__label">Dark mode</span>
+		</label>
+
+		<h1>BandwidthRange — card size</h1>
+
+		<div class="demo-cards">
+			<div class="demo-card">
+				<div class="bwr-mount" data-size="card" data-lower="7.8" data-upper="9.4" data-target="8.6" data-current="8.55" data-unit="%"></div>
+			</div>
+			<div class="demo-card">
+				<div class="bwr-mount" data-size="card" data-lower="7.8" data-upper="9.4" data-target="8.6" data-current="9.28" data-unit="%"></div>
+			</div>
+			<div class="demo-card">
+				<div class="bwr-mount" data-size="card" data-lower="7.8" data-upper="9.4" data-target="8.6" data-current="9.78" data-unit="%"></div>
+			</div>
+		</div>
+
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
+		<script src="assets/js/bandwidth-range.js" defer></script>
+		<script>
+			document.querySelector('.js-toggle').addEventListener('change', function () {
+				const theme = this.checked ? 'dark' : 'light';
+				document.body.setAttribute('data-theme', theme);
+				this.closest('.theme-toggle').querySelector('.theme-toggle__label').textContent = this.checked
+					? 'Dark mode'
+					: 'Light mode';
+			});
+		</script>
+	</body>
+</html>

@@ -25,8 +25,11 @@
 		color: var(--color-link);
 		text-decoration: none;
 
+		/* Hover reinforces the link (underline), it doesn't erase its color —
+		   the previous `color: inherit` made a link indistinguishable from
+		   body text on hover, which is the opposite of what hover should do. */
 		&:hover {
-			color: inherit;
+			text-decoration: underline;
 		}
 
 		&:active {

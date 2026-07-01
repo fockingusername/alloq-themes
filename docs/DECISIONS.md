@@ -975,3 +975,390 @@ Reorder only (no value changes). Pattern: cool → warm → cool → warm…
 
 ### Consequences
 Existing component references to --color-series-N by number will get a different color after this change. Since no components reference series tokens yet, risk is zero now.
+
+## DEC-033 — Un-alias --color-link; brighten light-theme value; fix hover to reinforce not erase
+
+- **Date:** 2026-07-01
+- **Status:** Superseded by DEC-034
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+Table cell links were rendering as plain white/dark body text instead of blue, because `table.css`'s base `td, th { a { color: inherit } }` rule overrode the link color. After restoring it, a review of link readability found the light-theme value (`--palette-blue-7`, aliased from `--color-accent-primary`) was WCAG-compliant (~7:1 on white) but perceptually too close in lightness to body text to clearly register as a link in dense tabular data. Separately, the global `a:hover` rule set `color: inherit`, which erased the link color on hover instead of reinforcing it.
+
+### Options considered
+1. Keep `--color-link` aliased to `--color-accent-primary`, only fix the table override — leaves the readability complaint unaddressed and couples link color to focus rings/buttons.
+2. Un-alias `--color-link` with an independent, more saturated light-theme value; fix hover to underline instead of erasing color.
+
+### Decision
+`--color-link: light-dark(var(--palette-blue-4), var(--palette-blue-3))` — light theme moves from blue-7 (`#1255b8`) to blue-4 (`#2196f3`, already an established vivid blue in the palette); dark theme unchanged. `--color-link` is no longer a duplicate of `--color-accent-primary`.
+
+`elements.css`: `a:hover { color: inherit }` → `a:hover { text-decoration: underline }`. Applies globally (not table-scoped) since erasing color on hover was backwards UX everywhere, not just in tables.
+
+`table.css`: added `.multilayered-table td a:not(.router-link-exact-active) { color: var(--color-link); }` to override the base cell-link inheritance. Current-page links (`.router-link-exact-active`) remain `--color-text-primary`, unchanged.
+
+### Consequences
+- `--color-accent-primary` (focus rings, active button borders, info-status accent) is unaffected by future link-color tuning, and vice versa.
+- Any other component that previously relied on `a:hover` losing its color will now show an underline on hover instead — reviewed nav.css/tab.css, no conflicting hover rules found.
+- `code a` already has its own scoped override (`color: inherit; text-decoration: underline`) and is unaffected.
+
+## DEC-034 — Correct --color-link light value: blue-4 failed contrast; replace with new blue-6 step
+
+- **Date:** 2026-07-01
+- **Status:** Superseded by DEC-035
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+- **Supersedes:** DEC-033 (light-theme value only; the un-aliasing and hover fix from DEC-033 stand)
+
+### Context
+DEC-033's light-theme value (`--palette-blue-4`, `#2196f3`) was verified after the fact to give only **3.1:1 contrast on white** — a fail against the project's non-negotiable 4.5:1 body-text minimum (CLAUDE.md §9). Increasing vividness by picking a lighter, more saturated blue directly traded away contrast, since lightness (not saturation) is what contrast ratio is sensitive to. Separately, a Figma-sourced contrast check surfaced that the Pieq spec's own link color (`#64A6F2`) fails even harder (2.53:1) — a pre-existing design-system issue, out of scope here since it's not implemented in our tokens.
+
+User supplied a specific target: `#1E5C8D`.
+
+### Options considered
+1. Revert to blue-7 (`#1255b8`, 6.96:1) — safe, zero new palette entries, but keeps the "muted" look flagged earlier.
+2. Add the user-supplied `#1E5C8D` as a new palette step — verified 7.06:1 on white, fits the existing gap in the blue ramp between blue-4 and blue-7.
+
+### Decision
+Added `--palette-blue-6: #1e5c8d` to `palette.css` (fills the existing 4→7 gap in the ordinal ramp). `--color-link` light value updated: `light-dark(var(--palette-blue-6), var(--palette-blue-3))`. Dark theme unchanged.
+
+### Consequences
+- `--color-link` now resolves to a verified-compliant, user-approved value in both themes.
+- Lesson for future token changes: verify contrast against the target surface *before* committing a "more vivid" substitution — saturation and lightness are independent, and only lightness drives WCAG contrast math.
+- The Figma spec's own `#64A6F2` link color remains uncorrected in Figma; if that needs addressing, it requires a separate decision explicitly diverging from or updating the Pieq spec.
+
+## DEC-035 — Final --color-link light value: #1255B8 (blue-7); links semi-bold; remove unused blue-6
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+- **Supersedes:** DEC-034 (light-theme value only)
+
+### Context
+User gave a final explicit target: `#1255B8`, which is exactly the existing `--palette-blue-7` (the original pre-DEC-033 value) — no new palette entry needed. `--palette-blue-6` (added in DEC-034, `#1e5c8d`) is now unused and removed. User also asked for links to render semi-bold, and for a plain (no-link) column to be added to the PME table for a direct visual comparison.
+
+### Decision
+`--color-link: light-dark(var(--palette-blue-7), var(--palette-blue-3))`. `--palette-blue-6` removed from palette.css (orphaned, single-use, never shipped).
+
+`table.css`: `.multilayered-table td a:not(.router-link-exact-active)` gets `font-weight: var(--font-weight-bold)` (600) in addition to the link color, so links read as visually distinct from the plain-weight numeric text around them.
+
+`PME - Monitoring - Asset allocation - Alloq.html`: added a trailing "Reference (no link)" column — plain `0.0 EUR` text, no `<a>` wrapper — across all 38 data rows, purely as a side-by-side comparison aid. Not a real data column.
+
+### Consequences
+- Net effect after DEC-033/034/035: `--color-link` ends up back at its original value (blue-7) but is now a properly independent token (no longer aliased to `--color-accent-primary`), and links are bolder and underline-on-hover — genuine improvements survive even though the color itself round-tripped.
+- The comparison column is a temporary visual aid; remove it from the HTML once the styling is confirmed, since it doesn't reflect real portfolio data.
+
+## DEC-036 — Row type icons are tenant-configurable, not fixed per level
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+The multilayered table's row type icons (briefcase for portfolio/total, pie chart for return/matching, folder for allocation group) were implemented as a fixed level→icon mapping in the static HTML trial. The user clarified this mapping is not universal: which icon appears at which level is set per tenant, not hardcoded to a specific level number across all tenants.
+
+### Decision
+Treat the level→icon assignment as tenant configuration, not a fixed design-system rule. The three icon choices (briefcase-line/fill, pie-chart-2-line/fill, folder-chart-2-line/fill) and their muted color treatment remain the shared visual language, but which icon maps to which nesting level must come from tenant-level config in the real implementation, not be assumed constant.
+
+### Consequences
+- The current static HTML/CSS/JS trial (assets/js/multilayered-table.js, table.css `.row-type-icon--*` classes) hardcodes level 0/1/2 → portfolio/return/allocation for demo purposes only. This is not the production data-binding approach.
+- When this moves from trial into the real app, the icon-per-level mapping needs to be sourced from tenant configuration (not hardcoded in component logic), while the icon set, line/fill swap behavior, and muted styling stay fixed per the design system.
+- No token or CSS change needed now — this is a note for whoever wires the real data binding.
+
+## DEC-037 — BandwidthRange rebuilt as a Vue SFC, not React, replacing bandwidth.css
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User brought a detailed component spec from a separate Claude Chat session, written as a React/TypeScript component (`BandwidthRange.tsx`) with its own placeholder CSS variable names (`--text-success`, `--text-warning`, `--text-danger`, `--border`, etc.). Two problems: (1) every saved HTML snapshot in this repo shows clear Vue signatures (`data-v-*` scoped attributes, `<!--v-if-->`, Vue Router `router-link-active` classes) — the actual Alloq product is Vue, not React, so a React component wouldn't plug into the real codebase; (2) this repo (`alloq-themes`) has no component framework at all — it's a static token/CSS/vanilla-JS library, and the spec's color variables don't correspond to any token defined here.
+
+### Options considered
+1. Build exactly as specified (React/TSX) — fastest to match the pasted spec literally, but produces an artifact incompatible with the actual Vue-based product.
+2. Build a framework-agnostic vanilla version (extending the current `bandwidth.css` SVG approach) — stays within this repo's existing pattern, but requires re-deriving from scratch and diverges further from the spec's component-based structure.
+3. Build a Vue SFC (`BandwidthRange.vue`), translating the spec's colors onto this repo's existing `--color-*` tokens — matches the real product's framework; new to this repo but not to the target codebase.
+
+### Decision
+Vue SFC, `assets/vue/BandwidthRange.vue` (+ `assets/vue/BandwidthRangeDemo.vue` per the spec's demo/story deliverable). Colors mapped 1:1 from the spec's placeholder names onto existing tokens:
+
+| Spec name | This repo's token |
+|---|---|
+| `--text-success` | `--color-status-positive-accent` |
+| `--text-warning` | `--color-status-warning-accent` |
+| `--text-danger` | `--color-status-negative-accent` |
+| safe-zone wash | `--color-status-positive-bg` |
+| warning-shoulder wash | `--color-status-warning-bg` |
+| `--border` | `--color-border-default` |
+| `--text-muted` | `--color-text-muted` |
+| `--text-primary` | `--color-text-primary` |
+| `--text-secondary` | `--color-text-secondary` |
+
+Icons: Tabler (as specced) has no precedent in this repo — substituted Remix Icon equivalents (`checkbox-circle-line`/`alert-line`/`close-circle-line` for the status pill, `arrow-left/right-double-line` for card overflow chevrons), consistent with every other icon added this session.
+
+Boundary confirmation (per spec's explicit ask): `current === lowerBound` or `=== upperBound` is never `'exceeded'`; the given `getStatus` precedence puts it in `'warning'` (it sits at the edge of the shoulder zone) since `warn > 0` whenever bounds differ. Implemented verbatim, not reinterpreted.
+
+### Consequences
+- This is the first Vue SFC ever added to this repo. `assets/vue/` is a new top-level asset category alongside `css/js/fonts/icons/images` — worth establishing as the convention if more framework components follow, or reconsidering if this repo should stay markup-agnostic.
+- `bandwidth.css` (the current SVG-based visualization) is NOT deleted — this is a new component living alongside it. Swapping the real app's usage from the old visualization to `BandwidthRange.vue` is a decision for whoever integrates this into the live `productone/frontend` codebase, not something this repo can do itself.
+- The `--font-family-mono`, `--radius-full`, `--font-weight-medium` etc. tokens referenced already exist in this repo's scale.css; no new tokens were introduced for this component.
+
+## DEC-038 — Preview BandwidthRange live in PME table via Vue CDN + plain-JS port
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User wanted to see the new `BandwidthRange` component (DEC-037) actually rendered in place of the old SVG visualization, inside the real PME table, rather than only in the isolated demo file. This repo's saved HTML pages have no build step and may be opened via `file://`, where runtime `.vue` SFC compilation (e.g. via a browser-side SFC loader) is unreliable — such loaders fetch the `.vue` file over XHR, which is blocked by CORS under `file://`.
+
+### Decision
+Added `assets/js/bandwidth-range.js` — a plain-JS port of `BandwidthRange.vue` using `Vue.defineComponent` with a template string, loaded via the Vue 3 global CDN build (`unpkg.com/vue@3/dist/vue.global.js`). This is a preview-only mechanism: it mounts one Vue app per `.bwr-mount` element (props read from `data-*` attributes) via a `DOMContentLoaded` listener. Styling lives in a new `assets/css/components/bandwidth-range.css`, a global (unscoped) mirror of the SFC's `<style scoped>` block.
+
+In `PME - Monitoring - Asset allocation - Alloq.html`, replaced all 9 old `.bandwidth-visualization` SVG blocks (3 per row × 3 rows with bandwidth data: "Benchmark weight bandwidth", "Forecast weight bandwidth", "Benchmark bandwidth projection") with `.bwr-mount` divs. Real underlying data was extracted from each row's existing backtrace-linked cells rather than invented:
+
+| Bandwidth column | current | target/lower/upper source |
+|---|---|---|
+| Benchmark weight bandwidth | `factualWeight` | `benchmarkWeightAllocation` / `benchmarkWeightLowerLimit` / `benchmarkWeightUpperLimit` |
+| Forecast weight bandwidth | `factualWeight` | `forecastWeightAllocation` / `forecastWeightLowerLimit` / `forecastWeightUpperLimit` |
+| Benchmark bandwidth projection | `newFactualWeight` | same benchmark triplet as above |
+
+### Consequences
+- `assets/js/bandwidth-range.js` and `assets/vue/BandwidthRange.vue` must be kept in sync manually — they are two representations of the same component (documented in both files' header comments). Any future prop/logic change to the component needs updating in both places, or this preview mechanism should be retired once the real app adopts the `.vue` SFC directly.
+- This is the only page in the repo pulling in an external CDN script. It's scoped to this one file and commented as preview-only — not a precedent for general dependency use in this repo.
+- Old `bandwidth.css` and its `.bandwidth`/`.bandwidth-visualization` classes are still defined (unused now in this specific file, but not deleted — other saved pages may still reference them).
+
+## DEC-039 — BandwidthRange card visual refined per reference mockup; bandwidth table columns widened
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User shared three reference screenshots (ok/warning/exceeded states) from the original Claude Chat exploration, showing a more refined card layout than the first pass: a header line (pulse icon + metric label + auto-computed "bandwidth ±X%"), the status pill moved to the top-right, current value and delta shown inline on one line instead of stacked, softer/more translucent safe-zone and warning-shoulder washes, and a hollow-ring dot (instead of solid fill) for the exceeded state so it doesn't visually merge into the solid red breach fill.
+
+### Decision
+Updated `card` size layout in `BandwidthRange.vue` (+ the `bandwidth-range.js` plain-JS port + `bandwidth-range.css`):
+- New optional header row, shown when `label` is provided: pulse icon + `"{label} · bandwidth ±{half}{unit}"` (half-band width auto-computed, not a new prop) on the left, status pill on the right.
+- If no `label` is given, the pill falls back to sitting inline next to the value/delta line, so status is never dropped entirely.
+- Value + delta now render on one flex row (`align-items: baseline`) instead of stacked blocks.
+- `deltaText` gained a third variant for `warning`: "approaching upper/lower limit" (previously only had "within limits" for both ok/warning, and "past X limit" for exceeded).
+- Safe-zone/shoulder washes: `color-mix()` down to 55%/70% opacity for a softer look, matching the reference's muted sage/khaki tones.
+- Status pill gained a `border-s` outline in the status color at 45% mix, matching the outlined-badge look in the reference (previously background-tint only, no border).
+- Exceeded-state dot (card only): larger, `border-l` thick ring using `--color-surface-raised` as the fill instead of the status color, so it reads as a hollow marker sitting on top of the breach fill.
+- Removed the old `.bandwidth-range__footer` block (pill + delta) — superseded by the new header/value-row layout.
+
+Also, in `PME - Monitoring - Asset allocation - Alloq.html`: added a `bandwidth-col` class to the three affected `<th>` headers (Benchmark weight bandwidth, Forecast weight bandwidth, Benchmark bandwidth projection) and a matching `table.css` rule (`min-width: 18rem`, up from the table default `11.25rem`) so the row-size track has more room.
+
+### Consequences
+- The demo file's card examples were updated with a `label` ("Active risk") and realistic bounds (7.8/8.6/9.4) matching the reference screenshots, so the new header renders in the demo.
+- `bandwidth-range.js`/`.vue`/`.css` remain three synced copies (per DEC-038) — this is now the second round of changes that had to be applied to all three; worth remembering if a fourth revision comes.
+- The interactive "Move current" slider + "In band/Near/Over" quick-set buttons visible in the reference screenshots were NOT built — they read as the reference's own exploration/demo tooling, not part of the component spec's deliverables. Flagging in case that interactivity is actually wanted in `BandwidthRangeDemo.vue`.
+
+## DEC-040 — BandwidthRange colors: reference palette steps directly, not --color-status-*
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+The shared `--color-status-positive-accent` (light: `green-5` `#00cc5b`) and `--color-status-negative-accent` (light: `red-3` `#ff2040`) are tuned as vivid accents for small marks — icons, borders, badges. Used for BandwidthRange's 30px current-value text, they read as neon/garish rather than the calmer forest-green/deep-maroon tone in the user's reference screenshots. This repo already has a precedent for this exact tradeoff: `bandwidth.css` bypasses shared status tokens and references `--palette-red-2` / `--palette-yellow-2` directly, with a comment explaining vivid signal colors need their own tuning separate from the shared semantic layer.
+
+### Decision
+`BandwidthRange`'s `--bwr-*` tokens now reference `--palette-*` directly instead of `--color-status-*`:
+
+| Token | Old (status-accent) | New (direct palette) |
+|---|---|---|
+| `--bwr-ok` | `light-dark(green-5, green-4)` | `light-dark(green-6, green-4)` — light: muted forest `#6a9955` |
+| `--bwr-warning` | `light-dark(yellow-3, yellow-2)` | unchanged — already reads well |
+| `--bwr-danger` | `light-dark(red-3, red-2)` | `light-dark(red-4, red-2)` — light: deep maroon `#3b0911` |
+| `--bwr-safe-wash` | `status-positive-bg` (green-0, near-white) | `green-2` `#c7d1a9` (visible sage tint) |
+| `--bwr-warning-wash` | `status-warning-bg` (yellow-0/5) | `brown-0` `#c7a98d` (warm tan/khaki, matches reference) |
+
+Dark-theme values kept vivid (unchanged or already vivid) since bright accents read fine against dark surfaces — this asymmetry (muted light / vivid dark) mirrors the same logic already applied to the `--color-series-*` ramp (DEC-029).
+
+### Consequences
+- These are component-scoped tokens (`--bwr-*`), not new shared semantic tokens — no change to `--color-status-*` or any other component that uses them.
+- `--bwr-safe-wash` and `--bwr-warning-wash` are now flat (not `light-dark()`-wrapped) — same simplification `bandwidth.css` already uses for `--bw-range`. They're used via `color-mix()` at reduced opacity (DEC-039), so a single mid-tone value reads reasonably as a translucent tint in both themes.
+
+## DEC-041 — BandwidthRange ok/warning: slate (light) / teal (dark) instead of green/yellow
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User asked to replace the green (ok) and yellow (warning) colors with teal, specifying the ok color should read softer than the warning color, and that light theme should use slate rather than teal. This matches palette.css's own documented hue intent: teal is annotated as "dark-theme background ramp," while slate is "used for UI accents that need a hint of blue temperature" — explicitly the light-theme-appropriate cool accent family. Red (danger) was not mentioned and stays unchanged.
+
+### Decision
+| Token | Light (slate) | Dark (teal) |
+|---|---|---|
+| `--bwr-ok` (softer) | `slate-4` `#8a9fa8` | `teal-1` `#8dbdc7` |
+| `--bwr-warning` (bolder) | `slate-6` `#5a6a72` | `teal-4` `#4a7a84` |
+| `--bwr-safe-wash` | `slate-3` `#dde3ea` | `teal-1` |
+| `--bwr-warning-wash` | `slate-5` `#7a8892` | `teal-3` `#5d7f84` |
+
+Ok and its wash share the same "softer" step per family; warning and its wash share the "bolder" step — keeping the accent and its background tint visually paired.
+
+### Consequences
+- `--bwr-warning` no longer aliases `--color-status-warning-accent` (yellow) — fully decoupled from the shared status palette now, consistent with `--bwr-ok`/`--bwr-danger`.
+- The component now uses four palette families total: slate + teal (ok/warning, theme-split) and red (danger, both themes) — no green, yellow, or brown left in this component.
+
+## DEC-042 — Zone tints darker in dark theme; value color reverts to green; target dash theme-aware
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+Three issues surfaced after DEC-041's slate/teal switch: (1) the dark-theme zone tints (`teal-1`/`teal-3`) were too light relative to the actual dark surface, standing out as a bright patch instead of sitting close to the background; (2) the user wants the current-value readout specifically to read green (a clear status signal), independent from the zone tint hue; (3) the target tick was set to solid white in DEC-039, which is invisible against a light-theme track — it needs to be dark in light mode, white in dark mode. Also asked for the tick to be taller again.
+
+### Decision
+- `--bwr-ok` (current-value/dot color) reverted to green: `light-dark(green-6, green-4)` — same values as DEC-040, decoupled from the zone-tint token now that zone tints are slate/teal (DEC-041) and value color is green.
+- `--bwr-warning` stays slate/teal (DEC-041, unchanged) — only the "ok" value color was called out.
+- Dark-theme zone tints darkened: `--bwr-safe-wash` teal-1→teal-6, `--bwr-warning-wash` teal-3→teal-5 — both now sit close to the dark surface rather than glowing against it. Light-theme zone tints (slate-3/slate-5) unchanged.
+- Target tick: `background-color: light-dark(var(--color-text-primary), var(--palette-white))` — dark in light theme, white in dark theme. Height increased 180%→220%.
+
+### Consequences
+- `--bwr-ok` and `--bwr-safe-wash` are now visually decoupled (green value text over a slate/teal-tinted zone) — this is intentional per the user's explicit ask, not an oversight.
+- Warning's value color and warning-wash still share the slate/teal family (only ok was asked to diverge to green) — worth confirming this asymmetry is actually wanted, or if warning should eventually get the same value/wash split.
+
+## DEC-043 — Current-value text is neutral; status icon (checkmark/warning/error) precedes it
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User asked for the current-value text to use the plain default text color instead of status-coloring it, with a status icon (green checkmark / yellow warning / red error) placed before the text to carry the signal instead. This applies to both `card` and `row` sizes.
+
+### Decision
+`.bandwidth-range__current` and `.bandwidth-range__value` now use `var(--color-text-primary)` unconditionally. A new `.bandwidth-range__status-icon` element (reusing the existing `STATUS_ICON_PATH` set already built for the pill) is inserted immediately before the value text in both sizes, colored per `[data-status]`:
+- ok → `--bwr-ok` (green)
+- warning → `--color-status-warning-accent` (yellow) — deliberately NOT `--bwr-warning` (slate/teal, used for the track/zone tint per DEC-041/042). A small icon can carry the vivid yellow accent fine per DEC-040's reasoning (only large text looked garish); the track's slate/teal choice is a separate, deliberate design decision that stays untouched.
+- exceeded → `--bwr-danger` (red)
+
+Demo file (`BandwidthRangeDemo.vue`) row examples expanded from 6 to 7, each given an explicit `note` field ("ok" / "warning — ..." / "exceeded — ...") rendered in a new table column, so warning and exceeded states are unambiguous at a glance rather than requiring the viewer to mentally compute status from bounds.
+
+### Consequences
+- The component now has THREE distinct color concerns that can diverge per status: track/zone tint (`--bwr-ok`/`--bwr-warning`/`--bwr-danger`, slate/teal/red), status icon color (green/yellow/red), and value text color (always neutral). This is intentional layering, not an oversight — but worth keeping straight if further color requests come in, since "the color" could now mean any of the three.
+- `--bwr-status-color` (used by the pill and previously by the value text) is now only consumed by the pill.
+
+## DEC-044 — Row track taller, softer zone tints, value text as link-blue, green pops in light
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+Four refinements requested together: (1) the row-size track felt thin; (2) the safe-zone and warning-shoulder tints were too strong; (3) the current-value text (neutral since DEC-043) should read as a link — blue; (4) with the value text no longer green, `--bwr-ok`'s light-theme value (muted `green-6`, chosen in DEC-042 specifically to avoid looking neon at 30px text) could afford to be more vivid since it now only drives a small status-icon checkmark.
+
+### Decision
+- `.bandwidth-range--row .bandwidth-range__track` height: `0.5rem` → `0.65rem`.
+- Safe-zone tint: `color-mix(... 55%, transparent)` → `40%`. Warning-shoulder tint: `70%` → `50%`.
+- `.bandwidth-range__current` and `.bandwidth-range__value` color: `--color-text-primary` → `--color-link`.
+- `--bwr-ok` light-theme value: `green-6` `#6a9955` → `green-5` `#00cc5b` (dark unchanged, `green-4`).
+
+### Consequences
+- The value text now visually reads as a link (blue, matching the rest of the app's link color) even though it isn't a clickable `<a>` — intentional per the request, worth flagging if this causes user confusion about clickability in the real app.
+- `--bwr-ok`'s "pop more in light theme" only works because DEC-043 already decoupled the icon color from the value text color — if a future request moves value text back to status-coloring, this green may need re-muting to avoid the original neon-at-30px problem DEC-042 solved.
+
+## DEC-045 — Remove standalone status icon; medium-weight value text; borderless pill; airier track
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+Four cleanups: (1) the standalone status-icon (checkmark/warning/error) added in DEC-043 before the value text was removed — the status pill already carries this signal, making the extra icon redundant; (2) the value text should be explicit medium weight; (3) the pill's outlined border (added in DEC-039) needed to go; (4) the safe-zone/shoulder fills touched the track's own border (added in DEC-039) with no inset, looking cramped.
+
+### Decision
+- Removed `.bandwidth-range__status-icon` element (both `card` value-row and `row` track-wrap) and its CSS block from `.vue`, `.js`, and `.css`. `STATUS_ICON_PATH`/`statusIconPath` remain — still used by the pill.
+- `.bandwidth-range__value` and `.bandwidth-range__current` font-weight: literal `500` → `var(--font-weight-medium)` token reference (same value, now token-driven); `.value` gained an explicit weight it didn't have before.
+- `.bandwidth-range__pill` border removed — background tint + status-colored text carry the signal alone now.
+- `.bandwidth-range__track` gained `padding: 0.1875rem`. Since absolutely-positioned children (`safe-zone`, `shoulder`, ticks, dot) are offset relative to the padding box per the CSS spec, this insets all of them automatically without touching their individual `top`/`left`/`width` rules — they now sit with a small gap from the track's own border instead of touching it edge-to-edge.
+
+### Consequences
+- `--bwr-ok`'s "pop more in light theme" (DEC-044) now serves the pill exclusively, not a second checkmark icon — one less place this color needs to stay legible.
+- Removing the icon simplifies the row-size visual back to: label → track (with inset zones) → blue medium-weight value, no icon clutter.
+
+## DEC-046 — Add "Current" label, second compare marker, full-width track
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User shared a reference screenshot showing: an uppercase "CURRENT" label paired with the value on one row, a second marker (hollow ring) alongside the current-value dot, and a full-width track. Clarified via questions: the second marker represents a genuinely new concept — a comparison value (e.g. forecast/projection) — requiring a new prop, not just a styling change. The existing absolute lower/target/upper tick-label row stays as-is (not switched to the reference's ±delta-from-target style).
+
+### Decision
+- New optional prop `compareValue?: number` (card size only). When provided, renders `.bandwidth-range__compare-dot` — a hollow ring in `--color-accent-primary` (blue), deliberately independent of `--bwr-status-color` so it can never be mistaken for a second status reading of the same value.
+- `.bandwidth-range__value-row` restructured: `justify-content: space-between` with a new `.bandwidth-range__current-label` ("Current", uppercase, muted, small) on the left and a `.bandwidth-range__value-group` wrapper (current value + delta + inline pill) on the right.
+- `.bandwidth-range` root gained `width: 100%` so the track reliably fills its container regardless of parent layout context (flex/grid siblings could otherwise shrink it to content width).
+- Demo gained a 4th card example passing `compareValue`, to show the new marker without needing a real integration.
+
+### Consequences
+- This is the first prop addition to the component since its initial build (DEC-037) — `compareValue` needs to be threaded through if/when the real Vue app adopts this component, and through the PME table integration (DEC-038) if the "Benchmark bandwidth projection" column's dual-value nature (current vs. projected) should actually use this marker instead of being its own separate BandwidthRange instance.
+- Row size does not support `compareValue` — the reference only showed this in a card layout; extending to row size wasn't requested and would need its own compact treatment.
+
+## DEC-047 — Strip BandwidthRange card down to just "Current" + track
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User asked to simplify the card size significantly: remove the `compareValue` second marker entirely (added in DEC-046), remove the label-driven header ("Active risk · bandwidth ±X%" + pulse icon), remove the status pill, remove the delta-vs-target text, and remove the lower/target/upper tick-value labels below the track.
+
+### Decision
+Card size is now just: "Current" label + current value (top), track with zones/ticks/dot (below) — no header, no pill, no delta, no tick-value labels. Removed entirely from `.vue`/`.js`/`.css`:
+- `compareValue` prop, `comparePct` computed, `.bandwidth-range__compare-dot`
+- `.bandwidth-range__header`, `.bandwidth-range__header-title`, `bandwidthLabel` computed, `PULSE_ICON_PATH`
+- `.bandwidth-range__pill` (both header and inline variants), `STATUS_LABEL`/`statusLabel`, `STATUS_ICON_PATH`/`statusIconPath` (now fully unused — only the pill consumed them)
+- `.bandwidth-range__delta`, `deltaText` computed
+- `.bandwidth-range__tick-labels` and its lower/target/upper value+caption markup
+
+Tick marks themselves (the physical lower/upper/target lines on the track) stay — only the text labels below were removed. `label` prop stays (still used by `row` size's own label), but card examples in both demo files no longer pass it since it has no card-size effect anymore.
+
+### Consequences
+- The component's status (`ok`/`warning`/`exceeded`) is now communicated ONLY through the dot's color and the breach fill — no text anywhere states the status in words. If a future accessibility pass wants status conveyed via text (not just color), this will need to be reintroduced in some form (e.g. an aria-label on the dot).
+- Significantly less surface area to keep in sync across the three files — this reverses most of DEC-043 through DEC-046's additions.
+
+## DEC-048 — Scale values below track; icon-in-dot (green/yellow/red); yellow warning fill; cell-sized value; PME cells → card
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+Batch of card refinements + a request to see them in the PME table. Every change is card-size-specific, so PME's bandwidth cells were switched from `row` to `card` to make them testable there (flagged to the user as a notable call).
+
+### Decisions
+1. **Scale values below the track** — re-added the lower / target / upper numeric values (positioned under their ticks), but with NO text captions (the "lower"/"target"/"upper" words removed in DEC-047 stay gone). New `.bandwidth-range__scale` / `__scale-value`.
+2. **Icon-in-dot** — the status dot is enlarged to 0.875rem (~14px) and now contains a glyph (Remix check / exclamation / cross). Dot fill is the vivid status color: green (ok), **yellow** (warning), red (exceeded) — so `--bwr-warning` moved from slate/teal to `light-dark(yellow-3, yellow-2)` and `--bwr-danger` from the muted red-4 to vivid `red-3`. Glyph color via `--bwr-icon-color`: dark (`--color-text-on-accent`) on the bright green/yellow, white on the saturated red. The old exceeded "hollow ring" dot override is removed (the icon + border now distinguish the dot from the breach fill).
+3. **Yellow warning fill** — mirrors the red breach fill but inside the band: a `--bwr-warning` (yellow) bar from the nearer wall to the current dot when status is `warning`. New `warningFill` computed + `.bandwidth-range__warning-fill`.
+4. **Current value → table-cell size** — `.bandwidth-range__current` font-size 1.875rem → `var(--font-size-s)` (matches a standard cell). Weight/color unchanged (medium, link-blue).
+5. **Demo note text removed** — the "warning — inside the upper shoulder" style captions deleted from both demo files.
+6. **PME bandwidth cells → card** — all 9 `.bwr-mount` divs switched `data-size="row"` → `"card"`.
+
+### Consequences
+- Static zone tints (slate/teal) now coexist with vivid dynamic fills (yellow warning / red breach) layered on top — a lot going on in the warning/exceeded states; watch for visual busyness.
+- The "Current" label now repeats in every PME bandwidth cell (9×). Slightly redundant against the column header — flag for the user; easy to hide in a table context if unwanted.
+- PME table rows are now taller (each bandwidth cell is a ~3-line card). Acceptable for a prototype/test page.
+- `--bwr-warning` no longer feeds only the dot — it now also feeds the warning fill; both are yellow, consistent.
+
+## DEC-049 — Row size gets a hover popover for lower/target/upper; PME reverts to row
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+Card size (DEC-048) was confirmed as the right widget variant, but too large for table cells. The existing `row` size already matched most of what's wanted for tables — value after the track, no "Current" label — it just never showed the lower/target/upper scale values at all. Ask: bring them back, hidden until hover, in a popover.
+
+### Decision
+The `.bandwidth-range__scale` block (lower/target/upper values, no captions — DEC-048) now renders for BOTH sizes. For `row`, it gets a `.bandwidth-range__scale--popover` modifier: `position: absolute`, hidden (`opacity: 0; pointer-events: none`), revealed via `:hover`/`:focus-within` on `.bandwidth-range--row`. Pure CSS, no JS state.
+
+PME's 9 `.bwr-mount` divs switched back `data-size="card"` → `"row"` (card was only switched in for DEC-048's testing round).
+
+### Consequences
+- **Known limitation:** the popover is positioned relative to the row component itself, not portaled to `document.body`. Inside `.data-table__main`, which has `overflow: auto` (data-table.css), the popover can get clipped if the row is near the container's edge — a real tooltip library (e.g. the app's existing Tippy.js integration, visible in other saved pages' `<style>` blocks) solves this via portaling + dynamic positioning. This trial ships the simple CSS version; flagged for follow-up if clipping turns out to be a problem in practice.
+- Card's warning/breach fills and icon-in-dot stay gated to `size === 'card'` — row's dot has no icon and the track has no dynamic fills, keeping the compact table variant visually quiet apart from color.
