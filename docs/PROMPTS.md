@@ -1422,3 +1422,16 @@ lets fix that later on. this is fine for now. In light mode tho i want the range
 
 **Outcome:**
 Shoulder tint in light theme is one step lighter. Popover clipping issue (data-table__main overflow) deferred per user, already logged in DEC-049.
+
+### [2026-07-01] — Integrate BandwidthRange into Dashboard's Rebalance widget
+
+**Prompt:**
+Can you add the visual also to the widget on dashboard html
+
+**Tokens / files touched:**
+- Dashboard - Alloq.html — replaced all 12 old bandwidth-visualization SVG widgets (nested in per-fund/per-cluster disclosure headers within the "Rebalance" card) with .bwr-mount (row size); added Vue CDN + bandwidth-range.css/js links
+
+**Outcome:**
+Found 12 real widgets, not 5 — first grep pass missed the ones with --error/--warning status modifier classes. Replaced all 12 with values chosen to reproduce each one's original status (5 ok, 5 exceeded, 1 warning, plus the ok "Cluster Onroerend goed" makes 12 total).
+
+**Related decision:** DEC-050

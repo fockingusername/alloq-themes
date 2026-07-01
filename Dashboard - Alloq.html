@@ -33,6 +33,7 @@
 		<link rel="stylesheet" href="assets/css/components/tag.css" />
 		<link rel="stylesheet" href="assets/css/components/button.css" />
 		<link rel="stylesheet" href="assets/css/components/bandwidth.css" />
+		<link rel="stylesheet" href="assets/css/components/bandwidth-range.css" />
 		<link rel="stylesheet" href="assets/css/components/notification.css" />
 		<link rel="stylesheet" href="assets/css/components/input.css" />
 		<link rel="stylesheet" href="assets/css/components/layout.css" />
@@ -3233,6 +3234,11 @@
 			}
 		</style>
 			<script src="assets/js/multilayered-table.js" defer></script>
+			<!-- BandwidthRange preview only (DEC-038) — Vue is not otherwise
+			     used in this static theme repo; loaded here purely so this
+			     trial component can be seen rendered in context. -->
+			<script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
+			<script src="assets/js/bandwidth-range.js" defer></script>
 	<style>
 		.series-chart {
 			display: flex;
@@ -3807,53 +3813,7 @@
 																		>
 																			Matching
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="53.203263390412936%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="40.5" data-target="40" data-lower="35" data-upper="45" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -3919,53 +3879,7 @@
 																		>
 																			Return
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="46.796736609587164%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="59.5" data-target="60" data-lower="55" data-upper="65" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4031,53 +3945,7 @@
 																		>
 																			Cluster Onroerend goed
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization bandwidth-visualization--error"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="90%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="15.5" data-target="12" data-lower="10" data-upper="14" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4143,53 +4011,7 @@
 																		>
 																			Cluster Hoogrentend
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization bandwidth-visualization--error"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="90%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="17.5" data-target="25" data-lower="20" data-upper="30" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4255,53 +4077,7 @@
 																		>
 																			Cluster Aandelen
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization bandwidth-visualization--error"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="90%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="63" data-target="58" data-lower="55" data-upper="61" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4430,53 +4206,7 @@
 																		>
 																			Matching
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="41.997611719220814%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="39" data-target="40" data-lower="35" data-upper="45" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4542,53 +4272,7 @@
 																		>
 																			Return
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="58.002388280779186%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="61" data-target="60" data-lower="55" data-upper="65" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4751,53 +4435,7 @@
 																		>
 																			Matching
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization bandwidth-visualization--error"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="47" data-target="40" data-lower="35" data-upper="45" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4865,53 +4503,7 @@
 																		>
 																			Return
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization bandwidth-visualization--error"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="90%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="52" data-target="60" data-lower="55" data-upper="65" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -4979,53 +4571,7 @@
 																		>
 																			Cluster Onroerend goed
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="30.731606702397944%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="12.2" data-target="12" data-lower="10" data-upper="14" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -5091,53 +4637,7 @@
 																		>
 																			Cluster Hoogrentend
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization bandwidth-visualization--error"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="90%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="32" data-target="25" data-lower="20" data-upper="30" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""
@@ -5205,53 +4705,7 @@
 																		>
 																			Cluster Aandelen
 																		</h4>
-																		<div
-																			data-v-c1d1a0a9=""
-																			data-v-4bd1e4bb=""
-																			class="bandwidth"
-																		>
-																			<span data-v-2788e09f="" class="trigger"
-																				><svg
-																					data-v-1297d35a=""
-																					aria-hidden="true"
-																					class="bandwidth-visualization bandwidth-visualization--warning"
-																					height="100%"
-																					width="100%"
-																					xmlns="http://www.w3.org/2000/svg"
-																				>
-																					<rect
-																						data-v-1297d35a=""
-																						x="0"
-																						y="37.5%"
-																						height="25%"
-																						width="100%"
-																						class="bandwidth-visualization__bar"
-																					></rect>
-																					<rect
-																						data-v-1297d35a=""
-																						x="10%"
-																						y="37.5%"
-																						height="25%"
-																						width="80%"
-																						class="bandwidth-visualization__boundary"
-																					></rect>
-																					<circle
-																						data-v-1297d35a=""
-																						cx="50%"
-																						cy="50%"
-																						r="0.25em"
-																						class="bandwidth-visualization__target"
-																					></circle>
-																					<rect
-																						data-v-1297d35a=""
-																						x="25.296420939551115%"
-																						y="12.5%"
-																						height="75%"
-																						width="0.25em"
-																						class="bandwidth-visualization__marker"
-																					></rect></svg
-																			></span>
-																		</div>
+																		<div class="bwr-mount" data-current="60.3" data-target="58" data-lower="55" data-upper="61" data-unit="%" data-size="row"></div>
 																	</div>
 																	<span
 																		data-v-387dd68a=""

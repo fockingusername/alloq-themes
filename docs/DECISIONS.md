@@ -1362,3 +1362,34 @@ PME's 9 `.bwr-mount` divs switched back `data-size="card"` → `"row"` (card was
 ### Consequences
 - **Known limitation:** the popover is positioned relative to the row component itself, not portaled to `document.body`. Inside `.data-table__main`, which has `overflow: auto` (data-table.css), the popover can get clipped if the row is near the container's edge — a real tooltip library (e.g. the app's existing Tippy.js integration, visible in other saved pages' `<style>` blocks) solves this via portaling + dynamic positioning. This trial ships the simple CSS version; flagged for follow-up if clipping turns out to be a problem in practice.
 - Card's warning/breach fills and icon-in-dot stay gated to `size === 'card'` — row's dot has no icon and the track has no dynamic fills, keeping the compact table variant visually quiet apart from color.
+
+## DEC-050 — Integrate BandwidthRange into the Dashboard's Rebalance widget
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User asked for the component to also appear in the Dashboard's existing "Rebalance" widget, which already used the old `bandwidth.css` SVG visualization inline in nested disclosure headers (per-fund, per-cluster breakdowns). A first pass found only 5 instances via `class="bandwidth-visualization"`, but that search missed widgets carrying a status modifier (`bandwidth-visualization--error`, `--warning`) since the exact-string match didn't account for the extra class text before the closing quote — the real count is 12.
+
+### Decision
+Replaced all 12 old SVG widgets with `.bwr-mount` (`row` size, matching the compact inline context of a disclosure header) in `Dashboard - Alloq.html`. Since no real target/lower/upper/current data is embedded in this static capture (unlike PME's backtrace-linked cells), values were chosen to reproduce each original widget's status modifier:
+
+| # | Context | Bounds (lower/upper/target) | Current | Status |
+|---|---|---|---|---|
+| 0,5 | Matching | 35/45/40 | 40.5, 39 | ok |
+| 1,6 | Return | 55/65/60 | 59.5, 61 | ok |
+| 2 | Cluster Onroerend goed | 10/14/12 | 15.5 | exceeded (past upper) |
+| 9 | Cluster Onroerend goed | 10/14/12 | 12.2 | ok |
+| 3 | Cluster Hoogrentend | 20/30/25 | 17.5 | exceeded (past lower) |
+| 10 | Cluster Hoogrentend | 20/30/25 | 32 | exceeded (past upper) |
+| 4 | Cluster Aandelen | 55/61/58 | 63 | exceeded (past upper) |
+| 11 | Cluster Aandelen | 55/61/58 | 60.3 | warning (upper shoulder) |
+| 7 | Matching | 35/45/40 | 47 | exceeded (past upper) |
+| 8 | Return | 55/65/60 | 52 | exceeded (past lower) |
+
+Added the Vue CDN script + `bandwidth-range.css`/`.js` links to the page head, same pattern as the PME table integration (DEC-038).
+
+### Consequences
+- This is now the SECOND page (after PME) pulling in the Vue CDN — still scoped/commented as preview-only, not a general dependency.
+- The values are fabricated to match each widget's pre-existing status, not real portfolio data — same caveat as DEC-038's PME integration.
