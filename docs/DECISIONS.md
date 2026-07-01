@@ -1393,3 +1393,153 @@ Added the Vue CDN script + `bandwidth-range.css`/`.js` links to the page head, s
 ### Consequences
 - This is now the SECOND page (after PME) pulling in the Vue CDN — still scoped/commented as preview-only, not a general dependency.
 - The values are fabricated to match each widget's pre-existing status, not real portfolio data — same caveat as DEC-038's PME integration.
+
+## DEC-051 — Update backtrace page to current tokens via link + compatibility shim
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User added a new saved page, `backtrace - products 26-10-2025 - Transactions - Alloq.html`, and asked for it to reflect the current light theme. Unlike every other saved page in this repo (which link external `assets/css/tokens/*.css`), this one had the entire pre-refactor design system inlined as a single `<style data-vite-dev-id=".../main.css">` block (770 lines: palette + base + elements + utilities bundled together) using deprecated token names that predate DEC-004/006/009/010/024/025 — `--palette-light-0..6`, `--palette-dark-0..6`, `--palette-blue-400/500`, `--color-brand-secondary`, `--color-info/positive/negative/neutral` with `-strong`/`-subtle` suffixes. These names don't exist anywhere in the current token files.
+
+Beyond that root block, ~53 more scattered usages of these same deprecated names exist across the page's individual inline component style blocks (Button.vue, Tag.vue, syntax-highlight colors, etc.) — all captured from the same old build.
+
+### Options considered
+1. Rewrite all ~53 scattered usages individually to current token names — most "correct" long-term, but extremely high-effort for a single saved snapshot page, and risks missing occurrences in a 30,000+ line file.
+2. Replace only the root stale block with current `<link>` tags, and define a compatibility shim aliasing every deprecated name onto its current equivalent, once — fixes the whole page's token resolution without touching the other ~53 sites.
+
+### Decision
+Option 2. Replaced the 770-line inline `<style data-vite-dev-id=".../main.css">` block with the standard 8 `<link>` tags every other page uses (fonts, tokens/palette, tokens/semantic, tokens/scale, tokens/component, base, elements, utilities), followed by a small shim `<style>` block aliasing every deprecated name found in the file onto its current counterpart:
+
+| Deprecated | Current |
+|---|---|
+| `--palette-blue-400/500` | `--palette-blue-3` / `--palette-blue-7` |
+| `--palette-light-0..6` | `--palette-white`, `--palette-grey-0..5` |
+| `--palette-dark-0..6` | `--palette-teal-6/7/8/8/10/11/11` |
+| `--color-black` / `--color-white` | `--palette-black` / `--palette-white` |
+| `--color-brand-secondary` | `--color-accent-secondary` |
+| `--color-{info,positive,negative,neutral}` | `--color-status-*-accent` |
+| `--color-{...}-strong` | `--color-status-*-fg` |
+| `--color-{...}-subtle` | `--color-status-*-bg` |
+
+No `assets/css/components/*.css` links were added — this page's component styles (Button.vue, Tag.vue, MultilayeredTable.vue, etc.) are already fully embedded inline from the same old capture, so adding our external component files would double up/conflict rather than help. Since those inline blocks already reference tokens by `var(--name)`, the shim alone is sufficient to bring their resolved colors current.
+
+### Consequences
+- The page's component STRUCTURE/markup stays exactly as captured (old build); only the token VALUES they resolve to are current. If this page's components have since evolved (new knobs, restructured classes) beyond what this old capture has, those changes are NOT reflected — this decision only fixes color/theme resolution, not component architecture drift.
+- If more deprecated token names surface later (usages my grep missed, e.g. non-`--palette`/`--color` prefixed names), extend the same shim block rather than reverting to a hardcoded bundle.
+
+## DEC-052 — Formulas box: theme-native black/white background; fix syntax-color light-mode contrast
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User asked for the `.formulas` box (backtrace page's formula/syntax-highlight display) to have a black background with a subtle border in dark theme, and a white background with a subtle border in light theme — plus, since white raises the bar for legibility, wanted the light-mode syntax-highlight colors made higher-contrast using darker steps already present in the existing palette families (no new hex values).
+
+Auditing `--color-syntax-*` in `assets/css/tokens/semantic.css` against a white background found 5 of 7 distinct light-mode colors failing WCAG AA (4.5:1): boolean/constant/number/string (blue-4, 3.12:1), comment (green-6, 3.33:1), function (slate-5, 3.64:1), operator (purple-0, 2.49:1), variable (green-7, 2.88:1). This affects every page using syntax highlighting, not just the backtrace page, so the fix belongs in the shared semantic token layer rather than a page-local override.
+
+### Options considered
+1. Give `.formulas` a page-local dark/light background only, leave syntax colors as-is — simplest, but light mode would be nearly unreadable (worst case 2.49:1 on white).
+2. Fix `.formulas` background/border AND raise the shared `--color-syntax-*` light values to the next viable step within each token's existing hue family.
+
+### Decision
+Option 2.
+
+`.formulas[data-v-44eead21]` (in the backtrace page): `background: light-dark(var(--palette-white), var(--palette-black))`; `border: var(--border-m) solid var(--color-border-subtle)` (previously `var(--surface-sunken)` / `var(--surface-border)` via the DEC-051 shim).
+
+`--color-syntax-*` light values (`assets/css/tokens/semantic.css`):
+
+| Token | Before → After | Contrast on white |
+|---|---|---|
+| boolean / constant / number / string | `blue-4` → `blue-7` | 3.12:1 → 6.96:1 |
+| comment | `green-6` → `slate-6` | 3.33:1 → 5.62:1 |
+| function | `slate-5` → `slate-6` | 3.64:1 → 5.62:1 |
+| operator | `purple-0` → `purple-1` | 2.49:1 → 4.04:1 |
+| variable | `green-7` → `green-8` | 2.88:1 → 16.81:1 |
+
+Notes on choices that aren't a straight "next step, same family":
+- `comment` moved from green to `slate-6` rather than a darker green — the green family has no step between `green-6` (3.33:1, fails) and `green-8` (16.81:1, near-black); `green-7` is actually *worse* (2.88:1). Comments read as de-emphasized/muted in most syntax themes anyway, so `slate-6` (which is also `--color-text-muted`'s light value) is a better semantic fit than a near-black green.
+- `function` also lands on `slate-6`, coinciding with `comment` — both are "de-emphasized" categories in this theme; the same overlap already existed intentionally among boolean/constant/number/string sharing one blue value, so a second shared value between two muted categories is consistent with the existing pattern.
+- `operator` (`purple-1`, 4.04:1) is the ceiling of a 2-step palette family and still falls short of 4.5:1. Kept anyway as the best available option within "the palettes we have" — same reasoning already documented on `function`'s dark value as "acceptable for non-text highlighting." Flagging here in case a future decision wants to add a `purple-2` darker step instead.
+- `variable` moved to `green-8` (16.81:1) to keep its green hue identity (distinct from the now-slate comment/function) while fully passing AA.
+
+Dark-theme syntax values were not touched — the user's request was scoped to light mode.
+
+### Consequences
+- Every page using `--color-syntax-*` tokens (not just the backtrace page) now renders syntax-highlighted text at AA contrast in light mode, except `operator` which is best-effort at 4.04:1.
+- `comment` and `function` are now visually identical in light mode (both `slate-6`). If a future need arises to distinguish them, a new palette step will need to be introduced under a decision entry — not a token reassignment.
+
+## DEC-053 — Revert variable syntax color from green-8 to green-6 (visual identity over strict AA)
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+DEC-052 moved `--color-syntax-variable`'s light value from `green-7` (2.88:1, fails AA) to `green-8` (16.81:1, passes) to fix contrast. User reviewed and flagged that `green-8` (`#02230e`) reads as near-black — it no longer looks green, defeating the purpose of a syntax color. Asked for `green-6` or `green-7` instead.
+
+### Options considered
+1. `green-7` (`#00af5b`) — 2.88:1, worse contrast than the pre-fix value it replaced.
+2. `green-6` (`#6a9955`) — 3.33:1, an olive-toned green; still fails strict AA but is the best contrast available among the visually-legible-as-green steps.
+
+### Decision
+`green-6`. Matches this project's existing precedent (see `function`'s dark value and `operator`'s light value in DEC-052) of accepting sub-4.5:1 contrast for syntax swatches when no palette step exists that is both clearly the right hue and AA-compliant. `--color-syntax-variable` light value: `light-dark(var(--palette-green-6), var(--palette-green-4))`.
+
+### Consequences
+- `--color-syntax-variable` light-mode contrast is now 3.33:1 (down from 16.81:1, up from the pre-DEC-052 2.88:1) — a deliberate trade of strict AA compliance for keeping a recognizable green hue.
+
+## DEC-054 — Add --palette-green-10; fix --color-syntax-variable light value to pass AA
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+- **Supersedes:** DEC-053 (light-theme value only)
+
+### Context
+DEC-053 moved `--color-syntax-variable`'s light value to `green-6` (3.33:1) to avoid `green-8`'s near-black look, but that still fails AA. No existing green step is both AA-passing and visually a clear mid-tone green — the family jumps straight from muted/vivid light tones to near-black. User supplied a specific target, `#215e06`, and asked for it to be added as a new palette step rather than picked from the existing set.
+
+### Decision
+Added `--palette-green-10: #215e06` to `assets/css/tokens/palette.css` (forest green, 7.87:1 on white). `--color-syntax-variable` light value: `green-6` → `green-10`.
+
+### Consequences
+- First "one-off" numbered palette step added out of lightness order (mirrors the DEC-034 precedent of adding `blue-6` to fill a gap, later removed) — acceptable since palette step numbers in this codebase are already not strictly monotonic by lightness.
+- `--palette-green-10` is currently only consumed by `--color-syntax-variable`'s light value; available for reuse if another token needs an AA-safe mid-tone green.
+
+## DEC-055 — Reorder green palette family to strict light-to-dark; remove unused primitives
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+CLAUDE.md/palette.css state every ramp is ordinal, 0 = lightest, ordered light-to-dark (DEC-010). Auditing all hue families by computed relative luminance found every family already monotonic except **green**, where `green-2/3` and `green-6/7` were swapped out of lightness order (an artifact of earlier DEC-052/053/054 edits inserting/removing steps without re-checking order). User asked to fix the ordering and audit for unused colors.
+
+A repo-wide `var(--palette-*)` usage scan (all `.css`/`.html`/`.htm`/`.vue`/`.js` files, excluding the definition file itself) additionally found 6 primitives with zero consumers, several freshly orphaned by today's earlier syntax-color edits: `green-2`, `green-3`, `green-6` (post-reorder index; old `green-7`), `green-7` (post-reorder index; old `green-6`), `orange-1`, `slate-5`.
+
+### Decision
+1. Renumbered the green family strictly by descending luminance:
+
+   | Old index | Hex | New index |
+   |---|---|---|
+   | 0 | #f0fff3 | 0 |
+   | 1 | #bbf7d0 | 1 |
+   | 3 | #7ce4b1 | 2 → removed (unused) |
+   | 2 | #c7d1a9 | 3 → removed (unused) |
+   | 4 | #00e676 | 4 |
+   | 5 | #00cc5b | 5 |
+   | 7 | #00af5b | 6 → removed (unused) |
+   | 6 | #6a9955 | 7 → removed (unused) |
+   | 10 | #215e06 | 8 |
+   | 8 | #02230e | 9 |
+   | 9 | #03200e | 10 |
+
+   Updated the 3 consumers in `semantic.css` that referenced the old indices (`--color-status-positive-bg/fg`, `--color-syntax-variable`) to the new ones.
+2. Removed 6 unused primitives entirely: `--palette-green-2`, `--palette-green-3`, `--palette-green-6` (old `#00af5b`), `--palette-green-7` (old `#6a9955`), `--palette-orange-1`, `--palette-slate-5`.
+
+Left gaps in the numbering (e.g. green now has 0,1,4,5,8,9,10) rather than renumbering to be contiguous — the codebase already has non-contiguous ramps (blue skips 5/6/8, teal skips 9), so this is consistent with existing precedent, and avoids a second churn of every consumer reference.
+
+### Consequences
+- All palette hue families are now verified monotonic light-to-dark by relative luminance, matching the DEC-010 rule that was previously just an intent, not a checked invariant.
+- Removed primitives are gone entirely, not deprecated/aliased — if a future decision wants an olive-green (`#6a9955`) or muted rust (`#8c4a2a`) swatch again, re-add it as a new step rather than assuming the old index still exists.

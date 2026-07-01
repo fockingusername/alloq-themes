@@ -25,17 +25,14 @@
 		--palette-blue-9: #111a35;
 		--palette-blue-10: #0a1428;
 
-		/* Green — pale tint → vivid → olive → deep shade */
+		/* Green — pale tint → vivid → deep shade */
 		--palette-green-0: #f0fff3;
 		--palette-green-1: #bbf7d0;
-		--palette-green-2: #c7d1a9;
-		--palette-green-3: #7ce4b1;
 		--palette-green-4: #00e676;
 		--palette-green-5: #00cc5b;
-		--palette-green-6: #6a9955;
-		--palette-green-7: #00af5b;
-		--palette-green-8: #02230e;
-		--palette-green-9: #03200e;
+		--palette-green-8: #215e06; /* DEC-054: forest green, 7.87:1 on white — AA-passing swatch that still reads as green */
+		--palette-green-9: #02230e;
+		--palette-green-10: #03200e;
 
 		/* Red — pale tint → vivid → deep shade */
 		--palette-red-0: #fceded;
@@ -103,7 +100,6 @@
 
 		/* Orange — warm vivid; distinct from amber brand secondary (#ff9100) */
 		--palette-orange-0: #ff6d00; /* vivid deep orange (series dark) */
-		--palette-orange-1: #8c4a2a; /* muted rust (series light) */
 
 		/* Pink — rose/hot-pink */
 		--palette-pink-0: #ff4081; /* vivid hot pink (series dark) */
@@ -117,7 +113,6 @@
 		--palette-slate-1: #f0f4f7;
 		--palette-slate-3: #dde3ea;
 		--palette-slate-4: #8a9fa8;
-		--palette-slate-5: #7a8892;
 		--palette-slate-6: #5a6a72;
 
 		/* Grey — pure neutral ramp. Used for light-theme surface backgrounds (page,

@@ -1435,3 +1435,71 @@ Can you add the visual also to the widget on dashboard html
 Found 12 real widgets, not 5 — first grep pass missed the ones with --error/--warning status modifier classes. Replaced all 12 with values chosen to reproduce each one's original status (5 ok, 5 exceeded, 1 warning, plus the ok "Cluster Onroerend goed" makes 12 total).
 
 **Related decision:** DEC-050
+
+### [2026-07-01] — Fix backtrace page's stale pre-refactor tokens
+
+**Prompt:**
+ive added a backtrace html. Could you update that one with the light theme we have right now
+
+**Tokens / files touched:**
+- backtrace - products 26-10-2025 - Transactions - Alloq.html — replaced a 770-line inline pre-refactor token bundle with standard <link> tags to current tokens/base/elements/utilities, plus a compatibility shim aliasing ~20 deprecated token names (--palette-light-*/--palette-dark-*/--color-brand-secondary/--color-info etc.) onto current equivalents
+
+**Outcome:**
+Page was captured from a build that predates DEC-004/006/009/010/024/025 — used entirely different token names inlined directly rather than linking our token files. Root token block replaced with our current links; ~53 scattered usages of deprecated names in the page's other inline component blocks now resolve correctly via the shim instead of needing individual rewrites.
+
+**Related decision:** DEC-051
+
+### [2026-07-01] — Formulas box background + light-mode syntax contrast fix
+
+**Prompt:**
+the formulas need a black background with a subtle border around it. For the light mode i want it to be white background but we need to increase the contrast of the colors there, use a darker variant from the palettes we have
+
+**Tokens / files touched:**
+- assets/css/tokens/semantic.css — `--color-syntax-boolean/constant/number/string`: blue-4 → blue-7; `--color-syntax-comment`: green-6 → slate-6; `--color-syntax-function`: slate-5 → slate-6; `--color-syntax-operator`: purple-0 → purple-1; `--color-syntax-variable`: green-7 → green-8 (light values only)
+- backtrace - products 26-10-2025 - Transactions - Alloq.html — `.formulas[data-v-44eead21]` background → `light-dark(var(--palette-white), var(--palette-black))`, border → `var(--color-border-subtle)`
+
+**Outcome:**
+Formulas box is now black-on-dark / white-on-light with a subtle border in both themes. Audited all 7 distinct light-mode `--color-syntax-*` colors against white: 5 failed WCAG AA (as low as 2.49:1); moved each to the best available darker step in its palette family. All now pass 4.5:1 except operator (purple-1, 4.04:1 — ceiling of a 2-step family, best available).
+
+**Related decision:** DEC-052
+
+### [2026-07-01] — Revert variable syntax color to a legible green
+
+**Prompt:**
+the green in dark needs a different color in light mode. maybe green 6 or 7
+
+**Tokens / files touched:**
+- assets/css/tokens/semantic.css — `--color-syntax-variable` light value: green-8 → green-6
+
+**Outcome:**
+green-8 (16.81:1) read as near-black, losing its green identity. Switched to green-6 (3.33:1) — better contrast than green-7 (2.88:1) while staying recognizably green, consistent with the dark-mode value's hue.
+
+**Related decision:** DEC-053
+
+### [2026-07-01] — Add new green palette step for AA-passing variable syntax color
+
+**Prompt:**
+can wem ake iseomthing like: #215e06 - you can add a new pallete
+
+**Tokens / files touched:**
+- assets/css/tokens/palette.css — added `--palette-green-10: #215e06`
+- assets/css/tokens/semantic.css — `--color-syntax-variable` light value: green-6 → green-10
+
+**Outcome:**
+green-6 (3.33:1) still failed AA. New green-10 step (#215e06, 7.87:1 on white) passes AA while staying a clear, recognizable green.
+
+**Related decision:** DEC-054
+
+### [2026-07-01] — Reorder palette to light-to-dark; audit for unused colors
+
+**Prompt:**
+can we rearrange hte pallets so its goes from light to dark. Also check if all the colors are being used
+
+**Tokens / files touched:**
+- assets/css/tokens/palette.css — renumbered the green family into strict light-to-dark order; removed 6 unused primitives (green-2, green-3, two olive/mid-green steps, orange-1, slate-5)
+- assets/css/tokens/semantic.css — updated 3 references to the renumbered green indices (--color-status-positive-bg/fg, --color-syntax-variable)
+
+**Outcome:**
+Computed relative luminance for every hue family; only green was out of order (2/3 and 6/7 swapped) — all others were already correctly light-to-dark. Fixed green's order and confirmed no other family needs changes. Usage scan across all css/html/vue/js files found 6 palette primitives with zero consumers; removed them.
+
+**Related decision:** DEC-055
