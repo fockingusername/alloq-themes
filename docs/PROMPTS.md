@@ -1503,3 +1503,30 @@ can we rearrange hte pallets so its goes from light to dark. Also check if all t
 Computed relative luminance for every hue family; only green was out of order (2/3 and 6/7 swapped) — all others were already correctly light-to-dark. Fixed green's order and confirmed no other family needs changes. Usage scan across all css/html/vue/js files found 6 palette primitives with zero consumers; removed them.
 
 **Related decision:** DEC-055
+
+### [2026-07-01] — Set exact hex values for function/variable syntax colors
+
+**Prompt:**
+highlight--function needs to be #8D0000,  and the green should be #008200 in lightmode both
+
+**Tokens / files touched:**
+- assets/css/tokens/palette.css — added `--palette-red-4: #8d0000` (shifted old red-4/5 → red-5/6); added `--palette-green-6: #008200`; removed now-unused `--palette-green-8` (#215e06)
+- assets/css/tokens/semantic.css — `--color-syntax-function` light value → red-4; `--color-syntax-variable` light value → green-6; updated `--color-status-negative-bg/fg` to the shifted red indices
+
+**Outcome:**
+Both user-specified colors added as new palette steps in correct light-to-dark position (9.85:1 and 5.01:1 on white — both pass AA).
+
+**Related decision:** DEC-056
+
+### [2026-07-01] — Fix function highlight using wrong color token
+
+**Prompt:**
+the function class has a text muted class, thats not good right
+
+**Tokens / files touched:**
+- backtrace - products 26-10-2025 - Transactions - Alloq.html — `.highlight--function[data-v-b47b1cc5]` split off from the shared `.highlight--scope` rule; now uses `var(--color-syntax-function)` instead of `var(--color-text-muted)`
+
+**Outcome:**
+Confirmed via a second, correctly-wired component elsewhere in the same file that function names should use `--color-syntax-function`, not muted text. Fixed the stale rule.
+
+**Related decision:** DEC-057

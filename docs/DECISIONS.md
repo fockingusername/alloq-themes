@@ -1543,3 +1543,38 @@ Left gaps in the numbering (e.g. green now has 0,1,4,5,8,9,10) rather than renum
 ### Consequences
 - All palette hue families are now verified monotonic light-to-dark by relative luminance, matching the DEC-010 rule that was previously just an intent, not a checked invariant.
 - Removed primitives are gone entirely, not deprecated/aliased — if a future decision wants an olive-green (`#6a9955`) or muted rust (`#8c4a2a`) swatch again, re-add it as a new step rather than assuming the old index still exists.
+
+## DEC-056 — User-specified light-mode syntax colors: function → #8D0000, variable → #008200
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User supplied exact hex values for two light-mode syntax-highlight tokens: `--color-syntax-function` → `#8D0000` (dark red) and `--color-syntax-variable` → `#008200` (green). Both pass AA on white (9.85:1 and 5.01:1 respectively), replacing the DEC-052/054 interim choices (`slate-6` for function, `green-10`/forest-green for variable).
+
+### Decision
+Added both as new palette steps, placed by computed luminance to keep each hue family in the light-to-dark order established in DEC-055:
+- `--palette-red-4: #8d0000` — inserted between `red-3` (`#ff2040`) and the old `red-4`/`red-5`, which shifted down to `red-5`/`red-6`. Updated the 2 consumers in `semantic.css` (`--color-status-negative-bg/fg`) to the shifted indices.
+- `--palette-green-6: #008200` — inserted into the gap left by DEC-055's removal of the old unused `green-6/7` olive steps; no shifting needed, order preserved.
+
+`--color-syntax-function` light value: `slate-6` → `red-4`. `--color-syntax-variable` light value: `green-8` (forest green from DEC-054) → `green-6`. The now-orphaned `--palette-green-8` (`#215e06`) was removed (zero remaining consumers, per the DEC-055 unused-primitive policy).
+
+### Consequences
+- `--color-syntax-function` moves to a red hue, breaking any expectation that it stays cool/blue-toned; this is a deliberate user choice, not a contrast-driven substitution.
+- `--palette-slate-5` and the DEC-054 forest-green (`#215e06`) are no longer referenced anywhere — already removed/never reintroduced.
+
+## DEC-057 — Fix .highlight--function wired to --color-text-muted instead of --color-syntax-function
+
+- **Date:** 2026-07-01
+- **Status:** Accepted
+- **Related prompt:** PROMPTS.md entry 2026-07-01
+
+### Context
+User noticed the backtrace page's `Highlight.vue` component (`data-v-b47b1cc5` scope) had `.highlight--function` sharing a rule with `.highlight--scope`, both mapped to `--color-text-muted` — meaning function names in formulas rendered as plain muted text instead of using the dedicated `--color-syntax-function` token (just tuned to `#8D0000` in DEC-056). A second, newer scoped component elsewhere in the same file (`.function { color: var(--color-syntax-function) }`, line ~2672) already does this correctly, confirming the `Highlight.vue` block was simply out of sync/stale.
+
+### Decision
+Split the combined rule: `.highlight--function[data-v-b47b1cc5]` now maps to `var(--color-syntax-function)`; `.highlight--scope[data-v-b47b1cc5]` keeps `var(--color-text-muted)` (a distinct role — "scope" is de-emphasized structural text, not a highlighted function name).
+
+### Consequences
+- Function names in the backtrace page's formula display (e.g. `default`, `sum`, `has`, `contains`, `not`, `sign` in the sampled formulas) now render in the syntax function color instead of muted grey.

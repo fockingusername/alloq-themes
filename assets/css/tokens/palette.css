@@ -30,7 +30,7 @@
 		--palette-green-1: #bbf7d0;
 		--palette-green-4: #00e676;
 		--palette-green-5: #00cc5b;
-		--palette-green-8: #215e06; /* DEC-054: forest green, 7.87:1 on white — AA-passing swatch that still reads as green */
+		--palette-green-6: #008200; /* DEC-056: high-contrast green for syntax highlighting, 5.01:1 on white */
 		--palette-green-9: #02230e;
 		--palette-green-10: #03200e;
 
@@ -39,8 +39,9 @@
 		--palette-red-1: #ffd6de;
 		--palette-red-2: #ff4e64;
 		--palette-red-3: #ff2040;
-		--palette-red-4: #3b0911;
-		--palette-red-5: #290710;
+		--palette-red-4: #8d0000; /* DEC-056: high-contrast dark red for syntax highlighting, 9.85:1 on white */
+		--palette-red-5: #3b0911;
+		--palette-red-6: #290710;
 
 		/* Yellow — warning family; pale tint → vivid → deep shade */
 		--palette-yellow-0: #fef5cf;

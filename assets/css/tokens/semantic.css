@@ -118,8 +118,8 @@
 		--color-status-positive-bg: light-dark(var(--palette-green-0), var(--palette-green-10));
 		--color-status-positive-fg: light-dark(var(--palette-green-9), var(--palette-green-1));
 
-		--color-status-negative-bg: light-dark(var(--palette-red-0),   var(--palette-red-5));
-		--color-status-negative-fg: light-dark(var(--palette-red-4),   var(--palette-red-1));
+		--color-status-negative-bg: light-dark(var(--palette-red-0),   var(--palette-red-6));
+		--color-status-negative-fg: light-dark(var(--palette-red-5),   var(--palette-red-1));
 
 		--color-status-warning-bg:  light-dark(var(--palette-yellow-0), var(--palette-yellow-5));
 		--color-status-warning-fg:  light-dark(var(--palette-yellow-4), var(--palette-yellow-1));
@@ -143,14 +143,14 @@
 		--color-syntax-boolean:     light-dark(var(--palette-blue-7),   var(--palette-blue-3));   /* DEC-052: blue-4 failed AA (3.12:1) on white; blue-7 → 6.96:1 */
 		--color-syntax-comment:     light-dark(var(--palette-slate-6), var(--palette-slate-4));  /* DEC-052: green-6 failed AA (3.33:1); slate-6 → 5.62:1, matches --color-text-muted's de-emphasized weight */
 		--color-syntax-constant:    light-dark(var(--palette-blue-7),   var(--palette-blue-3));
-		--color-syntax-function:    light-dark(var(--palette-slate-6),  var(--palette-teal-2));   /* DEC-052: slate-5 failed AA (3.64:1); slate-6 → 5.62:1 */
+		--color-syntax-function:    light-dark(var(--palette-red-4),    var(--palette-teal-2));   /* DEC-056: user-specified #8D0000, 9.85:1 on white */
 		--color-syntax-keyword:     light-dark(var(--palette-teal-5),   var(--palette-teal-1));   /* teal-5 ≈6.9:1 on white; teal-1 bright on dark */
 		--color-syntax-number:      light-dark(var(--palette-blue-7),   var(--palette-blue-3));
 		--color-syntax-operator:    light-dark(var(--palette-purple-1), var(--palette-purple-1)); /* DEC-052: purple-0 failed badly (2.49:1); purple-1 → 4.04:1, best available in this 2-step family, still short of 4.5:1 — acceptable for short syntax marks per the function/comment precedent above */
 		--color-syntax-punctuation: light-dark(var(--palette-teal-5),   var(--palette-teal-1));
 		--color-syntax-string:      light-dark(var(--palette-blue-7),   var(--palette-blue-3));
 		--color-syntax-text:        light-dark(var(--palette-teal-8),   var(--palette-slate-1));
-		--color-syntax-variable:    light-dark(var(--palette-green-8),  var(--palette-green-4));  /* DEC-054/055: green-6 (3.33:1) still failed AA; new forest-green step (renumbered to green-8 under DEC-055's light-to-dark reorder) → 7.87:1, passes AA and reads clearly as green */
+		--color-syntax-variable:    light-dark(var(--palette-green-6),  var(--palette-green-4));  /* DEC-056: user-specified #008200, 5.01:1 on white */
 
 		/* Categorical series — 13 steps; light palette inspired by Pieq Data Colors reference.
 		   No green, no red (reserved for status tokens). No amber (reserved for CTA accent).
